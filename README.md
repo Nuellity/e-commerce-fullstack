@@ -1,4 +1,4 @@
-Welcome to the e-commerce MERN (MongoDB, Express, React, Node.js) stack app repository!
+Welcome to the e-commerce MERN (MongoDB, Express, React, Node.js) stack app repository.
 
 This project is designed to provide a full-stack e-commerce solution using the MERN stack. The app includes features such as product management, shopping cart, order processing, and payment integration.
 
