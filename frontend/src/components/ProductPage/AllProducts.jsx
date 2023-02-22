@@ -4,7 +4,7 @@ import axios from "axios"
 
 function AllProducts({category, filter}) {
 const [products, setProducts] = useState([])
-const [filterproduct, setFilterProducts] = useState([])
+
 
 useEffect(() => {
   const getProducts = async () => {

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../Homepage/Footer";
 import Navbar from "../../Homepage/Navbar/Navbar";
 import ProductDetails from "./ProductDetails";
-import axios from "axios";
+import { publicRequest } from "../../../axiosRequest";
 
 
 function ProductInfo() {
@@ -20,22 +20,22 @@ function ProductInfo() {
 
   useEffect(() => {
     const getProduct = async () => {
-      console.log("enter method")
+   
       try {
-        console.log("fetch method")
-        const res = await axios.get(
+       
+        const res = await publicRequest.get(
           `http://localhost:4000/api/products/find/${id}`
         );
       const  fetchProduct = res.data
-      console.log("try method")
+      
       console.log(fetchProduct)
       setProduct(fetchProduct)
       } catch(error) {
-       console.log("catch method")
+       
       }
     };
     getProduct();
-    console.log("in action")
+    
    
    
   }, []);
@@ -43,7 +43,7 @@ function ProductInfo() {
   function isEmpty(product) {
     return Object.keys(product).length === 0;
 }
-  console.log(isEmpty(product))
+ 
   return (
     <>
       <Navbar />
