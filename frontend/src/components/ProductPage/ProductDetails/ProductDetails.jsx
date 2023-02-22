@@ -8,13 +8,13 @@ import Select from "@mui/material/Select";
 import BuyProductCard from "../../cards/BuyProductCard";
 import newArrivalData from "../../../Data/newArrivalData";
 import ImageGallery from "react-image-gallery";
-import { useCart } from "react-use-cart";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
 import Cart from "../../CartPage/Cart";
+import { ButtonGroup } from "@mui/material";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -24,9 +24,7 @@ function ProductDetails(props) {
   const [size, setSize] = useState("");
   const [cartDraw, setCartDraw] = useState(false);
   const [open, setOpen] = useState(false);
-
-
-  const { addItem } = useCart();
+  const [quantity, setQuantity] = useState(1);
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -38,12 +36,7 @@ function ProductDetails(props) {
 
   const handleAddToCart = () => {
     handleDraw();
-    handleAddItem();
     setOpen(true);
-  };
-
-  const handleAddItem = () => {
-    addItem(props.item);
   };
 
   const handleClose = () => {
@@ -57,10 +50,26 @@ function ProductDetails(props) {
     setOpen(false);
   };
 
+  function increment() {
+    setQuantity(function (prevCount) {
+      return (prevCount += 1);
+    });
+  }
+
+  function decrement() {
+    setQuantity(function (prevCount) {
+      if (prevCount > 1) {
+        return (prevCount -= 1);
+      } else {
+        return (prevCount = 1);
+      }
+    });
+  }
+
   return (
     <>
       <div className="container py-5 mb-5">
-      <h3 className="justify-content-start py-4">{props.title}</h3>
+        <h3 className="justify-content-start py-4">{props.title}</h3>
         <div className="row">
           <div className="col-lg-5">
             <ImageGallery
@@ -74,33 +83,60 @@ function ProductDetails(props) {
           </div>
           <div className="col-lg-6">
             <h2>${props.price}</h2>
-            <Box className="my-3" sx={{ minWidth: 120 }}>
-              <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="demo-simple-select-label">Size</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={size}
-                  label="Size"
-                  onChange={handleChange}
-                >
-                  <MenuItem value="XXL">XXL</MenuItem>
-                  <MenuItem value="XL">XL</MenuItem>
-                  <MenuItem value="Small">Small</MenuItem>
-                  <MenuItem value="Large">Large</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Cart optional={size} openCart={cartDraw} closeCart={handleClose} />
+            {!props.size.length ? (
+              ""
+            ) : (
+              <Box className="my-3" sx={{ minWidth: 120 }}>
+                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="demo-simple-select-label">Size</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={size}
+                    label="Size"
+                    onChange={handleChange}
+                  >
+                    {props.size.map((value, index) => {
+                      return (
+                        <MenuItem value={value} key={index}>
+                          {value}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </Box>
+            )}
+            <div className="mt-3">
+              <p>Quantity: </p>
+              <ButtonGroup
+                variant="outlined"
+                aria-label="outlined button group"
+                size="large"
+                sx={{ padding: "5px 0" }}
+              >
+                <Button onClick={increment}>+</Button>
+                <Button>{quantity}</Button>
+                <Button onClick={decrement}>-</Button>
+              </ButtonGroup>
+            </div>
 
-            <Button
-              variant="contained"
-              color="success"
-              onClick={() => handleAddToCart()}
-            >
-              Add to Cart
-            </Button>
-            <Snackbar open={open} autoHideDuration={2000} onClose={closeAlert}>
+            <Cart
+              count={props.count}
+              optional={size}
+              openCart={cartDraw}
+              closeCart={handleClose}
+            />
+            <div className="mt-5">
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => handleAddToCart()}
+              >
+                Add to Cart
+              </Button>
+            </div>
+            <Snackbar open={open} autoHideDuration={3000} onClose={closeAlert}>
               <Alert
                 onClose={closeAlert}
                 severity="success"
