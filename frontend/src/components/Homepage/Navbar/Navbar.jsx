@@ -26,15 +26,16 @@ import LoginIcon from "@mui/icons-material/Login";
 import SearchBar from "./SearchBar/SearchBar";
 import DrawerComp from "./DrawerComp";
 import Cart from "../../CartPage/Cart";
-import { useCart } from "react-use-cart";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [chorEl, setChorEl] = useState(null);
   const [visible, setVisible] = useState(false);
   const [cartDraw, setCartDraw] = useState(false);
-  const { totalUniqueItems } = useCart();
+
+  const cartQuantity = useSelector((state) => state.cart.quantity);
 
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -143,7 +144,7 @@ function Navbar() {
                   onClick={() => setCartDraw(true)}
                   color="inherit"
                 >
-                  <Badge badgeContent={totalUniqueItems} color="error">
+                  <Badge badgeContent={cartQuantity} color="error">
                     <ShoppingBasketIcon fontSize="large" />
                   </Badge>
                 </IconButton>

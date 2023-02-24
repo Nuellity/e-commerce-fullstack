@@ -1,12 +1,17 @@
 import { React } from "react";
 import { Drawer, List, Button, IconButton } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useCart } from "react-use-cart";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux"
 
 function Cart(props) {
-  const { isEmpty, totalUniqueItems, items, cartTotal } = useCart();
+  const cart = useSelector(state => state.cart)
+  console.log(cart)
+
+  function isEmpty(product) {
+    return Object.keys(product).length === 0;
+  }
 
   return (
     <>
@@ -36,7 +41,7 @@ function Cart(props) {
           sx={{ width: "100%", maxWidth: 450, bgcolor: "inherit" }}
           subheader={<li />}
         >
-          {isEmpty ? (
+          {isEmpty(cart) ? (
             <>
               <h5 className="text-center p-2 ">Your Cart is Empty</h5>
               <img
@@ -50,9 +55,7 @@ function Cart(props) {
             <>
               {" "}
               <CartItem
-                option={props.optional}
-                productItem={items}
-                qty={totalUniqueItems}
+                productItem={cart}
               />{" "}
             </>
           )}
@@ -63,7 +66,7 @@ function Cart(props) {
               <h5>Subtotal</h5>
             </div>
             <div className="prod-price">
-              <h5>${cartTotal.toFixed(2)}</h5>
+              <h5>${cart.total.toFixed(2)}</h5>
             </div>
           </div>
 

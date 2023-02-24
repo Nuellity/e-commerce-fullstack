@@ -27,7 +27,8 @@ import CustomerInfo from "./CustomerInfo";
 import Pay from "./Pay";
 import ShippingInfo from "./ShippingInfo";
 import { multiStepDetails } from "./StepDetails";
-import { useCart } from "react-use-cart";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const navItems = [
   "images/img/mc_afee.svg",
@@ -133,8 +134,8 @@ const StepTitle = [
 
 
 function Checkout() {
-  const { totalUniqueItems, items, cartTotal } = useCart();
   const { currentStep } = useContext(multiStepDetails);
+  const cart = useSelector(state => state.cart)
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -156,13 +157,16 @@ function Checkout() {
     <>
       <AppBar sx={{ backgroundColor: "#42C2FF" }} component="nav">
         <Toolbar>
-          <StoreIcon />
+        <StoreIcon />
+        <Link style={{ textDecoration: "none", color: "white" }}  to="/">
+          
           <Typography
             sx={{ display: "block", paddingRight: "10px", fontSize: "20px" }}
             href="/"
           >
             AYABA
           </Typography>
+          </Link>
           <Typography
             className="text-uppercase mx-auto"
             sx={{
@@ -292,24 +296,35 @@ function Checkout() {
               >
           
             <div className="pb-5">
-              {items.map((value, index) => {
+              {cart.products.map((value, index) => {
                 return (
                   <ListItem
+                  className="pb-4"
                     alignItems="flex-start"
                     secondaryAction={
-                      <Typography sx={{ fontSize: "25px" }}>
-                        ${cartTotal.toFixed(2)}
+                      <span className="d-flex flex-column">
+                    {!value.size.length ? (
+                      ""
+                    ) : (
+                      <Typography variant="span" sx={{ padding: "5px 0" }}>
+                        SIZE: {value.size}
                       </Typography>
+                    )}
+                      <Typography sx={{ fontSize: "25px" }}>
+                        ${(value.price * value.quantity).toFixed(2)}
+                      </Typography>
+                      </span>
+                      
                     }
                     sx={{ width: "100%" }}
                     key={index}
                   >
                     <ListItemAvatar>
-                      <Badge badgeContent={totalUniqueItems} color="secondary">
+                      <Badge badgeContent={value.quantity} color="secondary">
                         <Avatar>
                           <img
                             alt={value.title}
-                            src={value.src[0].original}
+                            src={value.img[0].original}
                             style={{ height: "100px", width: "100px" }}
                           />
                         </Avatar>
@@ -338,7 +353,7 @@ function Checkout() {
               <hr className="mt-5" />
               <div className="d-flex justify-content-between">
                 <p>Subtotal</p>
-                <p>${cartTotal}</p>
+                <p>${cart.total}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p>Shipping Fee</p>
@@ -346,7 +361,7 @@ function Checkout() {
               </div>
               <div className="d-flex justify-content-between">
                 <h6>You Pay</h6>
-                <h3>${cartTotal}</h3>
+                <h3>${cart.total}</h3>
               </div>
               <hr />
               <div>
