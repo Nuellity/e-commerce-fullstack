@@ -13,7 +13,7 @@ useEffect(() => {
       setProducts(response.data)
      
     } catch (error) {
-      console.log(error)
+     
     }
   }
   getProducts();
@@ -34,7 +34,7 @@ useEffect(() => {
 //   })
 // }
 // }, [filter])
-console.log( products)
+
     
   return (
     <>

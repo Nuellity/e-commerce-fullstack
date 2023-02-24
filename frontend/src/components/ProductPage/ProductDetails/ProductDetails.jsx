@@ -16,6 +16,9 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import Cart from "../../CartPage/Cart";
 import { ButtonGroup } from "@mui/material";
 
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../../redux/CartSlice";
+
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -25,6 +28,8 @@ function ProductDetails(props) {
   const [cartDraw, setCartDraw] = useState(false);
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const { product, itemPrice, title, image, sizes, desc, count } = props;
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -35,6 +40,7 @@ function ProductDetails(props) {
   };
 
   const handleAddToCart = () => {
+    dispatch(addProduct({ ...product, quantity, size }));
     handleDraw();
     setOpen(true);
   };
@@ -52,7 +58,11 @@ function ProductDetails(props) {
 
   function increment() {
     setQuantity(function (prevCount) {
-      return (prevCount += 1);
+      if (count - 1 >= prevCount) {
+        return (prevCount += 1);
+      } else {
+        return prevCount;
+      }
     });
   }
 
@@ -69,11 +79,11 @@ function ProductDetails(props) {
   return (
     <>
       <div className="container py-5 mb-5">
-        <h3 className="justify-content-start py-4">{props.title}</h3>
+        <h3 className="justify-content-start py-4">{title}</h3>
         <div className="row">
           <div className="col-lg-5">
             <ImageGallery
-              items={props.image}
+              items={image}
               showNav={false}
               showPlayButton={false}
               showFullscreenButton={false}
@@ -82,8 +92,8 @@ function ProductDetails(props) {
             />
           </div>
           <div className="col-lg-6">
-            <h2>${props.price}</h2>
-            {!props.size.length ? (
+            <h2>${itemPrice}</h2>
+            {!sizes.length ? (
               ""
             ) : (
               <Box className="my-3" sx={{ minWidth: 120 }}>
@@ -96,7 +106,7 @@ function ProductDetails(props) {
                     label="Size"
                     onChange={handleChange}
                   >
-                    {props.size.map((value, index) => {
+                    {props.sizes.map((value, index) => {
                       return (
                         <MenuItem value={value} key={index}>
                           {value}
@@ -122,7 +132,7 @@ function ProductDetails(props) {
             </div>
 
             <Cart
-              count={props.count}
+              count={count}
               optional={size}
               openCart={cartDraw}
               closeCart={handleClose}
@@ -147,7 +157,7 @@ function ProductDetails(props) {
             </Snackbar>
 
             <h4 className="mt-5 mb-3">Product Details</h4>
-            <span className="mb-5">{props.desc}</span>
+            <span className="mb-5">{desc}</span>
           </div>
         </div>
       </div>
