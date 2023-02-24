@@ -8,10 +8,12 @@ router.get("/config", (req, res) => {
 });
 
 router.post("/payment", async (req, res) => {
+  const amountInfo = (req.body.amount * 100).toString()
+  
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "usd",
-      amount: "10000",
+      amount: amountInfo,
       automatic_payment_methods: {
         enabled: true,
       },
