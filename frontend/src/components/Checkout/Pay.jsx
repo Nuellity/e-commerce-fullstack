@@ -7,6 +7,12 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import Stripe from "./Stripe/Stripe";
+import Dialog from '@mui/material/Dialog';
+
+import DialogContent from '@mui/material/DialogContent';
+
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 function Pay() {
@@ -15,11 +21,24 @@ function Pay() {
   const [formErrors, setFormErrors] = useState({});
   const [errorState, setErrorState] = useState(false);
   const [error, setError] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  console.log(userData.paymentType)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
+
+
+  const handlePay = (userData) => {
+    if(userData.paymentType === "Credit/Debit Cards" ){
+      console.log("pay funtion")
+      return handleClickOpen()
+    }else{
+      return
+    }
+ }
 
   const validate = (data) => {
     const errors = {};
@@ -31,21 +50,35 @@ function Pay() {
     return errors;
   };
 
-  function handleNext(e) {
+  const  handleNext = async (e) => {
+    console.log("next orking...")
     e.preventDefault();
     setFormErrors(validate(userData));
     setErrorState(true);
+    console.log("checked for errors")
+    await handlePay(userData)
+    console.log("pay working")
+  
   }
 
-  useEffect(() => {
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect( () => {
     if (Object.keys(formErrors).length === 0 && errorState) {
       submitData();
+      console.log("submit data")
     }
+
   }, [formErrors]);
 
-   
-
-
+  
+ 
 
   return (
     <div className="row">
@@ -115,18 +148,32 @@ function Pay() {
         </div>
         <div className="d-flex justify-content-between pt-2">
           <Button onClick={() => setCurrentStep(2)}>BACK</Button>
-          
+        
             <Button
               variant="contained"
               color="success"
               sx={{ height: "50px" }}
               type="submit"
+              onClick={handleClickOpen}
             >
               COMPLETE ORDER
             </Button>
+        
          
         </div>
       </form>
+      <Dialog open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description">
+         <DialogTitle id="alert-dialog-title">
+          {"Pay with Stripe"}
+        </DialogTitle>
+        <DialogContent>
+        <Stripe />
+        </DialogContent>
+
+      </Dialog>
     </div>
   );
 }

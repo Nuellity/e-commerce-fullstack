@@ -20,6 +20,7 @@ import Check from "./components/Checkout/Check";
 import ProductInfo from "./components/ProductPage/ProductDetails/ProductInfo";
 import PaymentSuccess from "./components/Checkout/PaymentSuccess";
 import ProductList from "./components/ProductPage/ProductList";
+import Stripe from "./components/Checkout/Stripe/Stripe";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="products" element={<ProductList />} />
         <Route path="products/:category" element={<ProductList />} />
         <Route path="product/:id" element={<ProductInfo />} />
+        <Route path="stripe" element={<Stripe/>} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </>
