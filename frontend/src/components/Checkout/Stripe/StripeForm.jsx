@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 
-
-import { Button } from '@mui/material';
+import { Button } from "@mui/material";
 
 function StripeForm(props) {
-    const stripe = useStripe();
+  const stripe = useStripe();
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
@@ -37,31 +36,26 @@ function StripeForm(props) {
     setIsProcessing(false);
   };
 
-
-
-
   return (
     <>
-    <div className='container'>
+      <div className="container">
         <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
-      <div className='pt-3'>
-      
-
-       <Button color="success" variant='contained' disabled={isProcessing || !stripe || !elements} type="submit">
-      
-          {isProcessing ? "Processing ... " : `Pay $${props.price}`}
-       
-      </Button>
+          <PaymentElement id="payment-element" />
+          <div className="pt-3">
+            <Button
+              color="success"
+              variant="contained"
+              disabled={isProcessing || !stripe || !elements}
+              type="submit"
+            >
+              {isProcessing ? "Processing ... " : `Pay $${props.price}`}
+            </Button>
+          </div>
+          {message && <div id="payment-message">{message}</div>}
+        </form>
       </div>
-      {message && <div id="payment-message">{message}</div>}
-    </form>
- 
-    
-     
-    </div>
     </>
-  )
+  );
 }
 
-export default StripeForm
+export default StripeForm;
