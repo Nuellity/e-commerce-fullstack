@@ -18,8 +18,7 @@ router.post("/payment", async (req, res) => {
         enabled: true,
       },
     });
-
-    res.send({
+    res.status(200).json({
       clientSecret: paymentIntent.client_secret,
     });
   } catch (error) {
