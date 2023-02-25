@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
-import LoadingButton from '@mui/lab/LoadingButton';
+
 
 import { Button } from '@mui/material';
 
@@ -46,19 +46,13 @@ function StripeForm(props) {
         <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
       <div className='pt-3'>
-      {isProcessing ? <LoadingButton loading  variant="contained">
-        Processing...
-      </LoadingButton> : <Button color="success" variant='contained' disabled={isProcessing || !stripe || !elements} type="submit">
       
-      {`Pay $${props.price}`}
-   
-  </Button> }
 
-       {/* <Button color="success" variant='contained' disabled={isProcessing || !stripe || !elements} type="submit">
+       <Button color="success" variant='contained' disabled={isProcessing || !stripe || !elements} type="submit">
       
           {isProcessing ? "Processing ... " : `Pay $${props.price}`}
        
-      </Button> */}
+      </Button>
       </div>
       {message && <div id="payment-message">{message}</div>}
     </form>
