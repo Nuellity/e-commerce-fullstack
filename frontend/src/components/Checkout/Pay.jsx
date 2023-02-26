@@ -51,7 +51,7 @@ function Pay() {
   };
 
   const  handleNext = async (e) => {
-    console.log("next orking...")
+    console.log("next working...")
     e.preventDefault();
     setFormErrors(validate(userData));
     setErrorState(true);
