@@ -48,7 +48,7 @@ function StripeForm(props) {
               disabled={isProcessing || !stripe || !elements}
               type="submit"
             >
-              {isProcessing ? "Processing ... " : `Pay $${props.price}`}
+              {isProcessing ? <> <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> <span className="mx-2">Processing... </span> </> : `Pay $${props.price}`}
             </Button>
           </div>
           {message && <div id="payment-message">{message}</div>}
