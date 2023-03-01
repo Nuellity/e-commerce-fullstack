@@ -26,8 +26,9 @@ import LoginIcon from "@mui/icons-material/Login";
 import SearchBar from "./SearchBar/SearchBar";
 import DrawerComp from "./DrawerComp";
 import Cart from "../../CartPage/Cart";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/ApiCalls";
 
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -36,6 +37,9 @@ function Navbar() {
   const [cartDraw, setCartDraw] = useState(false);
 
   const cartQuantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -110,6 +114,17 @@ function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleUser = () => {
+    if (user) {
+      logout(dispatch);
+      navigate("login");
+    } else if (!user) {
+      navigate("login");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
@@ -213,19 +228,15 @@ function Navbar() {
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem>
-                  <Link
-                    style={{ textDecoration: "none", color: "white" }}
-                    to="/login"
+                  <Button
+                    variant="contained"
+                    endIcon={<LoginIcon fontSize="small" />}
+                    sx={{ marginLeft: "10px" }}
+                    size="large"
+                    onClick={handleUser}
                   >
-                    <Button
-                      variant="contained"
-                      endIcon={<LoginIcon fontSize="small" />}
-                      sx={{ marginLeft: "10px" }}
-                      size="large"
-                    >
-                      Login
-                    </Button>
-                  </Link>
+                    {user ? "Sign Out" : "Login"}
+                  </Button>
                 </MenuItem>
                 <Divider />
                 <MenuItem>
