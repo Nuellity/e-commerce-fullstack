@@ -24,11 +24,15 @@ router.post("/signup", async (req, res) =>{
 router.post("/signin", async(req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
-        !user && res.status(401).json("Incorrect email")
+        if (!user) {
+            return res.status(401).json("Wrong Email!")
+        }
 
         const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SECRET)
         const correctPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
-        correctPassword !== req.body.password && res.status(401).json("Incorrect password")
+        if (correctPassword !== req.body.password) {
+            return res.status(401).json("Wrong password!!!")
+        }
         
         const accesstoken = jwt.sign(
             {

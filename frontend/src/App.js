@@ -4,7 +4,7 @@ import React from "react";
 import "./components/Homepage/home.css";
 import Log from "./components/LoginPage/Log";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/Homepage/Home";
 
 import AboutUs from "./components/Company/AboutUs";
@@ -21,13 +21,15 @@ import ProductInfo from "./components/ProductPage/ProductDetails/ProductInfo";
 import PaymentSuccess from "./components/Checkout/PaymentSuccess";
 import ProductList from "./components/ProductPage/ProductList";
 import Stripe from "./components/Checkout/Stripe/Stripe";
+import { useSelector } from "react-redux";
 
 function App() {
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={<Log />} />
+        <Route path="login" element={user ? <Navigate to="/" /> : <Log />} />
         <Route path="checkout" element={<Check />} />
         <Route path="about" element={<AboutUs />} />
         <Route path="privacy" element={<PrivacyPolicy />} />

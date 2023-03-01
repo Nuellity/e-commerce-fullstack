@@ -89,7 +89,6 @@ function Register() {
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
             name='password'
-            id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
             value={userData.password}
             onChange={handleChange}
@@ -115,7 +114,6 @@ function Register() {
           <InputLabel htmlFor="outlined-adornment-password">Confirm Password</InputLabel>
           <OutlinedInput
             name='confirmPassword'
-            id="outlined-adornment-password"
             type={showPassword ? 'text' : 'password'}
             value={userData.confirmPassword}
             onChange={handleChange}
