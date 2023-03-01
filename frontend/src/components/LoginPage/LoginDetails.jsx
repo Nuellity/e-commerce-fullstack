@@ -20,7 +20,6 @@ function LoginDetails() {
 
   function submitData() {
     setFinalData((finalData) => [...finalData, userData]);
-    setUserData("");
   }
 
   return (
