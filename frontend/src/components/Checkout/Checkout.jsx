@@ -136,6 +136,7 @@ const StepTitle = [
 function Checkout() {
   const { currentStep } = useContext(multiStepDetails);
   const cart = useSelector(state => state.cart)
+  console.log(cart)
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -353,7 +354,7 @@ function Checkout() {
               <hr className="mt-5" />
               <div className="d-flex justify-content-between">
                 <p>Subtotal</p>
-                <p>${cart.total}</p>
+                <p>${cart.total.toFixed(2)}</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p>Shipping Fee</p>
@@ -361,7 +362,7 @@ function Checkout() {
               </div>
               <div className="d-flex justify-content-between">
                 <h6>You Pay</h6>
-                <h3>${cart.total}</h3>
+                <h3>${cart.total.toFixed(2)}</h3>
               </div>
               <hr />
               <div>
