@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -21,7 +21,9 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import LoginIcon from "@mui/icons-material/Login";
 import SearchBar from "./SearchBar/SearchBar";
 import DrawerComp from "./DrawerComp";
@@ -35,6 +37,7 @@ function Navbar() {
   const [chorEl, setChorEl] = useState(null);
   const [visible, setVisible] = useState(false);
   const [cartDraw, setCartDraw] = useState(false);
+
 
   const cartQuantity = useSelector((state) => state.cart.quantity);
   const user = useSelector((state) => state.user.currentUser);
@@ -116,16 +119,18 @@ function Navbar() {
     setAnchorEl(null);
   };
 
-  const handleUser = () => {
-    if (user) {
-      logout(dispatch);
-      navigate("login");
-    } else if (!user) {
-      navigate("login");
-    } else {
-      navigate("/");
-    }
+  const handleLogin = () => {
+    navigate("/login");
   };
+
+  const handleLogOut = () => {
+    logout(dispatch);
+    navigate("/login");
+  };
+
+  
+
+  
 
   return (
     <div className="container">
@@ -228,31 +233,47 @@ function Navbar() {
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem>
-                  <Button
-                    variant="contained"
-                    endIcon={<LoginIcon fontSize="small" />}
-                    sx={{ marginLeft: "10px" }}
-                    size="large"
-                    onClick={handleUser}
-                  >
-                    {user ? "Sign Out" : "Login"}
-                  </Button>
+                  {user ? (
+                  
+                    <Button
+                      variant="contained"
+                      endIcon={<LoginIcon fontSize="small" />}
+                      sx={{ marginLeft: "10px" }}
+                      size="large"
+                      onClick={handleLogOut}
+                    >
+                      Sign Out
+                    </Button>
+              
+                  ) : (
+                    
+                    <Button
+                      variant="contained"
+                      endIcon={<LoginIcon fontSize="small" />}
+                      sx={{ marginLeft: "10px" }}
+                      size="large"
+                      onClick={handleLogin}
+                    >
+                      Login
+                    </Button>
+              
+                  )}
                 </MenuItem>
                 <Divider />
                 <MenuItem>
                   <ListItemIcon>
                     <PersonIcon fontSize="small" />
-                    <Typography sx={{ pl: "10px" }}>My Account </Typography>
+                    <Typography sx={{ pl: "10px" }} onClick={() => navigate("/profile")}>My Account </Typography>
                   </ListItemIcon>
                 </MenuItem>
                 <MenuItem>
-                  <ListItemIcon>
+                  <ListItemIcon onClick={() => navigate("/order")}>
                     <ShoppingCartIcon fontSize="small" />
                     <Typography sx={{ pl: "10px" }}>Orders </Typography>
                   </ListItemIcon>
                 </MenuItem>
                 <MenuItem>
-                  <ListItemIcon>
+                  <ListItemIcon onClick={() => navigate("/wishlist")}>
                     <FavoriteIcon fontSize="small" />
                     <Typography sx={{ pl: "10px" }}> Saved Items </Typography>
                   </ListItemIcon>

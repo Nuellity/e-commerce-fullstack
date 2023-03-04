@@ -4,6 +4,9 @@ import {
   loginStart,
   loginSuccess,
   logoutSuccess,
+  signUpFailure,
+  signUpStart,
+  signUpSuccess,
 } from "./userSlice";
 
 export const login = async (dispatch, user) => {
@@ -22,4 +25,19 @@ export const login = async (dispatch, user) => {
 
 export const logout = (dispatch) => {
   dispatch(logoutSuccess());
+};
+
+
+export const signup = async (dispatch, user) => {
+  dispatch(signUpStart());
+  try {
+    const res = await publicRequest.post("/auth/signup", user);
+    dispatch(signUpSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      dispatch(signUpFailure(error.response.data));
+    } else {
+      console.log(error);
+    }
+  }
 };

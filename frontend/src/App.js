@@ -21,7 +21,10 @@ import ProductInfo from "./components/ProductPage/ProductDetails/ProductInfo";
 import PaymentSuccess from "./components/Checkout/PaymentSuccess";
 import ProductList from "./components/ProductPage/ProductList";
 import Stripe from "./components/Checkout/Stripe/Stripe";
+import Order from "./components/Order"
 import { useSelector } from "react-redux";
+import SavedItems from "./components/SavedItems";
+import UserAccount from "./components/UserAccount";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -31,10 +34,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="login" element={user ? <Navigate to="/" /> : <Log />} />
         <Route path="checkout" element={<Check />} />
+        <Route path="order" element={<Order/>} />
         <Route path="about" element={<AboutUs />} />
         <Route path="privacy" element={<PrivacyPolicy />} />
         <Route path="terms" element={<Terms />} />
         <Route path="blog" element={<Blog />} />
+        <Route path="wishlist" element={<SavedItems/>} />
+        <Route path="profile" element={<UserAccount/>} />
         <Route path="faq" element={<Frequent />} />
         <Route path="return" element={<Return />} />
         <Route path="shipping" element={<Shipping />} />
