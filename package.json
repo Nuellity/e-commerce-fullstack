@@ -7,7 +7,8 @@
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "admin": "npm start --prefix admin",
+    "dev": "concurrently \"npm run server\" \"PORT=3000 npm run client\" \"PORT=3001 npm run admin\""
   },
   "keywords": [],
   "author": "",
