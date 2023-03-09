@@ -1,7 +1,28 @@
-*{
+html,
+body,
+#root,
+.app,
+.content {
+    height: 100%;
+    width: 100%;
     font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
 }
-body{
-    padding-top: 60px;
+
+.app{
+    display: flex;
+    position: relative;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb{
+    background: #888;
+}
+::-webkit-scrollbar-track:hover{
+    background: #555;
 }
