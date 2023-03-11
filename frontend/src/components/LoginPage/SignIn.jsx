@@ -1,22 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, TextField} from "@mui/material";
+import { Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { loginDetails } from "./LoginDetails";
 import LoginIcon from "@mui/icons-material/Login";
 import { login } from "../../redux/ApiCalls";
 import { useDispatch, useSelector } from "react-redux";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Visibility from "@mui/icons-material/Visibility";
 
 function SignIn() {
   const { setRecover, userData, setUserData, submitData } =
     useContext(loginDetails);
   const [formErrors, setFormErrors] = useState({});
   const [errorState, setErrorState] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const { isFetching, error, errorMessage } = useSelector(
     (state) => state.user
   );
-
-
 
   const email = userData.loginEmail;
   const password = userData.loginPassword;
@@ -40,6 +41,11 @@ function SignIn() {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   }
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -77,19 +83,31 @@ function SignIn() {
           />
         </div>
         <div className="col">
-          <TextField
-            name="loginPassword"
-            type="password"
-            label="Password"
-            value={userData.loginPassword}
-            onChange={handleChange}
-            helperText={formErrors.loginPassword}
-            margin="normal"
-            variant="outlined"
-            required
-            color="secondary"
-            fullWidth
-          />
+          <FormControl margin="normal" required fullWidth variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">
+              Password
+            </InputLabel>
+            <OutlinedInput
+              name="loginPassword"
+              type={showPassword ? "text" : "password"}
+              value={userData.loginPassword}
+              onChange={handleChange}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+            <FormHelperText>{formErrors.password}</FormHelperText>
+          </FormControl>
         </div>
         <div className="d-flex justify-content-end pb-2">
           <h6 onClick={handleClick} style={{ fontSize: "13px" }}>
