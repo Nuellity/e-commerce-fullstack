@@ -53,7 +53,7 @@ function Sidebar() {
             backgroundColor: "transparent !important "
         },
         "& .pro-inner-item": {
-            padding: "5px 35px 5px 20px !important"
+            padding: "5px 35px 5px 5px !important"
         },
         "& .pro-inner-item:hover": {
             color: "#868dfb !important"
@@ -93,7 +93,7 @@ function Sidebar() {
           </SidebarHeader>
 
           {!isCollapsed && (
-            <Box mb="25px">
+            <Box mb="20px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
                   alt="profile-user"
@@ -110,7 +110,7 @@ function Sidebar() {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Osas
+                  John
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Ayaba Admin
@@ -131,7 +131,7 @@ function Sidebar() {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 0 5px 5px" }}
             >
               Quick Menu
             </Typography>
@@ -167,7 +167,7 @@ function Sidebar() {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 0 5px 5px" }}
             >
              Alerts
             </Typography>
@@ -180,7 +180,7 @@ function Sidebar() {
             />
             <Item
               title="Feedback"
-              to="/calendar"
+              to="/pie"
               icon={<DynamicFeedOutlinedIcon/>}
               selected={selected}
               setSelected={setSelected}
@@ -196,7 +196,7 @@ function Sidebar() {
             <Typography
               variant="h6"
               color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
+              sx={{ m: "15px 0 5px 5px" }}
             >
               Staff
             </Typography>

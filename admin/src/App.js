@@ -4,13 +4,13 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
 import TopBar from "./pages/global/TopBar";
 import DashBoard from "./pages/dashboard/DashBoard";
-import Team from "./pages/Team";
-import Line from "./pages/Line";
-import Invoices from "./pages/Invoices";
+import Line from "./pages/Line/Line";
 import FAQ from "./pages/FAQ";
 import Contacts from "./pages/Contacts";
 import Form from "./pages/Form";
 import Sidebar from "./pages/global/Sidebar";
+import Bar from "./pages/Bar/Bar";
+import Pie from "./pages/Pie/Pie";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -24,9 +24,9 @@ function App() {
             <TopBar />
             <Routes>
               <Route path="/" element={<DashBoard />} />
-              <Route path="team" element={<Team />} />
+              <Route path="pie" element={<Pie/>} />
               <Route path="line" element={<Line />} />
-              <Route path="invoices" element={<Invoices />} />
+              <Route path="invoices" element={<Bar/>} />
               <Route path="FAQ" element={<FAQ />} />
               <Route path="contact" element={<Contacts />} />
               <Route path="form" element={<Form />} />
