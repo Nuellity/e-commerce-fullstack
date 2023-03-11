@@ -1,5 +1,8 @@
 import { publicRequest } from "../axiosRequest";
 import {
+  forgetFailure,
+  forgetStart,
+  forgetSuccess,
   loginFailure,
   loginStart,
   loginSuccess,
@@ -36,6 +39,20 @@ export const signup = async (dispatch, user) => {
   } catch (error) {
     if (error.response.status === 401) {
       dispatch(signUpFailure(error.response.data));
+    } else {
+      console.log(error);
+    }
+  }
+};
+
+export const forgetPassword = async (dispatch, user) => {
+  dispatch(forgetStart());
+  try {
+    const res = await publicRequest.post("/auth/forgotpassword", user);
+    dispatch(forgetSuccess(res.data));
+  } catch (error) {
+    if (error.response.status === 401) {
+      dispatch(forgetFailure(error.response.data));
     } else {
       console.log(error);
     }

@@ -13,6 +13,8 @@ function LoginDetails() {
     loginEmail: "",
     loginPassword: "",
     recoverEmail: "",
+    recoverPassword: "",
+    confirmRecoverPassword: "",
   });
   const [finalData, setFinalData] = useState([]);
   const [recover, setRecover] = useState(false);
