@@ -15,7 +15,7 @@ function TopBar() {
   const colorMode = useContext(colorModeContext);
 
   return (
-    <Box backgroundColor={colors.primary[900]} className="container-fluid d-flex justify-content-between p-2" >
+    <Box backgroundColor={colors.primary[900]} className="container-fluid d-flex justify-content-between p-2" style={{position: "sticky", top: 0}} >
       <Box
         display="flex"
         backgroundColor={colors.primary[400]}
