@@ -1,16 +1,27 @@
-import { Box, Button, IconButton, useTheme, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  useTheme,
+  Typography,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+} from "@mui/material";
 import { tokens } from "../../theme";
 import React from "react";
 import Header from "../../components/Header";
 import { mockTransactions } from "../../data/testData";
+import List from "@mui/material/List";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import Visibility from "@mui/icons-material/Visibility";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
-import LineChart from "../../components/LineChart"
+import LineChart from "../../components/LineChart";
 
 function DashBoard() {
   const theme = useTheme();
@@ -47,7 +58,7 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              m="3px"
+              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
                 title="12,361"
@@ -69,7 +80,7 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              m="3px"
+              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
                 title="431,225"
@@ -91,7 +102,7 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              m="3px"
+              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
                 title="32,441"
@@ -113,7 +124,7 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              m="3px"
+              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
                 title="1,325,134"
@@ -131,8 +142,8 @@ function DashBoard() {
         </div>
         {/* Row 3 */}
         <div className="row">
-          <div className="col-lg-8">
-            <Box backgroundColor={colors.primary[400]} component="div">
+          <div className="col">
+            <Box backgroundColor={colors.primary[400]}   sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}component="div">
               <Box
                 mt="20px"
                 p="10px 20px 0 20px"
@@ -157,75 +168,175 @@ function DashBoard() {
                 </Box>
                 <Box component="div">
                   <IconButton>
-                    <DownloadOutlinedIcon sx={{
-                      fontSize: "26px",
-                      color: colors.grey[500]
-                    }}/>
+                    <DownloadOutlinedIcon
+                      sx={{
+                        fontSize: "26px",
+                        color: colors.grey[500],
+                      }}
+                    />
                   </IconButton>
                 </Box>
               </Box>
-              <Box component="div" height="250px" >
-              <LineChart isDashboard={true}/>
+              <Box component="div" height="250px">
+                <LineChart isDashboard={true} />
               </Box>
             </Box>
           </div>
-          <Box
-          backgroundColor={colors.primary[400]}
-           className="col-lg-4"
-           component="div"
-           mt="20px"
-           height="310px"
-          overflow="auto"
-           >
-           
-          <Box
-           className="d-flex justify-content-between align-items-center p-2"
-           borderBottom={`4px solid ${colors.primary[500]}`}
-           color={colors.grey[100]}
-           component="div"
-           >
-            <Typography 
-            color={colors.grey[100]}
-            variant="h5"
-            fontWeight="600"
-            >
-              Recent Transactions
-            </Typography>
-          </Box>
-          {mockTransactions.map((transact, index)=> {
-            return (
+        </div>
+        {/* ROW 4*/}
+        <div className="row">
+
+          <div className="col-lg-4">
+          
             <Box
-            key={index}
-            className="d-flex justify-content-between align-items-center p-2"
-            borderBottom={`4px solid ${colors.primary[500]}`}
+              backgroundColor={colors.primary[400]}
+              component="div"
+              className="py-2 my-3"
+              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}
+              
             >
-            <div>
-            <Typography 
-            color={colors.greenAccent[500]}
-            variant="h5"
-            fontWeight="600"
-            >
-              {transact.txId}
-            </Typography>
-            <Typography 
-            color={colors.grey[100]}
-            >
-              {transact.user}
-            </Typography>
-            </div>
-            <Box
-            color={colors.grey[100]}
-            >{transact.date}</Box>
-            <Box
-            backgroundColor={colors.greenAccent[500]}
-            p="5px 10px"
-            borderRadius="4px"
-            >
-              ${transact.cost}
+            <Typography fontWeight="600" color={colors.grey[100]} variant="h5" style={{ position: "sticky", top: 0,  padding: "5px 10px"}}>
+                Newly Regsitered Users
+              </Typography>
+              <List style={{ maxHeight: "280px", overflowY: "auto" }}>
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="view user">
+                      <Visibility />
+                      <Typography ml="5px">view user</Typography>
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="user avatar"
+                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary="John Doe" />
+                </ListItem>
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="view user">
+                      <Visibility />
+                      <Typography ml="5px">view user</Typography>
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="user avatar"
+                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary="John Doe" />
+                </ListItem>
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="view user">
+                      <Visibility />
+                      <Typography ml="5px">view user</Typography>
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="user avatar"
+                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary="John Doe" />
+                </ListItem>
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="view user">
+                      <Visibility />
+                      <Typography ml="5px">view user</Typography>
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="user avatar"
+                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary="John Doe" />
+                </ListItem>
+                <ListItem
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="view user">
+                      <Visibility />
+                      <Typography ml="5px">view user</Typography>
+                    </IconButton>
+                  }
+                >
+                  <ListItemAvatar>
+                    <Avatar
+                      alt="user avatar"
+                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    />
+                  </ListItemAvatar>
+                  <ListItemText primary="John Doe" />
+                </ListItem>
+              </List>
             </Box>
+          </div>
+          <Box
+            backgroundColor={colors.primary[400]}
+            className="col-lg-8 my-3"
+            component="div"
+            sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}
+          >
+            <Box
+              className="p-2"
+              color={colors.grey[100]}
+              component="div"
+              style={{ position: "sticky", top: 0,}}
+            >
+              <Typography
+                color={colors.grey[100]}
+                variant="h5"
+                fontWeight="600"
+              >
+                Recent Transactions
+              </Typography>
             </Box>
-            )
-          })}
+            <Box
+            style={{ maxHeight: "260px", overflowY: "auto" }}>
+            {mockTransactions.map((transact, index) => {
+              return (
+                <Box
+                  key={index}
+                  className="d-flex justify-content-between align-items-center p-2"
+                  borderBottom={`4px solid ${colors.primary[500]}`}
+                  
+                >
+                  <div>
+                    <Typography
+                      color={colors.greenAccent[500]}
+                      variant="h5"
+                      fontWeight="600"
+                    >
+                      {transact.txId}
+                    </Typography>
+                    <Typography color={colors.grey[100]}>
+                      {transact.user}
+                    </Typography>
+                  </div>
+                  <Box color={colors.grey[100]}>{transact.date}</Box>
+                  <Box
+                    backgroundColor={colors.greenAccent[500]}
+                    p="5px 10px"
+                    borderRadius="4px"
+                  >
+                    ${transact.cost}
+                  </Box>
+                </Box>
+                
+              );
+            })}
+            </Box>
           </Box>
         </div>
       </div>

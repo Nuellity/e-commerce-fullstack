@@ -8,7 +8,7 @@ function StatBox({ title, subTitle, icon, progress, increase }) {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box component="div" width="100%" m="20px 30px">
+    <Box component="div" sx={{ padding: "20px", width: "100%", margin: "20px 30px"}}>
       <Box display="flex" justifyContent="space-between">
         <Box>
           {icon}
