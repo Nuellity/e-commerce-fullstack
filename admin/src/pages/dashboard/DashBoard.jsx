@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   IconButton,
   useTheme,
   Typography,
@@ -15,43 +14,30 @@ import Header from "../../components/Header";
 import { mockTransactions } from "../../data/testData";
 import List from "@mui/material/List";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
+import PointOfSaleOutlinedIcon from '@mui/icons-material/PointOfSaleOutlined';
 import Visibility from "@mui/icons-material/Visibility";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import StatBox from "../../components/StatBox";
 import LineChart from "../../components/LineChart";
 
 function DashBoard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+ 
   return (
     <div className="container mt-2 ">
       {/* Row 1 */}
       <div className="row">
-        <div className="container d-flex justify-content-between align-items-center">
+        <div className="container d-flex justify-content-start align-items-center">
           <div>
             <Header title="DASHBOARD" subTitle="Welcome to your dashboard" />
-          </div>
-          <div>
-            <Button
-              sx={{
-                backgroundColor: colors.blueAccent[700],
-                color: colors.grey[100],
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              startIcon={<DownloadOutlinedIcon />}
-            >
-              <Typography color={colors.grey[100]}>Download Reports</Typography>
-            </Button>
           </div>
         </div>
         {/* Row 2 */}
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -61,19 +47,19 @@ function DashBoard() {
               sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
-                title="12,361"
-                subTitle="Emails Sent"
+                title="$12,361"
+                subTitle="Revenue"
                 progress="0.75"
                 increase="+14%"
                 icon={
-                  <EmailIcon
-                    sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                  <LocalAtmOutlinedIcon
+                    sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
                   />
                 }
               />
             </Box>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -83,19 +69,19 @@ function DashBoard() {
               sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
-                title="431,225"
-                subTitle="Sales Obtained"
+                title="$31,624"
+                subTitle="Sales"
                 progress="0.50"
                 increase="+21%"
                 icon={
-                  <PointOfSaleIcon
-                    sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                  <InventoryOutlinedIcon
+                    sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
                   />
                 }
               />
             </Box>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -105,35 +91,13 @@ function DashBoard() {
               sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
             >
               <StatBox
-                title="32,441"
-                subTitle="New Clients"
-                progress="0.30"
-                increase="+5%"
-                icon={
-                  <PersonAddIcon
-                    sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-                  />
-                }
-              />
-            </Box>
-          </div>
-          <div className="col-lg-3">
-            <Box
-              backgroundColor={colors.primary[400]}
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              component="div"
-              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
-            >
-              <StatBox
-                title="1,325,134"
-                subTitle="Traffic Received"
+                title="$8,475"
+                subTitle="Cost"
                 progress="0.80"
                 increase="+43%"
                 icon={
-                  <TrafficIcon
-                    sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                  <PointOfSaleOutlinedIcon
+                    sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
                   />
                 }
               />
@@ -156,7 +120,7 @@ function DashBoard() {
                     fontWeight="600"
                     color={colors.grey[100]}
                   >
-                    Revenue Generated
+                    User Analytics
                   </Typography>
                   <Typography
                     variant="h3"
