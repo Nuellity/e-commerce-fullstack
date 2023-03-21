@@ -136,7 +136,6 @@ const StepTitle = [
 function Checkout() {
   const { currentStep } = useContext(multiStepDetails);
   const cart = useSelector(state => state.cart)
-  console.log(cart)
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));

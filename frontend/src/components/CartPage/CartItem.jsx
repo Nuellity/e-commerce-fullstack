@@ -1,5 +1,4 @@
-import React, { forwardRef, useState } from "react";
-import { useCart } from "react-use-cart";
+import React from "react";
 import {
   Divider,
   ListItemAvatar,
@@ -10,44 +9,38 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 
-const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+
+
+
 
 const Remove = (props) => {
   return <IconButton edge="end" aria-label="delete" {...props} />;
 };
 
 function CartItem(props) {
-  const { productItem } = props;
-  const productDetails = productItem.products;
+  const { productItem, removeItem } = props;
 
-  const { removeItem } = useCart();
-  const [open, setOpen] = useState(false);
+  const handleRemove = (index) => {
+    removeItem(index)
+  }
+ 
 
-  const closeAlert = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
+  
   return (
     <>
-      {productDetails.map((value, index) => {
+      {productItem.map((value, index) => {
+      
         return (
           <ListItem
             key={index}
             component={"div"}
             alignItems="flex-start"
-            secondaryAction={
-              <Remove onClick={() => removeItem(value._id)}>
-                <DeleteIcon />
-              </Remove>
-            }
+            // secondaryAction={
+            //   <Remove onClick={handleRemove(index)} >
+            //     <DeleteIcon />
+            //   </Remove>
+            // }
             sx={{ width: "100%" }}
           >
             <ListItemAvatar>
@@ -73,6 +66,9 @@ function CartItem(props) {
                     <Typography variant="span" sx={{ padding: "5px 0" }}>
                       Quantity: {value.quantity}
                     </Typography>
+                    <Typography variant="span" sx={{ padding: "5px 0" }}>
+                       delete
+                      </Typography>
                     <Typography
                       variant="span"
                       sx={{ padding: "5px 0", fontSize: "20px" }}
@@ -87,11 +83,7 @@ function CartItem(props) {
           </ListItem>
         );
       })}
-      <Snackbar open={open} autoHideDuration={2000} onClose={closeAlert}>
-        <Alert onClose={closeAlert} severity="warning" sx={{ width: "100%" }}>
-          Item has been removed from Cart!
-        </Alert>
-      </Snackbar>
+      
     </>
   );
 }
