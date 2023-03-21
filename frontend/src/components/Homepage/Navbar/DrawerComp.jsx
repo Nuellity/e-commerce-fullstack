@@ -25,7 +25,9 @@ import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore
 import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import { useCart } from "react-use-cart";
 import Cart from "../../CartPage/Cart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/ApiCalls";
 
 function DrawerComp() {
   const [openDraw, setOpenDraw] = useState(false);
@@ -33,7 +35,17 @@ function DrawerComp() {
   const { totalUniqueItems } = useCart();
   const [cartDraw, setCartDraw] = useState(false);
 
+  const user = useSelector(state => state.user.currentUser)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleDisplay = () => setVisible(!visible);
+
+  const handleLogOut = () => {
+    logout(dispatch);
+    navigate("/login");
+  };
 
   return (
     <>
@@ -139,20 +151,29 @@ function DrawerComp() {
             </Link>
           </div>
           <Divider sx={{ border: "0.7px solid" }} />
-          <Link
-            style={{ textDecoration: "none", color: "inherit" }}
-            to="/login"
-          >
+          
             <ListItemButton>
-              <Button
+
+            {
+              user ? <Button
                 variant="contained"
                 endIcon={<LoginIcon fontSize="small" />}
                 fullWidth
+                onClick={handleLogOut}
+              >
+                Logout
+              </Button> : <Button
+                variant="contained"
+                endIcon={<LoginIcon fontSize="small" />}
+                fullWidth
+                onClick={ () => navigate("/login")}
               >
                 Login
               </Button>
+            }
+              
             </ListItemButton>
-          </Link>
+         
         </List>
       </Drawer>
       <IconButton
