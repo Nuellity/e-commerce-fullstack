@@ -1,13 +1,32 @@
-import { React } from "react";
-import { Drawer, List, Button, IconButton } from "@mui/material";
+import  React, { useState } from "react";
+import { Drawer, List, Button, IconButton, Snackbar, Alert } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { removeProduct } from "../../redux/CartSlice";
 
 function Cart(props) {
   const cart = useSelector(state => state.cart)
-  console.log(cart)
+  const products = cart.products
+  const [open, setOpen] = useState(false);
+  console.log(products)
+  const dispatch = useDispatch()
+
+const removeItem = (index) => {
+  dispatch(removeProduct(index))
+
+
+}
+const closeAlert = (event, reason) => {
+  if (reason === "clickaway") {
+    return;
+  }
+  setOpen(false);
+};
+
+
+
 
   function isEmpty(product) {
     return Object.keys(product).length === 0;
@@ -41,7 +60,7 @@ function Cart(props) {
           sx={{ width: "100%", maxWidth: 450, bgcolor: "inherit" }}
           subheader={<li />}
         >
-          {isEmpty(cart) ? (
+          {isEmpty(products) ? (
             <>
               <h5 className="text-center p-2 ">Your Cart is Empty</h5>
               <img
@@ -55,7 +74,8 @@ function Cart(props) {
             <>
               {" "}
               <CartItem
-                productItem={cart}
+                productItem={products}
+                removeItem={removeItem}
               />{" "}
             </>
           )}
@@ -86,6 +106,11 @@ function Cart(props) {
           </div>
         </div>
       </Drawer>
+      <Snackbar open={open} autoHideDuration={2000} onClose={closeAlert}>
+        <Alert onClose={closeAlert} severity="warning" sx={{ width: "100%" }}>
+          Item has been removed from Cart!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

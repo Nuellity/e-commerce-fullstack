@@ -10,8 +10,12 @@ function StepDetails() {
     const [userData, setUserData] = useState({firstName: "", lastName: "", email: "", address: "", city: "", state: "", country: "", postalCode: "", paymentType: ""});
     const [finalData, setFinalData] = useState({});
 
+
+
+    
+
     function submitData(){
-        setFinalData( userData)
+        setFinalData({ userData})
         setCurrentStep(3)
     }
 
