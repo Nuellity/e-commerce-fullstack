@@ -1,7 +1,9 @@
 import React from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function TopCarousel() {
+  const navigate = useNavigate()
   return (
     <>
       <div
@@ -40,7 +42,7 @@ function TopCarousel() {
             />
             <div className="text-block">
               <h2>Welcome to Ayaba store!</h2>
-              <Button variant="contained">SHOP NOW</Button>
+              <Button onClick={() => navigate("/products")} variant="contained">SHOP NOW</Button>
             </div>
           </div>
           <div className="carousel-item">
@@ -51,7 +53,7 @@ function TopCarousel() {
             />
             <div className="text-block">
               <h2>Check out our wide range of computer</h2>
-              <Button variant="contained">SHOP NOW</Button>
+              <Button  onClick={() => navigate("/products")} variant="contained">SHOP NOW</Button>
             </div>
           </div>
           <div className="carousel-item">
@@ -62,7 +64,7 @@ function TopCarousel() {
             />
             <div className="text-block">
               <h2>Great selection of high-quality home gadgets</h2>
-              <Button variant="contained">SHOP NOW</Button>
+              <Button  onClick={() => navigate("/products")} variant="contained">SHOP NOW</Button>
             </div>
           </div>
         </div>
