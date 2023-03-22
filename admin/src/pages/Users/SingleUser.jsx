@@ -6,6 +6,7 @@ import {
   Button,
   Avatar,
   TextField,
+  IconButton
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tokens } from "../../theme";
@@ -16,10 +17,14 @@ import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import LocationSearchingOutlinedIcon from "@mui/icons-material/LocationSearchingOutlined";
 import PublishOutlinedIcon from "@mui/icons-material/PublishOutlined";
+import { useNavigate } from "react-router-dom"
+
 
 function SingleUser() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const navigate = useNavigate()
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
@@ -37,7 +42,9 @@ function SingleUser() {
             <Header title="Edit User" subTitle="Edit User Details" />
           </div>
           <div>
+          <IconButton onClick={ () => navigate("newuser")}>
             <ColorButton>CREATE</ColorButton>
+            </IconButton>
           </div>
         </div>
       </div>

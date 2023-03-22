@@ -11,21 +11,17 @@ import { login } from "../../redux/ApiCalls";
 const initialValues = {
   email: "",
   password: "",
-
 };
 
 const userSchema = yup.object().shape({
   email: yup.string().email("invalid email").required("required"),
-  password: yup
-    .string()
-    .required("required"),
-  
+  password: yup.string().required("required"),
 });
 
 function Login() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
@@ -36,14 +32,16 @@ function Login() {
   }));
 
   const handleFormSubmit = (values) => {
-    const email = values.email
-    const password =  values.password
-    console.log(email, password)
-    login(dispatch, { email, password})
+    const email = values.email;
+    const password = values.password;
+    login(dispatch, { email, password });
   };
   return (
     <Box m="20px">
-      <Header title="Admin Login" subTitle="Log in to access your Account dashboard" />
+      <Header
+        title="Admin Login"
+        subTitle="Log in to access your Account dashboard"
+      />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -71,9 +69,7 @@ function Login() {
                     name="email"
                     error={!!touched.email && !!errors.email}
                     helperText={
-                        touched.email && errors.email
-                        ? errors.email
-                        : ""
+                      touched.email && errors.email ? errors.email : ""
                     }
                     InputLabelProps={{
                       style: { color: colors.greenAccent[400] },
@@ -92,9 +88,7 @@ function Login() {
                     name="password"
                     error={!!touched.password && !!errors.password}
                     helperText={
-                        touched.password && errors.password
-                        ? errors.password
-                        : ""
+                      touched.password && errors.password ? errors.password : ""
                     }
                     InputLabelProps={{
                       style: { color: colors.greenAccent[400] },

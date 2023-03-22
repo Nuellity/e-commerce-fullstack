@@ -1,31 +1,45 @@
-import {
-  Box,
-  IconButton,
-  useTheme,
-  Typography,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
-} from "@mui/material";
+
+import { Box, useTheme, Typography } from "@mui/material";
 import { tokens } from "../../theme";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import { mockTransactions } from "../../data/testData";
-import List from "@mui/material/List";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
-import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
-import PointOfSaleOutlinedIcon from '@mui/icons-material/PointOfSaleOutlined';
-import Visibility from "@mui/icons-material/Visibility";
+import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
+import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
+import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
 import StatBox from "../../components/StatBox";
-import LineChart from "../../components/LineChart";
+import Chart from "../../components/Chart";
+import Users from "../../components/Users";
+import UserTransaction from "../../components/UserTransaction";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 function DashBoard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [revenue, setRevenue] = useState([]);
+  const [percent, setPercent] = useState(0);
+  const token = useSelector((state) => state.user.currentUser.accesstoken);
+  const GET_USER_URL = "http://localhost:4000/api/orders/income";
 
- 
+  useEffect(() => {
+    const getRevenue = async () => {
+      try {
+        const config = {
+          headers: {
+            token: `Bearer ${token}`,
+          },
+        };
+        const res = await axios.get(GET_USER_URL, config);
+        setRevenue(res.data);
+        setPercent(
+          Math.floor((res.data[1].totalOrders * 100) / res.data[0].totalOrders)
+        );
+      } catch (error) {}
+    };
+
+    getRevenue();
+  }, [token]);
+
   return (
     <div className="container mt-2 ">
       {/* Row 1 */}
@@ -44,13 +58,16 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
+              sx={{
+                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                margin: "3px",
+              }}
             >
               <StatBox
-                title="$12,361"
+                title={`$ ${revenue[1]?.totalOrders}`}
                 subTitle="Revenue"
-                progress="0.75"
-                increase="+14%"
+                progress={percent / 100}
+                increase={`${percent}%`}
                 icon={
                   <LocalAtmOutlinedIcon
                     sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
@@ -66,7 +83,10 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
+              sx={{
+                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                margin: "3px",
+              }}
             >
               <StatBox
                 title="$31,624"
@@ -88,7 +108,10 @@ function DashBoard() {
               alignItems="center"
               justifyContent="center"
               component="div"
-              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", margin: "3px"}}
+              sx={{
+                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                margin: "3px",
+              }}
             >
               <StatBox
                 title="$8,475"
@@ -106,200 +129,77 @@ function DashBoard() {
         </div>
         {/* Row 3 */}
         <div className="row">
-          <div className="col">
-            <Box backgroundColor={colors.primary[400]}   sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}component="div">
+          <div className="col h-100">
+            <Box
+              backgroundColor={colors.primary[400]}
+              sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+              component="div"
+            >
               <Box
                 mt="20px"
                 p="10px 20px 0 20px"
-                className="d-flex justify-content-between align-items-center"
+                className="d-flex justify-content-start align-items-center"
                 component="div"
               >
                 <Box component="div">
                   <Typography
-                    variant="h5"
+                    variant="h4"
                     fontWeight="600"
-                    color={colors.grey[100]}
+                    color={colors.greenAccent[400]}
+                    mb="10px"
                   >
                     User Analytics
                   </Typography>
-                  <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                    color={colors.greenAccent[500]}
-                  >
-                    $59,342.22
-                  </Typography>
-                </Box>
-                <Box component="div">
-                  <IconButton>
-                    <DownloadOutlinedIcon
-                      sx={{
-                        fontSize: "26px",
-                        color: colors.grey[500],
-                      }}
-                    />
-                  </IconButton>
                 </Box>
               </Box>
-              <Box component="div" height="250px">
-                <LineChart isDashboard={true} />
+              <Box component="div" mr="8px">
+                <Chart grid />
               </Box>
             </Box>
           </div>
         </div>
         {/* ROW 4*/}
         <div className="row">
-
           <div className="col-lg-4">
-          
             <Box
               backgroundColor={colors.primary[400]}
               component="div"
               className="py-2 my-3"
-              sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}
-              
+              sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
             >
-            <Typography fontWeight="600" color={colors.grey[100]} variant="h5" style={{ position: "sticky", top: 0,  padding: "5px 10px"}}>
+              <Typography
+                fontWeight="600"
+                color={colors.greenAccent[400]}
+                variant="h5"
+                style={{ position: "sticky", top: 0, padding: "5px 10px" }}
+              >
                 Newly Regsitered Users
               </Typography>
-              <List style={{ maxHeight: "280px", overflowY: "auto" }}>
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="view user">
-                      <Visibility />
-                      <Typography ml="5px">view user</Typography>
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar
-                      alt="user avatar"
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    />
-                  </ListItemAvatar>
-                  <ListItemText primary="John Doe" />
-                </ListItem>
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="view user">
-                      <Visibility />
-                      <Typography ml="5px">view user</Typography>
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar
-                      alt="user avatar"
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    />
-                  </ListItemAvatar>
-                  <ListItemText primary="John Doe" />
-                </ListItem>
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="view user">
-                      <Visibility />
-                      <Typography ml="5px">view user</Typography>
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar
-                      alt="user avatar"
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    />
-                  </ListItemAvatar>
-                  <ListItemText primary="John Doe" />
-                </ListItem>
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="view user">
-                      <Visibility />
-                      <Typography ml="5px">view user</Typography>
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar
-                      alt="user avatar"
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    />
-                  </ListItemAvatar>
-                  <ListItemText primary="John Doe" />
-                </ListItem>
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="view user">
-                      <Visibility />
-                      <Typography ml="5px">view user</Typography>
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar
-                      alt="user avatar"
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    />
-                  </ListItemAvatar>
-                  <ListItemText primary="John Doe" />
-                </ListItem>
-              </List>
+              <Users />
             </Box>
           </div>
           <Box
             backgroundColor={colors.primary[400]}
             className="col-lg-8 my-3"
             component="div"
-            sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}
+            sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
           >
             <Box
               className="p-2"
               color={colors.grey[100]}
               component="div"
-              style={{ position: "sticky", top: 0,}}
+              style={{ position: "sticky", top: 0 }}
             >
               <Typography
-                color={colors.grey[100]}
+                color={colors.greenAccent[400]}
                 variant="h5"
                 fontWeight="600"
               >
                 Recent Transactions
               </Typography>
             </Box>
-            <Box
-            style={{ maxHeight: "260px", overflowY: "auto" }}>
-            {mockTransactions.map((transact, index) => {
-              return (
-                <Box
-                  key={index}
-                  className="d-flex justify-content-between align-items-center p-2"
-                  borderBottom={`4px solid ${colors.primary[500]}`}
-                  
-                >
-                  <div>
-                    <Typography
-                      color={colors.greenAccent[500]}
-                      variant="h5"
-                      fontWeight="600"
-                    >
-                      {transact.txId}
-                    </Typography>
-                    <Typography color={colors.grey[100]}>
-                      {transact.user}
-                    </Typography>
-                  </div>
-                  <Box color={colors.grey[100]}>{transact.date}</Box>
-                  <Box
-                    backgroundColor={colors.greenAccent[500]}
-                    p="5px 10px"
-                    borderRadius="4px"
-                  >
-                    ${transact.cost}
-                  </Box>
-                </Box>
-                
-              );
-            })}
+            <Box style={{ maxHeight: "260px", overflowY: "auto" }}>
+              <UserTransaction />
             </Box>
           </Box>
         </div>

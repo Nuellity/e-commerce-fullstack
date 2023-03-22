@@ -68,7 +68,6 @@ router.get("/", verifyTokenAdmin, async (req, res) => {
 router.get("/stats", verifyTokenAdmin, async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
-  console.log(lastYear);
   try {
     const data = await User.aggregate([
       { $match: { createdAt: { $gte: lastYear } } },
