@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { IconButton, List, useTheme, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import { tokens } from "../../theme";
+// import { tokens } from "../../theme";
 import Drawer from "@mui/material/Drawer";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -24,8 +25,8 @@ import ErrorOutlinedIcon from "@mui/icons-material/ErrorOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 function Menubar() {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
 
   const [open, setOpen] = useState(false);
 
@@ -100,7 +101,7 @@ function Menubar() {
         <Divider />
         <List>
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem  disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -134,7 +135,7 @@ function Menubar() {
             Quick Menu
           </ListSubheader>
           <Link
-            to="/customers"
+            to="/users"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem disablePadding sx={{ display: "block" }}>
@@ -159,7 +160,7 @@ function Menubar() {
             </ListItem>
           </Link>
           <Link
-            to="/invoices"
+            to="/products"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem disablePadding sx={{ display: "block" }}>
