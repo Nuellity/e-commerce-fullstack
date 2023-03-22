@@ -51,7 +51,7 @@ function UserList() {
     },
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Price ($)",
       flex: 1,
       cellClassName: "name-column--cell",
     },
