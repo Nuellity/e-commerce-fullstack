@@ -1,7 +1,6 @@
-
 import { Box, useTheme, Typography } from "@mui/material";
 import { tokens } from "../../theme";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Header from "../../components/Header";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
@@ -10,35 +9,90 @@ import StatBox from "../../components/StatBox";
 import Chart from "../../components/Chart";
 import Users from "../../components/Users";
 import UserTransaction from "../../components/UserTransaction";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { userRequest } from "../../axiosRequest";
 
 function DashBoard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [revenue, setRevenue] = useState([]);
   const [percent, setPercent] = useState(0);
-  const token = useSelector((state) => state.user.currentUser.accesstoken);
-  const GET_USER_URL = "http://localhost:4000/api/orders/income";
+  const [userStats, setUserStats] = useState([
+    { name: "Jan", activeUser: 0 },
+    { name: "Feb", activeUser: 0 },
+    { name: "Mar", activeUser: 0 },
+    { name: "Apr", activeUser: 0 },
+    { name: "May", activeUser: 0 },
+    { name: "Jun", activeUser: 0 },
+    { name: "Jul", activeUser: 0 },
+    { name: "Aug", activeUser: 0 },
+    { name: "Sep", activeUser: 0 },
+    { name: "Oct", activeUser: 0 },
+    { name: "Nov", activeUser: 0 },
+    { name: "Dec", activeUser: 0 },
+  ]);
+  console.log(userStats);
+  const months = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
 
   useEffect(() => {
     const getRevenue = async () => {
       try {
-        const config = {
-          headers: {
-            token: `Bearer ${token}`,
-          },
-        };
-        const res = await axios.get(GET_USER_URL, config);
-        setRevenue(res.data);
+        const res = await userRequest.get("orders/income");
+        const lastTwoIncome = res.data.slice(-2);
+        setRevenue(lastTwoIncome);
         setPercent(
-          Math.floor((res.data[1].totalOrders * 100) / res.data[0].totalOrders)
+          Math.floor(
+            (lastTwoIncome[1].totalOrders * 100) / lastTwoIncome[0].totalOrders
+          )
         );
       } catch (error) {}
     };
 
     getRevenue();
-  }, [token]);
+  }, []);
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get("/users/stats");
+        res.data.map((item) =>
+          setUserStats((prev) => {
+            const index = prev.findIndex(
+              (user) => user.name === months[item._id - 1]
+            );
+            if (index !== -1) {
+              const updatedItem = {
+                ...prev[index],
+                activeUser: item.totalUsers,
+              };
+              return [
+                ...prev.slice(0, index),
+                updatedItem,
+                ...prev.slice(index + 1, 12),
+              ];
+            }
+            return prev;
+          })
+        );
+      } catch (error) {}
+    };
+    getStats();
+  }, [months]);
 
   return (
     <div className="container mt-2 ">
@@ -153,7 +207,7 @@ function DashBoard() {
                 </Box>
               </Box>
               <Box component="div" mr="8px">
-                <Chart grid />
+                <Chart data={userStats} dataKey="activeUser" />
               </Box>
             </Box>
           </div>

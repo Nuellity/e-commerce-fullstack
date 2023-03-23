@@ -9,30 +9,20 @@ import {
   List,
 } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
-import axios from "axios"
-import { useSelector } from "react-redux"
-
-
+import { userRequest } from "../axiosRequest";
 
 function Users() {
-    const token = useSelector(state => state.user.currentUser.accesstoken)
   const [users, setUsers] = useState([]);
-  const GET_USER_URL =  "http://localhost:4000/api/users/?new=true";
 
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const config =  {
-            headers: {
-                'token': `Bearer ${token}`,
-            }
-        }
-        const res = await axios.get(GET_USER_URL, config);
+        const res = await userRequest.get("/users/?new=true");
         setUsers(res.data);
       } catch (error) {}
     };
     getUsers();
-  }, [token]);
+  }, []);
 
   return (
     <List style={{ maxHeight: "280px", overflowY: "auto" }}>

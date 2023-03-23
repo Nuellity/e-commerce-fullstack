@@ -2,20 +2,17 @@ const router = require("express").Router();
 const Product = require("../models/product");
 const { verifyTokenAdmin } = require("./verify");
 
-
-
-
 // CREATE PRODUCT
 
-router.post("/", verifyTokenAdmin, async ( req, res ) => {
-    const newProduct = new Product(req.body);
-    try {
-        const savedProduct = await newProduct.save(); 
-        res.status(200).json(savedProduct);
-    } catch (error) {
-        res.status(500).json(error);
-    }
-})
+router.post("/", verifyTokenAdmin, async (req, res) => {
+  const newProduct = new Product(req.body);
+  try {
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 //UPDATE PRODUCT BY ID
 
@@ -36,7 +33,7 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 
 //DELETE PRODUCT BY ID
 
-router.delete("/delete/:id", verifyTokenAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json("Product has been deleted");
@@ -50,7 +47,7 @@ router.delete("/delete/:id", verifyTokenAdmin, async (req, res) => {
 router.get("/find/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-  
+
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json(error);
@@ -64,18 +61,17 @@ router.get("/", async (req, res) => {
   const qCategory = req.query.category;
   try {
     let products;
-    if(qNew){
-        products = await Product.find().sort({ createdAt: -1 }).limit(2);
-    } else if(qCategory){
-        products = await Product.find({ categories: { $in: [qCategory], }, })
-    }else{
-        products =  await Product.find();
+    if (qNew) {
+      products = await Product.find().sort({ createdAt: -1 }).limit(2);
+    } else if (qCategory) {
+      products = await Product.find({ categories: { $in: [qCategory] } });
+    } else {
+      products = await Product.find();
     }
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json(error);
   }
 });
-
 
 module.exports = router;

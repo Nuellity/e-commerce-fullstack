@@ -14,9 +14,9 @@ import Menubar from "./pages/Global/Menubar";
 import Login from "./pages/Login/Login";
 import { useSelector } from "react-redux";
 import ProductList from "./pages/Product/ProductList";
+import SingleProduct from "./pages/Product/SingleProduct";
 
 function App() {
-
   const user = useSelector((state) => state.user.currentUser);
   const [theme, colorMode] = useMode();
   return (
@@ -31,15 +31,18 @@ function App() {
               <Route path="/" element={<DashBoard />} />
               <Route path="pie" element={<Pie />} />
               <Route path="line" element={<UserList />} />
-              <Route path="products/:productId" element={<SingleUser />} />
-              <Route path="products" element={<ProductList/>} />
+              <Route path="products/:productId" element={<SingleProduct />} />
+              <Route path="products" element={<ProductList />} />
               <Route path="newproduct" element={<Bar />} />
               <Route path="newuser" element={<NewUser />} />
-              <Route path="users" element={<SingleUser/>} />
+              <Route path="users" element={<SingleUser />} />
               <Route path="users/:userId" element={<NewUser />} />
               <Route path="mail" element={<SingleUser />} />
               <Route path="team" element={<UserInfo />} />
-              <Route path="login" element={user ? <Navigate to="/" /> : <Login />} />
+              <Route
+                path="login"
+                element={user ? <Navigate to="/" /> : <Login />}
+              />
             </Routes>
           </main>
         </div>
