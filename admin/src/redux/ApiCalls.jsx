@@ -1,4 +1,13 @@
-import { publicRequest } from "../axiosRequest";
+/* eslint-disable no-unused-vars */
+import { publicRequest, userRequest } from "../axiosRequest";
+import {
+  deleteProductFailure,
+  deleteProductStart,
+  deleteProductSuccess,
+  getProductFailure,
+  getProductStart,
+  getProductSuccess,
+} from "./ProductSlice";
 import {
   forgetFailure,
   forgetStart,
@@ -30,7 +39,6 @@ export const logout = (dispatch) => {
   dispatch(logoutSuccess());
 };
 
-
 export const signup = async (dispatch, user) => {
   dispatch(signUpStart());
   try {
@@ -56,5 +64,25 @@ export const forgetPassword = async (dispatch, user) => {
     } else {
       console.log(error);
     }
+  }
+};
+
+export const getProducts = async (dispatch) => {
+  dispatch(getProductStart());
+  try {
+    const res = await publicRequest.get("/products");
+    dispatch(getProductSuccess(res.data));
+  } catch (err) {
+    dispatch(getProductFailure());
+  }
+};
+
+export const deleteProduct = async (id, dispatch) => {
+  dispatch(deleteProductStart());
+  try {
+    // const res = await userRequest.delete(`/products/${id}`);
+    dispatch(deleteProductSuccess(id));
+  } catch (err) {
+    dispatch(deleteProductFailure());
   }
 };

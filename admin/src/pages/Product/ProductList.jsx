@@ -1,26 +1,37 @@
-import React, { useState} from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { useTheme, Avatar,Button, IconButton, Box, Typography } from "@mui/material";
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
-import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
-import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import {mockDataTeam} from "../../data/testData"
+import { useTheme, Avatar, Button, IconButton, Box } from "@mui/material";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { mockDataTeam } from "../../data/testData";
 import Header from "../../components/Header";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, getProducts } from "../../redux/ApiCalls";
 
 function UserList() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [data, setData] = useState(mockDataTeam)
-  
+  // const [data, setData] = useState(mockDataTeam);
+
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.products);
+  console.log(products);
+
+  // const handleDelete = (id) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id  ))
-  }
+    deleteProduct(id, dispatch);
+  };
+
+  useEffect(() => {
+    getProducts(dispatch);
+  }, [dispatch]);
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "_id", headerName: "ID", width: 200 },
     {
       field: "product",
       headerName: "Product",
@@ -28,15 +39,19 @@ function UserList() {
       cellClassName: "name-column--cell",
       renderCell: (params) => {
         return (
-          <div className='d-flex justify-content-between align-items-center'>
-            <Avatar sx={{marginRight: "8px"}} src={params.row.img} alt=''/>
-            {params.row.product}
+          <div className="d-flex justify-content-between align-items-center">
+            <Avatar
+              sx={{ marginRight: "12px" }}
+              src={params.row.img[0].original}
+              alt=""
+            />
+            {params.row.title}
           </div>
-        )
-      }
+        );
+      },
     },
     {
-      field: "stock",
+      field: "count",
       headerName: "Stock",
       type: "number",
       headerAlign: "left",
@@ -44,7 +59,7 @@ function UserList() {
       cellClassName: "name-column--cell",
     },
     {
-      field: "status",
+      field: "inStock",
       headerName: "Status",
       flex: 1,
       cellClassName: "name-column--cell",
@@ -60,28 +75,41 @@ function UserList() {
       headerName: "Action",
       flex: 1,
       renderCell: (params) => {
-        console.log(params.row.id)
         return (
           <>
-          <div>
-          <Link to={`${params.row.id}`} style={{textDecoration: "none", color: "inherit"}}>
-          <Button variant='contained' color="success" sx={{color: colors.grey[900]}}>Edit</Button>
-          </Link>
-          <IconButton onClick={() => handleDelete(params.row.id)} >
-          <DeleteOutlineOutlinedIcon sx={{color: colors.redAccent[400], marginLeft:"10px"}}/>
-          </IconButton>
-          </div>
+            <div>
+              <Link
+                to={`${params.row._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{ color: colors.grey[900] }}
+                >
+                  Edit
+                </Button>
+              </Link>
+              <IconButton onClick={() => handleDelete(params.row._id)}>
+                <DeleteOutlineOutlinedIcon
+                  sx={{ color: colors.redAccent[400], marginLeft: "10px" }}
+                />
+              </IconButton>
+            </div>
           </>
         );
       },
     },
   ];
 
-
-    return(
-      <Box m="20px">
-        <Header title="Products" subTitle="Managing the Product"/>
-        <Box m="40px 0 0 0" width="100%" height="75vh" sx={{
+  return (
+    <Box m="20px">
+      <Header title="Products" subTitle="Managing the Product" />
+      <Box
+        m="40px 0 0 0"
+        width="100%"
+        height="75vh"
+        sx={{
           "& .MuiDataGrid-root": {
             border: "none",
           },
@@ -90,7 +118,7 @@ function UserList() {
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
-            fontSize: "14px"
+            fontSize: "14px",
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.blueAccent[700],
@@ -109,12 +137,18 @@ function UserList() {
           "& .MuiDataGrid-withBorderColor": {
             borderColor: `${colors.greenAccent[200]} !important`,
           },
-        }}>
-        <DataGrid checkboxSelection rows={data} columns={columns}  disableRowSelectionOnClick />
-        </Box>
+        }}
+      >
+        <DataGrid
+          checkboxSelection
+          rows={products}
+          getRowId={(row) => row._id}
+          columns={columns}
+          disableRowSelectionOnClick
+        />
       </Box>
-    )
-
+    </Box>
+  );
 }
 
 export default UserList;

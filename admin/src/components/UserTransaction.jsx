@@ -13,33 +13,24 @@ import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilled
 
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import { tokens } from "../theme";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import moment from 'moment';
+import moment from "moment";
+import { userRequest } from "../axiosRequest";
 
 function UserTransaction() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [orders, setOrders] = useState([]);
-  const token = useSelector((state) => state.user.currentUser.accesstoken);
-  const GET_USER_URL = "http://localhost:4000/api/orders";
   const transactionOrders = orders.slice().reverse();
-
 
   useEffect(() => {
     const getOrders = async () => {
       try {
-        const config = {
-          headers: {
-            token: `Bearer ${token}`,
-          },
-        };
-        const res = await axios.get(GET_USER_URL, config);
+        const res = await userRequest.get("/orders");
         setOrders(res.data);
       } catch (error) {}
     };
     getOrders();
-  }, [token]);
+  }, []);
 
   return (
     <TableContainer>
@@ -98,7 +89,7 @@ function UserTransaction() {
                 {order.userId}
               </TableCell>
               <TableCell align="right">
-              {moment(order.createdAt).fromNow()}
+                {moment(order.createdAt).fromNow()}
               </TableCell>
               <TableCell align="right">${order.amount}</TableCell>
               <TableCell align="right">
