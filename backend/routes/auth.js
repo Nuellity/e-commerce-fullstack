@@ -65,8 +65,8 @@ router.post("/forgotpassword", async (req, res) => {
     if (!user) {
       return res.status(401).json("Account not found!!");
     }
-    if(user.isAdmin){
-        return res.status(401).json("You are not authorized")
+    if (user.isAdmin) {
+      return res.status(401).json("You are not authorized");
     }
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
@@ -74,8 +74,8 @@ router.post("/forgotpassword", async (req, res) => {
     );
     const correctPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
     if (correctPassword === req.body.password) {
-        return res.status(401).json("Password has already been used");
-      }
+      return res.status(401).json("Password has already been used");
+    }
     const newPassword = await User.findOneAndUpdate(
       { email: user.email },
       {
