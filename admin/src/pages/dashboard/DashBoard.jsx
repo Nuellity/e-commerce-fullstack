@@ -30,7 +30,7 @@ function DashBoard() {
     { name: "Nov", activeUser: 0 },
     { name: "Dec", activeUser: 0 },
   ]);
-  console.log(userStats);
+
   const months = useMemo(
     () => [
       "Jan",

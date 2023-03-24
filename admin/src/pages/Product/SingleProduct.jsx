@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
@@ -39,6 +39,7 @@ function SingleProduct() {
     { name: "Dec", Sales: 0 },
   ]);
   const location = useLocation();
+  const navigate = useNavigate();
   const productId = location.pathname.split("/")[2];
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
@@ -111,7 +112,11 @@ function SingleProduct() {
         <div className=" my-3 d-flex justify-content-between align-items-center">
           <Header title="Product Details" subTitle="Edit product details" />
           <div>
-            <ColorButton style={{ width: "100px" }} variant="contained">
+            <ColorButton
+              onClick={() => navigate("/newproduct")}
+              style={{ width: "100px" }}
+              variant="contained"
+            >
               create
             </ColorButton>
           </div>
@@ -261,8 +266,11 @@ function SingleProduct() {
                       <FormControl variant="standard" fullWidth>
                         <InputLabel
                           sx={{
-                            color: colors.greenAccent[400],
                             fontSize: "15px",
+                            color: colors.greenAccent[400],
+                            "&.Mui-focused": {
+                              color: colors.greenAccent[400],
+                            },
                           }}
                           id="demo-simple-select-label"
                         >
