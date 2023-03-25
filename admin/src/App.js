@@ -4,7 +4,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route, Navigate } from "react-router-dom";
 import TopBar from "./pages/Global/TopBar";
 import DashBoard from "./pages/Dashboard/DashBoard";
-import Bar from "./pages/Bar/Bar";
+
 import Pie from "./pages/Pie/Pie";
 import UserList from "./pages/Users/UserList";
 import UserInfo from "./pages/Users/UserInfo";
@@ -15,6 +15,7 @@ import Login from "./pages/Login/Login";
 import { useSelector } from "react-redux";
 import ProductList from "./pages/Product/ProductList";
 import SingleProduct from "./pages/Product/SingleProduct";
+import NewProduct from "./pages/Product/NewProduct";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -33,7 +34,7 @@ function App() {
               <Route path="line" element={<UserList />} />
               <Route path="products/:productId" element={<SingleProduct />} />
               <Route path="products" element={<ProductList />} />
-              <Route path="newproduct" element={<Bar />} />
+              <Route path="newproduct" element={<NewProduct />} />
               <Route path="newuser" element={<NewUser />} />
               <Route path="users" element={<SingleUser />} />
               <Route path="users/:userId" element={<NewUser />} />
