@@ -6,7 +6,6 @@ import {
   Button,
   Avatar,
   TextField,
-  IconButton
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { tokens } from "../../theme";
@@ -17,14 +16,13 @@ import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import LocationSearchingOutlinedIcon from "@mui/icons-material/LocationSearchingOutlined";
 import PublishOutlinedIcon from "@mui/icons-material/PublishOutlined";
-import { useNavigate } from "react-router-dom"
-
+import { useNavigate } from "react-router-dom";
 
 function SingleUser() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
@@ -42,15 +40,23 @@ function SingleUser() {
             <Header title="Edit User" subTitle="Edit User Details" />
           </div>
           <div>
-          <IconButton onClick={ () => navigate("newuser")}>
-            <ColorButton>CREATE</ColorButton>
-            </IconButton>
+            <ColorButton onClick={() => navigate("newuser")}>
+              CREATE
+            </ColorButton>
           </div>
         </div>
       </div>
       <div className="row">
-        <div className="col-lg-3">
-          <Box component="div" backgroundColor={colors.primary[400]} sx={{height: "100%", padding: "20px", boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
+        <div className="col-lg-3 ">
+          <Box
+            component="div"
+            backgroundColor={colors.primary[400]}
+            sx={{
+              height: "100%",
+              padding: "20px",
+              boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+            }}
+          >
             <div className="d-flex align-items-center">
               <Avatar
                 src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -113,7 +119,15 @@ function SingleUser() {
           </Box>
         </div>
         <div className="col-lg-9">
-          <Box backgroundColor={colors.primary[400]} component="div" sx={{boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px", padding: "20px"}}>
+          <Box
+            backgroundColor={colors.primary[400]}
+            component="div"
+            sx={{
+              boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+              padding: "20px",
+              height: "100%",
+            }}
+          >
             <Typography variant="h4" fontWeight="600" color={colors.grey[200]}>
               Edit
             </Typography>

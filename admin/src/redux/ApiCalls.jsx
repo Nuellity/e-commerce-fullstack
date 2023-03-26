@@ -1,12 +1,18 @@
 /* eslint-disable no-unused-vars */
 import { publicRequest, userRequest } from "../axiosRequest";
 import {
+  addProductFailure,
+  addProductStart,
+  addProductSuccess,
   deleteProductFailure,
   deleteProductStart,
   deleteProductSuccess,
   getProductFailure,
   getProductStart,
   getProductSuccess,
+  updateProductFailure,
+  updateProductStart,
+  updateProductSuccess,
 } from "./ProductSlice";
 import {
   forgetFailure,
@@ -84,5 +90,25 @@ export const deleteProduct = async (id, dispatch) => {
     dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
+  }
+};
+
+export const updateProduct = async (id, product, dispatch) => {
+  dispatch(updateProductStart());
+  try {
+    // update
+    // const res = await userRequest.put(`/products/${id}`, product)
+    dispatch(updateProductSuccess({ id, product }));
+  } catch (err) {
+    dispatch(updateProductFailure());
+  }
+};
+export const addProduct = async (product, dispatch) => {
+  dispatch(addProductStart());
+  try {
+    const res = await userRequest.post(`/products`, product);
+    dispatch(addProductSuccess(res.data));
+  } catch (err) {
+    dispatch(addProductFailure());
   }
 };
