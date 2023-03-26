@@ -2,11 +2,19 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { useTheme, Avatar, Button, IconButton, Box } from "@mui/material";
+import {
+  useTheme,
+  Avatar,
+  Button,
+  IconButton,
+  Box,
+  Typography,
+} from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { styled } from "@mui/material/styles";
 import { mockDataTeam } from "../../data/testData";
 import Header from "../../components/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/ApiCalls";
 
@@ -14,10 +22,9 @@ function UserList() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // const [data, setData] = useState(mockDataTeam);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-  console.log(products);
 
   // const handleDelete = (id) => {
   //   setData(data.filter((item) => item.id !== id));
@@ -102,9 +109,33 @@ function UserList() {
     },
   ];
 
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(colors.grey[100]),
+    backgroundColor: colors.blueAccent[400],
+    "&:hover": {
+      backgroundColor: colors.blueAccent[600],
+    },
+  }));
+
   return (
     <Box m="20px">
-      <Header title="Products" subTitle="Managing the Product" />
+      <div className="d-flex justify-content-between">
+        <Header title="Products" subTitle="Managing the Product" />
+        <div>
+          <ColorButton
+            onClick={() => navigate("/newproduct")}
+            style={{
+              width: "150px",
+              height: "40px",
+              fontSize: "13px",
+              fontWeight: "bold",
+            }}
+            variant="contained"
+          >
+            Add new product
+          </ColorButton>
+        </div>
+      </div>
       <Box
         m="40px 0 0 0"
         width="100%"

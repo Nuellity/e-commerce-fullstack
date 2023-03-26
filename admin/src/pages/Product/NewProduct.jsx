@@ -62,12 +62,6 @@ function NewProduct() {
   const [category, setCategory] = useState([]);
   const [size, setSize] = useState([]);
   const [images, setImages] = useState([]);
-  const [progress, setProgress] = useState(0);
-  const [buffer, setBuffer] = React.useState(10);
-
-  const isFetching = useSelector((state) => state.product.isFetching);
-
-  const navigate = useNavigate();
   const [input, setInput] = useState({
     title: "",
     description: "",
@@ -75,7 +69,11 @@ function NewProduct() {
     inStock: false,
     count: "",
   });
+  const [progress, setProgress] = useState(0);
+  const [buffer, setBuffer] = useState(10);
 
+  const isFetching = useSelector((state) => state.product.isFetching);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleFileChange = (event) => {
