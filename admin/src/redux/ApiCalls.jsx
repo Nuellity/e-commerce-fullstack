@@ -1,6 +1,20 @@
 /* eslint-disable no-unused-vars */
 import { publicRequest, userRequest } from "../axiosRequest";
 import {
+  addCustomerFailure,
+  addCustomerStart,
+  addCustomerSuccess,
+  deleteCustomerFailure,
+  deleteCustomerStart,
+  deleteCustomerSuccess,
+  getCustomerFailure,
+  getCustomerStart,
+  getCustomerSuccess,
+  updateCustomerFailure,
+  updateCustomerStart,
+  updateCustomerSuccess,
+} from "./CustomerSlice";
+import {
   addProductFailure,
   addProductStart,
   addProductSuccess,
@@ -86,7 +100,7 @@ export const getProducts = async (dispatch) => {
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
   try {
-    // const res = await userRequest.delete(`/products/${id}`);
+    const res = await userRequest.delete(`/products/${id}`);
     dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
@@ -110,5 +124,47 @@ export const addProduct = async (product, dispatch) => {
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());
+  }
+};
+
+export const getCustomers = async (dispatch) => {
+  dispatch(getCustomerStart());
+  try {
+    const res = await userRequest.get("/users");
+    dispatch(getCustomerSuccess(res.data));
+  } catch (err) {
+    dispatch(getCustomerFailure());
+  }
+};
+
+export const deleteCustomer = async (id, dispatch) => {
+  dispatch(deleteCustomerStart());
+  try {
+    // const res = await userRequest.delete(`/users/${id}`);
+    dispatch(deleteCustomerSuccess(id));
+  } catch (err) {
+    dispatch(deleteCustomerFailure());
+  }
+};
+
+export const updateCustomer = async (id, customer, dispatch) => {
+  dispatch(updateCustomerStart());
+  try {
+    // update
+    const res = await userRequest.patch(`/users/${id}`, customer);
+    dispatch(updateCustomerSuccess(res.data));
+  } catch (err) {
+    dispatch(updateCustomerFailure());
+  }
+};
+export const addCustomer = async (customer, dispatch) => {
+  dispatch(addCustomerStart());
+  try {
+    const res = await userRequest.post("/users", customer);
+    console.log(res.data);
+    dispatch(addCustomerSuccess(res.data));
+  } catch (err) {
+    dispatch(addCustomerFailure());
+    console.log(err);
   }
 };

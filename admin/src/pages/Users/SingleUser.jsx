@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   useTheme,
   Box,
@@ -10,20 +10,118 @@ import {
 import { styled } from "@mui/material/styles";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
-import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import LocationSearchingOutlinedIcon from "@mui/icons-material/LocationSearchingOutlined";
-import PublishOutlinedIcon from "@mui/icons-material/PublishOutlined";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import app from "../../fireBase";
+import { updateCustomer } from "../../redux/ApiCalls";
 
 function SingleUser() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  const [file, setFile] = useState(null);
+  const [input, setInput] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+  const [address, setAddress] = useState({
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+    zipcode: "",
+  });
+  const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const customerId = location.pathname.split("/")[2];
+  const customer = useSelector((state) =>
+    state.customer.customers.find((customer) => customer._id === customerId)
+  );
 
+  const handleInputChange = (event) => {
+    setInput((prev) => {
+      return { ...prev, [event.target.name]: event.target.value };
+    });
+  };
+  const handleAddressChange = (event) => {
+    setAddress((prev) => {
+      return { ...prev, [event.target.name]: event.target.value };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let product = {};
+
+    const updatedCustomer = {};
+    Object.keys(input).forEach((key) => {
+      if (input[key]) {
+        updatedCustomer[key] = input[key];
+      }
+    });
+    const updatedAddress = {};
+    Object.keys(address).forEach((key) => {
+      if (address[key]) {
+        updatedAddress[key] = address[key];
+      }
+    });
+    if (file && typeof file !== "undefined") {
+      const fileName = new Date().getTime() + file.name;
+      const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            const product = {
+              ...updatedCustomer,
+              address: updatedAddress,
+              img: downloadURL,
+            };
+            console.log(product);
+            updateCustomer(customerId, product, dispatch);
+            navigate("/users");
+          });
+        }
+      );
+    } else {
+      product = {
+        ...updatedCustomer,
+        address: updatedAddress,
+      };
+      updateCustomer(customerId, product, dispatch);
+      navigate("/users");
+      console.log(product);
+    }
+  };
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
     backgroundColor: colors.blueAccent[400],
@@ -35,14 +133,9 @@ function SingleUser() {
   return (
     <div className="container mt-2">
       <div className="row">
-        <div className="container d-flex justify-content-between align-items-center">
+        <div className="container">
           <div>
             <Header title="Edit User" subTitle="Edit User Details" />
-          </div>
-          <div>
-            <ColorButton onClick={() => navigate("newuser")}>
-              CREATE
-            </ColorButton>
           </div>
         </div>
       </div>
@@ -58,13 +151,10 @@ function SingleUser() {
             }}
           >
             <div className="d-flex align-items-center">
-              <Avatar
-                src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
-              />
+              <Avatar src={customer.img} alt="" />
               <div className="mx-3">
                 <Typography color={colors.greenAccent[100]} fontWeight="600">
-                  Anna Becker
+                  {customer.firstName} {customer.lastName}
                 </Typography>
                 <Typography
                   color={colors.greenAccent[100]}
@@ -72,48 +162,27 @@ function SingleUser() {
                   fontWeight="300"
                 >
                   {" "}
-                  Software Engineer
+                  {customer.isAdmin ? "Admin" : "Customer"}
                 </Typography>
               </div>
             </div>
-            <div className="mt-4">
-              <Typography color={colors.grey[200]}>Account Details</Typography>
-              <div className="mt-4">
-                <div className="my-2">
-                  <PermIdentityOutlinedIcon sx={{ marginRight: "7px" }} />
-                  <span style={{ color: colors.greenAccent[400] }}>
-                    annabeck99
-                  </span>
-                </div>
 
-                <div className="my-2">
-                  <CalendarTodayOutlinedIcon sx={{ marginRight: "7px" }} />
-                  <span style={{ color: colors.greenAccent[400] }}>
-                    10.12.1999
-                  </span>
-                </div>
-                <Typography className="my-3" color={colors.grey[200]}>
-                  Contact Details
-                </Typography>
-                <div className="my-2">
-                  <PhoneAndroidOutlinedIcon sx={{ marginRight: "7px" }} />
-                  <span style={{ color: colors.greenAccent[400] }}>
-                    +1 123 4646
-                  </span>
-                </div>
+            <div className="mt-5">
+              <Typography className="my-3" color={colors.grey[200]}>
+                Contact Details
+              </Typography>
 
-                <div className="my-2">
-                  <MailOutlineOutlinedIcon sx={{ marginRight: "7px" }} />
-                  <span style={{ color: colors.greenAccent[400] }}>
-                    annabeck99@gmail.com
-                  </span>
-                </div>
-                <div className="my-2">
-                  <LocationSearchingOutlinedIcon sx={{ marginRight: "7px" }} />
-                  <span style={{ color: colors.greenAccent[400] }}>
-                    NEW YORK | USA
-                  </span>
-                </div>
+              <div className="my-2">
+                <MailOutlineOutlinedIcon sx={{ marginRight: "7px" }} />
+                <span style={{ color: colors.greenAccent[400] }}>
+                  {customer.email}
+                </span>
+              </div>
+              <div className="my-2">
+                <LocationSearchingOutlinedIcon sx={{ marginRight: "7px" }} />
+                <span style={{ color: colors.greenAccent[400] }}>
+                  {/* {customer.address.state}| {customer.address.country} */}
+                </span>
               </div>
             </div>
           </Box>
@@ -131,12 +200,15 @@ function SingleUser() {
             <Typography variant="h4" fontWeight="600" color={colors.grey[200]}>
               Edit
             </Typography>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-lg-7">
                   <div className="col my-2">
                     <TextField
-                      label="Username"
+                      name="firstName"
+                      label="First Name"
+                      onChange={handleInputChange}
+                      value={input.firstName}
                       variant="standard"
                       InputLabelProps={{
                         style: { color: colors.greenAccent[400] },
@@ -146,8 +218,11 @@ function SingleUser() {
                   </div>
                   <div className="col my-2">
                     <TextField
-                      label="Fullname"
+                      name="lastName"
+                      label="Last Name"
                       variant="standard"
+                      onChange={handleInputChange}
+                      value={input.lastName}
                       InputLabelProps={{
                         style: { color: colors.greenAccent[400] },
                       }}
@@ -156,9 +231,12 @@ function SingleUser() {
                   </div>
                   <div className="col my-2">
                     <TextField
+                      name="email"
                       type="email"
                       label="Email"
                       variant="standard"
+                      onChange={handleInputChange}
+                      value={input.email}
                       InputLabelProps={{
                         style: { color: colors.greenAccent[400] },
                       }}
@@ -167,18 +245,64 @@ function SingleUser() {
                   </div>
                   <div className="col my-2">
                     <TextField
-                      label="Phone"
-                      variant="standard"
-                      InputLabelProps={{
-                        style: { color: colors.greenAccent[400] },
-                      }}
-                      fullWidth
-                    />
-                  </div>
-                  <div className="col my-2">
-                    <TextField
+                      name="address"
                       label="Address"
                       variant="standard"
+                      onChange={handleAddressChange}
+                      value={address.address}
+                      InputLabelProps={{
+                        style: { color: colors.greenAccent[400] },
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                  <div className="col my-2">
+                    <TextField
+                      name="city"
+                      label="City"
+                      variant="standard"
+                      onChange={handleAddressChange}
+                      value={address.city}
+                      InputLabelProps={{
+                        style: { color: colors.greenAccent[400] },
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                  <div className="col my-2">
+                    <TextField
+                      name="state"
+                      label="State"
+                      variant="standard"
+                      onChange={handleAddressChange}
+                      value={address.state}
+                      InputLabelProps={{
+                        style: { color: colors.greenAccent[400] },
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                  <div className="col my-2">
+                    <TextField
+                      name="country"
+                      label="Country"
+                      variant="standard"
+                      onChange={handleAddressChange}
+                      value={address.country}
+                      InputLabelProps={{
+                        style: { color: colors.greenAccent[400] },
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                  <div className="col my-2">
+                    <TextField
+                      name="zipcode"
+                      label="ZipCode"
+                      type="number"
+                      variant="standard"
+                      onChange={handleAddressChange}
+                      value={address.zipcode}
                       InputLabelProps={{
                         style: { color: colors.greenAccent[400] },
                       }}
@@ -187,30 +311,31 @@ function SingleUser() {
                   </div>
                 </div>
                 <div className="col-lg-5">
-                  <div className="d-flex justify-content-end">
-                    <div className="d-flex justify-content-between w-50">
+                  <div className="">
+                    <div className="w-50">
                       <div>
-                        <Avatar
-                          sx={{ width: 100, height: 100 }}
-                          src="https://images.pexels.com/photos/1310474/pexels-photo-1310474.jpeg?auto=compress&cs=tinysrgb&w=800"
-                          alt=""
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="file">
-                          <PublishOutlinedIcon className="userUpdateIcon" />
-                        </label>
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            color: colors.greenAccent[400],
+                            marginBottom: "5px",
+                          }}
+                        >
+                          Change profile picture
+                        </Typography>
                         <input
                           type="file"
                           id="file"
-                          style={{ display: "none" }}
+                          onChange={(e) => setFile(e.target.files[0])}
                         />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="d-flex justify-content-end">
-                  <ColorButton>Update</ColorButton>
+                  <ColorButton type="submit" style={{ width: "120px" }}>
+                    UPDATE USER
+                  </ColorButton>
                 </div>
               </div>
             </form>

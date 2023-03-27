@@ -31,15 +31,15 @@ function App() {
             <Routes>
               <Route path="/" element={<DashBoard />} />
               <Route path="pie" element={<Pie />} />
-              <Route path="line" element={<UserList />} />
+              <Route path="line" element={<UserInfo />} />
               <Route path="products/:productId" element={<SingleProduct />} />
               <Route path="products" element={<ProductList />} />
               <Route path="newproduct" element={<NewProduct />} />
               <Route path="newuser" element={<NewUser />} />
-              <Route path="users" element={<SingleUser />} />
-              <Route path="users/:userId" element={<NewUser />} />
+              <Route path="users" element={<UserList />} />
+              <Route path="users/:userId" element={<SingleUser />} />
               <Route path="mail" element={<SingleUser />} />
-              <Route path="team" element={<UserInfo />} />
+              <Route path="team" element={<NewUser />} />
               <Route
                 path="login"
                 element={user ? <Navigate to="/" /> : <Login />}

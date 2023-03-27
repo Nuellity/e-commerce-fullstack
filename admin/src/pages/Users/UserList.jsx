@@ -1,236 +1,121 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { useTheme, Avatar,Button, IconButton, Box, Typography } from "@mui/material";
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
-import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
-import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import {mockDataTeam} from "../../data/testData"
+import {
+  useTheme,
+  Avatar,
+  Button,
+  IconButton,
+  Box,
+  Typography,
+} from "@mui/material";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { styled } from "@mui/material/styles";
+import { Link, useNavigate } from "react-router-dom";
+
+import { mockDataTeam } from "../../data/testData";
 import Header from "../../components/Header";
-
-
-
-// const columns = [
-//   { field: "id", headerName: "ID", width: 70 },
-//   { field: "userName", headerName: "Username", width: 200, renderCell: (params) => {
-//     return(<>
-//         <Avatar src={params.row.avatar} sx={{marginRight: 2,  width: 30, height: 30}} />
-//         {params.row.userName}
-//         </>
-//     )
-//   } },
-//   { field: "email", headerName: "Email", width: 200 },
-//   {
-//     field: "status",
-//     headerName: "Status",
-//     width: 120,
-//   },
-//   {
-//     field: "transaction",
-//     headerName: "Transaction Volume",
-//     width: 160,
-//   },
-//   {
-//     field: "action",
-//     headerName: "Action",
-//     width: 150,
-//     renderCell: (params) => {
-//         return (
-//             <>
-//             <Button variant="outlined"  size="small">Edit</Button>
-//             <IconButton>
-//             <DeleteOutlineOutlinedIcon sx={{color: "red"}}/>
-//             </IconButton>
-//             </>
-//         );
-        
-//     }
-//   },
-  
-  
-// ];
-
-// const rows = [
-//   {
-//     id: 1,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 2,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-
-//   {
-//     id: 3,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 4,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 5,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 6,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 7,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 8,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 9,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 10,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 11,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-//   {
-//     id: 12,
-//     userName: "John Doe",
-//     avatar:
-//       "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
-//     email: "doe@mail.com",
-//     status: "active",
-//     transaction: "$100.00",
-//   },
-// ];
+import { deleteCustomer, getCustomers } from "../../redux/ApiCalls";
+import { useDispatch, useSelector } from "react-redux";
 
 function UserList() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const customers = useSelector((state) => state.customer.customers);
+  console.log(customers);
+
+  const handleDelete = (id) => {
+    deleteCustomer(id, dispatch);
+  };
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    { field: "_id", headerName: "ID", width: 200 },
     {
-      field: "name",
-      headerName: "Name",
+      field: "firstName",
+      headerName: "First Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
+      field: "lastName",
+      headerName: "Last Name",
       flex: 1,
+      cellClassName: "name-column--cell",
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
+      width: 200,
+      cellClassName: "name-column--cell",
     },
     {
-      field: "accessLevel",
-      headerName: "Access Level",
+      field: "isAdmin",
+      headerName: "Admin",
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "action",
+      headerName: "Action",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
+      renderCell: (params) => {
         return (
-          <Box
-            width="60%"
-            m="0 auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : access === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
-          >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
-            </Typography>
-          </Box>
+          <>
+            <div>
+              <Link
+                to={`${params.row._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{ color: colors.grey[900] }}
+                >
+                  Edit
+                </Button>
+              </Link>
+              <IconButton onClick={() => handleDelete(params.row._id)}>
+                <DeleteOutlineOutlinedIcon
+                  sx={{ color: colors.redAccent[400], marginLeft: "10px" }}
+                />
+              </IconButton>
+            </div>
+          </>
         );
       },
     },
   ];
 
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(colors.grey[100]),
+    backgroundColor: colors.blueAccent[400],
+    "&:hover": {
+      backgroundColor: colors.blueAccent[600],
+    },
+  }));
 
-    return(
-      <Box m="20px">
-        <Header title="Team" subTitle="Managing the Team's Info"/>
-        <Box m="40px 0 0 0" width="100%" height="75vh" sx={{
+  useEffect(() => {
+    getCustomers(dispatch);
+  }, [dispatch]);
+
+  return (
+    <Box m="20px">
+      <div className="d-flex justify-content-between">
+        <Header title="Team" subTitle="Managing the Team's Info" />
+        <ColorButton
+          style={{ width: "200px", height: "40px", fontSize: "15px" }}
+          onClick={() => navigate("/newuser")}
+        >
+          CREATE NEW USER
+        </ColorButton>
+      </div>
+      <Box
+        m="40px 0 0 0"
+        width="100%"
+        height="75vh"
+        sx={{
           "& .MuiDataGrid-root": {
             border: "none",
           },
@@ -257,25 +142,18 @@ function UserList() {
           "& .MuiDataGrid-withBorderColor": {
             borderColor: `${colors.greenAccent[200]} !important`,
           },
-        }}>
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns}  disableRowSelectionOnClick />
-        </Box>
+        }}
+      >
+        <DataGrid
+          checkboxSelection
+          rows={customers}
+          getRowId={(row) => row._id}
+          columns={columns}
+          disableRowSelectionOnClick
+        />
       </Box>
-    )
-
-  // return (
-  //   <div style={{ height: "400px", width: "100%" }}>
-  //     <DataGrid
-  //       rows={rows}
-  //       columns={columns}
-  //       pageSize={8}
-  //       rowsPerPageOptions={[5]}
-  //       checkboxSelection
-  //       disableRowSelectionOnClick
-  //     />
-      
-  //   </div>
-  // );
+    </Box>
+  );
 }
 
 export default UserList;
