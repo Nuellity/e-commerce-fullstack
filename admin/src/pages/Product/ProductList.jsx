@@ -25,6 +25,7 @@ function UserList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+  console.log(products);
 
   // const handleDelete = (id) => {
   //   setData(data.filter((item) => item.id !== id));
