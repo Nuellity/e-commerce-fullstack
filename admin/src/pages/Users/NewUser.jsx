@@ -261,7 +261,11 @@ function NewUser() {
                         }
                         label="Password"
                       />
-                      <FormHelperText>
+                      <FormHelperText
+                        style={{
+                          color: errors.password ? "red" : "inherit",
+                        }}
+                      >
                         {touched.password && errors.password
                           ? errors.password
                           : ""}
@@ -308,7 +312,11 @@ function NewUser() {
                         }
                         label="Confirm Password"
                       />
-                      <FormHelperText>
+                      <FormHelperText
+                        style={{
+                          color: errors.confirmPassword ? "red" : "inherit",
+                        }}
+                      >
                         {touched.confirmPassword && errors.confirmPassword
                           ? errors.confirmPassword
                           : ""}
