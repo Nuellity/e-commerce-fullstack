@@ -9,38 +9,34 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProduct } from "../../redux/CartSlice";
 
+function CartItem() {
+  const cart = useSelector((state) => state.cart.products);
+  const dispatch = useDispatch();
 
-
-
-
-const Remove = (props) => {
-  return <IconButton edge="end" aria-label="delete" {...props} />;
-};
-
-function CartItem(props) {
-  const { productItem, removeItem } = props;
-
-  const handleRemove = (index) => {
-    removeItem(index)
-  }
- 
-
-  
+  const handleClick = (id) => {
+    console.log("working");
+    dispatch(deleteProduct(id));
+  };
   return (
     <>
-      {productItem.map((value, index) => {
-      
+      {cart.map((value, index) => {
         return (
           <ListItem
             key={index}
             component={"div"}
             alignItems="flex-start"
-            // secondaryAction={
-            //   <Remove onClick={handleRemove(index)} >
-            //     <DeleteIcon />
-            //   </Remove>
-            // }
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => handleClick(value._id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            }
             sx={{ width: "100%" }}
           >
             <ListItemAvatar>
@@ -66,9 +62,6 @@ function CartItem(props) {
                     <Typography variant="span" sx={{ padding: "5px 0" }}>
                       Quantity: {value.quantity}
                     </Typography>
-                    <Typography variant="span" sx={{ padding: "5px 0" }}>
-                       delete
-                      </Typography>
                     <Typography
                       variant="span"
                       sx={{ padding: "5px 0", fontSize: "20px" }}
@@ -83,7 +76,6 @@ function CartItem(props) {
           </ListItem>
         );
       })}
-      
     </>
   );
 }
