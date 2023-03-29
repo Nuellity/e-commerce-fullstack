@@ -31,6 +31,8 @@ function ProductDetails(props) {
   const dispatch = useDispatch();
   const { product, itemPrice, title, image, sizes, desc, count } = props;
 
+  // console.log(product);
+
   const handleChange = (event) => {
     setSize(event.target.value);
   };
@@ -40,7 +42,10 @@ function ProductDetails(props) {
   };
 
   const handleAddToCart = () => {
-    dispatch(addProduct({ ...product, quantity, size }));
+    const updatedProduct = { ...product, amount: quantity * product.price };
+    const item = { ...updatedProduct, quantity, size };
+    console.log(item);
+    dispatch(addProduct(item));
     handleDraw();
     setOpen(true);
   };
@@ -130,13 +135,6 @@ function ProductDetails(props) {
                 <Button onClick={decrement}>-</Button>
               </ButtonGroup>
             </div>
-
-            <Cart
-              count={count}
-              optional={size}
-              openCart={cartDraw}
-              closeCart={handleClose}
-            />
             <div className="mt-5">
               <Button
                 variant="contained"
@@ -146,6 +144,12 @@ function ProductDetails(props) {
                 Add to Cart
               </Button>
             </div>
+            <Cart
+              count={count}
+              optional={size}
+              openCart={cartDraw}
+              closeCart={handleClose}
+            />
             <Snackbar open={open} autoHideDuration={3000} onClose={closeAlert}>
               <Alert
                 onClose={closeAlert}

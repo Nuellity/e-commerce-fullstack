@@ -1,32 +1,28 @@
-import  React, { useState } from "react";
-import { Drawer, List, Button, IconButton, Snackbar, Alert } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Drawer,
+  List,
+  Button,
+  IconButton,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux"
-import { removeProduct } from "../../redux/CartSlice";
+import { useSelector } from "react-redux";
 
 function Cart(props) {
-  const cart = useSelector(state => state.cart)
-  const products = cart.products
+  const cart = useSelector((state) => state.cart);
+  const products = cart.products;
   const [open, setOpen] = useState(false);
-  console.log(products)
-  const dispatch = useDispatch()
 
-const removeItem = (index) => {
-  dispatch(removeProduct(index))
-
-
-}
-const closeAlert = (event, reason) => {
-  if (reason === "clickaway") {
-    return;
-  }
-  setOpen(false);
-};
-
-
-
+  const closeAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   function isEmpty(product) {
     return Object.keys(product).length === 0;
@@ -73,10 +69,7 @@ const closeAlert = (event, reason) => {
           ) : (
             <>
               {" "}
-              <CartItem
-                productItem={products}
-                removeItem={removeItem}
-              />{" "}
+              <CartItem />{" "}
             </>
           )}
         </List>
@@ -91,18 +84,23 @@ const closeAlert = (event, reason) => {
           </div>
 
           <div className="checkout text-center ">
-          <Link style={{textDecoration: "none", color: "inherit"}} to="/checkout">
-            <Button
-              variant="contained"
-              color="success"
-              sx={{ width: "80%", height: "50px", fontSize: "25px" }}
+            <Link
+              style={{ textDecoration: "none", color: "inherit" }}
+              to="/checkout"
             >
-              Checkout
-            </Button>
+              <Button
+                variant="contained"
+                color="success"
+                sx={{ width: "80%", height: "50px", fontSize: "25px" }}
+              >
+                Checkout
+              </Button>
             </Link>
           </div>
           <div className="cart-ship text-center py-3">
-            <p className="px-2" style={{fontSize: "15px"}}>Shipping & taxes calculated at checkout</p>
+            <p className="px-2" style={{ fontSize: "15px" }}>
+              Shipping & taxes calculated at checkout
+            </p>
           </div>
         </div>
       </Drawer>
