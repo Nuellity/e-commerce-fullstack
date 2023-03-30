@@ -1,20 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import {
-  useTheme,
-  Avatar,
-  Button,
-  IconButton,
-  Box,
-  Typography,
-} from "@mui/material";
+import { useTheme, Button, IconButton, Box } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { styled } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-
-import { mockDataTeam } from "../../data/testData";
 import Header from "../../components/Header";
 import { deleteCustomer, getCustomers } from "../../redux/ApiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -103,7 +94,7 @@ function UserList() {
   return (
     <Box m="20px">
       <div className="d-flex justify-content-between">
-        <Header title="Team" subTitle="Managing the Team's Info" />
+        <Header title="Customers" subTitle="Manage your Customer's Info" />
         <ColorButton
           style={{ width: "200px", height: "40px", fontSize: "15px" }}
           onClick={() => navigate("/newuser")}
@@ -142,6 +133,9 @@ function UserList() {
           "& .MuiDataGrid-withBorderColor": {
             borderColor: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
         <DataGrid
@@ -149,6 +143,7 @@ function UserList() {
           rows={customers}
           getRowId={(row) => row._id}
           columns={columns}
+          components={{ Toolbar: GridToolbar }}
           disableRowSelectionOnClick
         />
       </Box>

@@ -16,6 +16,9 @@ import { useSelector } from "react-redux";
 import ProductList from "./pages/Product/ProductList";
 import SingleProduct from "./pages/Product/SingleProduct";
 import NewProduct from "./pages/Product/NewProduct";
+import NoMatch from "./NoMatch";
+import Orders from "./pages/Transaction/OrderList";
+import SingleOrder from "./pages/Transaction/SingleOrder";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -35,11 +38,16 @@ function App() {
               <Route path="products/:productId" element={<SingleProduct />} />
               <Route path="products" element={<ProductList />} />
               <Route path="newproduct" element={<NewProduct />} />
-              <Route path="newuser" element={<NewUser />} />
+              <Route path="transactions" element={<Orders />} />
+              <Route
+                path="transactions/:transactionId"
+                element={<SingleOrder />}
+              />
               <Route path="users" element={<UserList />} />
               <Route path="users/:userId" element={<SingleUser />} />
-              <Route path="mail" element={<SingleUser />} />
+              <Route path="mail" element={<Pie />} />
               <Route path="team" element={<NewUser />} />
+              <Route path="*" element={<NoMatch />} />
               <Route
                 path="login"
                 element={user ? <Navigate to="/" /> : <Login />}

@@ -44,7 +44,6 @@ function ProductDetails(props) {
   const handleAddToCart = () => {
     const updatedProduct = { ...product, amount: quantity * product.price };
     const item = { ...updatedProduct, quantity, size };
-    console.log(item);
     dispatch(addProduct(item));
     handleDraw();
     setOpen(true);
