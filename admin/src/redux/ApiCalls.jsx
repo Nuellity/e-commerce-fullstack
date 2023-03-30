@@ -15,6 +15,20 @@ import {
   updateCustomerSuccess,
 } from "./CustomerSlice";
 import {
+  getOrderStart,
+  getOrderSuccess,
+  getOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
+  updateOrderStart,
+  updateOrderSuccess,
+  updateOrderFailure,
+  addOrderStart,
+  addOrderSuccess,
+  addOrderFailure,
+} from "./OrderSlice";
+import {
   addProductFailure,
   addProductStart,
   addProductSuccess,
@@ -165,6 +179,48 @@ export const addCustomer = async (customer, dispatch) => {
     dispatch(addCustomerSuccess(res.data));
   } catch (err) {
     dispatch(addCustomerFailure());
+    console.log(err);
+  }
+};
+
+export const getOrders = async (dispatch) => {
+  dispatch(getOrderStart());
+  try {
+    const res = await userRequest.get("/orders");
+    dispatch(getOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(getOrderFailure());
+  }
+};
+
+export const deleteOrder = async (id, dispatch) => {
+  dispatch(deleteOrderStart());
+  try {
+    const res = await userRequest.delete(`/orders/${id}`);
+    dispatch(deleteOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(deleteOrderFailure());
+  }
+};
+
+export const updateOrder = async (id, order, dispatch) => {
+  dispatch(updateOrderStart());
+  try {
+    // update
+    const res = await userRequest.patch(`/orders/${id}`, order);
+    dispatch(updateOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(updateOrderFailure());
+  }
+};
+export const addOrder = async (order, dispatch) => {
+  dispatch(addOrderStart());
+  try {
+    const res = await userRequest.post("/orders", order);
+    console.log(res.data);
+    dispatch(addOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(addOrderFailure());
     console.log(err);
   }
 };

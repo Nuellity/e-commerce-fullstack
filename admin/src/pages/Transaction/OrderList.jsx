@@ -1,82 +1,82 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import {
   useTheme,
-  Avatar,
   Button,
   IconButton,
   Box,
   Typography,
+  Chip,
 } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { styled } from "@mui/material/styles";
-import { mockDataTeam } from "../../data/testData";
-import Header from "../../components/Header";
+import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilledOutlined";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
+import { deleteOrder, getOrders } from "../../redux/ApiCalls";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProducts } from "../../redux/ApiCalls";
+import moment from "moment";
 
-function UserList() {
+function OrderList() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  // const [data, setData] = useState(mockDataTeam);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
-  console.log(products);
+  const navigate = useNavigate();
+  const orders = useSelector((state) => state.order.orders);
+  console.log(orders);
+  const transactionOrders = orders.slice().reverse();
 
-  // const handleDelete = (id) => {
-  //   setData(data.filter((item) => item.id !== id));
-  // };
   const handleDelete = (id) => {
-    deleteProduct(id, dispatch);
+    deleteOrder(id, dispatch);
   };
-
-  useEffect(() => {
-    getProducts(dispatch);
-  }, [dispatch]);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
-      field: "product",
-      headerName: "Product",
+      field: "userId",
+      headerName: "Customer ID",
       flex: 1,
       cellClassName: "name-column--cell",
+    },
+    {
+      field: "amount",
+      headerName: "Price($)",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
+      field: "createdAt",
+      headerName: "Date",
       renderCell: (params) => {
         return (
-          <div className="d-flex justify-content-between align-items-center">
-            <Avatar
-              sx={{ marginRight: "12px" }}
-              src={params.row.img[0].original}
-              alt=""
-            />
-            {params.row.title}
+          <div>
+            <Typography> {moment(params.row.createdAt).fromNow()}</Typography>
           </div>
         );
       },
     },
     {
-      field: "count",
-      headerName: "Stock",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "inStock",
+      field: "status",
       headerName: "Status",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "price",
-      headerName: "Price ($)",
-      flex: 1,
-      cellClassName: "name-column--cell",
+      renderCell: (params) => {
+        return (
+          <div>
+            <Chip
+              label={params.row.status}
+              color={params.row.status === "pending" ? "info" : "success"}
+              icon={
+                params.row.status === "pending" ? (
+                  <PauseCircleFilledOutlinedIcon />
+                ) : (
+                  <DoneOutlinedIcon />
+                )
+              }
+            />
+          </div>
+        );
+      },
     },
     {
       field: "action",
@@ -110,32 +110,14 @@ function UserList() {
     },
   ];
 
-  const ColorButton = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(colors.grey[100]),
-    backgroundColor: colors.blueAccent[400],
-    "&:hover": {
-      backgroundColor: colors.blueAccent[600],
-    },
-  }));
+  useEffect(() => {
+    getOrders(dispatch);
+  }, [dispatch]);
 
   return (
     <Box m="20px">
-      <div className="d-flex justify-content-between">
-        <Header title="Products" subTitle="Managing the Product" />
-        <div>
-          <ColorButton
-            onClick={() => navigate("/newproduct")}
-            style={{
-              width: "150px",
-              height: "40px",
-              fontSize: "13px",
-              fontWeight: "bold",
-            }}
-            variant="contained"
-          >
-            Add new product
-          </ColorButton>
-        </div>
+      <div>
+        <Header title="Orders" subTitle="Manage your Orders" />
       </div>
       <Box
         m="40px 0 0 0"
@@ -150,7 +132,6 @@ function UserList() {
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
-            fontSize: "14px",
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.blueAccent[700],
@@ -176,7 +157,7 @@ function UserList() {
       >
         <DataGrid
           checkboxSelection
-          rows={products}
+          rows={transactionOrders}
           getRowId={(row) => row._id}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
@@ -187,4 +168,4 @@ function UserList() {
   );
 }
 
-export default UserList;
+export default OrderList;

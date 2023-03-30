@@ -5,17 +5,13 @@ import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./StripeForm";
 import { useSelector } from "react-redux";
 import { publicRequest, userRequest } from "../../../axiosRequest";
- 
 
-function Stripe(props) {
+function Stripe() {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientKey, setClientKey] = useState("");
 
-
-
-  const cart = useSelector(state => state.cart)
-  const price = cart.total.toFixed(2)
-
+  const cart = useSelector((state) => state.cart);
+  const price = cart.total.toFixed(2);
 
   useEffect(() => {
     const fetchPublicKey = async () => {
@@ -45,7 +41,6 @@ function Stripe(props) {
         );
         const clientSecret = res.data.clientSecret;
         setClientKey(clientSecret);
-          
       } catch (error) {
         console.log(error.response.data.error.message);
       }
@@ -61,7 +56,7 @@ function Stripe(props) {
     <>
       {stripePromise && clientKey && (
         <Elements stripe={stripePromise} options={options}>
-          <StripeForm price={price} orderId={props.orderId} />
+          <StripeForm price={price} />
         </Elements>
       )}
     </>

@@ -53,8 +53,6 @@ function Menubar() {
     },
   });
 
-  
-
   const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     position: "sticky",
@@ -89,7 +87,7 @@ function Menubar() {
 
   return (
     <>
-      <MenuDrawer variant="permanent" open={open} >
+      <MenuDrawer variant="permanent" open={open}>
         <DrawerHeader>
           <Typography fontWeight="600" display={!open && "none"}>
             AYABA ADMIN
@@ -101,7 +99,7 @@ function Menubar() {
         <Divider />
         <List>
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem  disablePadding sx={{ display: "block" }}>
+            <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -188,7 +186,7 @@ function Menubar() {
             </ListItem>
           </Link>
           <Link
-            to="newuser"
+            to="transactions"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem disablePadding sx={{ display: "block" }}>

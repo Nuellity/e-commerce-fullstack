@@ -20,7 +20,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 //UPDATE ORDER BY ID
 
-router.put("/:id", verifyTokenAdmin, async (req, res) => {
+router.patch("/:id", verifyTokenAdmin, async (req, res) => {
   try {
     const updatedOrder = await Order.findByIdAndUpdate(
       req.params.id,
@@ -37,7 +37,7 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 
 //DELETE ORDER BY ID
 
-router.delete("/delete/:id", verifyTokenAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAdmin, async (req, res) => {
   try {
     await Order.findByIdAndDelete(req.params.id);
     res.status(200).json("Order has been deleted");

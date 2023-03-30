@@ -9,45 +9,42 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Stripe from "./Stripe/Stripe";
 import Dialog from "@mui/material/Dialog";
-import axios from "axios"
 
 import DialogContent from "@mui/material/DialogContent";
 
 import DialogTitle from "@mui/material/DialogTitle";
-import { useSelector } from 'react-redux';
-
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { addOrder } from "../../redux/OrderSlice";
 
 function Pay() {
-  const { setCurrentStep, userData, setUserData, submitData} = useContext(multiStepDetails);
+  const { setCurrentStep, userData, setUserData, submitData } =
+    useContext(multiStepDetails);
   const [formErrors, setFormErrors] = useState({});
   const [errorState, setErrorState] = useState(false);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
-  const [orderId, setOrderId] = useState(null);
-  const cart = useSelector(state => state.cart)
-  
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
 
-  const user = useSelector(state => state.user.currentUser)
-  const token = user.accesstoken
-
-  const POST_ORDER_URL =  "http://localhost:4000/api/orders/";
-
-  const { address, city, country, state, postalCode } = userData
+  const { address, city, country, state, postalCode } = userData;
   const billingAddress = {
     address,
     city,
     state,
-    country, 
+    country,
     postalCode,
-  }
-
-
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setUserData({ ...userData, [name]: value, quantity: cart.quantity, product: cart.products, price: cart.total  });
+    setUserData({
+      ...userData,
+      [name]: value,
+      quantity: cart.quantity,
+      product: cart.products,
+      price: cart.total,
+    });
   };
 
   const handlePay = () => {
@@ -68,10 +65,25 @@ function Pay() {
     return errors;
   };
 
+  const order = {
+    userId: user._id,
+    products: cart.products.map((item) => ({
+      productId: item._id,
+      name: item.title,
+      img: item.img[0].original,
+      size: item.size,
+      price: item.price,
+      quantity: item.quantity,
+    })),
+    amount: cart.total.toFixed(2),
+    address: billingAddress,
+  };
+
   const handleNext = (e) => {
     e.preventDefault();
     setFormErrors(validate(userData));
     setErrorState(true);
+    dispatch(addOrder(order));
     handlePay();
   };
 
@@ -88,39 +100,6 @@ function Pay() {
       submitData();
     }
   }, [formErrors, errorState]);
-
-  useEffect(() => {
-    const createOrder = async () => {
-   try {
-    const config =  {
-      headers: {
-          'token': `Bearer ${token}`,
-      }
-  }
-    const res = await axios.post(POST_ORDER_URL, {
-      userId: user._id,
-      products: cart.products.map((item) => ({
-        productId: item._id,
-        quantity: item.quantity,
-      })),
-    amount: (cart.total).toFixed(2),
-    address: billingAddress,
-    },config)
-   setOrderId(res.data._id);
-   
-    
-   } catch (error) {
-    
-   }
-  }
-  createOrder()
- 
-   
-  }, [])
-  
-
-
-  
 
   return (
     <div className="row">
@@ -209,7 +188,7 @@ function Pay() {
       >
         <DialogTitle id="alert-dialog-title">{"Pay with Stripe"}</DialogTitle>
         <DialogContent>
-          <Stripe  orderId={orderId}/>
+          <Stripe />
         </DialogContent>
       </Dialog>
     </div>
