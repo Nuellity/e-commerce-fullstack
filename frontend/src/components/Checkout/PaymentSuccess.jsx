@@ -8,21 +8,22 @@ import { userRequest } from "../../axiosRequest";
 function PaymentSuccess() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const paymentIntent = searchParams.get("payment_intent");
   const [orderId, setOrderId] = useState(null);
   const order = useSelector((state) => state.order.order);
-  console.log(order);
   const dispatch = useDispatch();
   dispatch(clearProduct());
 
   useEffect(() => {
+    const updatedOrder = { ...order, paymentIntent: paymentIntent };
     const createOrder = async () => {
       try {
-        const res = await userRequest.post("/orders", order);
+        const res = await userRequest.post("/orders", updatedOrder);
         setOrderId(res.data._id);
       } catch (error) {}
     };
     createOrder();
-  }, [order]);
+  }, [order, paymentIntent]);
 
   return (
     <>

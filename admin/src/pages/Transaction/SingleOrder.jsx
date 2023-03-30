@@ -100,6 +100,9 @@ function SingleOrder() {
               <Typography variant="h3" color={colors.greenAccent[400]}>
                 ORDER PRICE: ${order.amount}
               </Typography>
+              <Typography variant="h6" color={colors.greenAccent[400]}>
+                Payment ID: {order.paymentIntent}
+              </Typography>
             </div>
             <div>
               <div className="mt-4 mb-2">
