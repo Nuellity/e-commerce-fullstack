@@ -4,18 +4,23 @@ import React, { useState, useEffect, useMemo } from "react";
 import Header from "../../components/Header";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
 import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
-import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import StatBox from "../../components/StatBox";
 import Chart from "../../components/Chart";
 import Users from "../../components/Users";
 import UserTransaction from "../../components/UserTransaction";
 import { userRequest } from "../../axiosRequest";
+import moment from "moment";
 
 function DashBoard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [revenue, setRevenue] = useState([]);
   const [percent, setPercent] = useState(0);
+  const [dailySales, setDailySales] = useState([]);
+  const [dailyOrders, setDailyOrders] = useState(0);
+  const [salesPercent, setSalesPercent] = useState(0);
   const [userStats, setUserStats] = useState([
     { name: "Jan", activeUser: 0 },
     { name: "Feb", activeUser: 0 },
@@ -30,6 +35,7 @@ function DashBoard() {
     { name: "Nov", activeUser: 0 },
     { name: "Dec", activeUser: 0 },
   ]);
+  console.log(revenue[1]?.totalOrders, dailySales);
 
   const months = useMemo(
     () => [
@@ -48,11 +54,17 @@ function DashBoard() {
     ],
     []
   );
+  const year = new Date().getFullYear();
+  const today = moment();
+  const dayOfYear = today.dayOfYear();
+  const date = today.year(year).dayOfYear(dayOfYear);
+  const formattedDate = date.format("MMMM Do, YYYY");
 
   useEffect(() => {
     const getRevenue = async () => {
       try {
         const res = await userRequest.get("orders/income");
+        console.log(res.data);
         const lastTwoIncome = res.data.slice(-2);
         setRevenue(lastTwoIncome);
         setPercent(
@@ -64,6 +76,26 @@ function DashBoard() {
     };
 
     getRevenue();
+  }, []);
+
+  useEffect(() => {
+    const getDailySales = async () => {
+      try {
+        const res = await userRequest.get("orders/incomeperhour");
+        setDailySales(res.data);
+      } catch (error) {}
+    };
+    getDailySales();
+  }, []);
+
+  useEffect(() => {
+    const getDailyOrders = async () => {
+      try {
+        const res = await userRequest.get("orders/ordersperday");
+        setDailyOrders(res.data);
+      } catch (error) {}
+    };
+    getDailyOrders();
   }, []);
 
   useEffect(() => {
@@ -105,7 +137,13 @@ function DashBoard() {
         </div>
         {/* Row 2 */}
         <div className="row">
-          <div className="col-lg-4">
+          <div
+            className="col-lg-4"
+            style={{
+              display:
+                revenue[1]?.totalOrders === "undefined" ? "block" : "none",
+            }}
+          >
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -118,7 +156,7 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={`$ ${revenue[1]?.totalOrders}`}
+                title={`$${revenue[1]?.totalOrders}`}
                 subTitle="Revenue"
                 progress={percent / 100}
                 increase={`${percent}%`}
@@ -130,7 +168,11 @@ function DashBoard() {
               />
             </Box>
           </div>
-          <div className="col-lg-4">
+          <div
+            className={
+              revenue[1]?.totalOrders === "undefined" ? "col-lg-3" : "col-lg-4"
+            }
+          >
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -143,10 +185,10 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title="$31,624"
-                subTitle="Sales"
-                progress="0.50"
-                increase="+21%"
+                title={`$${revenue[0]?.totalOrders}`}
+                subTitle="Total Monthly Sales"
+                isProgress
+                isIncrease
                 icon={
                   <InventoryOutlinedIcon
                     sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
@@ -155,7 +197,11 @@ function DashBoard() {
               />
             </Box>
           </div>
-          <div className="col-lg-4">
+          <div
+            className={
+              revenue[1]?.totalOrders === "undefined" ? "col-lg-3" : "col-lg-4"
+            }
+          >
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -168,12 +214,47 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title="$8,475"
-                subTitle="Cost"
-                progress="0.80"
-                increase="+43%"
+                title={
+                  dailySales[0]?._id === dayOfYear
+                    ? `$${dailySales[0]?.totalOrders}`
+                    : "loading"
+                }
+                subTitle={`Today Sales on ${formattedDate}`}
+                isProgress
+                isIncrease
                 icon={
-                  <PointOfSaleOutlinedIcon
+                  <AttachMoneyOutlinedIcon
+                    sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
+                  />
+                }
+              />
+            </Box>
+          </div>
+          <div
+            className={
+              revenue[1]?.totalOrders === "undefined" ? "col-lg-3" : "col-lg-4"
+            }
+          >
+            <Box
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              component="div"
+              sx={{
+                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+                margin: "3px",
+              }}
+            >
+              <StatBox
+                title={
+                  dailySales[0]?._id === dayOfYear ? dailyOrders : "loading"
+                }
+                subTitle={`Today Orders on ${formattedDate}`}
+                isProgress
+                isIncrease
+                icon={
+                  <ShoppingCartOutlinedIcon
                     sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
                   />
                 }

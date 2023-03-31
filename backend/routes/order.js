@@ -76,7 +76,6 @@ router.get("/income", verifyTokenAdmin, async (req, res) => {
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
-
   try {
     const income = await Order.aggregate([
       {
@@ -89,6 +88,55 @@ router.get("/income", verifyTokenAdmin, async (req, res) => {
       { $group: { _id: "$month", totalOrders: { $sum: "$sales" } } },
     ]);
     res.status(200).json(income);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+//GET DAILY INCOME
+
+router.get("/incomeperhour", verifyTokenAdmin, async (req, res) => {
+  const productId = req.query.pid;
+  const currentDate = new Date();
+  const last24Hours = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
+  const previous24Hours = new Date(last24Hours.getTime() - 24 * 60 * 60 * 1000);
+
+  try {
+    const pipeline = [
+      {
+        $match: {
+          createdAt: { $gte: last24Hours },
+          ...(productId && { products: { $elemMatch: { productId } } }),
+        },
+      },
+      { $project: { day: { $dayOfYear: "$createdAt" }, sales: "$amount" } },
+      { $group: { _id: "$day", totalOrders: { $sum: "$sales" } } },
+    ];
+    const income = await Order.aggregate(pipeline);
+    res.status(200).json(income);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+router.get("/ordersperday", verifyTokenAdmin, async (req, res) => {
+  const productId = req.query.pid;
+  const currentDate = new Date();
+  const last24Hours = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
+  const previous24Hours = new Date(last24Hours.getTime() - 24 * 60 * 60 * 1000);
+
+  try {
+    const pipeline = [
+      {
+        $match: {
+          createdAt: { $gte: last24Hours },
+          ...(productId && { products: { $elemMatch: { productId } } }),
+        },
+      },
+      { $group: { _id: null, totalOrders: { $sum: 1 } } },
+    ];
+    const orders = await Order.aggregate(pipeline);
+    res.status(200).json(orders[0].totalOrders);
   } catch (error) {
     res.status(500).json(error);
   }
