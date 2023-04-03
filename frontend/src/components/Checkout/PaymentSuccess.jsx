@@ -16,6 +16,7 @@ function PaymentSuccess() {
 
   useEffect(() => {
     const updatedOrder = { ...order, paymentIntent: paymentIntent };
+    console.log("orderinfo: ", updatedOrder);
     const createOrder = async () => {
       try {
         const res = await userRequest.post("/orders", updatedOrder);

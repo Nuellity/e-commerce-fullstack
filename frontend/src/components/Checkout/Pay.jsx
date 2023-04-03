@@ -67,6 +67,9 @@ function Pay() {
 
   const order = {
     userId: user._id,
+    userFirstName: user.firstName,
+    userLastName: user.lastName,
+    deliveryName: `${userData.firstName} ${userData.lastName}`,
     products: cart.products.map((item) => ({
       productId: item._id,
       name: item.title,
