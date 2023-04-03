@@ -1,5 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
+import {
+  Button,
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { loginDetails } from "./LoginDetails";
 import LoginIcon from "@mui/icons-material/Login";
@@ -115,27 +124,29 @@ function SignIn() {
           </h6>
         </div>
         <div>
-        {
-          isFetching ? ( <Button
-            type="submit"
-            variant="contained"
-            disabled={isFetching}
-            fullWidth
-          >
+          {isFetching ? (
+            <Button
+              type="submit"
+              variant="contained"
+              // disabled={isFetching}
+              fullWidth
+            >
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"
                 aria-hidden="true"
               ></span>
-          </Button>) : ( <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            endIcon={<LoginIcon fontSize="small" />}
-          >
-            Log In
-          </Button>)
-        }
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              endIcon={<LoginIcon fontSize="small" />}
+            >
+              Log In
+            </Button>
+          )}
         </div>
       </form>
       {error && (

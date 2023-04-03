@@ -8,6 +8,7 @@ import {
   TableHead,
   TableRow,
   Chip,
+  Typography,
 } from "@mui/material";
 import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilledOutlined";
 
@@ -15,12 +16,15 @@ import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import { tokens } from "../theme";
 import moment from "moment";
 import { userRequest } from "../axiosRequest";
+import { useNavigate } from "react-router-dom";
 
 function UserTransaction() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [orders, setOrders] = useState([]);
   const transactionOrders = orders.slice().reverse();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getOrders = async () => {
@@ -85,8 +89,24 @@ function UserTransaction() {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               key={index}
             >
-              <TableCell component="th" scope="row">
-                {order.userId}
+              <TableCell
+                component="th"
+                scope="row"
+                onClick={() => navigate(`/transactions/${order._id}`)}
+                sx={{
+                  cursor: "pointer",
+                }}
+              >
+                <Typography
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": {
+                      color: colors.greenAccent[200],
+                    },
+                  }}
+                >
+                  {order.userId}
+                </Typography>
               </TableCell>
               <TableCell align="right">
                 {moment(order.createdAt).fromNow()}

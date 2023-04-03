@@ -86,6 +86,7 @@ router.get("/income", verifyTokenAdmin, async (req, res) => {
       },
       { $project: { month: { $month: "$createdAt" }, sales: "$amount" } },
       { $group: { _id: "$month", totalOrders: { $sum: "$sales" } } },
+      { $sort: { _id: 1 } },
     ]);
     res.status(200).json(income);
   } catch (error) {
@@ -95,12 +96,10 @@ router.get("/income", verifyTokenAdmin, async (req, res) => {
 
 //GET DAILY INCOME
 
-router.get("/incomeperhour", verifyTokenAdmin, async (req, res) => {
+router.get("/incomeperday", verifyTokenAdmin, async (req, res) => {
   const productId = req.query.pid;
   const currentDate = new Date();
   const last24Hours = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
-  const previous24Hours = new Date(last24Hours.getTime() - 24 * 60 * 60 * 1000);
-
   try {
     const pipeline = [
       {
@@ -119,11 +118,12 @@ router.get("/incomeperhour", verifyTokenAdmin, async (req, res) => {
   }
 });
 
+//DAILY ORDERS
+
 router.get("/ordersperday", verifyTokenAdmin, async (req, res) => {
   const productId = req.query.pid;
   const currentDate = new Date();
   const last24Hours = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
-  const previous24Hours = new Date(last24Hours.getTime() - 24 * 60 * 60 * 1000);
 
   try {
     const pipeline = [

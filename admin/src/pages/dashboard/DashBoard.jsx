@@ -3,9 +3,7 @@ import { tokens } from "../../theme";
 import React, { useState, useEffect, useMemo } from "react";
 import Header from "../../components/Header";
 import LocalAtmOutlinedIcon from "@mui/icons-material/LocalAtmOutlined";
-import InventoryOutlinedIcon from "@mui/icons-material/InventoryOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import StatBox from "../../components/StatBox";
 import Chart from "../../components/Chart";
 import Users from "../../components/Users";
@@ -17,10 +15,8 @@ function DashBoard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [revenue, setRevenue] = useState([]);
-  const [percent, setPercent] = useState(0);
   const [dailySales, setDailySales] = useState([]);
   const [dailyOrders, setDailyOrders] = useState(0);
-  const [salesPercent, setSalesPercent] = useState(0);
   const [userStats, setUserStats] = useState([
     { name: "Jan", activeUser: 0 },
     { name: "Feb", activeUser: 0 },
@@ -35,7 +31,14 @@ function DashBoard() {
     { name: "Nov", activeUser: 0 },
     { name: "Dec", activeUser: 0 },
   ]);
-  console.log(revenue[1]?.totalOrders, dailySales);
+  console.log(
+    "revenue: ",
+    revenue,
+    "dailysales: ",
+    dailySales,
+    "dailyOrders: ",
+    dailyOrders
+  );
 
   const months = useMemo(
     () => [
@@ -60,18 +63,17 @@ function DashBoard() {
   const date = today.year(year).dayOfYear(dayOfYear);
   const formattedDate = date.format("MMMM Do, YYYY");
 
+  const newDate = new Date();
+  const currentMonth = newDate.getMonth() + 1;
+
+  const previousMonth = revenue.find((item) => item._id === currentMonth - 1);
+
   useEffect(() => {
     const getRevenue = async () => {
       try {
         const res = await userRequest.get("orders/income");
-        console.log(res.data);
-        const lastTwoIncome = res.data.slice(-2);
-        setRevenue(lastTwoIncome);
-        setPercent(
-          Math.floor(
-            (lastTwoIncome[1].totalOrders * 100) / lastTwoIncome[0].totalOrders
-          )
-        );
+        const income = res.data;
+        setRevenue(income);
       } catch (error) {}
     };
 
@@ -81,7 +83,7 @@ function DashBoard() {
   useEffect(() => {
     const getDailySales = async () => {
       try {
-        const res = await userRequest.get("orders/incomeperhour");
+        const res = await userRequest.get("orders/incomeperday");
         setDailySales(res.data);
       } catch (error) {}
     };
@@ -138,10 +140,9 @@ function DashBoard() {
         {/* Row 2 */}
         <div className="row">
           <div
-            className="col-lg-4"
+            className="col-lg-3"
             style={{
-              display:
-                revenue[1]?.totalOrders === "undefined" ? "block" : "none",
+              display: revenue ? "block" : "none",
             }}
           >
             <Box
@@ -156,10 +157,10 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={`$${revenue[1]?.totalOrders}`}
-                subTitle="Revenue"
-                progress={percent / 100}
-                increase={`${percent}%`}
+                title={previousMonth ? `$${previousMonth?.totalOrders}` : "$0"}
+                subTitle="Last Month Sales"
+                isIncrease
+                isProgress
                 icon={
                   <LocalAtmOutlinedIcon
                     sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
@@ -168,11 +169,7 @@ function DashBoard() {
               />
             </Box>
           </div>
-          <div
-            className={
-              revenue[1]?.totalOrders === "undefined" ? "col-lg-3" : "col-lg-4"
-            }
-          >
+          <div className="col-lg-3">
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -185,23 +182,23 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={`$${revenue[0]?.totalOrders}`}
+                title={
+                  currentMonth === revenue[revenue.length - 1]?._id
+                    ? `$${revenue[revenue.length - 1]?.totalOrders}`
+                    : "$0"
+                }
                 subTitle="Total Monthly Sales"
                 isProgress
                 isIncrease
                 icon={
-                  <InventoryOutlinedIcon
+                  <LocalAtmOutlinedIcon
                     sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
                   />
                 }
               />
             </Box>
           </div>
-          <div
-            className={
-              revenue[1]?.totalOrders === "undefined" ? "col-lg-3" : "col-lg-4"
-            }
-          >
+          <div className="col-lg-3">
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -217,24 +214,20 @@ function DashBoard() {
                 title={
                   dailySales[0]?._id === dayOfYear
                     ? `$${dailySales[0]?.totalOrders}`
-                    : "loading"
+                    : "$0"
                 }
                 subTitle={`Today Sales on ${formattedDate}`}
                 isProgress
                 isIncrease
                 icon={
-                  <AttachMoneyOutlinedIcon
+                  <LocalAtmOutlinedIcon
                     sx={{ color: colors.greenAccent[600], fontSize: "40px" }}
                   />
                 }
               />
             </Box>
           </div>
-          <div
-            className={
-              revenue[1]?.totalOrders === "undefined" ? "col-lg-3" : "col-lg-4"
-            }
-          >
+          <div className="col-lg-3">
             <Box
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -247,9 +240,7 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={
-                  dailySales[0]?._id === dayOfYear ? dailyOrders : "loading"
-                }
+                title={dailySales[0]?._id === dayOfYear ? dailyOrders : "0"}
                 subTitle={`Today Orders on ${formattedDate}`}
                 isProgress
                 isIncrease
