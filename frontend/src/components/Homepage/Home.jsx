@@ -27,8 +27,8 @@ function Home() {
 
       <TopCarousel />
       <div className="container">
-        <HomeShopCategory />
         <HomeBrand />
+        <HomeShopCategory />
       </div>
       <HomeNewSection />
       <div className="container">

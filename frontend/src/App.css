@@ -1,23 +1,23 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
 
-body{
-    background-image: linear-gradient(to right top, #85f4ff, #9df7fd, #b2f9fb, #c6fbfa, #d8fdfb, #d2f9f9, #ccf6f7, #c6f2f5, #a6e8f4, #85dcf6, #63d0fa, #42c2ff);
- padding-top: 37px;
+body {
+    background: #E5E5E5;
+    padding-top: 37px;
 }
 
 
 
-@media only screen and (max-width: 480px){
-    body{
+@media only screen and (max-width: 480px) {
+    body {
         padding-top: 45px;
     }
 }
