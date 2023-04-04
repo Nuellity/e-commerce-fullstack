@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IconButton, List, useTheme, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-// import { tokens } from "../../theme";
+import { tokens } from "../../theme";
 import Drawer from "@mui/material/Drawer";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -25,8 +25,8 @@ import ErrorOutlinedIcon from "@mui/icons-material/ErrorOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 function Menubar() {
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   const [open, setOpen] = useState(false);
 
@@ -87,7 +87,11 @@ function Menubar() {
 
   return (
     <>
-      <MenuDrawer variant="permanent" open={open}>
+      <MenuDrawer
+        variant="permanent"
+        backgroundcolor={colors.primary[400]}
+        open={open}
+      >
         <DrawerHeader>
           <Typography fontWeight="600" display={!open && "none"}>
             AYABA ADMIN

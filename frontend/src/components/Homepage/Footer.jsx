@@ -12,7 +12,7 @@ function Footer() {
 
   return (
     <>
-      <div className="bottomcontainer">
+      <div className="bottomcontainer py-2">
         <div className="container">
           <div className="row">
             <div className=" col-md-3">
@@ -92,23 +92,22 @@ function Footer() {
               <p>BUY WITH CONFIDENCE: </p>
               <img
                 className="img-fluid conf"
-                style={{height: "40px", marginRight: "10px"}}
+                style={{ height: "40px", marginRight: "10px" }}
                 src="images/img/secure/ssl.svg"
                 alt="ssl"
               />
               <img
                 className="img-fluid conf"
-                style={{height: "40px", marginRight: "10px"}}
+                style={{ height: "40px", marginRight: "10px" }}
                 src="images/img/secure/norton.svg"
                 alt="norton"
               />
               <img
                 className="img-fluid conf"
-                style={{height: "40px", marginRight: "10px"}}
+                style={{ height: "40px", marginRight: "10px" }}
                 src="images/img/secure/go_daddy.svg"
                 alt="godaddy"
               />
-              
             </div>
             <div className="col-lg-6 col-md-6 ">
               <p>PAYMENT METHODS: </p>
@@ -121,7 +120,7 @@ function Footer() {
             </div>
           </div>
           <hr />
-          <p className="foot" style={{ textAlign: "center" }}>
+          <p className="foot" style={{ textAlign: "center", color: "black" }}>
             © Ayaba {year}
           </p>
         </div>
