@@ -23,7 +23,6 @@ function ProductList() {
   const handleChange = (e) => {
     setFilter(e.target.value);
   };
-  
 
   return (
     <>
@@ -44,9 +43,7 @@ function ProductList() {
             </FormControl>
           </Box>
         </div>
-        <div className="row py-5">
-          <AllProducts category={category} filter={filter} />
-        </div>
+        <AllProducts category={category} filter={filter} />
 
         <Stack mt={2} spacing={2}>
           <Pagination

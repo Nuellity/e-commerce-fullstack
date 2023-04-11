@@ -1,6 +1,6 @@
 import React from "react";
 import blogData from "../../Data/blogData";
-import BlogCard from "../cards/BlogCard";
+import BlogCard from "../Cards/BlogCard";
 import Footer from "../Homepage/Footer";
 import Navbar from "../Homepage/Navbar/Navbar";
 

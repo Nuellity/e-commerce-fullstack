@@ -3,7 +3,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import EmailIcon from "@mui/icons-material/Email";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -12,117 +12,155 @@ function Footer() {
 
   return (
     <>
-      <div className="bottomcontainer py-2">
+      <div className="">
         <div className="container">
           <div className="row">
-            <div className=" col-md-3">
-              <h6>CONTACT US</h6>
-              <p>
-                <EmailIcon sx={{ paddingRight: "5px" }} />
-                support@ayaba.com
+            <div className=" col-md-3 mb-4">
+              <h3 className="footer-name mb-4">AYABA</h3>
+              <p className="footer-info">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                mollitia, molestiae quas vel sint commodi repudiandae
               </p>
+              <div>
+                <FacebookIcon sx={{ margin: "10px" }} />
+                <TwitterIcon sx={{ margin: "10px" }} />
+                <InstagramIcon sx={{ margin: "10px" }} />
+                <YouTubeIcon sx={{ margin: "10px" }} />
+              </div>
             </div>
-            <div className=" col-md-3 ">
-              <h6>COMPANY</h6>
+            <div className="footer-items col-md-3 mb-4">
+              <h6 className="footer-list mb-4">CATALOG</h6>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
-                to="/about"
+                to="/payment"
               >
-                <p>ABOUT US</p>
+                <p>necklaces</p>
               </Link>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/payment"
+              >
+                <p>hoodies</p>
+              </Link>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/payment"
+              >
+                <p>jackets</p>
+              </Link>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/payment"
+              >
+                <p>jewelry</p>
+              </Link>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/payment"
+              >
+                <p>t-shirt</p>
+              </Link>
+            </div>
+            <div className="footer-items col-md-3 mb-4">
+              <h6 className="footer-list mb-4">ABOUT US</h6>
+
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/privacy"
               >
-                <p>PRIVACY POLICY</p>
+                <p>privacy policy</p>
               </Link>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/terms"
               >
-                <p>TERMS AND CONDITIONS</p>
+                <p>terms and conditions</p>
               </Link>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/blog"
               >
-                <p>BLOG</p>
+                <p>blog</p>
+              </Link>
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/about"
+              >
+                <p style={{ textTransform: "capitalize" }}>about us</p>
               </Link>
             </div>
-
-            <div className=" col-md-3 ">
-              <h6>NEED SOME HELP?</h6>
+            <div className="footer-items col-md-3 mb-4">
+              <h6 className="footer-list mb-4">CUSTOMER SERVICES</h6>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/payment"
               >
-                <p>PAYMENT METHODS</p>
+                <p>payment methods</p>
               </Link>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/shipping"
               >
-                <p>SHIPPING AND DELIVERY</p>
+                <p>shipping & delivery</p>
               </Link>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/return"
               >
-                <p>RETURNS POLICY</p>
+                <p>returns policy</p>
               </Link>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/faq"
               >
-                <p>FREQUENTLY ASKED QUESTIONS</p>
+                <p>frequently asked questions</p>
               </Link>
             </div>
-            <div className=" col-md-3 ">
-              <h6>FOLLOW US</h6>
-
-              <FacebookIcon sx={{ margin: "5px" }} />
-              <TwitterIcon sx={{ margin: "5px" }} />
-              <InstagramIcon sx={{ margin: "5px" }} />
-              <YouTubeIcon sx={{ margin: "5px" }} />
+          </div>
+        </div>
+        <div className="  bottom-container mt-5">
+          <div className="container">
+            <div className="row mt-5 d-flex justify-content-between">
+              <div className="col-md-4 mt-2">
+                <p>© Ayaba {year}</p>
+              </div>
+              <div className="col-md-4 mt-2 bottom-pay ">
+                <img
+                  src="images/img/payment/f1.png"
+                  className="m-1"
+                  alt="pay-cert"
+                />
+                <img
+                  src="images/img/payment/f3.png"
+                  className="m-1"
+                  alt="pay-cert"
+                />
+                <img
+                  src="images/img/payment/f4.png"
+                  className="m-1"
+                  alt="pay-cert"
+                />
+                <img
+                  src="images/img/payment/f5.png"
+                  className="m-1"
+                  alt="pay-cert"
+                />
+                <img
+                  src="images/img/payment/f6.png"
+                  className="m-1"
+                  alt="pay-cert"
+                />
+                <img
+                  src="images/img/payment/f2.png"
+                  className="m-1"
+                  alt="pay-cert"
+                />
+              </div>
+              <div className="col-md-4 mt-2 d-flex justify-content-md-end justify-content-sm-start ">
+                scroll to top <ArrowUpwardIcon />
+              </div>
             </div>
           </div>
-          <hr />
-          <div className="row">
-            <div className="col-md-6 ">
-              <p>BUY WITH CONFIDENCE: </p>
-              <img
-                className="img-fluid conf"
-                style={{ height: "40px", marginRight: "10px" }}
-                src="images/img/secure/ssl.svg"
-                alt="ssl"
-              />
-              <img
-                className="img-fluid conf"
-                style={{ height: "40px", marginRight: "10px" }}
-                src="images/img/secure/norton.svg"
-                alt="norton"
-              />
-              <img
-                className="img-fluid conf"
-                style={{ height: "40px", marginRight: "10px" }}
-                src="images/img/secure/go_daddy.svg"
-                alt="godaddy"
-              />
-            </div>
-            <div className="col-lg-6 col-md-6 ">
-              <p>PAYMENT METHODS: </p>
-              <i className="fa-brands fa-cc-paypal fa-icon-style"></i>{" "}
-              <i className="fa-brands fa-cc-mastercard fa-icon-style"></i>{" "}
-              <i className="fa-brands fa-cc-visa fa-icon-style"></i>{" "}
-              <i className="fa-brands fa-stripe fa-icon-style"></i>
-              <i className="fa-brands fa-cc-amex fa-icon-style"></i>
-              <i className="fa-brands fa-cc-discover fa-icon-style"></i>
-            </div>
-          </div>
-          <hr />
-          <p className="foot" style={{ textAlign: "center", color: "black" }}>
-            © Ayaba {year}
-          </p>
         </div>
       </div>
     </>

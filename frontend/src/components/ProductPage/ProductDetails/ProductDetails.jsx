@@ -5,7 +5,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import BuyProductCard from "../../cards/BuyProductCard";
+import BuyProductCard from "../../Cards/BuyProductCard";
 import newArrivalData from "../../../Data/newArrivalData";
 import ImageGallery from "react-image-gallery";
 import Snackbar from "@mui/material/Snackbar";

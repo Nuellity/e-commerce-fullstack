@@ -1,0 +1,317 @@
+* {
+    box-sizing: border-box;
+}
+
+.card-container {
+    position: relative;
+    width: 19.5rem;
+    height: auto;
+}
+
+.social-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.social-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 12.5rem;
+    opacity: 0;
+    transition: .3s ease;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.social-image {
+    display: block;
+    width: 12.5rem;
+    height: 12.5rem;
+}
+
+.social-icon {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+
+.big-card-container {
+    position: relative;
+    width: 40.5rem;
+    height: auto;
+}
+
+.buy-card-container {
+    position: relative;
+    width: 19.5rem;
+    height: auto;
+}
+
+.image {
+    display: block;
+    width: 19.5rem;
+    height: 19.5rem;
+}
+
+.big-image {
+    display: block;
+    width: 40.5rem;
+    height: 40.5rem;
+}
+
+.buy-image {
+    display: block;
+    width: 19.5rem;
+    height: 25rem;
+}
+
+.product-name {
+    width: 19.5rem;
+}
+
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: #1E2832;
+    display: flex;
+    justify-content: space-between;
+    color: #f1f1f1;
+    width: 19.5rem;
+    transition: .5s ease;
+    opacity: 0;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.big-overlay {
+    position: absolute;
+    bottom: 0;
+    background: #1E2832;
+    display: flex;
+    justify-content: space-between;
+    color: #f1f1f1;
+    width: 40.5rem;
+    transition: .5s ease;
+    opacity: 0;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.buy-overlay {
+    position: absolute;
+    bottom: 0;
+    background: #1E2832;
+    display: flex;
+    justify-content: space-between;
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.list-overlay {
+    position: absolute;
+    bottom: 0;
+    background: #1E2832;
+    display: flex;
+    justify-content: space-between;
+    color: #f1f1f1;
+    width: 19.5rem;
+    transition: .5s ease;
+    opacity: 0;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.sale-overlay {
+    position: absolute;
+    top: 20px;
+    background: #1E2832;
+    color: #f1f1f1;
+    width: 20%;
+    opacity: 1;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+}
+
+.hot-overlay {
+    position: absolute;
+    top: 20px;
+    background: #FF6F61;
+    color: #f1f1f1;
+    width: 20%;
+    opacity: 1;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+}
+
+.icon {
+    font-size: 20px;
+}
+
+.icon span {
+    font-size: 16px;
+    align-items: center;
+}
+
+.buy-title {
+    color: #000000;
+    font-size: 20px;
+}
+
+.buy-name {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+}
+
+.buy-price {
+    color: #000000;
+    font-size: 18px;
+}
+
+
+.card-container:hover .overlay {
+    opacity: 1;
+}
+
+.big-card-container:hover .big-overlay {
+    opacity: 1;
+}
+
+.buy-card-container:hover .buy-overlay {
+    opacity: 1;
+    text-align: center;
+}
+
+.buy-card-container:hover .list-overlay {
+    opacity: 1;
+    text-align: center;
+}
+
+.social-container:hover .social-overlay {
+    opacity: 1;
+}
+
+.icon:hover {
+    color: skyblue;
+    cursor: pointer;
+}
+
+
+
+
+@media only screen and (max-width: 991px) {
+    .big-image {
+        width: 19.5rem;
+        height: 19.5rem;
+    }
+
+    .big-overlay {
+        position: absolute;
+        bottom: 0;
+        background: #1E2832;
+        display: flex;
+        justify-content: space-between;
+        color: #f1f1f1;
+        width: 19.5rem;
+        transition: .5s ease;
+        opacity: 0;
+        font-size: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .buy-overlay {
+        position: absolute;
+        bottom: 0;
+        background: #1E2832;
+        display: flex;
+        justify-content: space-between;
+        color: #f1f1f1;
+        width: 19.5rem;
+        transition: .5s ease;
+        opacity: 0;
+        font-size: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .big-card-container {
+        position: relative;
+        width: 19.5rem;
+        height: auto;
+    }
+
+    .card-container {
+        position: relative;
+        width: 19.5rem;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .big-image {
+        width: 19.5rem;
+        height: 19.5rem;
+    }
+
+    .big-card-container {
+        position: relative;
+        width: 19.5rem;
+        height: auto;
+    }
+
+    .big-overlay {
+        position: absolute;
+        bottom: 0;
+        background: #1E2832;
+        display: flex;
+        justify-content: space-between;
+        color: #f1f1f1;
+        width: 19.5rem;
+        transition: .5s ease;
+        opacity: 0;
+        font-size: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .buy-overlay {
+        position: absolute;
+        bottom: 0;
+        background: #1E2832;
+        display: flex;
+        justify-content: space-between;
+        color: #f1f1f1;
+        width: 19.5rem;
+        transition: .5s ease;
+        opacity: 0;
+        font-size: 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .card-container {
+        position: relative;
+        width: 19.5rem;
+        height: auto;
+    }
+}
