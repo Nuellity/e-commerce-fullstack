@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./navbar.css";
 import {
   AppBar,
   Toolbar,
@@ -14,9 +15,8 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
-import StoreIcon from "@mui/icons-material/Store";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -71,177 +71,191 @@ function Navbar() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="container">
-        <AppBar sx={{ backgroundColor: "#E5E5E5" }}>
+      <div className="">
+        <AppBar
+          sx={{
+            background: "rgba(244, 244, 245)",
+          }}
+          elevation={0}
+        >
           <Toolbar>
-            <StoreIcon sx={{ cursor: "pointer", color: "black" }} />
-            <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
-              <Typography
-                sx={{
-                  paddingRight: isMatch ? "10px" : "50px",
-                  fontSize: "20px",
-                  fontFamily: "Alkatra",
-                  lineHeight: "33.6px",
-                  color: "black",
-                }}
-              >
-                AYABA
-              </Typography>
-            </Link>
-            <SearchBar />
-            {isMatch ? (
-              <>
-                <DrawerComp />
-              </>
-            ) : (
-              <>
-                <Box sx={{ flexGrow: 1 }} />
-                <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                  <IconButton
-                    size="large"
-                    aria-label="item added"
-                    sx={{ mr: "10px" }}
-                    onClick={() => setCartDraw(true)}
-                  >
-                    <Badge badgeContent={cartQuantity} color="error">
-                      <ShoppingBasketIcon
-                        sx={{ color: "black", height: "19px", width: "20px" }}
-                      />
-                    </Badge>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        color: "black",
-                        marginLeft: "3px",
-                      }}
-                    >
-                      Cart
-                    </Typography>
-                  </IconButton>
-                  <Cart
-                    openCart={cartDraw}
-                    closeCart={() => setCartDraw(false)}
-                  />
-                  <IconButton
-                    size="large"
-                    onClick={handleClick}
-                    aria-controls={open ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                  >
-                    <PersonIcon
-                      sx={{ color: "black", height: "19px", width: "20px" }}
-                    />
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        color: "black",
-                        marginLeft: "3px",
-                      }}
-                    >
-                      Account
-                    </Typography>
-                  </IconButton>
-                </Box>
-                <Menu
-                  anchorEl={anchorEl}
-                  id="account-menu"
-                  open={open}
-                  onClose={handleClose}
-                  onClick={handleClose}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      overflow: "visible",
-                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                      mt: 1.5,
-                      "& .MuiAvatar-root": {
-                        width: 32,
-                        height: 32,
-                        ml: -0.5,
-                        mr: 1,
-                      },
-                      "&:before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: "background.paper",
-                        transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0,
-                      },
-                      bgcolor: "#E5E5E5",
-                    },
-                  }}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            <div className="d-flex justify-content-between w-100 my-3  ">
+              <div>
+                <Link
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  to="/"
                 >
-                  <MenuItem>
-                    {user ? (
-                      <Button
-                        variant="contained"
-                        endIcon={<LoginIcon fontSize="small" />}
-                        sx={{ marginLeft: "10px" }}
+                  <Typography
+                    className="nav-logo"
+                    sx={{
+                      paddingRight: isMatch ? "10px" : "50px",
+                      fontFamily: "AmstelvarAlpha",
+                      fontStyle: "normal",
+                      fontWeight: "400px",
+                      fontSize: "28px",
+                      lineHeight: "34px",
+                      width: "98px",
+                      height: "34px",
+                      left: "611px",
+                      top: "0px",
+                      color: "#000000",
+                      cursor: "pointer",
+                    }}
+                  >
+                    AYABA
+                  </Typography>
+                </Link>
+              </div>
+              <div>
+                <SearchBar />
+              </div>
+
+              {isMatch ? (
+                <DrawerComp />
+              ) : (
+                <>
+                  <div>
+                    <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                      <IconButton
+                        onClick={handleClick}
+                        aria-controls={open ? "account-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                      >
+                        <PersonIcon
+                          className="nav-icon"
+                          sx={{ fontSize: "30px" }}
+                        />
+                        <Typography
+                          className="nav-item"
+                          sx={{ marginRight: "60px" }}
+                        >
+                          Account
+                        </Typography>
+                      </IconButton>
+                      <IconButton
                         size="large"
-                        onClick={handleLogOut}
+                        aria-label="item added"
+                        onClick={() => setCartDraw(true)}
                       >
-                        Sign Out
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="contained"
-                        endIcon={<LoginIcon fontSize="small" />}
-                        sx={{ marginLeft: "10px" }}
-                        size="large"
-                        color="primary"
-                        onClick={handleLogin}
-                      >
-                        Login
-                      </Button>
-                    )}
-                  </MenuItem>
-                  <Divider />
-                  <MenuItem>
-                    <ListItemIcon>
-                      <PersonIcon fontSize="small" />
-                      <Typography
-                        sx={{ pl: "10px" }}
-                        onClick={() => navigate("/profile")}
-                      >
-                        My Account{" "}
-                      </Typography>
-                    </ListItemIcon>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon onClick={() => navigate("/order")}>
-                      <ShoppingCartIcon fontSize="small" />
-                      <Typography sx={{ pl: "10px" }}>Orders </Typography>
-                    </ListItemIcon>
-                  </MenuItem>
-                  <MenuItem>
-                    <ListItemIcon onClick={() => navigate("/wishlist")}>
-                      <FavoriteIcon fontSize="small" />
-                      <Typography sx={{ pl: "10px" }}> Saved Items </Typography>
-                    </ListItemIcon>
-                  </MenuItem>
-                </Menu>
-              </>
-            )}
+                        <Badge badgeContent={cartQuantity} color="error">
+                          <ShoppingBagIcon
+                            className="nav-icon"
+                            sx={{ fontSize: "30px" }}
+                          />
+                        </Badge>
+                        <Typography className="nav-item">Cart</Typography>
+                      </IconButton>
+
+                      <Cart
+                        openCart={cartDraw}
+                        closeCart={() => setCartDraw(false)}
+                      />
+                    </Box>
+                  </div>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        "&:before": {
+                          content: '""',
+                          display: "block",
+                          position: "absolute",
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: "background.paper",
+                          transform: "translateY(-50%) rotate(45deg)",
+                          zIndex: 0,
+                        },
+                        bgcolor: "#E5E5E5",
+                      },
+                    }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                  >
+                    <MenuItem>
+                      {user ? (
+                        <Button
+                          variant="contained"
+                          endIcon={<LoginIcon fontSize="small" />}
+                          sx={{ marginLeft: "10px" }}
+                          size="large"
+                          onClick={handleLogOut}
+                        >
+                          Sign Out
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          endIcon={<LoginIcon fontSize="small" />}
+                          sx={{ marginLeft: "10px" }}
+                          size="large"
+                          color="primary"
+                          onClick={handleLogin}
+                        >
+                          Login
+                        </Button>
+                      )}
+                    </MenuItem>
+                    <Divider />
+                    <MenuItem>
+                      <ListItemIcon>
+                        <PersonIcon fontSize="small" />
+                        <Typography
+                          sx={{ pl: "10px" }}
+                          onClick={() => navigate("/profile")}
+                        >
+                          My Account{" "}
+                        </Typography>
+                      </ListItemIcon>
+                    </MenuItem>
+                    <MenuItem>
+                      <ListItemIcon onClick={() => navigate("/order")}>
+                        <ShoppingCartIcon fontSize="small" />
+                        <Typography sx={{ pl: "10px" }}>Orders </Typography>
+                      </ListItemIcon>
+                    </MenuItem>
+                    <MenuItem>
+                      <ListItemIcon onClick={() => navigate("/wishlist")}>
+                        <FavoriteIcon fontSize="small" />
+                        <Typography sx={{ pl: "10px" }}>
+                          {" "}
+                          Saved Items{" "}
+                        </Typography>
+                      </ListItemIcon>
+                    </MenuItem>
+                  </Menu>
+                </>
+              )}
+            </div>
           </Toolbar>
-          <div
-            className="d-flex justify-content-between my-2 mx-3"
-            style={{ color: "black" }}
-          >
-            <span>Jewelry & Accessories</span>
-            <span>Clothing & Shoes</span>
-            <span>Home & Living</span>
-            <span>Wedding & Party</span>
-            <span>Toys & Entertainment</span>
-            <span>Art & Collectibles</span>
-          </div>
+          <Divider />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <div className="d-flex justify-content-between container my-4 nav-category">
+              <span className="px-1">Jewelry & Accessories</span>
+              <span>Clothing & Shoes</span>
+              <span>Home & Living</span>
+              <span>Wedding & Party</span>
+              <span>Toys & Entertainment</span>
+              <span>Art & Collectibles</span>
+            </div>
+          </Box>
         </AppBar>
       </div>
     </ThemeProvider>

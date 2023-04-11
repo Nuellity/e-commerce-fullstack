@@ -1,0 +1,47 @@
+.divider {
+    width: 100%;
+    border: 0.1px solid grey;
+}
+
+.nav-icon {
+    height: 60px;
+    width: 60px;
+    font-style: normal;
+    font-size: 100px;
+    line-height: 40px;
+    align-items: center;
+    text-align: center;
+    color: #1e2832
+}
+
+.nav-item {
+    width: 47px;
+    color: #1e2832;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 100;
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+    text-transform: capitalize;
+}
+
+.nav-category span {
+    width: 10rem;
+    height: 0.75rem;
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.9375rem;
+    line-height: 0.75rem;
+    text-transform: capitalize;
+    justify-content: center;
+    color: #000000;
+    cursor: pointer;
+}
+
+.divider:hover,
+.nav-icon:hover,
+.nav-item:hover,
+.nav-category span:hover {
+    color: skyblue;
+}

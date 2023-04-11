@@ -1,27 +1,25 @@
-import React from 'react'
-import categoryData from '../../Data/categoryData'
-import CategoryCard from '../cards/CategoryCard'
+import React from "react";
+import ProductCard, { BigCard } from "../Cards/ProductCard/ProductCard";
 
 function HomeCategory() {
   return (
-    <>
-        <div className='container'>
-            <div className='row g-2'>
-            {
-                categoryData.map((value, index)=>{
-                    return(
-                        <CategoryCard image={value.imgURL} title={value.title} action={value.action} key={index} />
-                    )
-                    
-                })
-            }
-            
-            
-
-            </div>
+    <div className="my-3" style={{ background: "#E5E5E5;" }}>
+      <div className=" py-5">
+        <h3>Explore</h3>
+      </div>
+      <div className="row g-4">
+        <BigCard />
+        <div className="col-lg-6">
+          <div className="row g-4">
+            <ProductCard isSale />
+            <ProductCard />
+            <ProductCard isHot />
+            <ProductCard />
+          </div>
         </div>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
 
-export default HomeCategory
+export default HomeCategory;
