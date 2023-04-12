@@ -78,7 +78,7 @@ function DrawerComp() {
           onClose={() => setOpenDraw(false)}
         >
           <List>
-            <Link>
+            <Link style={{ textDecoration: "none" }}>
               <ListItem>
                 <ListItemText primary="Jewelry & Accessories" />
               </ListItem>
