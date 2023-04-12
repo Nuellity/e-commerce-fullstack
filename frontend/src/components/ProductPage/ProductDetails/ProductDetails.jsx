@@ -5,8 +5,6 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import BuyProductCard from "../../Cards/BuyProductCard";
-import newArrivalData from "../../../Data/newArrivalData";
 import ImageGallery from "react-image-gallery";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
@@ -162,24 +160,6 @@ function ProductDetails(props) {
             <h4 className="mt-5 mb-3">Product Details</h4>
             <span className="mb-5">{desc}</span>
           </div>
-        </div>
-      </div>
-      <div className="container ">
-        <h4 className="mt-5" style={{ textAlign: "center" }}>
-          Related Products
-        </h4>
-        <div className="row ">
-          {newArrivalData.map((value, index) => {
-            return (
-              <div className="col-lg-2 col-md-4 col-sm-6 col-6 g-1" key={index}>
-                <BuyProductCard
-                  image={value.imgURL}
-                  price={value.price}
-                  title={value.title}
-                />
-              </div>
-            );
-          })}
         </div>
       </div>
     </>

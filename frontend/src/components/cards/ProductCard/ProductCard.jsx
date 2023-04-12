@@ -8,12 +8,12 @@ import { Link } from "react-router-dom";
 
 function ProductCard({ isHot, isSale }) {
   return (
-    <div className="col-sm-6 ">
-      <div className="card-container">
+    <div className="col-md-6 ">
+      <div className="card-container w-100">
         <img
           src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="Avatar"
-          className="image"
+          className="image img-fluid"
         />
         {isSale && (
           <div className="sale-overlay">
@@ -37,11 +37,11 @@ function ProductCard({ isHot, isSale }) {
 export const BigCard = () => {
   return (
     <div className="col-lg-6">
-      <div className="big-card-container">
+      <div className="big-card-container w-100">
         <img
           src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           alt="Avatar"
-          className="big-image"
+          className="big-image img-fluid"
         />
         <div className="big-overlay">
           <div>Pants</div>
@@ -140,42 +140,19 @@ export const ListCard = ({ isHot, isSale, image, title, price, id }) => {
 
 export const SocialCard = () => {
   return (
-    <div className="col-lg-2">
-      <div class="social-container">
+    <div className="col-lg-2 col-md-4 col-sm-6">
+      <div className="social-container">
         <img
           src="https://images.pexels.com/photos/982585/pexels-photo-982585.jpeg?auto=compress&cs=tinysrgb&w=800"
           alt="Avatar"
-          class="social-image"
+          className="social-image"
         />
-        <div class="social-overlay">
+        <div className="social-overlay">
           <InstagramIcon className="social-icon" sx={{ fontSize: 80 }} />
         </div>
       </div>
     </div>
   );
 };
-// export const BootCard = () => {
-//   return (
-//     <div className="card h-100">
-//       <img
-//         className="card-img-top img-fluid"
-//         src={props.image}
-//         alt={props.title}
-//       />
-
-//       <div className="card-body">
-//         <div>
-//           <h5 className="card-text"></h5>
-
-//         </div>
-//         <div>
-//           <div className="card-foot">
-
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 
 export default ProductCard;

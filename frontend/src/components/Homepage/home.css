@@ -65,107 +65,54 @@ span {
   margin: 2.5% auto;
 }
 
-
-
-/* PRODUCT CARD STYLES */
-
-.card {
-  padding: 1em 0 auto;
-  margin: 0.25em 0 auto;
-  height: 18.75em;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
-
-.card img {
-  height: 9.375em;
-  width: 100%;
-}
-
-.card-foot {
-  margin-top: 10px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.container-fluid {
+  padding: 10% 14%;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* SAMPLE CARD 1 */
-
-
-.sample-1 {
-  background-color: #42c2ff;
-  border-radius: 0 40% 5px 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
-
-.sample-card {
-  height: 25rem;
-}
-
-.sample-card img {
-  height: 15rem;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* CATEGORIES CARD STYLE */
-
-.card-category {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  width: 100%;
-  background-color: white;
-  border-radius: 5px;
-  padding: 20px 20px;
-  height: 100%;
+/* MAIN IMAGE STYLES */
+.title-img {
+  width: 70%;
+  border-radius: 7em 0;
 
 }
 
-.card-category:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-
+.main-title h1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 4.625em;
+  line-height: 2;
+  text-transform: capitalize;
+  color: #000000;
 }
 
-.card-category img {
-  height: 12.5rem;
-  width: 100%;
+.main-title p {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.875em;
+  text-transform: capitalize;
+  color: #000000;
 }
 
-.card-category a {
-  text-decoration: none;
+.img-line {
+  width: 25em;
+  height: 33.875em;
+  position: absolute;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 7em 0;
+  left: 60.625em;
+  top: 19.375em;
+  z-index: -1;
+
+  /* Dark 25 */
+
+
+
+
 }
-
-.card-category a:hover {
-  color: red;
-  text-decoration: underline;
-}
-
-.card-category-body {
-  margin: 10px 0;
-
-
-}
-
 
 /* BANNER STYLES */
 .banner {
@@ -698,13 +645,34 @@ span {
     border-bottom: 0.1px solid grey;
   }
 
-}
+  .title-img {
+    width: 90%;
+    height: 20em;
+    border-radius: 3em 0;
 
-@media only screen and (max-width: 991px) {
-
-
-  .carousel-item {
-    height: 90vh;
-    min-height: 300px;
   }
+
+  .main-title h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 3em;
+    line-height: 2;
+    text-transform: capitalize;
+    color: #000000;
+  }
+
+  .main-title p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.875em;
+    text-transform: capitalize;
+    color: #000000;
+  }
+
+
 }
+
+@media only screen and (max-width: 991px) {}
