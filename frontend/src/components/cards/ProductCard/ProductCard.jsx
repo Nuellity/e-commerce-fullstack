@@ -95,49 +95,6 @@ export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
   );
 };
 
-export const ListCard = ({ isHot, isSale, image, title, price, id }) => {
-  return (
-    <>
-      <div className="buy-card-container mt-5" style={{ width: "19.5rem" }}>
-        <img src={image} alt={title} className="buy-image img-fluid" />
-        {isSale && (
-          <div className="sale-overlay">
-            <div>SALE</div>
-          </div>
-        )}
-        {isHot && (
-          <div className="hot-overlay">
-            <div>HOT</div>
-          </div>
-        )}
-        <div className="list-overlay">
-          <div>
-            <FavoriteBorderIcon sx={{ marginRight: "18px" }} />{" "}
-            <Link
-              to={`/product/${id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <SearchIcon className="icon" />
-            </Link>
-          </div>
-          <div className="icon">
-            <ShoppingBagIcon /> <span>Shop Now</span>
-          </div>
-        </div>
-      </div>
-      <div className="mx-1 mt-3" style={{ width: "19.5rem" }}>
-        <div className="mb-3">
-          <span className="buy-title">{title}</span>
-        </div>
-        <div className="d-flex justify-content-between">
-          <span className="buy-name">Dress</span>
-          <span className="buy-price ">${price}</span>
-        </div>
-      </div>
-    </>
-  );
-};
-
 export const SocialCard = () => {
   return (
     <div className="col-lg-2 col-md-4 col-sm-6">
