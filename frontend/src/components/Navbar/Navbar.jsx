@@ -215,19 +215,23 @@ function Navbar() {
                     </MenuItem>
                     <Divider />
                     <MenuItem>
-                      <ListItemIcon onClick={() => navigate("/profile")}>
+                      <ListItemIcon
+                        onClick={() => navigate("/profile/summary")}
+                      >
                         <PersonIcon fontSize="small" />
                         <Typography sx={{ pl: "10px" }}>My Account </Typography>
                       </ListItemIcon>
                     </MenuItem>
                     <MenuItem>
-                      <ListItemIcon onClick={() => navigate("/order")}>
+                      <ListItemIcon onClick={() => navigate("/profile/orders")}>
                         <ShoppingCartIcon fontSize="small" />
                         <Typography sx={{ pl: "10px" }}>Orders </Typography>
                       </ListItemIcon>
                     </MenuItem>
                     <MenuItem>
-                      <ListItemIcon onClick={() => navigate("/wishlist")}>
+                      <ListItemIcon
+                        onClick={() => navigate("/profile/wishlist")}
+                      >
                         <FavoriteIcon fontSize="small" />
                         <Typography sx={{ pl: "10px" }}>
                           {" "}

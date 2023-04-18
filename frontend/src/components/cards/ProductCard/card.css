@@ -216,7 +216,39 @@
 }
 
 
+/* ORDER CARD */
 
+.order-name {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.order-date {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.1em;
+    line-height: 1.4em;
+    text-transform: capitalize;
+    color: #000000;
+    margin-top: 20px;
+}
+
+.order-id {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.4em;
+    text-transform: capitalize;
+    color: rgba(30, 40, 50, 0.75);
+    padding-bottom: 10px;
+}
 
 @media only screen and (max-width: 991px) {
 
