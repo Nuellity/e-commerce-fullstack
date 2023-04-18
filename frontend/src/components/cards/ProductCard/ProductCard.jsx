@@ -4,7 +4,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import "./card.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Chip } from "@mui/material";
 
 function ProductCard({ isHot, isSale }) {
   return (
@@ -106,6 +107,55 @@ export const SocialCard = () => {
         />
         <div className="social-overlay">
           <InstagramIcon className="social-icon" sx={{ fontSize: 80 }} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const OrderCard = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      className=""
+      style={{
+        border: "1px solid rgba(30, 40, 50, 0.5",
+        borderRadius: "5px",
+        padding: "1.5em",
+      }}
+    >
+      <div className="row d-flex g-4">
+        <div className="col-lg-4" style={{ width: "8rem" }}>
+          <img
+            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Avatar"
+            style={{ width: "8rem", height: "8rem", borderRadius: "5px" }}
+          />
+        </div>
+        <div className="col-lg-6">
+          <div className="px-3">
+            <span className="order-name">
+              Anti Blue Ray Light Glasses For Screens Black-Gold Frame
+            </span>
+            <br /> <span className="order-id">Order 1548345222 </span> <br />
+            <Chip label="DELIVERED" color="success" pt="30px" /> <br />
+            <span className="order-date">On 29-09-2022</span>
+          </div>
+        </div>
+        <div className="col-lg-2 ms-auto">
+          <div>
+            <Button
+              variant="text"
+              size="large"
+              sx={{ color: "#1E2832", fontSize: "0.95em" }}
+              onClick={() => {
+                navigate("/profile/order-details");
+              }}
+            >
+              SEE DETAILS
+            </Button>
+          </div>
         </div>
       </div>
     </div>

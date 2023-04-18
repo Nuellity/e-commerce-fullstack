@@ -1,0 +1,91 @@
+.card-text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.1em;
+    line-height: 1em;
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2em;
+    line-height: 1.3em;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.card-header {
+    background: white;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.2em;
+    line-height: 2em;
+    text-transform: capitalize;
+    color: #000000;
+    height: 4rem;
+
+}
+
+.card-footer {
+    background: white;
+}
+
+.main-card {
+    border-bottom: none;
+}
+
+.header {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+/* ORDER */
+
+.order-title {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.order-text {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.2em;
+    text-transform: capitalize;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.order-item {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1em;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.order-price {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.3em;
+    line-height: 1.2em;
+    text-transform: capitalize;
+    color: #000000;
+}
