@@ -10,7 +10,7 @@ function OrderDetails() {
 
   return (
     <div className="card main-card">
-      <p className="card-header header">
+      <p className="card-header header px-0">
         <IconButton onClick={() => navigate("/profile/orders")}>
           <ArrowBackIcon />
         </IconButton>
@@ -24,7 +24,7 @@ function OrderDetails() {
           Total: $23.00
         </p>
         <hr />
-        <span className="order-item px-3">ITEMS IN YOUR ORDER</span>
+        <span className="order-item ">ITEMS IN YOUR ORDER</span>
         <div className="container">
           <div className="row g-4">
             <div className="col-md-12">
@@ -36,7 +36,7 @@ function OrderDetails() {
                   padding: "1.5em",
                 }}
               >
-                <div className="row d-flex g-4">
+                <div className="row">
                   <div className="col-lg-4" style={{ width: "8rem" }}>
                     <img
                       src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -49,23 +49,21 @@ function OrderDetails() {
                     />
                   </div>
                   <div className="col-lg-6">
-                    <div className="px-4">
+                    <div className="review-details">
                       <span className="order-name">
                         Anti Blue Ray Light Glasses For Screens Black-Gold Frame
                       </span>
                       <br /> <span className="order-id">QTY: 1 </span> <br />
-                      <div style={{ paddingTop: "8px" }}>
+                      <div style={{ padding: "0.5em 0" }}>
                         <div className="">
                           <Chip
                             label="DELIVERED"
                             color="success"
-                            sx={{ marginRight: "7px", marginBottom: "5px" }}
+                            sx={{
+                              marginRight: "7px",
+                            }}
                           />
-                          <Chip
-                            label="NON-REFUNDABLE"
-                            color="secondary"
-                            sx={{ marginBottom: "5px" }}
-                          />
+                          <Chip label="NON-REFUNDABLE" color="secondary" />
                         </div>
 
                         <br />
@@ -76,7 +74,7 @@ function OrderDetails() {
                     </div>
                   </div>
                   <div className="col-lg-2 ms-auto">
-                    <div>
+                    <div className="">
                       <Button
                         variant="contained"
                         size="large"
@@ -84,6 +82,10 @@ function OrderDetails() {
                           color: "white",
                           fontSize: "0.95em",
                           width: "8rem",
+                          backgroundColor: "skyblue",
+                          "&:hover": {
+                            backgroundColor: "#4a90e2",
+                          },
                         }}
                         onClick={() => {
                           navigate("/profile/order-details");
@@ -97,12 +99,16 @@ function OrderDetails() {
                 <p className="pt-3">
                   <SettingsBackupRestoreIcon /> The return period ended on
                   (06-10-2022){" "}
-                  <Link to="/return" style={{ textDecoration: "none" }}>
+                  <Link
+                    to="/return"
+                    style={{ textDecoration: "none", color: "skyblue" }}
+                  >
                     Access our Return Policy.
                   </Link>
                 </p>
               </div>
             </div>
+
             <div className="col-md-6">
               <div className="card h-100 w-100">
                 <p className="card-header">PAYMENT INFORMATION</p>
@@ -122,7 +128,7 @@ function OrderDetails() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 ">
               <div className="card h-100 w-100">
                 <p className="card-header">DELIVERY INFORMATION</p>
                 <div className="card-body">

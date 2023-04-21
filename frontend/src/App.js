@@ -23,14 +23,17 @@ import ProductInfo from "./pages/ProductPage/ProductDetails/ProductInfo";
 import Stripe from "./pages/Checkout/Stripe/Stripe";
 import NoMatch from "./pages/NoMatch";
 import AccountSummary from "./pages/AccountPage/AccountSummary";
-import Reviews from "./pages/AccountPage/Reviews";
+import Reviews from "./pages/AccountPage/Reviews/Reviews";
 import Voucher from "./pages/AccountPage/Voucher";
 import AddressBook from "./pages/AccountPage/AddressBook";
 import NewsLetter from "./pages/AccountPage/NewsLetter";
-import CloseAccount from "./pages/AccountPage/CloseAccount";
-import ManageAccount from "./pages/AccountPage/ManageAccount";
+import ManageAccount from "./pages/AccountPage/ManageAccount/ManageAccount";
 import Order from "./pages/AccountPage/Order/Order";
 import OrderDetails from "./pages/AccountPage/Order/OrderDetails";
+import ReviewProduct from "./pages/AccountPage/Reviews/ReviewProduct";
+import ProfileDetails from "./pages/AccountPage/ManageAccount/ProfileDetails";
+import ChangePassword from "./pages/AccountPage/ManageAccount/ChangePassword";
+import DeleteAccount from "./pages/AccountPage/ManageAccount/DeleteAccount";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -46,18 +49,23 @@ function App() {
         <Route path="blog" element={<Blog />} />
         <Route
           path="profile"
-          element={user ? <UserAccount /> : <Navigate to="/login" />}
+          // element={user ? <UserAccount /> : <Navigate to="/login" />}
+          element={<UserAccount />}
         >
           <Route path="orders" element={<Order />} />
           <Route path="order-details" element={<OrderDetails />} />
           <Route path="summary" element={<AccountSummary />} />
           <Route path="wishlist" element={<SavedItems />} />
           <Route path="reviews" element={<Reviews />} />
+          <Route path="review-product" element={<ReviewProduct />} />
           <Route path="vouchers" element={<Voucher />} />
           <Route path="address" element={<AddressBook />} />
           <Route path="newsletter" element={<NewsLetter />} />
-          <Route path="close" element={<CloseAccount />} />
+          <Route path="close" element={<DeleteAccount />} />
           <Route path="manage" element={<ManageAccount />} />
+          <Route path="change-name" element={<ProfileDetails />} />
+          <Route path="change-password" element={<ChangePassword />} />
+          <Route path="delete-account" element={<DeleteAccount />} />
         </Route>
         <Route path="faq" element={<Frequent />} />
         <Route path="return" element={<Return />} />

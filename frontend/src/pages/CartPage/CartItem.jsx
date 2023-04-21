@@ -17,7 +17,6 @@ function CartItem() {
   const dispatch = useDispatch();
 
   const handleClick = (id) => {
-    console.log("working");
     dispatch(deleteProduct(id));
   };
   return (
