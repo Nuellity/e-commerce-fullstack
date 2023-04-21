@@ -247,8 +247,37 @@
     line-height: 1.4em;
     text-transform: capitalize;
     color: rgba(30, 40, 50, 0.75);
-    padding-bottom: 10px;
 }
+
+/* REVIEW CARD */
+.review-date {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 0.9em;
+    line-height: 1.4em;
+
+    color: #FF6F61;
+
+}
+
+.review-details {
+    padding: 0 1rem;
+}
+
+
+
+/* RATING */
+
+.wrap-rating {
+    font-size: 3rem;
+}
+
+.wrap-rating .MuiSvgIcon-root {
+    font-size: 3.5rem;
+}
+
+
 
 @media only screen and (max-width: 991px) {
 
@@ -441,5 +470,16 @@
         text-align: center;
     }
 
+    .review-details {
+        padding: 0
+    }
 
+    .review-image {
+        height: 10rem
+    }
+
+    .rate-button {
+        display: flex;
+        justify-content: center;
+    }
 }

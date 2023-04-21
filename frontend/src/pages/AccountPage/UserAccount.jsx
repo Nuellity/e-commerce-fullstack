@@ -56,7 +56,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 0 ? "lightblue" : "transparent",
+                            selectedIndex === 0 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemIcon
@@ -88,7 +88,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 1 ? "lightblue" : "transparent",
+                            selectedIndex === 1 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemIcon
@@ -119,7 +119,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 2 ? "lightblue" : "transparent",
+                            selectedIndex === 2 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemIcon
@@ -150,7 +150,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 3 ? "lightblue" : "transparent",
+                            selectedIndex === 3 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemIcon
@@ -181,7 +181,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 4 ? "lightblue" : "transparent",
+                            selectedIndex === 4 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemIcon
@@ -213,7 +213,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 5 ? "lightblue" : "transparent",
+                            selectedIndex === 5 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemText
@@ -235,7 +235,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 6 ? "lightblue" : "transparent",
+                            selectedIndex === 6 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemText
@@ -257,7 +257,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 7 ? "lightblue" : "transparent",
+                            selectedIndex === 7 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemText
@@ -279,7 +279,7 @@ function UserAccount() {
                           minHeight: 48,
                           py: 3,
                           backgroundColor:
-                            selectedIndex === 8 ? "lightblue" : "transparent",
+                            selectedIndex === 8 ? "#4a90e2" : "transparent",
                         }}
                       >
                         <ListItemText

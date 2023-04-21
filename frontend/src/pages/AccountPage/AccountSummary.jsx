@@ -25,7 +25,7 @@ function AccountSummary() {
               <div class="card-header d-flex justify-content-between">
                 ADDRESS BOOK
                 <IconButton>
-                  <EditIcon />
+                  <EditIcon sx={{ color: "skyblue" }} />
                 </IconButton>
               </div>
               <div className="card-body">
@@ -46,8 +46,14 @@ function AccountSummary() {
               <p className="card-header">AYABA STORE CREDIT</p>
               <div className="card-body">
                 <div className="card-credit">
-                  <AccountBalanceWalletIcon sx={{ marginRight: "1rem" }} />
-                  <span>$ 0.00</span>
+                  <AccountBalanceWalletIcon
+                    sx={{
+                      marginRight: "0.5rem",
+                      fontSize: "3rem",
+                      color: "skyblue",
+                    }}
+                  />
+                  <span style={{ fontSize: "1.2rem" }}>$ 0.00</span>
                 </div>
               </div>
             </div>
@@ -60,8 +66,10 @@ function AccountSummary() {
                   You are currently not subscribed to any of our newsletters.
                 </p>
               </div>
-              <div className="card-footer">
-                <Button variant="text">EDIT NEWSLETTER REFERENCE</Button>
+              <div className="card-footer" style={{ border: "none" }}>
+                <Button variant="text" sx={{ color: "skyblue" }}>
+                  EDIT NEWSLETTER REFERENCE
+                </Button>
               </div>
             </div>
           </div>

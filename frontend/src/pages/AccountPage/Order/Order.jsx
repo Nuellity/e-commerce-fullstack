@@ -6,6 +6,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { OrderCard } from "../../../components/Cards/ProductCard/ProductCard";
+import { Button } from "@mui/material";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 function Order() {
   const [value, setValue] = React.useState(0);
@@ -74,12 +76,53 @@ function Order() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <div className="container">
+            <div className="container p-0">
               <OrderCard />
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            CLOSED ORDERS
+            <div
+              className="d-flex justify-content-center pt-5"
+              style={{ textAlign: "center" }}
+            >
+              <div>
+                <div
+                  style={{
+                    background: "rgba(30, 40, 50, 0.05)",
+                    padding: "1em",
+                    height: "8em",
+                    width: "8em",
+                    borderRadius: "50%",
+                    margin: "auto",
+                  }}
+                >
+                  <ShoppingCartOutlinedIcon
+                    sx={{
+                      fontSize: "6em",
+                      color: "skyblue",
+                    }}
+                  />
+                </div>
+                <p className="card-title pt-3 pb-2">
+                  You currently have no closed order
+                </p>
+                <p className="card-text pb-4">
+                  All your closed orders will be displayed here
+                </p>
+                <Button
+                  variant="contained"
+                  sx={{
+                    fontSize: "1rem",
+                    backgroundColor: "skyblue",
+                    "&:hover": {
+                      backgroundColor: "#4a90e2",
+                    },
+                  }}
+                >
+                  CONTINUE SHOPPING
+                </Button>
+              </div>
+            </div>
           </TabPanel>
         </Box>
       </div>

@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button, Chip, Box, Rating } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import StarIcon from "@mui/icons-material/Star";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./card.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Chip } from "@mui/material";
+
+const labels = {
+  0.5: "Useless",
+  1: "Useless+",
+  1.5: "Poor",
+  2: "Poor+",
+  2.5: "Ok",
+  3: "Ok+",
+  3.5: "Good",
+  4: "Good+",
+  4.5: "Excellent",
+  5: "Excellent+",
+};
 
 function ProductCard({ isHot, isSale }) {
   return (
@@ -115,46 +130,248 @@ export const SocialCard = () => {
 
 export const OrderCard = () => {
   const navigate = useNavigate();
-
   return (
     <div
       className=""
       style={{
-        border: "1px solid rgba(30, 40, 50, 0.5",
+        border: "1px solid rgba(0, 0, 0, 0.175)",
         borderRadius: "5px",
         padding: "1.5em",
       }}
     >
       <div className="row d-flex g-4">
-        <div className="col-lg-4" style={{ width: "8rem" }}>
+        <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
           <img
             src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="Avatar"
-            style={{ width: "8rem", height: "8rem", borderRadius: "5px" }}
+            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
           />
         </div>
         <div className="col-lg-6">
-          <div className="px-3">
+          <div className="review-details">
             <span className="order-name">
               Anti Blue Ray Light Glasses For Screens Black-Gold Frame
             </span>
-            <br /> <span className="order-id">Order 1548345222 </span> <br />
-            <Chip label="DELIVERED" color="success" pt="30px" /> <br />
-            <span className="order-date">On 29-09-2022</span>
+            <br /> <span className="order-id">Order nº: 1548345222 </span>
+            <br />
+            <div className="pt-2">
+              <Chip label="DELIVERED" color="success" /> <br />
+              <span className="order-date">On 29-09-2022</span>
+            </div>
           </div>
         </div>
         <div className="col-lg-2 ms-auto">
-          <div>
+          <div className="rate-button">
             <Button
               variant="text"
               size="large"
-              sx={{ color: "#1E2832", fontSize: "0.95em" }}
+              sx={{ color: "skyblue", fontSize: "0.95em" }}
               onClick={() => {
                 navigate("/profile/order-details");
               }}
             >
               SEE DETAILS
             </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ReviewCard = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(0, 0, 0, 0.175)",
+        borderRadius: "5px",
+        padding: "1.5em",
+      }}
+    >
+      <div className="row d-flex g-4">
+        <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
+          <img
+            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Avatar"
+            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+          />
+        </div>
+        <div className="col-lg-6">
+          <div className=" d-flex align-items-start flex-column review-details">
+            <div className="mb-auto">
+              <span className="order-name">
+                Anti Blue Ray Light Glasses For Screens Black-Gold Frame
+              </span>
+            </div>
+            <br />
+            <div>
+              <span className="order-id">Order nº: 1548345222</span>
+            </div>
+            <br />
+            <div>
+              <span className="review-date">Delivered on 29-09-2022</span>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-2 ms-auto">
+          <div className="rate-button">
+            <Button
+              variant="text"
+              size="large"
+              sx={{
+                color: "skyblue",
+                fontSize: "0.95em",
+              }}
+              onClick={() => {
+                navigate("/profile/review-product");
+              }}
+            >
+              ADD REVIEW
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const RateCard = () => {
+  const [value, setValue] = useState(0);
+  const [hover, setHover] = useState(-1);
+
+  function getLabelText(value) {
+    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
+  }
+
+  return (
+    <div
+      className=""
+      style={{
+        border: "none",
+      }}
+    >
+      <div className="row d-flex g-4">
+        <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
+          <img
+            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Avatar"
+            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+          />
+        </div>
+        <div className="col-lg-6">
+          <div className="review-details">
+            <div>
+              <span className="order-name">
+                Anti Blue Ray Light Glasses For Screens Black-Gold Frame
+              </span>
+            </div>
+            <br />
+            <div>
+              <Box
+                sx={{
+                  width: 200,
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <div className="wrap-rating">
+                  <Rating
+                    size="large"
+                    name="hover-feedback"
+                    value={value}
+                    precision={0.5}
+                    getLabelText={getLabelText}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                    onChangeActive={(event, newHover) => {
+                      setHover(newHover);
+                    }}
+                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} />}
+                  />
+                </div>
+                {value !== null && (
+                  <Box sx={{ ml: 2 }}>
+                    {labels[hover !== -1 ? hover : value]}
+                  </Box>
+                )}
+              </Box>
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const SavedCard = () => {
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(0, 0, 0, 0.175)",
+        borderRadius: "5px",
+        padding: "1.5em",
+      }}
+    >
+      <div className="row d-flex g-4">
+        <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
+          <img
+            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Avatar"
+            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+          />
+        </div>
+        <div className="col-lg-6">
+          <div className=" d-flex align-items-start flex-column review-details">
+            <div className="mb-auto">
+              <span className="order-name">
+                Anti Blue Ray Light Glasses For Screens Black-Gold Frame
+              </span>
+            </div>
+            <br />
+            <div>
+              <span className="order-id">Order nº: 1548345222</span>
+            </div>
+            <br />
+            <div>
+              <span className="review-date">Delivered on 29-09-2022</span>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-2 ms-auto  ">
+          <div className="h-100 d-flex flex-column justify-content-between">
+            <div className="rate-button mb-auto">
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  color: "white",
+                  fontSize: "0.95em",
+                  backgroundColor: "skyblue",
+                  "&:hover": {
+                    backgroundColor: "#4a90e2",
+                  },
+                }}
+              >
+                BUY NOW
+              </Button>
+            </div>
+            <div>
+              <Button
+                variant="text"
+                startIcon={<DeleteIcon />}
+                size="large"
+                sx={{
+                  color: "skyblue",
+                  fontSize: "0.95em",
+                }}
+              >
+                REMOVE
+              </Button>
+            </div>
           </div>
         </div>
       </div>

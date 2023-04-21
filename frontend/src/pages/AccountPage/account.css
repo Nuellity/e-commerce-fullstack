@@ -89,3 +89,43 @@
     text-transform: capitalize;
     color: #000000;
 }
+
+.MuiBox-root .css-19kzrtu {
+    padding: 0;
+}
+
+
+/* REVIEW */
+.review-title {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    color: #000000;
+}
+
+.review-details {
+    padding: 0 1rem;
+}
+
+@media only screen and (max-width: 480px) {
+    .review-details {
+        padding: 0;
+    }
+
+    .order-button {
+        display: flex;
+        justify-content: center;
+    }
+
+    .order-item {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1em;
+        text-transform: capitalize;
+        color: #000000;
+    }
+}
