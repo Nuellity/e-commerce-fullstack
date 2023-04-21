@@ -22,7 +22,7 @@ function AccountSummary() {
           </div>
           <div className="col-md-6">
             <div className="card h-100">
-              <div class="card-header d-flex justify-content-between">
+              <div className="card-header d-flex justify-content-between">
                 ADDRESS BOOK
                 <IconButton>
                   <EditIcon sx={{ color: "skyblue" }} />

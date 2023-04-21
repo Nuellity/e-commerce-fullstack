@@ -25,7 +25,6 @@ import NoMatch from "./pages/NoMatch";
 import AccountSummary from "./pages/AccountPage/AccountSummary";
 import Reviews from "./pages/AccountPage/Reviews/Reviews";
 import Voucher from "./pages/AccountPage/Voucher";
-import AddressBook from "./pages/AccountPage/AddressBook";
 import NewsLetter from "./pages/AccountPage/NewsLetter";
 import ManageAccount from "./pages/AccountPage/ManageAccount/ManageAccount";
 import Order from "./pages/AccountPage/Order/Order";
@@ -34,6 +33,9 @@ import ReviewProduct from "./pages/AccountPage/Reviews/ReviewProduct";
 import ProfileDetails from "./pages/AccountPage/ManageAccount/ProfileDetails";
 import ChangePassword from "./pages/AccountPage/ManageAccount/ChangePassword";
 import DeleteAccount from "./pages/AccountPage/ManageAccount/DeleteAccount";
+import AddressBook from "./pages/AccountPage/AddressBook/AddressBook";
+import NewAddress from "./pages/AccountPage/AddressBook/NewAddress";
+import DefaultAddress from "./pages/AccountPage/AddressBook/DefaultAddress";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -60,6 +62,8 @@ function App() {
           <Route path="review-product" element={<ReviewProduct />} />
           <Route path="vouchers" element={<Voucher />} />
           <Route path="address" element={<AddressBook />} />
+          <Route path="new-address" element={<NewAddress />} />
+          <Route path="default-address" element={<DefaultAddress />} />
           <Route path="newsletter" element={<NewsLetter />} />
           <Route path="close" element={<DeleteAccount />} />
           <Route path="manage" element={<ManageAccount />} />
