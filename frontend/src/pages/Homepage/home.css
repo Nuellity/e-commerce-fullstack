@@ -137,21 +137,26 @@ span {
 
 /* ADVERT STYLES */
 .advert {
-  background-image: url("/public/images/img/andrey-zvyagintsev-EQj1ZMpq_VM-unsplash 1.png");
-  background-repeat: no repeat;
-  height: 40em;
-  width: 100%;
+  position: relative;
+
 }
 
 .advert-title {
   color: #FFFFFF;
+  position: absolute;
+  bottom: 30%;
+  right: 5em;
+  width: 38%;
 }
 
-.logo {
-  background-image: url("/public/images/img/Zara_Logo.png");
-  width: 191px;
-  height: 81px;
+.advert-back {
+  position: absolute;
+  top: 6em;
+  right: 1em;
+
 }
+
+
 
 .advert-title p {
   font-family: 'Roboto';
@@ -413,6 +418,12 @@ span {
 
 /* ABOUT US STYLES */
 
+.about {
+  position: relative;
+
+}
+
+
 
 .about-us {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/public/images/img/back.jpg);
@@ -423,7 +434,14 @@ span {
 }
 
 .about-us-details {
-  padding-top: 5%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5em;
 }
 
 .about-us-details hr {
@@ -486,6 +504,10 @@ span {
   height: 55%;
   width: 45%;
   object-fit: contain;
+}
+
+.partner-container {
+  background-color: rgba(30, 40, 50, 0.05);
 }
 
 .core hr {
@@ -687,14 +709,52 @@ span {
   }
 
   .img-line {
-    width: 5em;
-    height: 10em;
+    display: none;
+  }
+
+  .advert-back {
     position: absolute;
-    border: 2px solid rgba(0, 0, 0, 0.25);
-    border-radius: 3em 0;
-    left: 1em;
-    top: 31em;
-    z-index: 1;
+    top: 1em;
+    left: -2em;
+  }
+
+  .advert-title p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 8px;
+    line-height: 1.5;
+    text-transform: capitalize;
+
+  }
+
+  .advert-title {
+    color: #FFFFFF;
+    position: absolute;
+    top: 30%;
+    right: 1em;
+    width: 38%;
+  }
+
+  .footer-name {
+    padding-top: 1em;
+  }
+
+  .about {
+    position: relative;
+
+  }
+
+  .about-us-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1.5em;
+
   }
 
 
@@ -702,13 +762,6 @@ span {
 
 @media only screen and (max-width: 991px) {
   .img-line {
-    width: 23em;
-    height: 35em;
-    position: absolute;
-    border: 2px solid rgba(0, 0, 0, 0.25);
-    border-radius: 5em 0;
-    left: 10em;
-    top: 40em;
-    z-index: -1;
+    display: none;
   }
 }

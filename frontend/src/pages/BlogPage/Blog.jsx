@@ -9,7 +9,9 @@ function Blog() {
     <>
       <Navbar />
       <div className="container">
-        <h2>Blog</h2>
+        <h1 style={{ paddingTop: "1.5em", textTransform: "capitalize" }}>
+          Check out our blogs
+        </h1>
       </div>
       <div className="blog-img-container container">
         <div className="row">

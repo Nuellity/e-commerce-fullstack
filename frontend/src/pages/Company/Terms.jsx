@@ -7,7 +7,7 @@ function Terms() {
     <>
       <Navbar />
       <div className="container" style={{ fontSize: "13px" }}>
-        <h2 className="text-center py-5">TERMS AND CONDITIONS</h2>
+        <h1 className="text-center py-5">TERMS AND CONDITIONS</h1>
         <p>
           We provide services to you subject to the notices, terms, and
           conditions set forth in this agreement. Besides, you will obey the

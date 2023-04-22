@@ -1,47 +1,60 @@
 import React from "react";
-import { Button } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#ffffff",
-    },
-  },
-});
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 
 function HomeAdvert() {
+  const myTheme = useTheme();
+
+  const isMatch = useMediaQuery(myTheme.breakpoints.down("md"));
+
   return (
-    <ThemeProvider theme={theme}>
-      <div className="pt-5 pb-3">
-        <div className="advert my-5 py-5">
-          <div className=" py-5 advert-title d-flex justify-content-end">
-            <div className="logo"></div>
-            <div className="">
-              <p>
-                Lustrous yet understated. The new evening wear collection
-                exclusively offered at the reopened Giorgio Armani boutique in
-                Los Angeles.
-              </p>
-            </div>
-            <Button
-              variant="contained"
-              className="text-capitalize"
-              color="primary"
-              style={{
-                animationDelay: "3s",
-                width: "14em",
-                height: "4.5em",
-                textTransform: "capitalize",
-                fontSize: "1em",
-              }}
-            >
-              see collection
-            </Button>
-          </div>
-        </div>
+    <div className="advert">
+      <img
+        src="/images/img/andrey-zvyagintsev-EQj1ZMpq_VM-unsplash 1.png"
+        alt="advert-background"
+        className="advert-image"
+        style={{ width: "100%", height: isMatch ? "25rem" : "45rem" }}
+      />
+      <div className="advert-back">
+        <img
+          src="/images/img/Zara_Logo 1.png"
+          alt="advert-logo"
+          style={{ width: isMatch ? "20rem" : "100%", height: "auto" }}
+        />
       </div>
-    </ThemeProvider>
+
+      <div className="advert-title">
+        <div>
+          <img
+            src="/images/img/Zara_Logo.png"
+            alt="advert-logo"
+            style={{ height: isMatch ? "3em" : "auto" }}
+          />
+        </div>
+        <div style={{ padding: isMatch ? "1rem 0" : " 2.5rem 0" }}>
+          <p>
+            Lustrous yet understated. The new evening wear collection
+            exclusively offered at the reopened Giorgio Armani boutique in Los
+            Angeles.
+          </p>
+        </div>
+        <Button
+          variant="contained"
+          className="text-capiltalize"
+          style={{
+            padding: "0.5em",
+            textTransform: "capitalize",
+            fontSize: isMatch ? "14px" : "1.5em",
+            backgroundColor: "#FFFFFF",
+            fontFamily: "Roboto",
+            lineHeight: "2em",
+            fontWeight: "400",
+            color: "#1E2832",
+          }}
+        >
+          see collection
+        </Button>
+      </div>
+    </div>
   );
 }
 
