@@ -7,7 +7,12 @@ function Payment() {
     <>
       <Navbar />
       <div className="container" style={{ fontSize: "13px" }}>
-        <h1 className="text-center text-uppercase py-4">Payment methods</h1>
+        <h1
+          className="text-center text-uppercase"
+          style={{ padding: "1.2em 0" }}
+        >
+          Payment methods
+        </h1>
         <img
           className="img-fluid pb-5"
           src="images/img/about/payment.svg"

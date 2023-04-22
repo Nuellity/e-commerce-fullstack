@@ -3,6 +3,7 @@ import "./account.css";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function AccountSummary() {
   return (
@@ -24,9 +25,14 @@ function AccountSummary() {
             <div className="card h-100">
               <div className="card-header d-flex justify-content-between">
                 ADDRESS BOOK
-                <IconButton>
-                  <EditIcon sx={{ color: "skyblue" }} />
-                </IconButton>
+                <Link
+                  to="/profile/address"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <IconButton>
+                    <EditIcon sx={{ color: "skyblue" }} />
+                  </IconButton>
+                </Link>
               </div>
               <div className="card-body">
                 <p className="card-title">Your default shipping address:</p>

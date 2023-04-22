@@ -6,8 +6,14 @@ function PrivacyPolicy() {
   return (
     <>
       <Navbar />
-      <h1 className="text-center pt-5">Privacy Policy</h1>
+
       <div className="container" style={{ fontSize: "13px" }}>
+        <h1
+          className="text-center text-uppercase "
+          style={{ padding: "1.2em 0" }}
+        >
+          Privacy Policy
+        </h1>
         <p>
           Ayaba is compliant with The General Data Protection Regulation (GDPR)
           (EU) 2016/679.

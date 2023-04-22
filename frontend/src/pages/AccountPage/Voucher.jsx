@@ -28,7 +28,7 @@ function Voucher() {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <Typography component="div">{children}</Typography>
           </Box>
         )}
       </div>
@@ -49,7 +49,7 @@ function Voucher() {
   }
   return (
     <div className="card main-card">
-      <p className="card-header header">Voucher</p>
+      <div className="card-header header">Voucher</div>
 
       <div className="container">
         <Box sx={{ width: "100%" }}>

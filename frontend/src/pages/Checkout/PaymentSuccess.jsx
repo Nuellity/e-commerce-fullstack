@@ -4,6 +4,9 @@ import { clearProduct } from "../../redux/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import { userRequest } from "../../axiosRequest";
+import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 function PaymentSuccess() {
   const location = useLocation();
@@ -28,19 +31,73 @@ function PaymentSuccess() {
 
   return (
     <>
-      <div className="py-3">
-        <div className="text-center">PaymentSuccess</div>
-        <div className="container">
-          {orderId
-            ? `Order has been created successfully. Your order number is: ${orderId}`
-            : `Payment successfull!! Your order is being prepared...`}
-          <div>
-            <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-              <Button variant="contained">Continue Shopping</Button>
-            </Link>
+      <Navbar />
+
+      <div
+        className=" pt-5"
+        style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}
+      >
+        <div className="container py-5">
+          <div
+            className="d-flex justify-content-center pt-5"
+            style={{ textAlign: "center" }}
+          >
+            <div className="pb-5">
+              <div
+                style={{
+                  background: "rgba(30, 40, 50, 0.05)",
+                  padding: "1em",
+                  height: "8em",
+                  width: "8em",
+                  borderRadius: "50%",
+                  margin: "auto",
+                }}
+              >
+                <CheckCircleIcon
+                  sx={{
+                    fontSize: "6em",
+                    color: "green",
+                  }}
+                />
+              </div>
+              {orderId ? (
+                <>
+                  {" "}
+                  <p className="card-title py-5">
+                    Order has been created successfully. Your order number is:{" "}
+                    {orderId}
+                  </p>
+                  <p className="card-text pb-5">
+                    All your available Vouchers will be displayed here
+                  </p>{" "}
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <p className="card-title py-5">
+                    Payment is successfull!!! Your order is being prepared...
+                  </p>
+                </>
+              )}
+              <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    fontSize: "1rem",
+                    backgroundColor: "skyblue",
+                    "&:hover": {
+                      backgroundColor: "#4a90e2",
+                    },
+                  }}
+                >
+                  CONTINUE SHOPPING
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

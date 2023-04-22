@@ -55,7 +55,7 @@ function Shipping() {
     <>
       <Navbar />
       <div className="container">
-        <h3 className="text-uppercase py-5 text-center">shipping & delivery</h3>
+        <h1 className="text-uppercase py-5 text-center">shipping & delivery</h1>
         <div className="pb-5">
           <img
             src="images/img/about/delivery.svg"

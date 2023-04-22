@@ -15,7 +15,7 @@ function Footer() {
       <div className="container" style={{ position: "relative" }}>
         <div className="row">
           <div className=" col-md-3 mb-3">
-            <h3 className="footer-name mb-4">AYABA</h3>
+            <h3 className="footer-name  mb-4">AYABA</h3>
             <p className="footer-info">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
               mollitia, molestiae quas vel sint commodi repudiandae
@@ -119,11 +119,11 @@ function Footer() {
       </div>
       <div className="bottom-container w-100" style={{ position: "absolute" }}>
         <div className="container">
-          <div className="row mt-2 d-flex justify-content-between">
-            <div className="col-md-4 mt-2">
+          <div className="row d-flex justify-content-between">
+            <div className="col-md-4">
               <p>© Ayaba {year}</p>
             </div>
-            <div className="col-md-4 mt-2 bottom-pay ">
+            <div className="col-md-4 bottom-pay ">
               <img
                 src="images/img/payment/f1.png"
                 className="m-1"
@@ -155,7 +155,7 @@ function Footer() {
                 alt="pay-cert"
               />
             </div>
-            <div className="col-md-4 mt-2 d-flex justify-content-md-end justify-content-sm-start ">
+            <div className="col-md-4 mt-2 d-flex justify-content-md-end justify-content-sm-start text-capitalize ">
               scroll to top <ArrowUpwardIcon />
             </div>
           </div>

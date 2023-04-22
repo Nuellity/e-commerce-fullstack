@@ -38,7 +38,6 @@ function TopBar() {
   const [horEl, setHorEl] = useState(null);
   const [visible, setVisible] = useState(false);
   const [orders, setOrders] = useState([]);
-  const [lastNumItemsAdded, setLastNumItemsAdded] = useState(0);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -94,24 +93,6 @@ function TopBar() {
     getOrders();
   }, []);
 
-  useEffect(() => {
-    const numNewItems = orders.length - lastNumItemsAdded;
-    if (numNewItems > 0) {
-      setLastNumItemsAdded(orders.length);
-    }
-  }, [orders.length]);
-
-  const numItemsAdded = orders.length - lastNumItemsAdded;
-
-  console.log(
-    "newItems: ",
-    numItemsAdded,
-    "numOrders ",
-    orders.length,
-    "lastNumItems: ",
-    lastNumItemsAdded
-  );
-
   return (
     <Box
       backgroundColor={colors.primary[400]}
@@ -138,7 +119,7 @@ function TopBar() {
           aria-haspopup="true"
           aria-expanded={openNotif ? "true" : undefined}
         >
-          <Badge badgeContent={numItemsAdded} color="error">
+          <Badge badgeContent={0} color="error">
             <NotificationsOutlinedIcon />
           </Badge>
         </IconButton>

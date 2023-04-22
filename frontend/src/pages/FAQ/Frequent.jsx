@@ -54,9 +54,9 @@ function Frequent() {
     <>
       <Navbar />
       <div className="container">
-        <h3 className="text-uppercase py-5 text-center">
+        <h1 className="text-uppercase py-5 text-center">
           FREQUENTLY ASKED QUESTIONS
-        </h3>
+        </h1>
         <div className="pb-5">
           <img
             src="images/img/about/return.svg"

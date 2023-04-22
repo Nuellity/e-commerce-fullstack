@@ -30,9 +30,9 @@ function UserAccount() {
   return (
     <>
       <Navbar />
-      <div>
-        <div className="container " style={{ paddingTop: "4em" }}>
-          <div className="row g-4">
+      <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
+        <div className="container  py-5" style={{ paddingTop: "4em" }}>
+          <div className="row py-5 g-4">
             <div className="col-md-3 ">
               <Box
                 component="div"
@@ -40,7 +40,7 @@ function UserAccount() {
                   height: "100%",
                   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                   borderRadius: "5px",
-                  background: "rgba(30, 40, 50, 0.05)",
+                  backgroundColor: "white",
                 }}
               >
                 <List sx={{ margin: 0, paddingTop: 0 }}>
@@ -314,6 +314,7 @@ function UserAccount() {
                   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                   borderRadius: "5px",
                   padding: 0,
+                  backgroundColor: "white",
                 }}
               >
                 <Outlet />
