@@ -19,50 +19,39 @@ function AllProducts({ category, filter }) {
     getProducts();
   }, [category]);
 
-  // useEffect(() => {
-  // if((filter === "new")){
-  //   setProducts((prev) => {
-  //     [...prev].sort((a,b) => a.createdAt - b.createdAt)
-  //   })
-  // }else if((filter === "highPrice")){
-  //   setProducts((prev) => {
-  //     [...prev].sort((a,b) => a.price - b.price)
-  //   })
-  // }else if((filter === "lowPrice ")){
-  //   setProducts((prev) => {
-  //     [...prev].sort((a,b) => b.price - a.price)
-  //   })
-  // }
-  // }, [filter])
-
   return (
     <div className="row">
       {products.map((value, index) => {
         return (
-          <>
-            {/* <ListCard item={value} category={category} filter={filter} image={value.img[0].original} price={value.price} title={value.title} id={value._id} /> */}
-            <BuyCard
-              key={index}
-              category={category}
-              filter={filter}
-              image={value.img[0].original}
-              price={value.price}
-              title={value.title}
-              id={value._id}
-            />
-          </>
+          <BuyCard
+            key={value._id}
+            category={category}
+            filter={filter}
+            image={value.img[0].original}
+            price={value.price}
+            title={value.title}
+            id={value._id}
+          />
         );
       })}
-      <BuyCard
-        title="Geometric Print Scarf"
-        price="150.00"
-        id="63ed045b7e2b59aabbf0ff5b"
-        image={
-          "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        }
-      />
     </div>
   );
 }
 
 export default AllProducts;
+
+// useEffect(() => {
+// if((filter === "new")){
+//   setProducts((prev) => {
+//     [...prev].sort((a,b) => a.createdAt - b.createdAt)
+//   })
+// }else if((filter === "highPrice")){
+//   setProducts((prev) => {
+//     [...prev].sort((a,b) => a.price - b.price)
+//   })
+// }else if((filter === "lowPrice ")){
+//   setProducts((prev) => {
+//     [...prev].sort((a,b) => b.price - a.price)
+//   })
+// }
+// }, [filter])

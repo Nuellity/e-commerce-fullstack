@@ -25,12 +25,18 @@ function ManageAccount() {
                 </IconButton>
               </p>
               <div className="card-body">
-                <p className="card-text">First Name</p>
-                <p className="card-title">John</p>
-                <p className="card-text">Last Name</p>
-                <p className="card-title">Grey</p>
-                <p className="card-text">Email</p>
-                <p className="card-title">test@gmail.com</p>
+                <div className="pb-4">
+                  <p className="card-text">First Name</p>
+                  <p className="card-title">John</p>
+                </div>
+                <div className="pb-4">
+                  <p className="card-text">Last Name</p>
+                  <p className="card-title">Grey</p>
+                </div>
+                <div>
+                  <p className="card-text">Email</p>
+                  <p className="card-title">test@gmail.com</p>
+                </div>
               </div>
             </div>
           </div>

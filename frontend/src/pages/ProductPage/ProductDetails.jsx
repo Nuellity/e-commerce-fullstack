@@ -8,14 +8,17 @@ import Select from "@mui/material/Select";
 import ImageGallery from "react-image-gallery";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import Cart from "../../CartPage/Cart";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, Typography } from "@mui/material";
 
 import { useDispatch } from "react-redux";
-import { addProduct } from "../../../redux/CartSlice";
+import { addProduct } from "../../redux/CartSlice";
+import Cart from "../CartPage/Cart";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -28,10 +31,46 @@ function ProductDetails(props) {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const { product, itemPrice, title, image, sizes, desc, count } = props;
+  const [value, setValue] = useState(0);
 
-  // console.log(product);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-  const handleChange = (event) => {
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography component="div">{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  }
+
+  const handleSize = (event) => {
     setSize(event.target.value);
   };
 
@@ -107,7 +146,7 @@ function ProductDetails(props) {
                       id="demo-simple-select"
                       value={size}
                       label="Size"
-                      onChange={handleChange}
+                      onChange={handleSize}
                     >
                       {props.sizes.map((value, index) => {
                         return (
@@ -162,8 +201,44 @@ function ProductDetails(props) {
                 </Alert>
               </Snackbar>
 
-              <h4 className="mt-5 mb-3">Product Details</h4>
-              <span className="mb-5">{desc}</span>
+              <div className="container pt-5">
+                <Box sx={{ width: "100%" }}>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      sx={{
+                        "& .MuiTabs-indicator": {
+                          backgroundColor: "skyblue",
+                        },
+                        "& .MuiTab-textColorInherit": {
+                          color: "red",
+                        },
+                      }}
+                      aria-label="basic tabs example"
+                    >
+                      <Tab
+                        label="Description"
+                        sx={{
+                          fontSize: "1.2em",
+                        }}
+                        {...a11yProps(0)}
+                      />
+                      <Tab
+                        label="Reviews"
+                        sx={{ fontSize: "1.2em" }}
+                        {...a11yProps(1)}
+                      />
+                    </Tabs>
+                  </Box>
+                  <TabPanel value={value} index={0}>
+                    <div className="container p-0">{desc}</div>
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    <div> no reviews available for this product yet.</div>
+                  </TabPanel>
+                </Box>
+              </div>
             </div>
           </div>
         </div>

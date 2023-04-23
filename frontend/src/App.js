@@ -19,7 +19,7 @@ import Shipping from "./pages/FAQ/Shipping";
 import Payment from "./pages/FAQ/Payment";
 import PaymentSuccess from "./pages/Checkout/PaymentSuccess";
 import ProductList from "./pages/ProductPage/ProductList";
-import ProductInfo from "./pages/ProductPage/ProductDetails/ProductInfo";
+import ProductInfo from "./pages/ProductPage/ProductInfo";
 import Stripe from "./pages/Checkout/Stripe/Stripe";
 import NoMatch from "./pages/NoMatch";
 import AccountSummary from "./pages/AccountPage/AccountSummary";
@@ -36,6 +36,7 @@ import DeleteAccount from "./pages/AccountPage/ManageAccount/DeleteAccount";
 import AddressBook from "./pages/AccountPage/AddressBook/AddressBook";
 import NewAddress from "./pages/AccountPage/AddressBook/NewAddress";
 import DefaultAddress from "./pages/AccountPage/AddressBook/DefaultAddress";
+import BlogDetails from "./pages/BlogPage/BlogDetails";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -49,6 +50,7 @@ function App() {
         <Route path="privacy" element={<PrivacyPolicy />} />
         <Route path="terms" element={<Terms />} />
         <Route path="blog" element={<Blog />} />
+        <Route path="blog-details" element={<BlogDetails />} />
         <Route
           path="profile"
           // element={user ? <UserAccount /> : <Navigate to="/login" />}

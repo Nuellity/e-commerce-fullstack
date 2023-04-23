@@ -9,6 +9,9 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
+  Fab,
+  Fade,
+  useScrollTrigger,
 } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import InventoryIcon from "@mui/icons-material/Inventory";
@@ -19,6 +22,40 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { Link, Outlet } from "react-router-dom";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        block: "center",
+      });
+    }
+  };
+
+  return (
+    <Fade in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        {children}
+      </Box>
+    </Fade>
+  );
+}
 
 function UserAccount() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -30,6 +67,7 @@ function UserAccount() {
   return (
     <>
       <Navbar />
+      <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container  py-5" style={{ paddingTop: "4em" }}>
           <div className="row py-5 g-4">
@@ -324,6 +362,11 @@ function UserAccount() {
         </div>
       </div>
       <Footer />
+      <ScrollTop>
+        <Fab size="large" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon sx={{ fontSize: 40 }} />
+        </Fab>
+      </ScrollTop>
     </>
   );
 }

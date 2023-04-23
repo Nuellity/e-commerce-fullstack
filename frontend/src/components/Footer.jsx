@@ -3,7 +3,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -154,9 +153,6 @@ function Footer() {
                 className="m-1"
                 alt="pay-cert"
               />
-            </div>
-            <div className="col-md-4 mt-2 d-flex justify-content-md-end justify-content-sm-start text-capitalize ">
-              scroll to top <ArrowUpwardIcon />
             </div>
           </div>
         </div>
