@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../account.css";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -10,7 +10,7 @@ import { Button } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 function Order() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -62,15 +62,15 @@ function Order() {
               aria-label="basic tabs example"
             >
               <Tab
-                label="OPEN ORDERS"
+                label="Open Orders"
                 sx={{
-                  fontSize: "1.2em",
+                  fontSize: "1em",
                 }}
                 {...a11yProps(0)}
               />
               <Tab
-                label="CLOSED ORDERS"
-                sx={{ fontSize: "1.2em" }}
+                label="Closed Orders"
+                sx={{ fontSize: "1em" }}
                 {...a11yProps(1)}
               />
             </Tabs>
@@ -85,7 +85,7 @@ function Order() {
               className="d-flex justify-content-center pt-5"
               style={{ textAlign: "center" }}
             >
-              <div>
+              <div className="py-4">
                 <div
                   style={{
                     background: "rgba(30, 40, 50, 0.05)",

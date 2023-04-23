@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: 300;
     font-size: 1.1em;
-    line-height: 1em;
+    line-height: 1.2em;
     text-transform: capitalize;
     color: rgba(0, 0, 0, 0.5);
 }
@@ -127,5 +127,25 @@
         font-size: 1em;
         text-transform: capitalize;
         color: #000000;
+    }
+
+    .card-title {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 1.2em;
+        text-transform: capitalize;
+        color: #000000;
+    }
+
+    .card-text {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 1em;
+        line-height: 1.2em;
+        text-transform: capitalize;
+        color: rgba(0, 0, 0, 0.5);
     }
 }

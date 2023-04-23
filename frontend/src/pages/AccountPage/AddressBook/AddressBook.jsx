@@ -14,8 +14,10 @@ function AddressBook() {
           onClick={() => navigate("/profile/new-address")}
           variant="contained"
           sx={{
-            width: "12em",
-            fontSize: "0.7em",
+            width: "10em",
+            fontSize: "0.6em",
+            height: "2.5em",
+            padding: "0",
             backgroundColor: "skyblue",
             "&:hover": {
               backgroundColor: "#4a90e2",
@@ -25,11 +27,10 @@ function AddressBook() {
           ADD NEW ADDRESS
         </Button>
       </div>
-      <div className="container">
+      <div className="container pb-2 pt-1">
         <div className="row">
           <div className="col-md-6">
             <div className="card h-100">
-              <p className="card-header">NEWSLETTER</p>
               <div className="card-body">
                 <div>
                   <p className="card-title">FirstName LastName</p>

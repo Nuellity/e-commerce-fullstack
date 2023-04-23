@@ -10,9 +10,12 @@ import {
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 function DeleteAccount() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -22,7 +25,12 @@ function DeleteAccount() {
 
   return (
     <div className="card main-card">
-      <p className="card-header header">Delete Account</p>
+      <p className="card-header header">
+        <IconButton onClick={() => navigate("/profile/manage")}>
+          <ArrowBackIcon />
+        </IconButton>
+        Delete Account
+      </p>
       <div className="container">
         <p className="card-title mx-auto" style={{ textAlign: "center" }}>
           We hate to see you go.

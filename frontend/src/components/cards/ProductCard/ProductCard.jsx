@@ -278,7 +278,7 @@ export const RateCard = () => {
               >
                 <div className="wrap-rating">
                   <Rating
-                    size="large"
+                    size="small"
                     name="hover-feedback"
                     value={value}
                     precision={0.5}
@@ -342,7 +342,7 @@ export const SavedCard = () => {
           </div>
         </div>
         <div className="col-lg-2 ms-auto  ">
-          <div className="h-100 d-flex flex-column justify-content-between">
+          <div className="save-btn ">
             <div className="rate-button mb-auto">
               <Button
                 variant="contained"

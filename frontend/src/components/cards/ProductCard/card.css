@@ -267,11 +267,17 @@
 
 
 
-/* RATING */
 
-.wrap-rating {
-    font-size: 3rem;
+/* SAVED CARD */
+
+.save-btn {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
 }
+
+/* RATING */
 
 .wrap-rating .MuiSvgIcon-root {
     font-size: 3.5rem;
@@ -481,5 +487,18 @@
     .rate-button {
         display: flex;
         justify-content: center;
+    }
+
+
+
+    .wrap-rating .MuiSvgIcon-root {
+        font-size: 2.5rem;
+    }
+
+    .save-btn {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        height: 100%;
     }
 }

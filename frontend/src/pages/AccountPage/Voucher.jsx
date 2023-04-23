@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./account.css";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -9,7 +9,7 @@ import RedeemIcon from "@mui/icons-material/Redeem";
 import { Button } from "@mui/material";
 
 function Voucher() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
