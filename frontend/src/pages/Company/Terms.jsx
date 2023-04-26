@@ -44,7 +44,7 @@ function Terms() {
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container pt-3 pb-5" style={{ fontSize: "1em" }}>
-          <h1 className="text-center pt-5 pb-3">TERMS AND CONDITIONS</h1>
+          <h1 className="main-header py-5">terms and conditions</h1>
           <p>
             We provide services to you subject to the notices, terms, and
             conditions set forth in this agreement. Besides, you will obey the

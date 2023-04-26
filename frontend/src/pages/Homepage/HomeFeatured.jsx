@@ -5,18 +5,8 @@ import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 function HomeFeatured() {
   return (
     <div className="container my-5">
-      <div className="py-2 d-flex justify-content-center">
-        <h2
-          style={{
-            color: "#000000",
-            font: "Roboto",
-            fontSize: "50px",
-            textAlign: "center",
-            textTransform: "capitalize",
-          }}
-        >
-          or subscribe to the newsLetter
-        </h2>
+      <div className="pt-5 pb-2 d-flex justify-content-center">
+        <h2 className="main-header">Check out trending items</h2>
       </div>
       <div className="row">
         <BuyCard

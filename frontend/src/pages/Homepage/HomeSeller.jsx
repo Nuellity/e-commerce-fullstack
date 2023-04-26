@@ -4,24 +4,10 @@ import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 
 function HomeSeller() {
   return (
-    <div
-      className="my-5"
-      style={{ paddingBottom: "50px", background: "#FFFFFF" }}
-    >
-      <div className="py-2 d-flex justify-content-center">
-        <h2
-          style={{
-            color: "#000000",
-            font: "Roboto",
-            fontSize: "50px",
-            textAlign: "center",
-            textTransform: "capitalize",
-          }}
-        >
-          best sellers
-        </h2>
-      </div>
-      <div className="container">
+    <div style={{ paddingBottom: "50px", background: "#FFFFFF" }}>
+      <div className="container pt-5">
+        <h2 className="main-header">best sellers</h2>
+
         <div className="row">
           <BuyCard
             title="Geometric Print Scarf"

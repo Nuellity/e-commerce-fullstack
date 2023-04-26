@@ -46,16 +46,8 @@ function Blog() {
       <Navbar />
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
-        <div className="container">
-          <h1
-            style={{
-              paddingTop: "1.5em",
-              textTransform: "capitalize",
-              textAlign: "center",
-            }}
-          >
-            Check out our blogs
-          </h1>
+        <div className="container pt-5">
+          <h1 className="main-header pt-5">Check out our blogs</h1>
         </div>
         <div className="blog-img-container container">
           <div className="row">

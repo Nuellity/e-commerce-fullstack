@@ -90,9 +90,7 @@ function Return() {
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container py-5">
-          <h3 className="text-uppercase py-5 text-center">
-            REFUNDS & RETURNS POLICY
-          </h3>
+          <h3 className="main-header pt-3 pb-5">refund and returns policy</h3>
           <div className="pb-5">
             <img
               src="images/img/about/return.svg"
@@ -115,7 +113,7 @@ function Return() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     All orders can be canceled until they are processed and
                     shipped. Once the packaging and shipping process has
                     started, it can no longer be canceled.
@@ -137,7 +135,7 @@ function Return() {
               </AccordionSummary>
               <AccordionDetails>
                 <p>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     Your customer satisfaction is our #1 priority. We want you
                     to fulfil orders with confidence. That's why we proudly
                     offer absolute satisfaction guarantees that ensure our
@@ -146,19 +144,19 @@ function Return() {
                   </span>
                 </p>
                 <p>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     Our primary goal is making our customers happy, so everyone
                     who shops with us receives the following guarantees:
                   </span>
                 </p>
                 <ul>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       Refund if the item is not as described or damaged;
                     </span>
                   </li>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       Refund minus the shipping cost if our customer does not
                       want the product he received. Our customer must return the
                       item at his expense to our warehouse and the item must be
@@ -185,13 +183,13 @@ function Return() {
               <AccordionDetails>
                 <ul>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       Your order does not arrive due to an incorrect address
                       provided by the customer;
                     </span>
                   </li>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       Your order does not arrive due to exceptional
                       circumstances beyond our control (e.g. delayed by a
                       natural disaster).
@@ -218,7 +216,7 @@ function Return() {
                 <ul>
                   <li aria-level="1">
                     <b>In case you report a damaged or incorrect product,</b>
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       {" "}
                       you are required to submit photo evidence within 14 days
                       of receiving the item. If the claim is approved, a refund
@@ -230,13 +228,13 @@ function Return() {
                       If the product packaging is damaged but the product itself
                       is intact,{" "}
                     </b>
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       you must submit a claim to the shipping carrier directly.
                     </span>
                   </li>
                   <li aria-level="1">
                     <b>Missing order:</b>
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       {" "}
                       In case a package is delivered (based on tracking number
                       update) but you claim that you did not receive the item,
@@ -248,7 +246,7 @@ function Return() {
                   </li>
                 </ul>
                 <p>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     If you experienced any of the above scenarios, you must
                     report the issue within 14 days of receipt. Otherwise, you
                     agree that the product is deemed delivered and satisfactory.
@@ -269,32 +267,32 @@ function Return() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <span>
+                <span style={{ fontSize: "1em" }}>
                   Handling returns is an essential part of running a business.
                   We are here to help! We have put together the following steps
                   to make this process easier:
                 </span>
                 <ol>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       In the event of a refund, return, or exchange request from
                       you, contact our Customer Support team via email at
                       support@shynster.com and include the evidence if required.
                     </span>
                   </li>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       After we have approved the order refund, return, or
                       exchange, the product must be returned to our address.
                     </span>
                   </li>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       You must return the product and provide a tracking number.
                     </span>
                   </li>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       Once the tracking number has been provided (or once we
                       have received the returned product), a replacement product
                       will be shipped or a refund minus the shipping cost will

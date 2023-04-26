@@ -90,9 +90,7 @@ function Shipping() {
       <Navbar /> <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container py-5">
-          <h1 className="text-uppercase py-5 text-center">
-            shipping & delivery
-          </h1>
+          <h1 className="main-header pt-3 pb-5">shipping & delivery</h1>
           <div className="pb-5">
             <img
               src="images/img/about/delivery.svg"
@@ -115,7 +113,7 @@ function Shipping() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     Currently, we offer shipping across the U.S. only. Packages
                     from our U.S. warehouse are shipped through USPS.
                   </span>
@@ -136,7 +134,7 @@ function Shipping() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     All orders require 1 business day processing time. The
                     estimated delivery time is 1-3 business days.
                   </span>
@@ -157,7 +155,7 @@ function Shipping() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     Yes, you will receive an email with your tracking
                     information.
                   </span>
@@ -178,7 +176,7 @@ function Shipping() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     Yes. <br />
                     If you have any other questions, please contact us and we
                     will do our best to help you out.

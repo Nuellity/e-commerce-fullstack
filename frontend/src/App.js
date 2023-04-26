@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import Home from "./pages/Homepage/Home";
 import Log from "./pages/LoginPage/Log";
 import Check from "./pages/Checkout/Check";
-
 import AboutUs from "./pages/Company/AboutUs";
 import PrivacyPolicy from "./pages/Company/PrivacyPolicy";
 import Terms from "./pages/Company/Terms";

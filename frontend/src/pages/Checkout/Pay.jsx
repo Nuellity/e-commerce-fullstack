@@ -15,6 +15,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useSelector, useDispatch } from "react-redux";
 import { addOrder } from "../../redux/OrderSlice";
+import { useNavigate } from "react-router-dom";
 
 function Pay() {
   const { setCurrentStep, userData, setUserData, submitData } =
@@ -26,6 +27,7 @@ function Pay() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { address, city, country, state, postalCode } = userData;
   const billingAddress = {
@@ -48,17 +50,18 @@ function Pay() {
   };
 
   const handlePay = () => {
-    if (userData.paymentType === "Credit/Debit Cards") {
+    if (userData.paymentMethod === "Credit/Debit Cards") {
       handleClickOpen();
     } else {
       console.log("bad pay");
+      navigate("/paymentsuccess");
     }
   };
 
   const validate = (data) => {
     const errors = {};
-    if (!data.paymentType) {
-      errors.paymentType = "Payment Type is required";
+    if (!data.paymentMethod) {
+      errors.paymentMethod = "Payment Type is required";
       setError(true);
     }
 
@@ -80,7 +83,10 @@ function Pay() {
     })),
     amount: cart.total.toFixed(2),
     address: billingAddress,
+    paymentMethod: userData.paymentMethod,
   };
+
+  console.log(userData);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -146,28 +152,22 @@ function Pay() {
 
             <RadioGroup
               aria-labelledby="demo-controlled-radio-buttons-group"
-              name="paymentType"
-              value={userData.paymentType || ""}
+              name="paymentMethod"
+              value={userData.paymentMethod || ""}
               onChange={handleChange}
-              defaultValue="Paypal Express Checkout"
             >
-              <FormControlLabel
-                value="Paypal Express Checkout"
-                control={<Radio />}
-                label="Paypal Express Checkout"
-              />
               <FormControlLabel
                 value="Credit/Debit Cards"
                 control={<Radio />}
                 label="Credit/Debit Cards (Stripe)"
               />
               <FormControlLabel
-                value="Bitcoin"
+                value="Pay On Delivery"
                 control={<Radio />}
-                label="Bitcoin"
+                label="Pay On Delivery"
               />
             </RadioGroup>
-            <FormHelperText>{formErrors.paymentType}</FormHelperText>
+            <FormHelperText>{formErrors.paymentMethod}</FormHelperText>
           </FormControl>
         </div>
         <div className="d-flex justify-content-between pt-2">

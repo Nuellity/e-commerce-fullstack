@@ -48,18 +48,23 @@ function AboutUs() {
     <>
       <Navbar />
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
-      <div className="about">
+      <div className="about" style={{ paddingTop: isMatch ? "1em" : "5em" }}>
         <img
           src="/images/img/back.jpg"
           alt="about"
           className="about-image"
-          style={{ width: "100%", height: isMatch ? "25rem" : "45rem" }}
+          style={{ width: "100%", height: isMatch ? "20rem" : "30rem" }}
         />
         <div className="about-us-details text-center ">
-          <h1 style={{ paddingTop: isMatch ? "0.5em" : "2em" }}>About Us</h1>
+          <h1
+            style={{ paddingTop: isMatch ? "0.5em" : "1em", color: "white" }}
+            className="main-header"
+          >
+            About Us
+          </h1>
           <hr />
           <p
-            className="mx-auto pt-3"
+            className="mx-auto pt-5"
             style={{ width: isMatch ? "100%" : "50%" }}
           >
             Welcome to Ayaba. We are a team of enthusiastic developers and
@@ -71,9 +76,9 @@ function AboutUs() {
         </div>
       </div>
 
-      <div className="row text-center container">
+      <div className="row text-center pb-3 container">
         <div className="core py-4">
-          <h2 className="text-uppercase ">Core Values</h2>
+          <h2 className="main-header">Core Values</h2>
           <hr />
         </div>
 
@@ -121,7 +126,9 @@ function AboutUs() {
 
       <div className="about-banner">
         <div className="container mx-auto about-title">
-          <h4>KEEP IN CONTACT WITH US</h4>
+          <h4 className="main-header" style={{ color: "white" }}>
+            keep in contact with us
+          </h4>
           <hr />
           <p className="pt-4">
             We're continually working on our online store and are open to any
@@ -146,22 +153,24 @@ function AboutUs() {
           <Button
             variant="outlined"
             className="text-uppercase "
-            color="error"
-            sx={{ color: "white", border: "1px solid white" }}
+            sx={{
+              color: "white",
+              border: "1px solid white",
+            }}
             size="large"
           >
             contact us
           </Button>
         </div>
       </div>
-      <div className=" text-center partners partner-container py-5">
-        <h2 className="text-uppercase">Our Partners</h2>
+      <div className=" text-center partners partner-container pt-5 pb-4">
+        <h2 className="main-header">Our Partners</h2>
         <hr />
         <p className="py-4">
           We work with the world's most popular and trusted companies so you can
           enjoy safe shopping and fast delivery.
         </p>
-        <div className="row partners py-4 container text-center">
+        <div className="row partners container text-center">
           <div className="col">
             <img src="/images/img/abt/abt1.png" alt="abt-partners" />
           </div>

@@ -90,9 +90,7 @@ function Frequent() {
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container py-5">
-          <h1 className="text-uppercase py-5 text-center">
-            FREQUENTLY ASKED QUESTIONS
-          </h1>
+          <h1 className="main-header pt-3 pb-5">frequently asked questions</h1>
           <div className="pb-5">
             <img
               src="images/img/about/return.svg"
@@ -115,7 +113,7 @@ function Frequent() {
               </AccordionSummary>
               <AccordionDetails>
                 <Typography>
-                  <span>
+                  <span style={{ fontSize: "1em" }}>
                     Search for products by entering the product name or keyword
                     into the Search Bar at the top of any page. Try to enter a
                     general description. The more keywords you use, the less
@@ -139,23 +137,25 @@ function Frequent() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <span>
+                <span style={{ fontSize: "1em" }}>
                   Buyer Protection is a set of guarantees that enables buyers to
                   shop with confidence on our website.
                 </span>
-                <span>You are protected when:</span>
+                <span style={{ fontSize: "1em" }}>You are protected when:</span>
                 <ul>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       The item you ordered did not arrive within the time
                       promised by the seller.
                     </span>
                   </li>
                   <li aria-level="1">
-                    <span>The item you received was not as described.</span>
+                    <span style={{ fontSize: "1em" }}>
+                      The item you received was not as described.
+                    </span>
                   </li>
                   <li aria-level="1">
-                    <span>
+                    <span style={{ fontSize: "1em" }}>
                       The item you received that was assured to be genuine was
                       fake.
                     </span>

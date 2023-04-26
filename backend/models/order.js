@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema(
     userId: { type: String, required: true },
     userFirstName: { type: String, required: true },
     userLastName: { type: String, required: true },
-    deliveryName: { type: String, required: true },
+    deliveryName: { type: String },
     products: [
       {
         productId: { type: String },
@@ -18,8 +18,9 @@ const orderSchema = new mongoose.Schema(
     ],
     amount: { type: Number, required: true },
     address: { type: Object, required: true },
+    paymentMethod: { type: String, required: true },
     status: { type: String, default: "pending" },
-    paymentIntent: { type: String, required: true },
+    paymentIntent: { type: String },
   },
   { timestamps: true }
 );

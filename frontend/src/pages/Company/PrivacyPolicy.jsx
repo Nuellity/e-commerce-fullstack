@@ -43,13 +43,11 @@ function PrivacyPolicy() {
       <Navbar />
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
-        <div className="container pt-3 pb-5" style={{ fontSize: "13px" }}>
-          <h1
-            className="text-center text-uppercase "
-            style={{ padding: "1.2em 0" }}
-          >
-            Privacy Policy
-          </h1>
+        <div
+          className="container pt-3 pb-5 pay-info"
+          style={{ fontSize: "13px" }}
+        >
+          <h1 className="main-header py-5">Privacy Policy</h1>
           <p>
             Ayaba is compliant with The General Data Protection Regulation
             (GDPR) (EU) 2016/679.
@@ -61,14 +59,26 @@ function PrivacyPolicy() {
           </p>
           <p>At shynster.com, we collect:</p>
           <ul>
-            <li>Your name and surname </li>
-            <li>Your email address </li>
-            <li>Your physical address </li>
-            <li>Your phone number </li>
             <li>
-              The data about the browser and device you use to view the store{" "}
+              <p>Your name and surname</p>{" "}
             </li>
-            <li>The way you navigate the store </li>
+            <li>
+              {" "}
+              <p>Your email address</p>{" "}
+            </li>
+            <li>
+              {" "}
+              <p>Your physical address</p>{" "}
+            </li>
+            <li>
+              <p>
+                The data about the browser and device you use to view the store
+              </p>
+            </li>
+
+            <li>
+              <p>The way you navigate the store</p>
+            </li>
           </ul>
           <p>
             We gather your contact details because they are necessary to accept
@@ -88,20 +98,29 @@ function PrivacyPolicy() {
           </p>
           <ul>
             <li>
-              Payment services use your credit card number, your name and
-              surname to verify and process your payments for our products{" "}
+              <p>
+                Payment services use your credit card number, your name and
+                surname to verify and process your payments for our products
+              </p>{" "}
             </li>
             <li>
-              Our manufacturers and stock keepers use the data of your order
-              contents to assemble the necessary package for you{" "}
+              <p>
+                Our manufacturers and stock keepers use the data of your order
+                contents to assemble the necessary package for you
+              </p>{" "}
             </li>
             <li>
-              Postal services use your first name, last name, and physical
-              address to arrange the product delivery for you{" "}
+              <p>
+                Postal services use your first name, last name, and physical
+                address to arrange the product delivery for you
+              </p>{" "}
             </li>
             <li>
-              Mass mailing services use your email address to send you emails
-              (if you have subscribed for them){" "}
+              <p>
+                {" "}
+                Mass mailing services use your email address to send you emails
+                (if you have subscribed for them)
+              </p>{" "}
             </li>
           </ul>
           <p>
@@ -113,12 +132,18 @@ function PrivacyPolicy() {
           <p>You can email us at support@shynster.com and ask:</p>
           <ul>
             <li>
-              To receive the copy of your personal details we have collected{" "}
+              <p>
+                To receive the copy of your personal details we have collected
+              </p>{" "}
             </li>
-            <li>To delete your personal details from our system </li>
             <li>
-              To withdraw your consent (if you previously agreed to provide us
-              with the data, but then changed your mind){" "}
+              <p>To delete your personal details from our system</p>{" "}
+            </li>
+            <li>
+              <p>
+                To withdraw your consent (if you previously agreed to provide us
+                with the data, but then changed your mind)
+              </p>{" "}
             </li>
           </ul>
           <p>

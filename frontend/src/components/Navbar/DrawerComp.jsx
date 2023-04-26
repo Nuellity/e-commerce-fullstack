@@ -78,32 +78,32 @@ function DrawerComp() {
           onClose={() => setOpenDraw(false)}
         >
           <List>
-            <Link style={{ textDecoration: "none" }}>
+            <Link style={{ textDecoration: "none", color: "inherit" }}>
               <ListItem>
                 <ListItemText primary="Jewelry & Accessories" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none" }}>
+            <Link style={{ textDecoration: "none", color: "inherit" }}>
               <ListItem>
                 <ListItemText primary="Clothing & Shoes" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none" }}>
+            <Link style={{ textDecoration: "none", color: "inherit" }}>
               <ListItem>
                 <ListItemText primary="Home & Living" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none" }}>
+            <Link style={{ textDecoration: "none", color: "inherit" }}>
               <ListItem>
                 <ListItemText primary="Wedding & Party" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none" }}>
+            <Link style={{ textDecoration: "none", color: "inherit" }}>
               <ListItem>
                 <ListItemText primary="Toys & Entertainment" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none" }}>
+            <Link style={{ textDecoration: "none", color: "inherit" }}>
               <ListItem>
                 <ListItemText primary="Art & Collectibles" />
               </ListItem>
@@ -112,7 +112,7 @@ function DrawerComp() {
             <ListItemButton onClick={() => setCartDraw(true)}>
               <ListItemIcon>
                 <Badge badgeContent={quantity} color="error">
-                  <ShoppingBagIcon />
+                  <ShoppingBagIcon sx={{ fontSize: 30 }} />
                 </Badge>
               </ListItemIcon>
               <ListItemText primary="Cart" />
@@ -122,13 +122,13 @@ function DrawerComp() {
             <div>
               <ListItemButton onClick={handleAccount}>
                 <ListItemIcon>
-                  <PersonIcon />
+                  <PersonIcon sx={{ fontSize: 30 }} />
                 </ListItemIcon>
                 <ListItemText primary="Account" />
-                {isVisible ? <ExpandMore /> : <ExpandLess />}
+                {isVisible ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
             </div>
-            <div style={{ display: isVisible ? "none" : "block" }}>
+            <div style={{ display: isVisible ? "block" : "none" }}>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/orders"
@@ -167,14 +167,14 @@ function DrawerComp() {
             <div>
               <ListItemButton onClick={handleDisplay}>
                 <ListItemIcon>
-                  <ContactSupportIcon />
+                  <ContactSupportIcon sx={{ fontSize: 30 }} />
                 </ListItemIcon>
                 <ListItemText primary="Help" />
-                {visible ? <ExpandMore /> : <ExpandLess />}
+                {visible ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
               <Divider sx={{ border: "0.4px solid" }} />
             </div>
-            <div style={{ display: visible ? "none" : "block" }}>
+            <div style={{ display: visible ? "block" : "none" }}>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
                 to="/return"

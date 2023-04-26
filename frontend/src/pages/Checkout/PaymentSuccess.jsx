@@ -7,6 +7,7 @@ import { userRequest } from "../../axiosRequest";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { clearOrder } from "../../redux/OrderSlice";
 
 function PaymentSuccess() {
   const location = useLocation();
@@ -17,6 +18,9 @@ function PaymentSuccess() {
   const dispatch = useDispatch();
   dispatch(clearProduct());
 
+  const isPayOnDelivery = order.paymentMethod === "Pay on Delivery";
+  console.log("isPay", isPayOnDelivery);
+
   useEffect(() => {
     const updatedOrder = { ...order, paymentIntent: paymentIntent };
     console.log("orderinfo: ", updatedOrder);
@@ -24,10 +28,11 @@ function PaymentSuccess() {
       try {
         const res = await userRequest.post("/orders", updatedOrder);
         setOrderId(res.data._id);
+        dispatch(clearOrder());
       } catch (error) {}
     };
     createOrder();
-  }, [order, paymentIntent]);
+  }, [dispatch, isPayOnDelivery, order, paymentIntent]);
 
   return (
     <>
@@ -67,9 +72,6 @@ function PaymentSuccess() {
                     Order has been created successfully. Your order number is:{" "}
                     {orderId}
                   </p>
-                  <p className="card-text pb-5">
-                    All your available Vouchers will be displayed here
-                  </p>{" "}
                 </>
               ) : (
                 <>

@@ -11,7 +11,7 @@ function Subscribe() {
         style={{ background: "rgba(30, 40, 50, 0.05)", width: "100%" }}
       >
         <div>
-          <h3 className="sub-title pb-5">
+          <h3 className="main-header pb-5">
             follow products and discounts on instagram
           </h3>
         </div>
@@ -26,32 +26,36 @@ function Subscribe() {
           </div>
         </div>
         <div>
-          <h3 className="sub-title pt-5 pb-3">or subscribe to newsletter</h3>
+          <h3 className="main-header pt-5 pb-3">or subscribe to newsletter</h3>
         </div>
         <div className="pb-5">
           <div className="col-lg-8  mx-auto">
-            <div className="d-flex justify-content-between align-items-center">
-              <TextField
-                label="Email Address"
-                placeholder="enter your email address here"
-                variant="standard"
-                fullWidth
-              />
-              <Button
-                variant="outlined"
-                size="large"
-                sx={{
-                  height: "100%",
-                  marginLeft: "40px",
-                  color: "black",
-                  borderTop: "none",
-                  borderLeft: "none",
-                  borderRight: "none",
-                  borderBottom: "1px solid black",
-                }}
-              >
-                SUBSCRIBE
-              </Button>
+            <div className="mx-auto">
+              <div className="row">
+                <div className="col-md-6">
+                  <TextField
+                    label="Email Address"
+                    placeholder="enter your email address here"
+                    variant="standard"
+                    margin="normal"
+                    fullWidth
+                  />
+                </div>
+                <div className="col-md-6 my-auto">
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    style={{
+                      width: "12em",
+                      height: "3em",
+                      alignItems: "center",
+                      backgroundColor: "#1E2832",
+                    }}
+                  >
+                    Subscribe
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -56,6 +56,17 @@ span {
   font-size: 0.8rem;
 }
 
+.main-header {
+  font-family: 'Roboto';
+  font-style: bold;
+  font-weight: 500;
+  font-size: 2.5em;
+  line-height: 1.2;
+  text-transform: capitalize;
+  text-align: center;
+  color: #000000;
+}
+
 
 
 .container {
@@ -248,17 +259,6 @@ span {
 
 
 /* HOMEPAGE TOP IMAGE */
-
-.main-home {
-  width: 100%;
-  height: 80vh;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/public/images/img/banner-3.png"); */
-  background-position: center;
-  background-size: cover;
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  align-items: center;
-}
 
 
 
@@ -557,6 +557,11 @@ span {
 }
 
 
+/* Payment */
+
+.pay-info p {
+  font-size: 1.2em;
+}
 
 
 
@@ -614,8 +619,8 @@ span {
 /* CHECKOUT */
 
 .delivery {
-  border: 0.1px solid grey;
-  background-color: #50d6ff;
+  border: 0.1px solid #1E2832;
+  background-color: rgba(30, 40, 50, 0.05);
   border-radius: 1px;
 }
 
@@ -625,22 +630,16 @@ span {
 }
 
 .edit {
-  color: grey;
+  color: skyblue;
   font-size: 13px;
 }
 
 .edit :hover {
-  text-decoration: underline;
-  color: red;
+  color: purple;
 }
 
-.payment {
-  border: 0.1px solid #6ee8ff;
-}
 
-.checkout-trust {
-  border-radius: 3px;
-}
+
 
 
 
@@ -794,6 +793,17 @@ span {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1.5em;
 
+  }
+
+  .main-header {
+    font-family: 'Roboto';
+    font-style: bold;
+    font-weight: 500;
+    font-size: 2em;
+    line-height: 1.2;
+    text-transform: capitalize;
+    text-align: center;
+    color: #000000;
   }
 
 
