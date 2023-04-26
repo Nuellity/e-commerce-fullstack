@@ -86,8 +86,6 @@ function Pay() {
     paymentMethod: userData.paymentMethod,
   };
 
-  console.log(userData);
-
   const handleNext = (e) => {
     e.preventDefault();
     setFormErrors(validate(userData));

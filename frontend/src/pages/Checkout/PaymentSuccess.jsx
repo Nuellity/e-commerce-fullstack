@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { clearProduct } from "../../redux/CartSlice";
@@ -16,10 +17,12 @@ function PaymentSuccess() {
   const [orderId, setOrderId] = useState(null);
   const order = useSelector((state) => state.order.order);
   const dispatch = useDispatch();
-  dispatch(clearProduct());
 
   const isPayOnDelivery = order.paymentMethod === "Pay on Delivery";
-  console.log("isPay", isPayOnDelivery);
+
+  useEffect(() => {
+    dispatch(clearProduct());
+  }, []);
 
   useEffect(() => {
     const updatedOrder = { ...order, paymentIntent: paymentIntent };

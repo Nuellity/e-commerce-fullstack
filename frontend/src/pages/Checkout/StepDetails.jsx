@@ -22,7 +22,6 @@ function StepDetails() {
   function submitData() {
     setFinalData({ userData });
     setCurrentStep(3);
-    console.log("eorkding");
   }
 
   return (
