@@ -54,16 +54,16 @@ function Cart(props) {
             },
           }}
         >
-          <div>
-            <div className="cart-header">
-              <div className="py-3 cart-title  ">
-                <h4 className="text-capitalize mx-auto">shopping cart</h4>
-                <IconButton onClick={props.closeCart}>
-                  <CancelIcon color="primary" />
-                </IconButton>
-              </div>
+          <div className="cart-header">
+            <div className="py-3 cart-title  ">
+              <h4 className="text-capitalize mx-auto">shopping cart</h4>
+              <IconButton onClick={props.closeCart}>
+                <CancelIcon color="primary" />
+              </IconButton>
             </div>
-            <div>
+          </div>
+          <div className="cart-list">
+            <div className="cart-list-container">
               <List
                 sx={{ width: "100%", maxWidth: 450, bgcolor: "inherit" }}
                 subheader={<li />}
@@ -86,34 +86,34 @@ function Cart(props) {
                 )}
               </List>
             </div>
-            <div className=" cart-footer">
-              <div className="d-flex justify-content-between m-3">
-                <div className="sub-total">
-                  <h4>Subtotal</h4>
-                </div>
-                <div className="prod-price">
-                  <h5>${cart.total.toFixed(2)}</h5>
-                </div>
+          </div>
+          <div className=" cart-footer">
+            <div className="d-flex justify-content-between m-3">
+              <div className="sub-total">
+                <h4>Subtotal</h4>
               </div>
-              <div className="text-center ">
-                <Link
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  to="/checkout"
+              <div className="prod-price">
+                <h5>${cart.total.toFixed(2)}</h5>
+              </div>
+            </div>
+            <div className="text-center ">
+              <Link
+                style={{ textDecoration: "none", color: "inherit" }}
+                to="/checkout"
+              >
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{ width: "80%", height: "50px", fontSize: "25px" }}
                 >
-                  <Button
-                    variant="contained"
-                    color="success"
-                    sx={{ width: "80%", height: "50px", fontSize: "25px" }}
-                  >
-                    Checkout
-                  </Button>
-                </Link>
-              </div>
-              <div className="cart-ship text-center py-3">
-                <p className="px-2" style={{ fontSize: "15px" }}>
-                  Shipping & taxes calculated at checkout
-                </p>
-              </div>
+                  Checkout
+                </Button>
+              </Link>
+            </div>
+            <div className="cart-ship text-center py-3">
+              <p className="px-2" style={{ fontSize: "15px" }}>
+                Shipping & taxes calculated at checkout
+              </p>
             </div>
           </div>
         </Drawer>
