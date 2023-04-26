@@ -5,7 +5,7 @@ import ProductCard, {
 
 function HomeCategory() {
   return (
-    <div className="container">
+    <div className="container pb-5">
       <div>
         <h3 className="main-header pb-5">Explore New And Popular Styles</h3>
         <div className="row g-4">

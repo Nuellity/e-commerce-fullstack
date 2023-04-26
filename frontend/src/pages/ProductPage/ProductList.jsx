@@ -82,7 +82,6 @@ function ProductList() {
             </Box>
           </div>
           <AllProducts category={category} filter={filter} />
-
           <Stack mt={2} spacing={2} sx={{ padding: "1.5em 0" }}>
             <Pagination
               count={7}

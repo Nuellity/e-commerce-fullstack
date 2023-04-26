@@ -8,7 +8,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 function HomeDescription() {
   return (
     <>
-      <div className="desc" style={{ background: "#FFFFFF" }}>
+      <div className="desc pt-4" style={{ background: "#FFFFFF" }}>
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-md-6 g-2 desc-post ">

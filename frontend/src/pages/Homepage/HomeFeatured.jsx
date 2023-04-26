@@ -4,7 +4,7 @@ import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 
 function HomeFeatured() {
   return (
-    <div className="container my-5">
+    <div className="container pt-3 pb-5">
       <div className="pt-5 pb-2 d-flex justify-content-center">
         <h2 className="main-header">Check out trending items</h2>
       </div>
