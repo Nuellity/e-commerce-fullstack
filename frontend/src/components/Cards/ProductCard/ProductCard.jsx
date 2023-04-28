@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Chip, Box, Rating } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import SearchIcon from "@mui/icons-material/Search";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import StarIcon from "@mui/icons-material/Star";
@@ -69,32 +69,43 @@ export const BigCard = () => {
 };
 
 export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
+  const [isFav, setIsFav] = useState(false);
+
+  const handleFav = () => {
+    setIsFav(!isFav);
+  };
+
   return (
     <div className="col-lg-3 col-md-6 mt-5">
       <div className="buy-card-container w-100">
-        <img src={image} alt={title} className="buy-image img-fluid" />
-        {isSale && (
-          <div className="sale-overlay">
-            <div>SALE</div>
-          </div>
-        )}
-        {isHot && (
-          <div className="hot-overlay">
-            <div>HOT</div>
-          </div>
-        )}
-        <div className="buy-overlay">
-          <div>
-            <FavoriteBorderIcon sx={{ marginRight: "18px" }} />{" "}
-            <Link
-              to={`/product/${id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <SearchIcon className="icon" />
-            </Link>
+        <Link
+          to={`/product/${id}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <img src={image} alt={title} className="buy-image img-fluid" />
+          {isSale && (
+            <div className="sale-overlay">
+              <div>SALE</div>
+            </div>
+          )}
+          {isHot && (
+            <div className="hot-overlay">
+              <div>HOT</div>
+            </div>
+          )}
+        </Link>
+        <div className="buy-overlay ">
+          <div className="fav-icon" onClick={handleFav}>
+            {isFav ? (
+              <FavoriteIcon sx={{ marginRight: "18px", color: "#FF6F61" }} />
+            ) : (
+              <FavoriteBorderIcon
+                sx={{ marginRight: "18px", color: "#FF6F61" }}
+              />
+            )}
           </div>
           <div className="icon">
-            <ShoppingBagIcon /> <span>Shop Now</span>
+            <ShoppingBagIcon /> <span>Add to Cart</span>
           </div>
         </div>
       </div>
