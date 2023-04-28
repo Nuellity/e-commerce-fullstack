@@ -18,7 +18,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 
 function SignIn() {
-  const { setRecover, userData, setUserData, submitData } =
+  const { setRecover, userData, setUserData, setSignUp, submitData } =
     useContext(loginDetails);
   const [formErrors, setFormErrors] = useState({});
   const [errorState, setErrorState] = useState(false);
@@ -65,6 +65,10 @@ function SignIn() {
 
   const handleClick = () => {
     setRecover(true);
+  };
+
+  const handleSignUp = () => {
+    setSignUp(true);
   };
 
   useEffect(() => {
@@ -128,7 +132,7 @@ function SignIn() {
             <Button
               type="submit"
               variant="contained"
-              // disabled={isFetching}
+              disabled={isFetching}
               fullWidth
             >
               <span
@@ -147,6 +151,14 @@ function SignIn() {
               Log In
             </Button>
           )}
+
+          <p
+            onClick={handleSignUp}
+            className="text-center py-3"
+            style={{ cursor: "pointer", fontSize: "13px" }}
+          >
+            Create A New Account? Click Here!
+          </p>
         </div>
       </form>
       {error && (

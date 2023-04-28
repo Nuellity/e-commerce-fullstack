@@ -124,32 +124,32 @@ function Footer() {
             </div>
             <div className="col-md-4 bottom-pay ">
               <img
-                src="images/img/payment/f1.png"
+                src="/images/img/payment/f1.png"
                 className="m-1"
                 alt="pay-cert"
               />
               <img
-                src="images/img/payment/f3.png"
+                src="/images/img/payment/f3.png"
                 className="m-1"
                 alt="pay-cert"
               />
               <img
-                src="images/img/payment/f4.png"
+                src="/images/img/payment/f4.png"
                 className="m-1"
                 alt="pay-cert"
               />
               <img
-                src="images/img/payment/f5.png"
+                src="/images/img/payment/f5.png"
                 className="m-1"
                 alt="pay-cert"
               />
               <img
-                src="images/img/payment/f6.png"
+                src="/images/img/payment/f6.png"
                 className="m-1"
                 alt="pay-cert"
               />
               <img
-                src="images/img/payment/f2.png"
+                src="/images/img/payment/f2.png"
                 className="m-1"
                 alt="pay-cert"
               />

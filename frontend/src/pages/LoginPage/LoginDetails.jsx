@@ -18,6 +18,7 @@ function LoginDetails() {
   });
   const [finalData, setFinalData] = useState([]);
   const [recover, setRecover] = useState(false);
+  const [signUp, setSignUp] = useState(false);
   const [register, setRegister] = useState(false);
 
   function submitData() {
@@ -36,6 +37,8 @@ function LoginDetails() {
         submitData,
         recover,
         setRecover,
+        signUp,
+        setSignUp,
       }}
     >
       <Login />

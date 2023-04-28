@@ -30,7 +30,6 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-stripe-checkout": "^2.6.3",
-    "react-use-cart": "^1.13.0",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
     "swiper": "^8.4.2",

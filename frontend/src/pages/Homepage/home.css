@@ -611,6 +611,24 @@ span {
 
 
 
+.fade-out {
+  animation: fadeOutLeftBig 3s ease forwards;
+}
+
+@keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+
+
 
 
 

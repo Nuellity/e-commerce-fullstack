@@ -17,20 +17,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../redux/ApiCalls";
 
 function Register() {
-  const { setRegister, userData, setUserData, submitData } =
+  const { userData, setUserData, submitData, setSignUp } =
     useContext(loginDetails);
   const [formErrors, setFormErrors] = useState({});
   const [errorState, setErrorState] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const { isSignUp, signUpError } = useSelector(
-    (state) => state.user
-  );
+  const { isSignUp, signUpError } = useSelector((state) => state.user);
   const firstName = userData.firstName;
   const lastName = userData.lastName;
   const email = userData.email;
-  const password = userData.password
-  
+  const password = userData.password;
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -79,9 +76,9 @@ function Register() {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && errorState) {
       submitData();
-      signup(dispatch, { firstName, lastName, email, password })
+      signup(dispatch, { firstName, lastName, email, password });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formErrors]);
 
   return (
@@ -185,36 +182,36 @@ function Register() {
           </FormControl>
         </div>
         <div>
-        {
-          isSignUp ? ( <Button
-            type="submit"
-            variant="contained"
-            disabled={isSignUp}
-            fullWidth
-          >
+          {isSignUp ? (
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={isSignUp}
+              fullWidth
+            >
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"
                 aria-hidden="true"
               ></span>
-          </Button>) : ( <Button type="submit" variant="contained" fullWidth>
-            Create an Account
-          </Button>)
-        }
-        {signUpError && (
-        <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
-          Error occured!!! Please try again.
-        </p>
-      )}
-          
-          <p
-            onClick={() => setRegister(false)}
-            className="text-center py-3"
-            style={{ cursor: "pointer", fontSize: "13px" }}
-          >
-            Already have an account? Click here!
-          </p>
+            </Button>
+          ) : (
+            <Button type="submit" variant="contained" fullWidth>
+              Create an Account
+            </Button>
+          )}
+          {signUpError && (
+            <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
+              Error occured!!! Please try again.
+            </p>
+          )}
         </div>
+        <p
+          className="text-center text-capitalize py-4"
+          onClick={() => setSignUp(false)}
+        >
+          Log in instead? Click here
+        </p>
       </form>
     </>
   );
