@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   FormControl,
@@ -8,6 +7,8 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { loginDetails } from "./LoginDetails";
@@ -16,8 +17,12 @@ import { login } from "../../redux/ApiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import LockIcon from "@mui/icons-material/Lock";
 
 function SignIn() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.up("md"));
   const { setRecover, userData, setUserData, setSignUp, submitData } =
     useContext(loginDetails);
   const [formErrors, setFormErrors] = useState({});
@@ -75,7 +80,7 @@ function SignIn() {
     if (Object.keys(formErrors).length === 0 && errorState) {
       submitData();
     }
-  }, [formErrors]);
+  }, [errorState, formErrors, submitData]);
 
   return (
     <>
@@ -90,6 +95,13 @@ function SignIn() {
             helperText={formErrors.loginEmail}
             margin="normal"
             variant="outlined"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AlternateEmailIcon />
+                </InputAdornment>
+              ),
+            }}
             required
             color="secondary"
             fullWidth
@@ -115,6 +127,11 @@ function SignIn() {
                   >
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
+                </InputAdornment>
+              }
+              startAdornment={
+                <InputAdornment position="start">
+                  <LockIcon />
                 </InputAdornment>
               }
               label="Password"
@@ -155,7 +172,11 @@ function SignIn() {
           <p
             onClick={handleSignUp}
             className="text-center py-3"
-            style={{ cursor: "pointer", fontSize: "13px" }}
+            style={{
+              cursor: "pointer",
+              fontSize: "0.8em",
+              display: isMatch ? "none" : "block",
+            }}
           >
             Create A New Account? Click Here!
           </p>

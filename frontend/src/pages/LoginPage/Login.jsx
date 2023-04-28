@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Button, useMediaQuery, useTheme } from "@mui/material";
 import React, { useContext } from "react";
+import { Button, useMediaQuery, useTheme } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import { loginDetails } from "./LoginDetails";
@@ -26,10 +25,16 @@ function Login() {
           <div className="row">
             {signUp ? (
               <>
-                <h1 className="text-center py-3" style={{ fontSize: "25px" }}>
-                  Register
-                </h1>
-                <Register />
+                <div
+                  style={{
+                    display: isMatch ? "none" : "block",
+                  }}
+                >
+                  <h1 className="text-center py-3" style={{ fontSize: "25px" }}>
+                    Register
+                  </h1>
+                  <Register />
+                </div>
               </>
             ) : (
               <div
