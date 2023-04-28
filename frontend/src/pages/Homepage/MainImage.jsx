@@ -50,7 +50,6 @@ function MainImage() {
             src="https://images.unsplash.com/photo-1603344797033-f0f4f587ab60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80"
             alt="advert"
           />
-          <div className="img-line"></div>
         </div>
       </div>
     </div>
