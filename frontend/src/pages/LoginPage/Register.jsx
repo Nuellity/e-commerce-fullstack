@@ -8,15 +8,21 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-
 import { loginDetails } from "./LoginDetails";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import LockIcon from "@mui/icons-material/Lock";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../redux/ApiCalls";
 
 function Register() {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.up("md"));
   const { userData, setUserData, submitData, setSignUp } =
     useContext(loginDetails);
   const [formErrors, setFormErrors] = useState({});
@@ -95,6 +101,13 @@ function Register() {
             variant="outlined"
             required
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircleIcon />
+                </InputAdornment>
+              ),
+            }}
             fullWidth
           />
         </div>
@@ -109,6 +122,13 @@ function Register() {
             variant="outlined"
             required
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircleIcon />
+                </InputAdornment>
+              ),
+            }}
             fullWidth
           />
         </div>
@@ -124,6 +144,13 @@ function Register() {
             variant="outlined"
             required
             color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AlternateEmailIcon />
+                </InputAdornment>
+              ),
+            }}
             fullWidth
           />
         </div>
@@ -150,6 +177,11 @@ function Register() {
                 </InputAdornment>
               }
               label="Password"
+              startAdornment={
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              }
             />
             <FormHelperText>{formErrors.password}</FormHelperText>
           </FormControl>
@@ -177,6 +209,11 @@ function Register() {
                 </InputAdornment>
               }
               label="Confirm Password"
+              startAdornment={
+                <InputAdornment position="start">
+                  <LockIcon />
+                </InputAdornment>
+              }
             />
             <FormHelperText>{formErrors.confirmPassword}</FormHelperText>
           </FormControl>
@@ -208,6 +245,11 @@ function Register() {
         </div>
         <p
           className="text-center text-capitalize py-4"
+          style={{
+            cursor: "pointer",
+            fontSize: "0.8em",
+            display: isMatch ? "none" : "block",
+          }}
           onClick={() => setSignUp(false)}
         >
           Log in instead? Click here

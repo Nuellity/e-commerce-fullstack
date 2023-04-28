@@ -14,6 +14,11 @@ router.post("/signup", async (req, res) => {
       req.body.password,
       process.env.PASS_SECRET
     ).toString(),
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    country: req.body.country,
+    zipcode: req.body.zipcode,
   });
   try {
     const savedUser = await newUser.save();

@@ -8,7 +8,11 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false },
     img: { type: String },
-    address: { type: Object },
+    address: { type: String, required: true },
+    city: { type: String, required: true },
+    state: { type: String, required: true },
+    country: { type: String, required: true },
+    zipcode: { type: Number, required: true },
   },
   { timestamps: true }
 );
