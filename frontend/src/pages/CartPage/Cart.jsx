@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-  Drawer,
-  List,
-  Button,
-  IconButton,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import React from "react";
+import { Drawer, List, Button, IconButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CartItem from "./CartItem";
@@ -24,14 +17,6 @@ const theme = createTheme({
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const products = cart.products;
-  const [open, setOpen] = useState(false);
-
-  const closeAlert = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
 
   function isEmpty(product) {
     return Object.keys(product).length === 0;
@@ -64,36 +49,37 @@ function Cart(props) {
           </div>
           <div className="cart-list">
             <div className="cart-list-container">
-              <List
-                sx={{ width: "100%", maxWidth: 450, bgcolor: "inherit" }}
-                subheader={<li />}
-              >
-                {isEmpty(products) ? (
-                  <>
-                    <h5 className="text-center p-2 ">Your Cart is Empty</h5>
-                    <img
-                      className="img-fluid pt-5 "
-                      src="images/img/about/empty.svg"
-                      alt="empty-cart"
-                      style={{ height: "200px", width: "100%" }}
-                    />
-                  </>
-                ) : (
-                  <>
-                    {" "}
-                    <CartItem />{" "}
-                  </>
-                )}
-              </List>
+              {isEmpty(products) ? (
+                <>
+                  <h5 className="text-center p-2 ">Your Cart is Empty</h5>
+                  <img
+                    className="img-fluid pt-5 "
+                    src="/images/img/about/empty.svg"
+                    alt="empty-cart"
+                    style={{ height: "200px", width: "100%" }}
+                  />
+                </>
+              ) : (
+                <>
+                  <List
+                    sx={{ width: "100%", maxWidth: 450, bgcolor: "inherit" }}
+                    subheader={<li />}
+                  >
+                    <CartItem />
+                  </List>
+                </>
+              )}
             </div>
           </div>
           <div className=" cart-footer">
             <div className="d-flex justify-content-between m-3">
-              <div className="sub-total">
-                <h4>Subtotal</h4>
+              <div className="">
+                <span style={{ fontSize: "1.3rem" }}>Subtotal</span>
               </div>
-              <div className="prod-price">
-                <h5>${cart.total.toFixed(2)}</h5>
+              <div>
+                <span style={{ fontSize: "1.5rem" }}>
+                  ${cart.total.toFixed(2)}
+                </span>
               </div>
             </div>
             <div className="text-center ">
@@ -111,17 +97,12 @@ function Cart(props) {
               </Link>
             </div>
             <div className="cart-ship text-center py-3">
-              <p className="px-2" style={{ fontSize: "15px" }}>
+              <p className="px-2 text-capitalize" style={{ fontSize: "1em" }}>
                 Shipping & taxes calculated at checkout
               </p>
             </div>
           </div>
         </Drawer>
-        <Snackbar open={open} autoHideDuration={2000} onClose={closeAlert}>
-          <Alert onClose={closeAlert} severity="warning" sx={{ width: "100%" }}>
-            Item has been removed from Cart!
-          </Alert>
-        </Snackbar>
       </ThemeProvider>
     </>
   );

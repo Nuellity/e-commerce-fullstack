@@ -1,12 +1,83 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Box, Fab, Fade, useScrollTrigger } from "@mui/material/";
+import {
+  Box,
+  Fab,
+  Fade,
+  Skeleton,
+  useScrollTrigger,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material/";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import ProductDetails from "./ProductDetails";
 import { publicRequest } from "../../axiosRequest";
+
+const ProductDetailsSkeleton = () => {
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.up("sm"));
+  const isIpad = useMediaQuery("(min-width: 768px) and (max-width: 1024px)");
+
+  return (
+    <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
+      <div className="container py-5">
+        <div className="row">
+          <div className="col-lg-6">
+            <Skeleton
+              variant="rectangular"
+              width={isIpad ? 700 : isMatch ? 600 : 350}
+              height={isMatch ? 400 : 250}
+            />
+            <div className="row mt-2">
+              <div className="col-3">
+                <Skeleton
+                  variant="rectangular"
+                  width={isIpad ? 160 : isMatch ? 106 : 70}
+                  height={isIpad ? 160 : isMatch ? 106 : 70}
+                />
+              </div>
+              <div className="col-3">
+                <Skeleton
+                  variant="rectangular"
+                  width={isIpad ? 160 : isMatch ? 106 : 70}
+                  height={isIpad ? 160 : isMatch ? 106 : 70}
+                />
+              </div>
+              <div className="col-3">
+                <Skeleton
+                  variant="rectangular"
+                  width={isIpad ? 160 : isMatch ? 106 : 70}
+                  height={isIpad ? 160 : isMatch ? 106 : 70}
+                />
+              </div>
+              <div className="col-3 ">
+                <Skeleton
+                  variant="rectangular"
+                  width={isIpad ? 160 : isMatch ? 106 : 70}
+                  height={isIpad ? 160 : isMatch ? 106 : 70}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-6 mt-2">
+            <Skeleton width={140} height={100} />
+            <Skeleton width={200} height={80} />
+            <Skeleton width={140} height={80} />
+            <div style={{ marginTop: "0.5rem" }}>
+              <Skeleton
+                width={isIpad ? 700 : isMatch ? 500 : 350}
+                height={300}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -69,7 +140,7 @@ function ProductInfo() {
       <Navbar />
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       {isEmpty(product) ? (
-        "loading"
+        <ProductDetailsSkeleton />
       ) : (
         <ProductDetails
           product={product}
@@ -82,7 +153,6 @@ function ProductInfo() {
           inStock={product.inStock}
         />
       )}
-
       <Footer />
       <ScrollTop>
         <Fab size="large" aria-label="scroll back to top">

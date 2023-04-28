@@ -19,14 +19,10 @@ const CartSlice = createSlice({
 
     //DELETE
     deleteProduct: (state, action) => {
-      const deletedItem = state.products.find(
-        (item) => item._id === action.payload
-      );
+      const index = action.payload;
+      const deletedItem = state.products[index];
       state.total -= deletedItem.amount;
-      state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload),
-        1
-      );
+      state.products.splice(index, 1);
       const updatedQuantity = state.products.length;
       state.quantity = updatedQuantity;
     },
