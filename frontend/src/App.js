@@ -56,11 +56,11 @@ function App() {
           element={<UserAccount />}
         >
           <Route path="orders" element={<Order />} />
-          <Route path="order-details" element={<OrderDetails />} />
+          <Route path="order-details/:orderId" element={<OrderDetails />} />
           <Route path="summary" element={<AccountSummary />} />
           <Route path="wishlist" element={<SavedItems />} />
           <Route path="reviews" element={<Reviews />} />
-          <Route path="review-product" element={<ReviewProduct />} />
+          <Route path="review-product/:reviewId" element={<ReviewProduct />} />
           <Route path="vouchers" element={<Voucher />} />
           <Route path="address" element={<AddressBook />} />
           <Route path="new-address" element={<NewAddress />} />

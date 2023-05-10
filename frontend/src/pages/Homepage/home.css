@@ -81,6 +81,14 @@ span {
 }
 
 
+/* swiper */
+.my-slide {
+  width: 18.75em !important;
+  margin-right: 0.5em !important;
+}
+
+
+
 /* MAIN IMAGE STYLES */
 .title-img {
   width: 70%;
@@ -109,16 +117,7 @@ span {
   color: #000000;
 }
 
-.img-line {
-  width: 25em;
-  height: 33.875em;
-  position: absolute;
-  border: 2px solid rgba(0, 0, 0, 0.25);
-  border-radius: 7em 0;
-  left: 60.625em;
-  top: 19.375em;
-  z-index: -1;
-}
+
 
 
 
@@ -583,7 +582,6 @@ span {
 
 .cart-header {
   position: -webkit-sticky;
-  /* Safari */
   position: sticky;
   top: 0;
   border-bottom: #E3E3E3 0.1px solid;
