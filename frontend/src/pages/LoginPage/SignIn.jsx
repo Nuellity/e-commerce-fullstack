@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   FormControl,
@@ -80,7 +81,7 @@ function SignIn() {
     if (Object.keys(formErrors).length === 0 && errorState) {
       submitData();
     }
-  }, [errorState, formErrors, submitData]);
+  }, [submitData]);
 
   return (
     <>
@@ -146,12 +147,7 @@ function SignIn() {
         </div>
         <div>
           {isFetching ? (
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={isFetching}
-              fullWidth
-            >
+            <Button type="submit" variant="contained" fullWidth>
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"

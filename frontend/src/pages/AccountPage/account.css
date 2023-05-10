@@ -66,7 +66,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 1em;
-    line-height: 1.2em;
+    line-height: 1.4;
     text-transform: capitalize;
     color: rgba(0, 0, 0, 0.5);
 }
@@ -94,6 +94,17 @@
     padding: 0;
 }
 
+.order-list {
+    flex: 1;
+    overflow-y: auto;
+    height: 35rem;
+}
+
+.order-details-list {
+    flex: 1;
+    overflow-y: auto;
+    height: 23rem;
+}
 
 /* REVIEW */
 .review-title {
@@ -109,6 +120,16 @@
 .review-details {
     padding: 0 1rem;
 }
+
+.review-list {
+    flex: 1;
+    overflow-y: auto;
+    height: 45rem;
+}
+
+
+
+
 
 @media only screen and (max-width: 480px) {
     .review-details {
@@ -148,4 +169,23 @@
         text-transform: capitalize;
         color: rgba(0, 0, 0, 0.5);
     }
+}
+
+
+@media only screen and (max-width: 991px) {
+    .review-details {
+        padding: 0;
+    }
+
+    .order-title {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 1.2;
+        text-transform: capitalize;
+        color: #000000;
+    }
+
+
 }

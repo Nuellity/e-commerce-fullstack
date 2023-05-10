@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../account.css";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -6,11 +6,43 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { OrderCard } from "../../../components/Cards/ProductCard/ProductCard";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { userRequest } from "../../../axiosRequest";
+import { useSelector } from "react-redux";
+
+const OrderSkeleton = () => {
+  return (
+    <>
+      <div className="d-flex justify-content-between  flex-lg-row flex-sm-column w-100">
+        <div className="p-3">
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={150}
+            height={100}
+          />
+        </div>
+        <div className="p-3">
+          <Skeleton animation="wave" height={40} width={410} />
+          <Skeleton animation="wave" height={20} width={310} />
+          <Skeleton animation="wave" height={20} width={200} />
+        </div>
+        <div className="p-3">
+          <Skeleton animation="wave" width={120} height={60} />
+        </div>
+      </div>
+    </>
+  );
+};
 
 function Order() {
   const [value, setValue] = useState(0);
+  const [orders, setOrders] = useState([]);
+
+  const user = useSelector((state) => state.user.currentUser._id);
+
+  console.log(orders);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -49,6 +81,17 @@ function Order() {
     };
   }
 
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await userRequest.get(`orders/find/${user}`);
+        setOrders(res.data);
+      } catch (error) {}
+    };
+
+    fetchOrders();
+  }, [user]);
+
   return (
     <div className="card main-card">
       <p className="card-header header">Orders</p>
@@ -76,8 +119,23 @@ function Order() {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <div className="container p-0">
-              <OrderCard />
+            <div className="order-list">
+              <div className="container p-0 ">
+                {orders.length === 0 ? (
+                  <OrderSkeleton />
+                ) : (
+                  orders.map((value) => (
+                    <OrderCard
+                      key={value._id}
+                      title={value.products}
+                      image={value.products[0].img}
+                      status={value.status}
+                      orderId={value._id}
+                      orderDate={value.updatedAt}
+                    />
+                  ))
+                )}
+              </div>
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>

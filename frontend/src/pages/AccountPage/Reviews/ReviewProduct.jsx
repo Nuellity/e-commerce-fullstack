@@ -1,12 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, IconButton, TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../account.css";
 import { RateCard } from "../../../components/Cards/ProductCard/ProductCard";
+import { publicRequest, userRequest } from "../../../axiosRequest";
+import { useSelector } from "react-redux";
 
 function ReviewProduct() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [reviewInfo, setReviewInfo] = useState({
+    title: "",
+    userName: "",
+    description: "",
+  });
+
+  const [reviewPost, setReviewPost] = useState({});
+  const [product, setProduct] = useState([]);
+  const [value, setValue] = useState(0);
+  const id = location.pathname.split("/")[3];
+  const user = useSelector((state) => state.user.currentUser._id);
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setReviewInfo((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const reviewList = { ...reviewInfo, rating: value };
+  const revys = {
+    userId: user,
+    productId: id,
+    review: [reviewList],
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("working");
+    try {
+      const res = await userRequest.post("reviews", revys);
+      setReviewPost(res.data);
+      navigate("/profile/reviews");
+    } catch (error) {}
+  };
+  console.log(reviewPost);
+
+  console.log(revys);
+
+  useEffect(() => {
+    const getProductDetails = async () => {
+      const res = await publicRequest.get(`products/find/${id}`);
+
+      setProduct(res.data);
+    };
+
+    getProductDetails();
+  }, [id]);
+
   return (
     <div className="card main-card">
       <p className="card-header header">
@@ -18,57 +71,77 @@ function ReviewProduct() {
       <div className="container">
         <p className="review-title">SELECT THE STARS TO RATE THE PRODUCT</p>
         <hr />
-        <div className="container">
-          <RateCard />
-        </div>
-        <p className="review-title">LEAVE A REVIEW</p>
-        <hr />
-        <div>
-          <div className="row">
-            <div className="col-md-6">
-              <TextField
-                fullWidth
-                margin="normal"
-                label="Review Title"
-                variant="outlined"
-              />
-            </div>
-            <div className="col-md-6">
-              <TextField
-                fullWidth
-                margin="normal"
-                label="Your name"
-                variant="outlined"
-              />
-            </div>
-            <div className="col-md-12">
-              <TextField
-                multiline
-                rows={8}
-                fullWidth
-                margin="normal"
-                label="Detailed Review"
-                placeholder="Tell us more about your rating!"
-                variant="outlined"
-              />
-            </div>
-            <div className="col-md-12">
-              <Button
-                variant="contained"
-                sx={{
-                  width: "100%",
-                  fontSize: "1.1em",
-                  backgroundColor: "skyblue",
-                  "&:hover": {
-                    backgroundColor: "#4a90e2",
-                  },
-                }}
-              >
-                SUBMIT REVIEW
-              </Button>
+        <form onSubmit={handleSubmit}>
+          <div className="container">
+            <RateCard
+              value={value}
+              handleChange={handleChange}
+              title={product?.title}
+              image={product?.img?.[0]?.original}
+            />
+          </div>
+          <p className="review-title">LEAVE A REVIEW</p>
+          <hr />
+          <div>
+            <div className="row">
+              <div className="col-md-6">
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  name="title"
+                  label="Review Title"
+                  variant="outlined"
+                  value={reviewInfo.title}
+                  onChange={handleFormChange}
+                  required
+                />
+              </div>
+              <div className="col-md-6">
+                <TextField
+                  fullWidth
+                  margin="normal"
+                  name="userName"
+                  label="Your name"
+                  variant="outlined"
+                  value={reviewInfo.userName}
+                  onChange={handleFormChange}
+                  required
+                />
+              </div>
+              <div className="col-md-12">
+                <TextField
+                  multiline
+                  rows={8}
+                  fullWidth
+                  margin="normal"
+                  name="description"
+                  label="Detailed Review"
+                  placeholder="Tell us more about your rating!"
+                  variant="outlined"
+                  value={reviewInfo.decription}
+                  onChange={handleFormChange}
+                  required
+                />
+              </div>
+              <div className="col-md-12">
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{
+                    width: "100%",
+                    fontSize: "1.1em",
+                    backgroundColor: "skyblue",
+                    "&:hover": {
+                      backgroundColor: "#4a90e2",
+                    },
+                  }}
+                >
+                  SUBMIT REVIEW
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

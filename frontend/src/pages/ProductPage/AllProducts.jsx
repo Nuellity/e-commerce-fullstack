@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 import { Skeleton } from "@mui/material";
+import { publicRequest } from "../../axiosRequest";
 
 const BuyCardSkeleton = () => {
   return (
@@ -20,7 +20,7 @@ function AllProducts({ category, filter }) {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await axios.get(
+        const response = await publicRequest.get(
           category
             ? `http://localhost:4000/api/products?category=${category}`
             : "http://localhost:4000/api/products"
@@ -35,17 +35,18 @@ function AllProducts({ category, filter }) {
   return (
     <div className="row">
       {loading
-        ? products.map((value, index) => {
+        ? products.map((value) => {
             return (
-              <BuyCard
-                key={value._id}
-                category={category}
-                filter={filter}
-                image={value.img[0].original}
-                price={value.price}
-                title={value.title}
-                id={value._id}
-              />
+              <div className="col-lg-3 col-md-6 mt-5" key={value._id}>
+                <BuyCard
+                  category={category}
+                  filter={filter}
+                  image={value.img[0].original}
+                  price={value.price}
+                  title={value.title}
+                  id={value._id}
+                />
+              </div>
             );
           })
         : Array(8)

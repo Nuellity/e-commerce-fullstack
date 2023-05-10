@@ -75,7 +75,7 @@
 }
 
 .product-name {
-    width: 19.5rem;
+    width: 18.5rem;
 }
 
 
@@ -165,6 +165,10 @@
 
 .icon {
     font-size: 20px;
+}
+
+.fav-icon {
+    display: block;
 }
 
 .icon span {

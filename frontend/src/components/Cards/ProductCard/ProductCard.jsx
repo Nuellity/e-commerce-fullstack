@@ -1,5 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useState } from "react";
-import { Button, Chip, Box, Rating } from "@mui/material";
+import {
+  Button,
+  Chip,
+  Box,
+  Rating,
+  Tooltip,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -8,10 +18,13 @@ import StarIcon from "@mui/icons-material/Star";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./card.css";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment";
+import { userRequest } from "../../../axiosRequest";
+import { useSelector } from "react-redux";
 
 const labels = {
   0.5: "Useless",
-  1: "Useless+",
+  1: "Terrible",
   1.5: "Poor",
   2: "Poor+",
   2.5: "Ok",
@@ -70,13 +83,24 @@ export const BigCard = () => {
 
 export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
   const [isFav, setIsFav] = useState(false);
+  const user = useSelector((state) => state.user.currentUser._id);
 
-  const handleFav = () => {
-    setIsFav(!isFav);
+  const handleFav = async () => {
+    const savedItem = { userId: user, productId: id };
+    console.log("work1");
+
+    try {
+      const res = await userRequest.post("wishlists", savedItem);
+      console.log("work2");
+      setIsFav(true);
+      console.log(res.data);
+    } catch (error) {
+      console.log("work3");
+    }
   };
 
   return (
-    <div className="col-lg-3 col-md-6 mt-5">
+    <>
       <div className="buy-card-container w-100">
         <Link
           to={`/product/${id}`}
@@ -94,15 +118,17 @@ export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
             </div>
           )}
         </Link>
-        <div className="buy-overlay ">
+        <div className="buy-overlay  w-100">
           <div className="fav-icon" onClick={handleFav}>
-            {isFav ? (
-              <FavoriteIcon sx={{ marginRight: "18px", color: "#FF6F61" }} />
-            ) : (
-              <FavoriteBorderIcon
-                sx={{ marginRight: "18px", color: "#FF6F61" }}
-              />
-            )}
+            <Tooltip title="Add to Wishlist" placement="bottom" arrow>
+              {isFav ? (
+                <FavoriteIcon sx={{ marginRight: "18px", color: "#FF6F61" }} />
+              ) : (
+                <FavoriteBorderIcon
+                  sx={{ marginRight: "18px", color: "#FF6F61" }}
+                />
+              )}
+            </Tooltip>
           </div>
           <div className="icon">
             <ShoppingBagIcon /> <span>Add to Cart</span>
@@ -118,7 +144,7 @@ export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
           <span className="buy-price ">${price}</span>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -139,35 +165,51 @@ export const SocialCard = () => {
   );
 };
 
-export const OrderCard = () => {
+export const OrderCard = ({ title, image, status, orderId, orderDate }) => {
   const navigate = useNavigate();
+  const date = moment(orderDate);
+  const formattedDate = date.format("MMMM Do YYYY");
   return (
     <div
-      className=""
       style={{
         border: "1px solid rgba(0, 0, 0, 0.175)",
         borderRadius: "5px",
         padding: "1.5em",
+        margin: "5px 0",
       }}
     >
       <div className="row d-flex g-4">
         <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
           <img
-            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={image}
             alt="Avatar"
-            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+            style={{ width: "8rem", height: "7rem", borderRadius: "5px" }}
           />
         </div>
         <div className="col-lg-6">
           <div className="review-details">
             <span className="order-name">
-              Anti Blue Ray Light Glasses For Screens Black-Gold Frame
+              {title.length === 1
+                ? title[0].name
+                : `${title[0].name} & Other Items `}
             </span>
-            <br /> <span className="order-id">Order nº: 1548345222 </span>
+            <br /> <span className="order-id">Order nº: {orderId}</span>
             <br />
             <div className="pt-2">
-              <Chip label="DELIVERED" color="success" /> <br />
-              <span className="order-date">On 29-09-2022</span>
+              {status === "pending" ? (
+                <>
+                  {" "}
+                  <Chip label="Delivered" color="success" /> <br />{" "}
+                </>
+              ) : (
+                <>
+                  <Chip label="Processing" color="secondary" /> <br />
+                </>
+              )}
+
+              <span className="order-date">
+                {status === "completed" ? "" : `On ${formattedDate}`}
+              </span>
             </div>
           </div>
         </div>
@@ -178,7 +220,7 @@ export const OrderCard = () => {
               size="large"
               sx={{ color: "skyblue", fontSize: "0.95em" }}
               onClick={() => {
-                navigate("/profile/order-details");
+                navigate(`/profile/order-details/${orderId}`);
               }}
             >
               SEE DETAILS
@@ -190,8 +232,10 @@ export const OrderCard = () => {
   );
 };
 
-export const ReviewCard = () => {
+export const ReviewCard = ({ title, image, orderId }) => {
   const navigate = useNavigate();
+  const myTheme = useTheme();
+  const isMatch = useMediaQuery(myTheme.breakpoints.down("sm"));
 
   return (
     <div
@@ -199,31 +243,26 @@ export const ReviewCard = () => {
         border: "1px solid rgba(0, 0, 0, 0.175)",
         borderRadius: "5px",
         padding: "1.5em",
+        margin: "5px 0",
       }}
     >
       <div className="row d-flex g-4">
-        <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
+        <div
+          className="col-lg-4 review-image"
+          style={{ width: "10rem", padding: 0 }}
+        >
           <img
-            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={image}
             alt="Avatar"
-            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+            style={{ width: "100%", height: "8rem", borderRadius: "5px" }}
           />
         </div>
-        <div className="col-lg-6">
-          <div className=" d-flex align-items-start flex-column review-details">
+        <div className={`col-lg-6 ${isMatch ? "p-0" : "pl-3"}`}>
+          <div className=" d-flex align-items-start  review-details m-auto p-0">
             <div className="mb-auto">
-              <span className="order-name">
-                Anti Blue Ray Light Glasses For Screens Black-Gold Frame
-              </span>
+              <span className="order-name">{title}</span>
             </div>
             <br />
-            <div>
-              <span className="order-id">Order nº: 1548345222</span>
-            </div>
-            <br />
-            <div>
-              <span className="review-date">Delivered on 29-09-2022</span>
-            </div>
           </div>
         </div>
         <div className="col-lg-2 ms-auto">
@@ -236,7 +275,7 @@ export const ReviewCard = () => {
                 fontSize: "0.95em",
               }}
               onClick={() => {
-                navigate("/profile/review-product");
+                navigate(`/profile/review-product/${orderId}`);
               }}
             >
               ADD REVIEW
@@ -248,8 +287,7 @@ export const ReviewCard = () => {
   );
 };
 
-export const RateCard = () => {
-  const [value, setValue] = useState(0);
+export const RateCard = ({ title, image, handleChange, value }) => {
   const [hover, setHover] = useState(-1);
 
   function getLabelText(value) {
@@ -258,7 +296,6 @@ export const RateCard = () => {
 
   return (
     <div
-      className=""
       style={{
         border: "none",
       }}
@@ -266,17 +303,15 @@ export const RateCard = () => {
       <div className="row d-flex g-4">
         <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
           <img
-            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={image}
             alt="Avatar"
-            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+            style={{ width: "8rem", height: "8rem", borderRadius: "5px" }}
           />
         </div>
         <div className="col-lg-6">
           <div className="review-details">
             <div>
-              <span className="order-name">
-                Anti Blue Ray Light Glasses For Screens Black-Gold Frame
-              </span>
+              <span className="order-name">{title}</span>
             </div>
             <br />
             <div>
@@ -294,9 +329,7 @@ export const RateCard = () => {
                     value={value}
                     precision={0.5}
                     getLabelText={getLabelText}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
+                    onChange={handleChange}
                     onChangeActive={(event, newHover) => {
                       setHover(newHover);
                     }}
@@ -318,7 +351,9 @@ export const RateCard = () => {
   );
 };
 
-export const SavedCard = () => {
+export const SavedCard = ({ image, title, id, handleDelete }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       style={{
@@ -330,26 +365,21 @@ export const SavedCard = () => {
       <div className="row d-flex g-4">
         <div className="col-lg-4 review-image" style={{ width: "8rem" }}>
           <img
-            src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={image}
             alt="Avatar"
-            style={{ width: "8rem", height: "100%", borderRadius: "5px" }}
+            style={{
+              width: "8rem",
+              height: "8rem",
+              borderRadius: "5px",
+            }}
           />
         </div>
         <div className="col-lg-6">
           <div className=" d-flex align-items-start flex-column review-details">
             <div className="mb-auto">
-              <span className="order-name">
-                Anti Blue Ray Light Glasses For Screens Black-Gold Frame
-              </span>
+              <span className="order-name">{title}</span>
             </div>
             <br />
-            <div>
-              <span className="order-id">Order nº: 1548345222</span>
-            </div>
-            <br />
-            <div>
-              <span className="review-date">Delivered on 29-09-2022</span>
-            </div>
           </div>
         </div>
         <div className="col-lg-2 ms-auto  ">
@@ -366,6 +396,7 @@ export const SavedCard = () => {
                     backgroundColor: "#4a90e2",
                   },
                 }}
+                onClick={() => navigate(`/product/${id}`)}
               >
                 BUY NOW
               </Button>
@@ -379,6 +410,7 @@ export const SavedCard = () => {
                   color: "skyblue",
                   fontSize: "0.95em",
                 }}
+                onClick={() => handleDelete(id)}
               >
                 REMOVE
               </Button>

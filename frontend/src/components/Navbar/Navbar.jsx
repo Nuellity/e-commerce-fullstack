@@ -14,6 +14,7 @@ import {
   useTheme,
   Box,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
@@ -116,36 +117,40 @@ function Navbar() {
                 <>
                   <div>
                     <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                      <IconButton
-                        onClick={handleClick}
-                        aria-controls={open ? "account-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                      >
-                        <PersonIcon
-                          className="nav-icon"
-                          sx={{ fontSize: "30px" }}
-                        />
-                        <Typography
-                          className="nav-item"
-                          sx={{ marginRight: "60px" }}
+                      <Tooltip title="View Account">
+                        <IconButton
+                          onClick={handleClick}
+                          aria-controls={open ? "account-menu" : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
                         >
-                          Account
-                        </Typography>
-                      </IconButton>
-                      <IconButton
-                        size="large"
-                        aria-label="item added"
-                        onClick={() => setCartDraw(true)}
-                      >
-                        <Badge badgeContent={cartQuantity} color="error">
-                          <ShoppingBagIcon
+                          <PersonIcon
                             className="nav-icon"
                             sx={{ fontSize: "30px" }}
                           />
-                        </Badge>
-                        <Typography className="nav-item">Cart</Typography>
-                      </IconButton>
+                          <Typography
+                            className="nav-item"
+                            sx={{ marginRight: "60px" }}
+                          >
+                            Account
+                          </Typography>
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title="View Cart">
+                        <IconButton
+                          size="large"
+                          aria-label="item added"
+                          onClick={() => setCartDraw(true)}
+                        >
+                          <Badge badgeContent={cartQuantity} color="error">
+                            <ShoppingBagIcon
+                              className="nav-icon"
+                              sx={{ fontSize: "30px" }}
+                            />
+                          </Badge>
+                          <Typography className="nav-item">Cart</Typography>
+                        </IconButton>
+                      </Tooltip>
 
                       <Cart
                         openCart={cartDraw}
