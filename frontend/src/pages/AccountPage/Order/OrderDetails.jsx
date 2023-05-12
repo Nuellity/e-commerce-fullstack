@@ -93,8 +93,6 @@ function OrderDetails() {
   const shippingDate = date.add(6, "day").format("MMMM Do");
   const shippingDateTwo = date.add(1, "day").format("MMMM Do");
 
-  console.log(order);
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {

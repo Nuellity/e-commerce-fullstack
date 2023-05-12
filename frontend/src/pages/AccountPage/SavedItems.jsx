@@ -1,11 +1,12 @@
 import { Alert, Button, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { publicRequest, userRequest } from "../../axiosRequest";
 import { SavedCard } from "../../components/Cards/ProductCard/ProductCard";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
 import "./account.css";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../redux/ApiCalls";
 
 const NoSavedItem = () => {
   const navigate = useNavigate();
@@ -62,8 +63,8 @@ function SavedItems() {
   const [productList, setProductList] = useState([]);
   const [deleteMessage, setDeleteMessage] = useState("");
   const [deleteItem, setDeleteItem] = useState(null);
-
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleDelete = async (id) => {
     try {
@@ -73,7 +74,6 @@ function SavedItems() {
       setOpen(true);
     } catch (error) {}
   };
-  console.log(deleteItem);
 
   const closeAlert = (event, reason) => {
     if (reason === "clickaway") {
@@ -87,10 +87,14 @@ function SavedItems() {
       try {
         const res = await userRequest.get("wishlists/find/" + user);
         setSavedItems(res.data);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+        }
+      }
     };
     savedItems();
-  }, [user, deleteItem]);
+  }, [user, deleteItem, dispatch]);
 
   useEffect(() => {
     const productIdArray = savedItems.map((obj) => obj.productId);

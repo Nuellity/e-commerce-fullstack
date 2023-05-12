@@ -52,8 +52,7 @@ function App() {
         <Route path="blog-details" element={<BlogDetails />} />
         <Route
           path="profile"
-          // element={user ? <UserAccount /> : <Navigate to="/login" />}
-          element={<UserAccount />}
+          element={user ? <UserAccount /> : <Navigate to="/login" />}
         >
           <Route path="orders" element={<Order />} />
           <Route path="order-details/:orderId" element={<OrderDetails />} />

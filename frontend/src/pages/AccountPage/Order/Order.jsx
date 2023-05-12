@@ -6,33 +6,54 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { OrderCard } from "../../../components/Cards/ProductCard/ProductCard";
-import { Button, Skeleton } from "@mui/material";
+import { Button } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { userRequest } from "../../../axiosRequest";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const OrderSkeleton = () => {
+const NoOrder = () => {
+  const navigate = useNavigate();
   return (
-    <>
-      <div className="d-flex justify-content-between  flex-lg-row flex-sm-column w-100">
-        <div className="p-3">
-          <Skeleton
-            variant="rectangular"
-            animation="wave"
-            width={150}
-            height={100}
+    <div
+      className="d-flex justify-content-center pt-5"
+      style={{ textAlign: "center" }}
+    >
+      <div className="py-4">
+        <div
+          style={{
+            background: "rgba(30, 40, 50, 0.05)",
+            padding: "1em",
+            height: "8em",
+            width: "8em",
+            borderRadius: "50%",
+            margin: "auto",
+          }}
+        >
+          <ShoppingCartOutlinedIcon
+            sx={{
+              fontSize: "6em",
+              color: "skyblue",
+            }}
           />
         </div>
-        <div className="p-3">
-          <Skeleton animation="wave" height={40} width={410} />
-          <Skeleton animation="wave" height={20} width={310} />
-          <Skeleton animation="wave" height={20} width={200} />
-        </div>
-        <div className="p-3">
-          <Skeleton animation="wave" width={120} height={60} />
-        </div>
+        <p className="card-title pt-3 pb-2">You currently have no orders.</p>
+        <p className="card-text pb-4">All your orders will be displayed here</p>
+        <Button
+          onClick={() => navigate("/")}
+          variant="contained"
+          sx={{
+            fontSize: "1rem",
+            backgroundColor: "skyblue",
+            "&:hover": {
+              backgroundColor: "#4a90e2",
+            },
+          }}
+        >
+          CONTINUE SHOPPING
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -41,8 +62,6 @@ function Order() {
   const [orders, setOrders] = useState([]);
 
   const user = useSelector((state) => state.user.currentUser._id);
-
-  console.log(orders);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -122,7 +141,7 @@ function Order() {
             <div className="order-list">
               <div className="container p-0 ">
                 {orders.length === 0 ? (
-                  <OrderSkeleton />
+                  <NoOrder />
                 ) : (
                   orders.map((value) => (
                     <OrderCard

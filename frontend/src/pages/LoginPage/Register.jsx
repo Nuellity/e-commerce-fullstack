@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
@@ -15,6 +16,7 @@ import { loginDetails } from "./LoginDetails";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import BusinessIcon from "@mui/icons-material/Business";
 import LockIcon from "@mui/icons-material/Lock";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +36,11 @@ function Register() {
   const lastName = userData.lastName;
   const email = userData.email;
   const password = userData.password;
+  const address = userData.address;
+  const city = userData.city;
+  const state = userData.state;
+  const country = userData.country;
+  const zipcode = userData.zipcode;
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -55,6 +62,21 @@ function Register() {
       errors.email = "Email is required";
     } else if (!regex.test(data.email)) {
       errors.email = "This is not a valid email format";
+    }
+    if (!data.address) {
+      errors.address = "Address is required";
+    }
+    if (!data.city) {
+      errors.city = "City is required";
+    }
+    if (!data.state) {
+      errors.state = "State is required";
+    }
+    if (!data.country) {
+      errors.country = "Country is required";
+    }
+    if (!data.zipcode) {
+      errors.zipcode = "Zipcode is required";
     }
     if (!data.password) {
       errors.password = "Password is required";
@@ -82,9 +104,18 @@ function Register() {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && errorState) {
       submitData();
-      signup(dispatch, { firstName, lastName, email, password });
+      signup(dispatch, {
+        firstName,
+        lastName,
+        email,
+        address,
+        city,
+        state,
+        country,
+        zipcode,
+        password,
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formErrors]);
 
   return (
@@ -153,6 +184,90 @@ function Register() {
             }}
             fullWidth
           />
+        </div>
+        <div className="col">
+          <TextField
+            name="address"
+            type="text"
+            label="Address"
+            value={userData.address}
+            onChange={handleChange}
+            helperText={formErrors.address}
+            margin="normal"
+            variant="outlined"
+            required
+            color="secondary"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <BusinessIcon />
+                </InputAdornment>
+              ),
+            }}
+            fullWidth
+          />
+        </div>
+        <div className="row">
+          <div className="col-lg-6">
+            <TextField
+              name="city"
+              type="text"
+              label="City"
+              value={userData.city}
+              onChange={handleChange}
+              helperText={formErrors.city}
+              margin="normal"
+              variant="outlined"
+              required
+              color="secondary"
+              fullWidth
+            />
+          </div>
+          <div className="col-lg-6">
+            <TextField
+              name="state"
+              type="text"
+              label="State"
+              value={userData.state}
+              onChange={handleChange}
+              helperText={formErrors.state}
+              margin="normal"
+              variant="outlined"
+              required
+              color="secondary"
+              fullWidth
+            />
+          </div>
+          <div className="col-lg-6">
+            <TextField
+              name="country"
+              type="text"
+              label="Country"
+              value={userData.country}
+              onChange={handleChange}
+              helperText={formErrors.country}
+              margin="normal"
+              variant="outlined"
+              required
+              color="secondary"
+              fullWidth
+            />
+          </div>
+          <div className="col-lg-6">
+            <TextField
+              name="zipcode"
+              type="number"
+              label="Zipcode"
+              value={userData.zipcode}
+              onChange={handleChange}
+              helperText={formErrors.zipcode}
+              margin="normal"
+              variant="outlined"
+              required
+              color="secondary"
+              fullWidth
+            />
+          </div>
         </div>
         <div className="col">
           <FormControl margin="normal" required fullWidth variant="outlined">

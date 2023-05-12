@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./StripeForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { publicRequest, userRequest } from "../../../axiosRequest";
+import { logout } from "../../../redux/ApiCalls";
 
 function Stripe() {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientKey, setClientKey] = useState("");
+  const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const price = cart.total.toFixed(2);
@@ -42,7 +44,9 @@ function Stripe() {
         const clientSecret = res.data.clientSecret;
         setClientKey(clientSecret);
       } catch (error) {
-        console.log(error.response.data.error.message);
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+        }
       }
     };
     fetchClientKey();
