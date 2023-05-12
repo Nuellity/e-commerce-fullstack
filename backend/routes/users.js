@@ -28,12 +28,12 @@ router.post("/", verifyTokenAdmin, async (req, res) => {
 //UPDATE USER BY ID
 
 router.patch("/:id", verifyTokenAuthorization, async (req, res) => {
-  // if (req.body.password) {
-  //   req.body.password = CryptoJS.AES.encrypt(
-  //     req.body.password,
-  //     process.env.PASS_SECRET
-  //   ).toString();
-  // }
+  if (req.body.password) {
+    req.body.password = CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.PASS_SECRET
+    ).toString();
+  }
 
   try {
     const updatedUser = await User.findByIdAndUpdate(

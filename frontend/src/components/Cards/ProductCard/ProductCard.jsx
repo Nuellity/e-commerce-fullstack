@@ -87,16 +87,12 @@ export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
 
   const handleFav = async () => {
     const savedItem = { userId: user, productId: id };
-    console.log("work1");
 
     try {
       const res = await userRequest.post("wishlists", savedItem);
-      console.log("work2");
       setIsFav(true);
       console.log(res.data);
-    } catch (error) {
-      console.log("work3");
-    }
+    } catch (error) {}
   };
 
   return (

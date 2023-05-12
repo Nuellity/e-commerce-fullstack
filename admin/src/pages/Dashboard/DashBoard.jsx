@@ -31,14 +31,6 @@ function DashBoard() {
     { name: "Nov", activeUser: 0 },
     { name: "Dec", activeUser: 0 },
   ]);
-  console.log(
-    "revenue: ",
-    revenue,
-    "dailysales: ",
-    dailySales,
-    "dailyOrders: ",
-    dailyOrders
-  );
 
   const months = useMemo(
     () => [

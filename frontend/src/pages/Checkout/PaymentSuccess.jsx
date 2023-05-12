@@ -9,6 +9,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { clearOrder } from "../../redux/OrderSlice";
+import { logout } from "../../redux/ApiCalls";
 
 function PaymentSuccess() {
   const location = useLocation();
@@ -32,7 +33,11 @@ function PaymentSuccess() {
         const res = await userRequest.post("/orders", updatedOrder);
         setOrderId(res.data._id);
         dispatch(clearOrder());
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+        }
+      }
     };
     createOrder();
   }, [dispatch, isPayOnDelivery, order, paymentIntent]);
