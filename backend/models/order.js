@@ -3,8 +3,6 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
-    userFirstName: { type: String, required: true },
-    userLastName: { type: String, required: true },
     deliveryName: { type: String },
     products: [
       {

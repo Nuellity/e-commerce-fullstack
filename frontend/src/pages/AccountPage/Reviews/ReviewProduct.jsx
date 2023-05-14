@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Button, IconButton, TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -16,7 +17,6 @@ function ReviewProduct() {
     description: "",
   });
 
-  const [reviewPost, setReviewPost] = useState({});
   const [product, setProduct] = useState([]);
   const [value, setValue] = useState(0);
   const id = location.pathname.split("/")[3];
@@ -42,13 +42,9 @@ function ReviewProduct() {
     console.log("working");
     try {
       const res = await userRequest.post("reviews", revys);
-      setReviewPost(res.data);
       navigate("/profile/reviews");
     } catch (error) {}
   };
-  console.log(reviewPost);
-
-  console.log(revys);
 
   useEffect(() => {
     const getProductDetails = async () => {

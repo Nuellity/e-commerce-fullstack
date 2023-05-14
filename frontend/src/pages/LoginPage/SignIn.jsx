@@ -14,12 +14,15 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { loginDetails } from "./LoginDetails";
 import LoginIcon from "@mui/icons-material/Login";
-import { login } from "../../redux/ApiCalls";
+import { googleAuth, login } from "../../redux/ApiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
+import { auth, provider } from "../../fireBase";
+import { signInWithPopup } from "firebase/auth";
+import GoogleIcon from "@mui/icons-material/Google";
 
 function SignIn() {
   const theme = useTheme();
@@ -33,9 +36,6 @@ function SignIn() {
   const { isFetching, error, errorMessage } = useSelector(
     (state) => state.user
   );
-
-  const email = userData.loginEmail;
-  const password = userData.loginPassword;
 
   const validate = (data) => {
     const errors = {};
@@ -62,19 +62,31 @@ function SignIn() {
     event.preventDefault();
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    setFormErrors(validate(userData));
-    setErrorState(true);
-    login(dispatch, { email, password });
-  }
-
   const handleClick = () => {
     setRecover(true);
   };
 
   const handleSignUp = () => {
     setSignUp(true);
+  };
+
+  function handleSubmit(e) {
+    const email = userData.loginEmail;
+    const password = userData.loginPassword;
+    e.preventDefault();
+    setFormErrors(validate(userData));
+    setErrorState(true);
+    login(dispatch, { email, password });
+  }
+
+  const handleGoogle = async () => {
+    try {
+      const data = await signInWithPopup(auth, provider);
+      await googleAuth(dispatch, {
+        email: data.user.email,
+        googleId: data.user.uid,
+      });
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -178,6 +190,15 @@ function SignIn() {
           </p>
         </div>
       </form>
+      <div className="py-5">
+        <Button
+          variant="outlined"
+          endIcon={<GoogleIcon />}
+          onClick={handleGoogle}
+        >
+          Sign In With Google
+        </Button>
+      </div>
       {error && (
         <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
           {errorMessage}

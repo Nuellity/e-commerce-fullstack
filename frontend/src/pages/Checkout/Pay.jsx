@@ -53,7 +53,6 @@ function Pay() {
     if (userData.paymentMethod === "Credit/Debit Cards") {
       handleClickOpen();
     } else {
-      console.log("bad pay");
       navigate("/paymentsuccess");
     }
   };
@@ -70,8 +69,6 @@ function Pay() {
 
   const order = {
     userId: user._id,
-    userFirstName: user.firstName,
-    userLastName: user.lastName,
     deliveryName: `${userData.firstName} ${userData.lastName}`,
     products: cart.products.map((item) => ({
       productId: item._id,

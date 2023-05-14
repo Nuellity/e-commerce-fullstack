@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/user");
+const GoogleAuth = require("../models/googleAuth");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
@@ -56,6 +57,42 @@ router.post("/signin", async (req, res) => {
     );
 
     const { password, ...remainderInfo } = user._doc;
+    res.status(200).json({ ...remainderInfo, accesstoken });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+//GOOGLE AUTHENTICATION
+
+router.post("/google-signin", async (req, res) => {
+  try {
+    const { email, googleId } = req.body;
+    let user = await GoogleAuth.findOne({ email });
+    if (user) {
+      const accesstoken = jwt.sign(
+        {
+          id: user._id,
+          isAdmin: user.isAdmin,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "15h" }
+      );
+      const { googleId: userId, ...remainderInfo } = user._doc;
+      return res.status(200).json({ ...remainderInfo, accesstoken });
+    }
+    user = new GoogleAuth({ email, googleId });
+    await user.save();
+
+    const accesstoken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "15h" }
+    );
+    const { googleId: userId, ...remainderInfo } = user._doc;
     res.status(200).json({ ...remainderInfo, accesstoken });
   } catch (error) {
     res.status(500).json(error);
