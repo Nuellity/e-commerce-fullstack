@@ -6,11 +6,34 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { OrderCard } from "../../../components/Cards/ProductCard/ProductCard";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { userRequest } from "../../../axiosRequest";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+const OrderSkeleton = () => {
+  return (
+    <>
+      <div className="d-flex justify-content-between  flex-lg-row flex-sm-column w-100">
+        <div className="p-3">
+          <Skeleton
+            variant="rectangular"
+            animation="wave"
+            width={150}
+            height={100}
+          />
+        </div>
+        <div className="p-3">
+          <Skeleton animation="wave" height={40} width={410} />
+        </div>
+        <div className="p-3">
+          <Skeleton animation="wave" width={120} height={60} />
+        </div>
+      </div>
+    </>
+  );
+};
 
 const NoOrder = () => {
   const navigate = useNavigate();
@@ -60,6 +83,7 @@ const NoOrder = () => {
 function Order() {
   const [value, setValue] = useState(0);
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const user = useSelector((state) => state.user.currentUser._id);
 
@@ -102,10 +126,16 @@ function Order() {
 
   useEffect(() => {
     const fetchOrders = async () => {
+      setLoading(true);
       try {
         const res = await userRequest.get(`orders/find/${user}`);
         setOrders(res.data);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          window.location.reload();
+        }
+      }
+      setLoading(false);
     };
 
     fetchOrders();
@@ -140,7 +170,9 @@ function Order() {
           <TabPanel value={value} index={0}>
             <div className="order-list">
               <div className="container p-0 ">
-                {orders.length === 0 ? (
+                {loading ? (
+                  <OrderSkeleton />
+                ) : orders.length === 0 ? (
                   <NoOrder />
                 ) : (
                   orders.map((value) => (

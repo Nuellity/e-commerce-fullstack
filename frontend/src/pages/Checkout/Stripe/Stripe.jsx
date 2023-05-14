@@ -18,9 +18,7 @@ function Stripe() {
   useEffect(() => {
     const fetchPublicKey = async () => {
       try {
-        const res = await publicRequest.get(
-          "http://localhost:4000/api/checkout/config"
-        );
+        const res = await publicRequest.get("/checkout/config");
         const stripeKey = res.data.stripePublishKey;
         setStripePromise(loadStripe(stripeKey));
       } catch (error) {
