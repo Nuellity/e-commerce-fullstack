@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const connectDatabase = require("./config/mongoDb");
+const saveProductsToDatabase = require("./fetch");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
@@ -17,15 +18,6 @@ connectDatabase();
 
 const app = express();
 
-// app.use(
-//   "/service-worker.js",
-//   express.static(path.join(__dirname, "frontend", "service-worker.js"), {
-//     setHeaders: (res, path, stat) => {
-//       res.set("Content-Type", "application/javascript");
-//     },
-//   })
-// );
-
 app.use(
   express.static(path.join(__dirname, "frontend"), {
     setHeaders: (res, path, stat) => {
@@ -39,6 +31,8 @@ app.use(
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
+
+saveProductsToDatabase();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
