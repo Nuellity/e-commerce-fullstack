@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 import { Skeleton } from "@mui/material";
+import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
+import Stack from "@mui/material/Stack";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { publicRequest } from "../../axiosRequest";
 
 const BuyCardSkeleton = () => {
@@ -16,6 +21,14 @@ const BuyCardSkeleton = () => {
 function AllProducts({ category, filter }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const perPage = 12;
+
+  const startIndex = (page - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const pageCount = Math.ceil(products.length / perPage);
+
+  const productsToShow = loading ? products.slice(startIndex, endIndex) : [];
 
   useEffect(() => {
     const getProducts = async () => {
@@ -35,7 +48,7 @@ function AllProducts({ category, filter }) {
   return (
     <div className="row">
       {loading
-        ? products.map((value) => {
+        ? productsToShow.map((value) => {
             return (
               <div className="col-lg-3 col-md-6 mt-5" key={value._id}>
                 <BuyCard
@@ -52,24 +65,24 @@ function AllProducts({ category, filter }) {
         : Array(8)
             .fill()
             .map((_, index) => <BuyCardSkeleton key={index} />)}
+      <Stack mt={4} spacing={2} sx={{ padding: "1.5em 0" }}>
+        <Pagination
+          count={pageCount}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          renderItem={(item) => (
+            <PaginationItem
+              components={{
+                previous: ArrowBackIcon,
+                next: ArrowForwardIcon,
+              }}
+              {...item}
+            />
+          )}
+        />
+      </Stack>
     </div>
   );
 }
 
 export default AllProducts;
-
-// useEffect(() => {
-// if((filter === "new")){
-//   setProducts((prev) => {
-//     [...prev].sort((a,b) => a.createdAt - b.createdAt)
-//   })
-// }else if((filter === "highPrice")){
-//   setProducts((prev) => {
-//     [...prev].sort((a,b) => a.price - b.price)
-//   })
-// }else if((filter === "lowPrice ")){
-//   setProducts((prev) => {
-//     [...prev].sort((a,b) => b.price - a.price)
-//   })
-// }
-// }, [filter])
