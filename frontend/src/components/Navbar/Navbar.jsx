@@ -252,12 +252,24 @@ function Navbar() {
           <Divider />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <div className="d-flex justify-content-between container my-4 nav-category">
-              <span className="px-1">Jewelry & Accessories</span>
-              <span>Clothing & Shoes</span>
-              <span>Home & Living</span>
-              <span>Wedding & Party</span>
-              <span>Toys & Entertainment</span>
-              <span>Art & Collectibles</span>
+              <Link
+                to="/products/Gaming Chairs"
+                style={{ textDecoration: "none" }}
+              >
+                <span className="px-1">Gaming Chairs</span>
+              </Link>
+              <Link to="/products/Audio" style={{ textDecoration: "none" }}>
+                <span style={{ width: "13%" }}>Speakers & Headphones</span>
+              </Link>
+              <Link
+                to="/products/All Flat-Screen TVs"
+                style={{ textDecoration: "none" }}
+              >
+                <span>All Flat-Screen TVs</span>
+              </Link>
+              <Link to="/products/Laptops" style={{ textDecoration: "none" }}>
+                <span>Laptops</span>
+              </Link>
             </div>
           </Box>
         </AppBar>

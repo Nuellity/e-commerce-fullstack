@@ -30,33 +30,27 @@ function Footer() {
             <h6 className="footer-list mb-4">CATALOG</h6>
             <Link
               style={{ textDecoration: "none", color: "inherit" }}
-              to="/payment"
+              to="/products/Gaming Chairs"
             >
-              <p>necklaces</p>
+              <p>Gaming Chairs</p>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "inherit" }}
-              to="/payment"
+              to="/products/Audio"
             >
-              <p>hoodies</p>
+              <p>Speakers & Headphones</p>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "inherit" }}
-              to="/payment"
+              to="/products/All Flat-Screen TVs"
             >
-              <p>jackets</p>
+              <p>All Flat-Screen TVs</p>
             </Link>
             <Link
               style={{ textDecoration: "none", color: "inherit" }}
-              to="/payment"
+              to="/products/Laptops"
             >
-              <p>jewelry</p>
-            </Link>
-            <Link
-              style={{ textDecoration: "none", color: "inherit" }}
-              to="/payment"
-            >
-              <p>t-shirt</p>
+              <p>Laptops</p>
             </Link>
           </div>
           <div className="footer-items col-md-3 mb-4">

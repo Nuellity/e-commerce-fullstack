@@ -52,12 +52,12 @@ function AllProducts({ category, filter }) {
             return (
               <div className="col-lg-3 col-md-6 mt-5" key={value._id}>
                 <BuyCard
-                  category={category}
                   filter={filter}
                   image={value.img[0].original}
                   price={value.price}
                   title={value.title}
                   id={value._id}
+                  category={value.categories[0]}
                 />
               </div>
             );

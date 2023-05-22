@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useState } from "react";
@@ -9,6 +10,8 @@ import {
   Tooltip,
   useTheme,
   useMediaQuery,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -20,7 +23,8 @@ import "./card.css";
 import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
 import { userRequest } from "../../../axiosRequest";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/ApiCalls";
 
 const labels = {
   0.5: "Useless",
@@ -35,55 +39,90 @@ const labels = {
   5: "Excellent+",
 };
 
-function ProductCard({ isHot, isSale }) {
+function ProductCard({
+  isHot,
+  isSale,
+  image,
+  category,
+  productQuantity,
+  title,
+  id,
+}) {
   return (
     <div className="col-md-6 ">
       <div className="card-container w-100">
-        <img
-          src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="Avatar"
-          className="image img-fluid"
-        />
-        {isSale && (
-          <div className="sale-overlay">
-            <div>SALE</div>
-          </div>
-        )}
-        {isHot && (
-          <div className="hot-overlay">
-            <div>HOT</div>
-          </div>
-        )}
+        <Link
+          to={`/product/${id}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <img src={image} alt={title} className="image img-fluid" />
+          {isSale && (
+            <div className="sale-overlay">
+              <div>SALE</div>
+            </div>
+          )}
+          {isHot && (
+            <div className="hot-overlay">
+              <div>HOT</div>
+            </div>
+          )}
+        </Link>
         <div className="overlay">
-          <div>Pants</div>
-          <div>300 Products</div>
+          <div>{category}</div>
+          <div>{productQuantity} Products</div>
         </div>
       </div>
     </div>
   );
 }
 
-export const BigCard = () => {
+export const BigCard = ({ image, title, category, productQuantity, id }) => {
   return (
     <div className="col-lg-6">
       <div className="big-card-container w-100">
-        <img
-          src="https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt="Avatar"
-          className="big-image img-fluid"
-        />
+        <Link
+          to={`/product/${id}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <img src={image} alt={title} className="big-image img-fluid" />
+        </Link>
         <div className="big-overlay">
-          <div>Pants</div>
-          <div>200 Products</div>
+          <div>{category}</div>
+          <div>{productQuantity} Products</div>
         </div>
       </div>
     </div>
   );
 };
 
-export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
+export const BuyCard = ({
+  isHot,
+  isSale,
+  image,
+  title,
+  price,
+  id,
+  category,
+}) => {
   const [isFav, setIsFav] = useState(false);
-  const user = useSelector((state) => state.user.currentUser._id);
+  const user = useSelector((state) => state.user?.currentUser?._id);
+  const [open, setOpen] = useState(false);
+  const [fav, setFav] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const closeAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+  const closeFav = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setFav(false);
+  };
 
   const handleFav = async () => {
     const savedItem = { userId: user, productId: id };
@@ -91,8 +130,15 @@ export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
     try {
       const res = await userRequest.post("wishlists", savedItem);
       setIsFav(true);
-      console.log(res.data);
-    } catch (error) {}
+      setFav(true);
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        logout(dispatch);
+        navigate("/login");
+      } else if (error.response && error.response.status === 401) {
+        setOpen(true);
+      }
+    }
   };
 
   return (
@@ -136,10 +182,33 @@ export const BuyCard = ({ isHot, isSale, image, title, price, id }) => {
           <span className="buy-title">{title}</span>
         </div>
         <div className="d-flex justify-content-between">
-          <span className="buy-name">Dress</span>
+          <span className="buy-name">{category}</span>
           <span className="buy-price ">${price}</span>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={closeAlert}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={closeAlert} severity="error" sx={{ width: "100%" }}>
+          You have to login to favorite product.{" "}
+          <Link to="/login" style={{ paddingLeft: "5px" }}>
+            Login
+          </Link>
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={fav}
+        autoHideDuration={3000}
+        onClose={closeAlert}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={closeFav} severity="success" sx={{ width: "100%" }}>
+          Product has been added to saved items.{" "}
+        </Alert>
+      </Snackbar>
     </>
   );
 };
