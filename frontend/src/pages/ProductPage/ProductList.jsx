@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import Pagination from "@mui/material/Pagination";
 import { Box, Fab, Fade, useScrollTrigger } from "@mui/material/";
-
+import PaginationItem from "@mui/material/PaginationItem";
+import Stack from "@mui/material/Stack";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -48,7 +52,7 @@ function ProductList() {
   const [filter, setFilter] = useState("new");
 
   const location = useLocation();
-  const category = location.pathname.split("/")[2];
+  const category = decodeURIComponent(location.pathname.split("/")[2]);
 
   const handleChange = (e) => {
     setFilter(e.target.value);
@@ -78,6 +82,20 @@ function ProductList() {
             </Box>
           </div>
           <AllProducts category={category} filter={filter} />
+          <Stack mt={2} spacing={2} sx={{ padding: "1.5em 0" }}>
+            <Pagination
+              count={7}
+              renderItem={(item) => (
+                <PaginationItem
+                  components={{
+                    previous: ArrowBackIcon,
+                    next: ArrowForwardIcon,
+                  }}
+                  {...item}
+                />
+              )}
+            />
+          </Stack>
         </div>
       </div>
       <Footer />

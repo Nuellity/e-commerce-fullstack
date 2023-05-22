@@ -1,123 +1,84 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
+import { publicRequest } from "../../axiosRequest";
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(0.6 * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
 function HomeSeller() {
+  const [products, setProducts] = useState([]);
+  const categories = ["Gaming Chairs", "All Flat-Screen TVs"];
+  console.log(products);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const promises = categories.map((category) =>
+          publicRequest.get(
+            `http://localhost:4000/api/products?category=${category}`
+          )
+        );
+        const responses = await Promise.all(promises);
+        const fetchedProducts = responses.map((response) =>
+          response.data.slice(6, 13)
+        );
+        const flattenedProducts = fetchedProducts.flat();
+        const shuffledProducts = shuffleArray(flattenedProducts);
+        setProducts(shuffledProducts);
+      } catch (error) {
+        // Handle error
+        console.error("Failed to fetch products:", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <div style={{ paddingBottom: "50px", background: "#FFFFFF" }}>
       <div className="container pt-5">
-        <h2 className="main-header">best sellers</h2>
+        <h2 className="main-header pb-5">best sellers</h2>
         <Swiper
-          navigation={true}
+          navigation
           modules={[Navigation]}
-          className="mySwiper w-100"
-          slidesPerView={2}
-          // slidesPerGroup={1}
-          // slidesPerColumn={1}
-          // breakpoints={{
-          //   640: {
-          //     slidesPerView: 2,
-          //     slidesPerGroup: 2,
-          //     slidesPerColumn: 2,
-          //     spaceBetween: 5,
-          //   },
-          //   768: {
-          //     slidesPerView: 4,
-          //     slidesPerGroup: 4,
-          //     slidesPerColumn: 1,
-          //     spaceBetween: 7.5,
-          //   },
-          //   1024: {
-          //     slidesPerView: 4,
-          //     slidesPerGroup: 4,
-          //     slidesPerColumn: 1,
-          //     spaceBetween: 10,
-          //   },
-          // }}
+          className="mySwiper "
+          slidesPerView={1}
+          spaceBetween={10}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 4,
+            },
+          }}
+          style={{
+            "--swiper-navigation-color": "red", // Change the color of the arrow buttons
+          }}
         >
-          <SwiperSlide className="my-slide w-100">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
-          <SwiperSlide className="my-slide">
-            <BuyCard
-              title="Geometric Print Scarf"
-              price="150.00"
-              id="63ed045b7e2b59aabbf0ff5b"
-              image={
-                "https://images.pexels.com/photos/335257/pexels-photo-335257.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              }
-            />
-          </SwiperSlide>
+          {products.map((value, index) => (
+            <SwiperSlide className="my-slide" key={index}>
+              <BuyCard
+                image={value?.img[0]?.original}
+                title={value?.title}
+                category={value?.categories[0]}
+                id={value?._id}
+                price={value?.price}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
