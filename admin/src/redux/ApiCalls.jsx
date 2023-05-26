@@ -43,6 +43,17 @@ import {
   updateProductSuccess,
 } from "./ProductSlice";
 import {
+  deleteReviewFailure,
+  deleteReviewStart,
+  deleteReviewSuccess,
+  getReviewFailure,
+  getReviewStart,
+  getReviewSuccess,
+  updateReviewFailure,
+  updateReviewStart,
+  updateReviewSuccess,
+} from "./ReviewSlice";
+import {
   forgetFailure,
   forgetStart,
   forgetSuccess,
@@ -101,36 +112,42 @@ export const forgetPassword = async (dispatch, user) => {
   }
 };
 
-export const getProducts = async (dispatch) => {
-  dispatch(getProductStart());
+export const getReviews = async (dispatch, navigate) => {
+  dispatch(getReviewStart());
   try {
-    const res = await publicRequest.get("/products");
-    dispatch(getProductSuccess(res.data));
+    const res = await userRequest.get("/reviews");
+    dispatch(getReviewSuccess(res.data));
   } catch (err) {
-    dispatch(getProductFailure());
+    dispatch(getReviewFailure());
+    if (err.response && err.response.status === 403) {
+      logout(dispatch);
+      navigate("/login");
+    } else if (err.response && err.response.status === 401) {
+      window.location.reload();
+    }
   }
 };
 
-export const deleteProduct = async (id, dispatch) => {
-  dispatch(deleteProductStart());
+export const deleteReview = async (id, dispatch) => {
+  dispatch(deleteReviewStart());
   try {
     const res = await userRequest.delete(`/products/${id}`);
-    dispatch(deleteProductSuccess(id));
+    dispatch(deleteReviewSuccess(id));
   } catch (err) {
-    dispatch(deleteProductFailure());
+    dispatch(deleteReviewFailure());
   }
 };
 
-export const updateProduct = async (id, product, dispatch) => {
-  dispatch(updateProductStart());
+export const updateReview = async (id, review, dispatch) => {
+  dispatch(updateReviewStart());
   try {
-    // update
-    const res = await userRequest.patch(`/products/${id}`, product);
-    dispatch(updateProductSuccess(res.data));
+    const res = await userRequest.patch(`/reviews/${id}`, review);
+    dispatch(updateOrderSuccess(res.data));
   } catch (err) {
-    dispatch(updateProductFailure());
+    dispatch(updateOrderFailure());
   }
 };
+
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
@@ -164,7 +181,6 @@ export const deleteCustomer = async (id, dispatch) => {
 export const updateCustomer = async (id, customer, dispatch) => {
   dispatch(updateCustomerStart());
   try {
-    // update
     const res = await userRequest.patch(`/users/${id}`, customer);
     dispatch(updateCustomerSuccess(res.data));
   } catch (err) {
@@ -183,13 +199,19 @@ export const addCustomer = async (customer, dispatch) => {
   }
 };
 
-export const getOrders = async (dispatch) => {
+export const getOrders = async (dispatch, navigate) => {
   dispatch(getOrderStart());
   try {
     const res = await userRequest.get("/orders");
     dispatch(getOrderSuccess(res.data));
   } catch (err) {
     dispatch(getOrderFailure());
+    if (err.response && err.response.status === 403) {
+      logout(dispatch);
+      navigate("/login");
+    } else if (err.response && err.response.status === 401) {
+      window.location.reload();
+    }
   }
 };
 
@@ -206,7 +228,6 @@ export const deleteOrder = async (id, dispatch) => {
 export const updateOrder = async (id, order, dispatch) => {
   dispatch(updateOrderStart());
   try {
-    // update
     const res = await userRequest.patch(`/orders/${id}`, order);
     dispatch(updateOrderSuccess(res.data));
   } catch (err) {
@@ -222,5 +243,35 @@ export const addOrder = async (order, dispatch) => {
   } catch (err) {
     dispatch(addOrderFailure());
     console.log(err);
+  }
+};
+
+export const getProducts = async (dispatch) => {
+  dispatch(getProductStart());
+  try {
+    const res = await publicRequest.get("/products");
+    dispatch(getProductSuccess(res.data));
+  } catch (err) {
+    dispatch(getProductFailure());
+  }
+};
+
+export const deleteProduct = async (id, dispatch) => {
+  dispatch(deleteProductStart());
+  try {
+    const res = await userRequest.delete(`/products/${id}`);
+    dispatch(deleteProductSuccess(id));
+  } catch (err) {
+    dispatch(deleteProductFailure());
+  }
+};
+
+export const updateProduct = async (id, product, dispatch) => {
+  dispatch(updateProductStart());
+  try {
+    const res = await userRequest.patch(`/products/${id}`, product);
+    dispatch(updateProductSuccess(res.data));
+  } catch (err) {
+    dispatch(updateProductFailure());
   }
 };

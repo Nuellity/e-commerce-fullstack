@@ -1,10 +1,6 @@
 const router = require("express").Router();
 const SavedItem = require("../models/savedItem");
-const {
-  verifyTokenAuthorization,
-  verifyTokenAdmin,
-  verifyToken,
-} = require("./verify");
+const { verifyTokenAdmin, verifyToken } = require("./verify");
 
 // CREATE ORDER
 

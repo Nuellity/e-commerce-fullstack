@@ -126,6 +126,7 @@ export const BuyCard = ({
 
   const handleFav = async () => {
     const savedItem = { userId: user, productId: id };
+    console.log(savedItem);
 
     try {
       const res = await userRequest.post("wishlists", savedItem);
@@ -137,6 +138,7 @@ export const BuyCard = ({
         navigate("/login");
       } else if (error.response && error.response.status === 401) {
         setOpen(true);
+        window.location.reload();
       }
     }
   };
@@ -188,15 +190,12 @@ export const BuyCard = ({
       </div>
       <Snackbar
         open={open}
-        autoHideDuration={5000}
+        autoHideDuration={3000}
         onClose={closeAlert}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={closeAlert} severity="error" sx={{ width: "100%" }}>
-          You have to login to favorite product.{" "}
-          <Link to="/login" style={{ paddingLeft: "5px" }}>
-            Login
-          </Link>
+          Error occured while saving product, please try again.
         </Alert>
       </Snackbar>
       <Snackbar

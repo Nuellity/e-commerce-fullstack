@@ -30,18 +30,18 @@ function ReviewProduct() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const reviewList = { ...reviewInfo, rating: value };
-  const revys = {
+
+  const review = {
     userId: user,
     productId: id,
-    review: [reviewList],
+    reviewInfo,
+    rating: value,
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("working");
     try {
-      const res = await userRequest.post("reviews", revys);
+      const res = await userRequest.post("reviews", review);
       navigate("/profile/reviews");
     } catch (error) {}
   };

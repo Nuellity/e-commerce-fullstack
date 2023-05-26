@@ -9,7 +9,7 @@ import Pie from "./pages/Pie/Pie";
 import UserList from "./pages/Users/UserList";
 import UserInfo from "./pages/Users/UserInfo";
 import SingleUser from "./pages/Users/SingleUser";
-import NewUser from "./pages/Users/NewUser";
+import ReviewList from "./pages/Reviews/ReviewList";
 import Menubar from "./pages/Global/Menubar";
 import Login from "./pages/Login/Login";
 import { useSelector } from "react-redux";
@@ -19,6 +19,9 @@ import NewProduct from "./pages/Product/NewProduct";
 import NoMatch from "./NoMatch";
 import Orders from "./pages/Transaction/OrderList";
 import SingleOrder from "./pages/Transaction/SingleOrder";
+import SingleReview from "./pages/Reviews/SingleReview";
+import NewReview from "./pages/Reviews/NewReview";
+import NewUser from "./pages/Users/NewUser";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -32,21 +35,48 @@ function App() {
           <main className="content">
             <TopBar />
             <Routes>
-              <Route path="/" element={<DashBoard />} />
+              <Route path="/" element={user ? <DashBoard /> : <Login />} />
               <Route path="pie" element={<Pie />} />
               <Route path="line" element={<UserInfo />} />
-              <Route path="products/:productId" element={<SingleProduct />} />
-              <Route path="products" element={<ProductList />} />
-              <Route path="newproduct" element={<NewProduct />} />
-              <Route path="transactions" element={<Orders />} />
+              <Route
+                path="products/:productId"
+                element={user ? <SingleProduct /> : <Login />}
+              />
+              <Route
+                path="products"
+                element={user ? <ProductList /> : <Login />}
+              />
+              <Route
+                path="newproduct"
+                element={user ? <NewProduct /> : <Login />}
+              />
+              <Route
+                path="transactions"
+                element={user ? <Orders /> : <Login />}
+              />
               <Route
                 path="transactions/:transactionId"
-                element={<SingleOrder />}
+                element={user ? <SingleOrder /> : <Login />}
               />
-              <Route path="users" element={<UserList />} />
-              <Route path="users/:userId" element={<SingleUser />} />
+              <Route path="users" element={user ? <UserList /> : <Login />} />
+              <Route path="newuser" element={user ? <NewUser /> : <Login />} />
+              <Route
+                path="users/:userId"
+                element={user ? <SingleUser /> : <Login />}
+              />
               <Route path="mail" element={<Pie />} />
-              <Route path="team" element={<NewUser />} />
+              <Route
+                path="reviews"
+                element={user ? <ReviewList /> : <Login />}
+              />
+              <Route
+                path="reviews/:reviewId"
+                element={user ? <SingleReview /> : <Login />}
+              />
+              <Route
+                path="newreview"
+                element={user ? <NewReview /> : <Login />}
+              />
               <Route path="*" element={<NoMatch />} />
               <Route
                 path="login"

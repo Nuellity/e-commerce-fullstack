@@ -20,7 +20,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 //UPDATE REVIEW BY ID
 
-router.patch("/:id", verifyTokenAuthorization, async (req, res) => {
+router.patch("/:id", verifyTokenAdmin, async (req, res) => {
   try {
     const updatedReview = await Review.findByIdAndUpdate(
       req.params.id,

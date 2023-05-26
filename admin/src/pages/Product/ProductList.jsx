@@ -1,18 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import {
-  useTheme,
-  Avatar,
-  Button,
-  IconButton,
-  Box,
-  Typography,
-} from "@mui/material";
+import { useTheme, Avatar, Button, IconButton, Box } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { styled } from "@mui/material/styles";
-import { mockDataTeam } from "../../data/testData";
 import Header from "../../components/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,15 +13,10 @@ import { deleteProduct, getProducts } from "../../redux/ApiCalls";
 function UserList() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  // const [data, setData] = useState(mockDataTeam);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
-  console.log(products);
 
-  // const handleDelete = (id) => {
-  //   setData(data.filter((item) => item.id !== id));
-  // };
   const handleDelete = (id) => {
     deleteProduct(id, dispatch);
   };
@@ -43,7 +30,7 @@ function UserList() {
     {
       field: "product",
       headerName: "Product",
-      flex: 1,
+      flex: 2,
       cellClassName: "name-column--cell",
       renderCell: (params) => {
         return (
@@ -51,7 +38,7 @@ function UserList() {
             <Avatar
               sx={{ marginRight: "12px" }}
               src={params.row.img[0].original}
-              alt=""
+              alt="avatar"
             />
             {params.row.title}
           </div>
@@ -62,8 +49,9 @@ function UserList() {
       field: "count",
       headerName: "Stock",
       type: "number",
-      headerAlign: "left",
-      align: "left",
+      headerAlign: "center",
+      align: "center",
+      flex: 2,
       cellClassName: "name-column--cell",
     },
     {
@@ -119,7 +107,7 @@ function UserList() {
   }));
 
   return (
-    <Box m="20px">
+    <Box className="container mt-4">
       <div className="d-flex justify-content-between">
         <Header title="Products" subTitle="Managing the Product" />
         <div>

@@ -92,7 +92,7 @@ function UserList() {
   }, [dispatch]);
 
   return (
-    <Box m="20px">
+    <Box className="container mt-4">
       <div className="d-flex justify-content-between">
         <Header title="Customers" subTitle="Manage your Customer's Info" />
         <ColorButton

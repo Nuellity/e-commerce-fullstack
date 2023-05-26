@@ -36,18 +36,13 @@ const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 
 const categories = [
-  "Home",
-  "Tech",
-  "Woman",
-  "Man",
-  "Pet",
-  "Accessories",
+  "Gaming Chairs",
+  "Audio",
+  "All Flat-Screen TVs",
+  "Laptops",
   "Trending",
   "BestSeller",
-  "Electronics",
-  "Gadgets",
 ];
-
 const sizes = ["XS", "S", "M", "L", "X", "XL", "XXL", "XXXL"];
 
 function getStyles(name, category, theme) {
@@ -364,7 +359,7 @@ function SingleProduct() {
                 <Avatar
                   src={product.img[0].original}
                   alt=""
-                  sx={{ width: 75, height: 75 }}
+                  sx={{ width: 100, height: 100 }}
                 />
                 <Typography
                   variant="h4"

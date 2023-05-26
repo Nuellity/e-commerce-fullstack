@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box, useTheme, Typography } from "@mui/material";
 import { tokens } from "../../theme";
 import React, { useState, useEffect, useMemo } from "react";
@@ -9,11 +10,16 @@ import Chart from "../../components/Chart";
 import Users from "../../components/Users";
 import UserTransaction from "../../components/UserTransaction";
 import { userRequest } from "../../axiosRequest";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { logout } from "../../redux/ApiCalls";
 
 function DashBoard() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [revenue, setRevenue] = useState([]);
   const [dailySales, setDailySales] = useState([]);
   const [dailyOrders, setDailyOrders] = useState(0);
@@ -66,7 +72,14 @@ function DashBoard() {
         const res = await userRequest.get("orders/income");
         const income = res.data;
         setRevenue(income);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+          navigate("/login");
+        } else if (error.response && error.response.status === 401) {
+          window.location.reload();
+        }
+      }
     };
 
     getRevenue();
@@ -77,7 +90,14 @@ function DashBoard() {
       try {
         const res = await userRequest.get("orders/incomeperday");
         setDailySales(res.data);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+          navigate("/login");
+        } else if (error.response && error.response.status === 401) {
+          window.location.reload();
+        }
+      }
     };
     getDailySales();
   }, []);
@@ -87,7 +107,14 @@ function DashBoard() {
       try {
         const res = await userRequest.get("orders/ordersperday");
         setDailyOrders(res.data);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+          navigate("/login");
+        } else if (error.response && error.response.status === 401) {
+          window.location.reload();
+        }
+      }
     };
     getDailyOrders();
   }, []);
@@ -115,7 +142,14 @@ function DashBoard() {
             return prev;
           })
         );
-      } catch (error) {}
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          logout(dispatch);
+          navigate("/login");
+        } else if (error.response && error.response.status === 401) {
+          window.location.reload();
+        }
+      }
     };
     getStats();
   }, [months]);
@@ -286,10 +320,11 @@ function DashBoard() {
               sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
             >
               <Typography
+                variant="h4"
                 fontWeight="600"
                 color={colors.greenAccent[400]}
-                variant="h5"
-                style={{ position: "sticky", top: 0, padding: "5px 10px" }}
+                mb="10px"
+                style={{ position: "sticky", top: 0, paddingLeft: "5px" }}
               >
                 Newly Regsitered Users
               </Typography>
@@ -309,9 +344,10 @@ function DashBoard() {
               style={{ position: "sticky", top: 0 }}
             >
               <Typography
-                color={colors.greenAccent[400]}
-                variant="h5"
+                variant="h4"
                 fontWeight="600"
+                color={colors.greenAccent[400]}
+                mb="10px"
               >
                 Recent Transactions
               </Typography>
