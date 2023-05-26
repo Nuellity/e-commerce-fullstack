@@ -157,9 +157,9 @@ function Reviews() {
                 return (
                   <ReviewCard
                     key={index}
-                    title={value.title}
-                    image={value.img[0].original}
-                    orderId={value._id}
+                    title={value?.title}
+                    image={value?.img[0].original}
+                    orderId={value?._id}
                   />
                 );
               })

@@ -1,62 +1,60 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import {
-  useTheme,
-  Button,
-  IconButton,
-  Box,
-  Typography,
-  Chip,
-} from "@mui/material";
+import { useTheme, Button, IconButton, Box, Chip } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { styled } from "@mui/material/styles";
+import Header from "../../components/Header";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteReview, getReviews } from "../../redux/ApiCalls";
 import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilledOutlined";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
-import { deleteOrder, getOrders } from "../../redux/ApiCalls";
-import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
 
-function OrderList() {
+function ReviewList() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const orders = useSelector((state) => state.order.orders);
-  const transactionOrders = orders.slice().reverse();
+  const dispatch = useDispatch();
+  const reviews = useSelector((state) => state.review.reviews);
+  console.log(reviews);
 
   const handleDelete = (id) => {
-    deleteOrder(id, dispatch);
+    deleteReview(id, dispatch);
   };
+
+  useEffect(() => {
+    getReviews(dispatch, navigate);
+  }, [dispatch]);
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
       field: "userId",
-      headerName: "Customer ID",
-      flex: 1,
+      headerName: "User ID",
+      type: "number",
+      headerAlign: "center",
+      align: "center",
+      flex: 2,
       cellClassName: "name-column--cell",
     },
     {
-      field: "amount",
-      headerName: "Price($)",
-      flex: 1,
+      field: "productId",
+      headerName: "Product ID",
+      type: "number",
+      headerAlign: "center",
+      align: "center",
+      flex: 2,
       cellClassName: "name-column--cell",
     },
     {
-      field: "createdAt",
-      headerName: "Date",
-      renderCell: (params) => {
-        return (
-          <div>
-            <Typography> {moment(params.row.createdAt).fromNow()}</Typography>
-          </div>
-        );
-      },
+      field: "title",
+      headerName: "Title",
+      flex: 2,
+      cellClassName: "name-column--cell",
     },
+
     {
       field: "status",
       headerName: "Status",
@@ -110,17 +108,35 @@ function OrderList() {
     },
   ];
 
-  useEffect(() => {
-    getOrders(dispatch, navigate);
-  }, [dispatch]);
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(colors.grey[100]),
+    backgroundColor: colors.blueAccent[400],
+    "&:hover": {
+      backgroundColor: colors.blueAccent[600],
+    },
+  }));
 
   return (
     <Box className="container mt-4">
-      <div>
-        <Header title="Orders" subTitle="Manage your Orders" />
+      <div className="d-flex justify-content-between">
+        <Header title="Reviews" subTitle="Managing The Product Reviews" />
+        <div>
+          <ColorButton
+            onClick={() => navigate("/newreview")}
+            style={{
+              width: "150px",
+              height: "40px",
+              fontSize: "13px",
+              fontWeight: "bold",
+            }}
+            variant="contained"
+          >
+            Add new review
+          </ColorButton>
+        </div>
       </div>
       <Box
-        m="40px 0 0 0"
+        m="2.5em 0 0 0"
         width="100%"
         height="75vh"
         sx={{
@@ -132,6 +148,7 @@ function OrderList() {
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
+            fontSize: "14px",
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: colors.blueAccent[700],
@@ -157,7 +174,7 @@ function OrderList() {
       >
         <DataGrid
           checkboxSelection
-          rows={transactionOrders}
+          rows={reviews}
           getRowId={(row) => row._id}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
@@ -168,4 +185,4 @@ function OrderList() {
   );
 }
 
-export default OrderList;
+export default ReviewList;

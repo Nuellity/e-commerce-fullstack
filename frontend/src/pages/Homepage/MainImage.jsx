@@ -29,7 +29,7 @@ function MainImage() {
             </p>
             <Button
               color="primary"
-              onClick={() => navigate("/products")}
+              onClick={() => navigate("/products/")}
               variant="contained"
               className="animate__animated animate__fadeInUp"
               style={{

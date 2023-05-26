@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Table,
   useTheme,
@@ -15,26 +15,19 @@ import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilled
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import { tokens } from "../theme";
 import moment from "moment";
-import { userRequest } from "../axiosRequest";
+
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function UserTransaction() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [orders, setOrders] = useState([]);
-  const transactionOrders = orders.slice().reverse();
+  const allOrder = useSelector((state) => state.order.orders);
+  const transactionOrders = allOrder.slice().reverse();
+
+  console.log(allOrder);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const getOrders = async () => {
-      try {
-        const res = await userRequest.get("/orders");
-        setOrders(res.data);
-      } catch (error) {}
-    };
-    getOrders();
-  }, []);
 
   return (
     <TableContainer>

@@ -33,16 +33,12 @@ const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 
 const categories = [
-  "Home",
-  "Tech",
-  "Woman",
-  "Man",
-  "Pet",
-  "Accessories",
+  "Gaming Chairs",
+  "Audio",
+  "All Flat-Screen TVs",
+  "Laptops",
   "Trending",
   "BestSeller",
-  "Electronics",
-  "Gadgets",
 ];
 
 const sizes = ["XS", "S", "M", "L", "X", "XL", "XXL", "XXXL"];

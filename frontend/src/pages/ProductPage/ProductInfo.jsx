@@ -18,6 +18,7 @@ import { publicRequest } from "../../axiosRequest";
 
 const ProductDetailsSkeleton = () => {
   const theme = useTheme();
+
   const isMatch = useMediaQuery(theme.breakpoints.up("sm"));
   const isIpad = useMediaQuery("(min-width: 768px) and (max-width: 1024px)");
 
@@ -116,6 +117,7 @@ function ProductInfo() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -129,6 +131,20 @@ function ProductInfo() {
       } catch (error) {}
     };
     getProduct();
+  }, []);
+
+  useEffect(() => {
+    const getReviews = async () => {
+      try {
+        const res = await publicRequest.get(
+          `http://localhost:4000/api/reviews/find/${id}`
+        );
+        const fetchProduct = res.data;
+
+        setReviews(fetchProduct);
+      } catch (error) {}
+    };
+    getReviews();
   }, []);
 
   function isEmpty(product) {
@@ -151,6 +167,7 @@ function ProductInfo() {
           sizes={product.size}
           count={product.count}
           inStock={product.inStock}
+          reviews={reviews}
         />
       )}
       <Footer />

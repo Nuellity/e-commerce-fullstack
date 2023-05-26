@@ -65,7 +65,7 @@ function HomeSeller() {
             },
           }}
           style={{
-            "--swiper-navigation-color": "red", // Change the color of the arrow buttons
+            "--swiper-navigation-color": "red",
           }}
         >
           {products.map((value, index) => (

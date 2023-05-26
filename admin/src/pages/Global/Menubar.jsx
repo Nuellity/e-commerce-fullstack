@@ -16,7 +16,6 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import DynamicFeedOutlinedIcon from "@mui/icons-material/DynamicFeedOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
@@ -217,7 +216,10 @@ function Menubar() {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="team" style={{ textDecoration: "none", color: "inherit" }}>
+          <Link
+            to="reviews"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -233,10 +235,10 @@ function Menubar() {
                     justifyContent: "center",
                   }}
                 >
-                  <BarChartOutlinedIcon />
+                  <DynamicFeedOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Reports"
+                  primary="Reviews"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
