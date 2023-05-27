@@ -18,7 +18,6 @@ function shuffleArray(array) {
 function HomeSeller() {
   const [products, setProducts] = useState([]);
   const categories = ["Gaming Chairs", "All Flat-Screen TVs"];
-  console.log(products);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -76,6 +75,8 @@ function HomeSeller() {
                 category={value?.categories[0]}
                 id={value?._id}
                 price={value?.price}
+                product={value}
+                count={value?.count}
               />
             </SwiperSlide>
           ))}
