@@ -51,7 +51,7 @@ function ProductReview({ averageRating, reviews, image }) {
           />
         </Box>
       </Typography>
-      <div style={{ flex: 1, overflowY: "auto", height: "16em" }}>
+      <div style={{ overflowY: "auto", height: "16em" }}>
         <List>
           {reviews.map((review, index) => (
             <ListItem key={index} style={styles.listItem}>

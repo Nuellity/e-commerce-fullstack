@@ -218,52 +218,63 @@ function Checkout() {
                 </div>
               </div>
               <hr />
-              <div style={{ display: isVisible ? "block" : "none" }}>
-                {cart.products.map((value, index) => {
-                  return (
-                    <ListItem
-                      alignItems="flex-start"
-                      secondaryAction={
-                        <span className="d-flex flex-column">
-                          {!value.size.length ? (
-                            ""
-                          ) : (
-                            <Typography
-                              variant="span"
-                              sx={{ padding: "5px 0" }}
-                            >
-                              SIZE: {value.size}
+              <div
+                style={{
+                  display: isVisible ? "block" : "none",
+                  overflowY: "auto",
+                  height: "18em",
+                }}
+              >
+                <div>
+                  {cart.products.map((value, index) => {
+                    return (
+                      <ListItem
+                        alignItems="flex-start"
+                        secondaryAction={
+                          <span className="d-flex flex-column">
+                            {!value.size.length ? (
+                              ""
+                            ) : (
+                              <Typography
+                                variant="span"
+                                sx={{ padding: "5px 0" }}
+                              >
+                                SIZE: {value.size}
+                              </Typography>
+                            )}
+                            <Typography sx={{ fontSize: "1.2em" }}>
+                              ${(value.price * value.quantity).toFixed(2)}
                             </Typography>
-                          )}
-                          <Typography sx={{ fontSize: "1.2em" }}>
-                            ${(value.price * value.quantity).toFixed(2)}
-                          </Typography>
-                        </span>
-                      }
-                      sx={{ width: "100%" }}
-                      key={index}
-                    >
-                      <ListItemAvatar>
-                        <Badge badgeContent={value.quantity} color="secondary">
-                          <Avatar
-                            src={value.img[0].original}
-                            alt={value.title}
-                            sx={{ width: 40, height: 40 }}
-                          />
-                        </Badge>
-                      </ListItemAvatar>
+                          </span>
+                        }
+                        sx={{ width: "100%" }}
+                        key={index}
+                      >
+                        <ListItemAvatar>
+                          <Badge
+                            badgeContent={value.quantity}
+                            color="secondary"
+                          >
+                            <Avatar
+                              src={value.img[0].original}
+                              alt={value.title}
+                              sx={{ width: 40, height: 40 }}
+                            />
+                          </Badge>
+                        </ListItemAvatar>
 
-                      <ListItemText
-                        sx={{
-                          fontSize: "1em",
-                          margin: "auto 1em",
-                          "& .MuiListItemText-primary": { fontSize: "1em" },
-                        }}
-                        primary={value.title}
-                      />
-                    </ListItem>
-                  );
-                })}
+                        <ListItemText
+                          sx={{
+                            fontSize: "1em",
+                            margin: "auto 1em",
+                            "& .MuiListItemText-primary": { fontSize: "1em" },
+                          }}
+                          primary={value.title}
+                        />
+                      </ListItem>
+                    );
+                  })}
+                </div>
                 <hr />
                 <div className="">
                   <TextField
@@ -307,7 +318,7 @@ function Checkout() {
             style={{ display: isMatch ? "block" : "none" }}
           />
           <p
-            className="text-center py-4 main-header"
+            className="text-center py-5 main-header"
             style={{ display: isMatch ? "none" : "block" }}
           >
             CHECKOUT
@@ -424,58 +435,67 @@ function Checkout() {
               >
                 <div
                   className="pb-5"
-                  style={{ display: isMatch ? "none" : "block" }}
+                  style={{
+                    display: isMatch ? "none" : "block",
+                    overflowY: "auto",
+                    height: "18em",
+                  }}
                 >
-                  {cart.products.map((value, index) => {
-                    return (
-                      <ListItem
-                        alignItems="flex-start"
-                        secondaryAction={
-                          <span className="d-flex flex-column">
-                            {!value.size.length ? (
-                              ""
-                            ) : (
+                  <div>
+                    {cart.products.map((value, index) => {
+                      return (
+                        <ListItem
+                          alignItems="flex-start"
+                          secondaryAction={
+                            <span className="d-flex flex-column">
+                              {!value.size.length ? (
+                                ""
+                              ) : (
+                                <Typography
+                                  variant="span"
+                                  sx={{ padding: "5px 0" }}
+                                >
+                                  SIZE: {value.size}
+                                </Typography>
+                              )}
                               <Typography
-                                variant="span"
-                                sx={{ padding: "5px 0" }}
+                                sx={{ fontSize: "1.9em", fontWeight: 400 }}
                               >
-                                SIZE: {value.size}
+                                $ {(value.price * value.quantity).toFixed(2)}
                               </Typography>
-                            )}
-                            <Typography
-                              sx={{ fontSize: "1.9em", fontWeight: 400 }}
+                            </span>
+                          }
+                          sx={{ width: "100%" }}
+                          key={index}
+                        >
+                          <ListItemAvatar>
+                            <Badge
+                              badgeContent={value.quantity}
+                              color="secondary"
                             >
-                              ${(value.price * value.quantity).toFixed(2)}
-                            </Typography>
-                          </span>
-                        }
-                        sx={{ width: "100%" }}
-                        key={index}
-                      >
-                        <ListItemAvatar>
-                          <Badge
-                            badgeContent={value.quantity}
-                            color="secondary"
-                          >
-                            <Avatar
-                              src={value.img[0].original}
-                              alt={value.title}
-                              sx={{ width: 60, height: 60 }}
-                            />
-                          </Badge>
-                        </ListItemAvatar>
+                              <Avatar
+                                src={value.img[0].original}
+                                alt={value.title}
+                                sx={{ width: 80, height: 80 }}
+                              />
+                            </Badge>
+                          </ListItemAvatar>
 
-                        <ListItemText
-                          sx={{
-                            fontSize: "1.1em",
-                            margin: "auto 1em",
-                            "& .MuiListItemText-primary": { fontSize: "1.1em" },
-                          }}
-                          primary={value.title}
-                        />
-                      </ListItem>
-                    );
-                  })}
+                          <ListItemText
+                            sx={{
+                              fontSize: "1em",
+                              margin: "auto 1em",
+                              "& .MuiListItemText-primary": {
+                                fontSize: "1.1em",
+                                width: "70%",
+                              },
+                            }}
+                            primary={value.title}
+                          />
+                        </ListItem>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 <div className="pt-5">
@@ -497,7 +517,7 @@ function Checkout() {
                     <div className="d-flex justify-content-between">
                       <p>Subtotal</p>
                       <p style={{ fontSize: "1.4em" }}>
-                        ${cart.total.toFixed(2)}
+                        $ {cart.total.toFixed(2)}
                       </p>
                     </div>
                     <div className="d-flex justify-content-between">
@@ -506,7 +526,7 @@ function Checkout() {
                     </div>
                     <div className="d-flex justify-content-between">
                       <h6>You Pay</h6>
-                      <h3>${cart.total.toFixed(2)}</h3>
+                      <h3>$ {cart.total.toFixed(2)}</h3>
                     </div>
                     <hr />
                   </div>
