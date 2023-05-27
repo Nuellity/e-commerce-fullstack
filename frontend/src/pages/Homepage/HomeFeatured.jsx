@@ -32,6 +32,8 @@ function HomeFeatured() {
               category={value?.categories[0]}
               id={value?._id}
               price={value?.price}
+              product={value}
+              count={value?.count}
             />
           </div>
         ))}

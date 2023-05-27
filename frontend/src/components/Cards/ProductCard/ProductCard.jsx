@@ -25,6 +25,8 @@ import moment from "moment";
 import { userRequest } from "../../../axiosRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/ApiCalls";
+import { addProduct } from "../../../redux/CartSlice";
+import Cart from "../../../pages/CartPage/Cart";
 
 const labels = {
   0.5: "Useless",
@@ -103,10 +105,15 @@ export const BuyCard = ({
   price,
   id,
   category,
+  product,
+  count,
 }) => {
   const [isFav, setIsFav] = useState(false);
   const user = useSelector((state) => state.user?.currentUser?._id);
   const [open, setOpen] = useState(false);
+  const [addItem, setAddItem] = useState(false);
+  const [cartDraw, setCartDraw] = useState(false);
+  const [duplicate, setDuplicate] = useState(false);
   const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -117,6 +124,13 @@ export const BuyCard = ({
     }
     setOpen(false);
   };
+
+  const closeAdd = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setAddItem(false);
+  };
   const closeFav = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -124,9 +138,14 @@ export const BuyCard = ({
     setFav(false);
   };
 
+  const closeDuplicate = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setDuplicate(false);
+  };
   const handleFav = async () => {
     const savedItem = { userId: user, productId: id };
-    console.log(savedItem);
 
     try {
       const res = await userRequest.post("wishlists", savedItem);
@@ -139,8 +158,25 @@ export const BuyCard = ({
       } else if (error.response && error.response.status === 401) {
         setOpen(true);
         window.location.reload();
+      } else if (error.response && error.response.status === 500) {
+        setDuplicate(true);
       }
     }
+  };
+  const handleDraw = () => {
+    setCartDraw(!cartDraw);
+  };
+  const handleClose = () => {
+    setCartDraw(false);
+  };
+
+  const handleAddToCart = () => {
+    const updatedProduct = { ...product, amount: 1 * product.price };
+    const item = { ...updatedProduct, quantity: 1 };
+
+    dispatch(addProduct(item));
+    handleDraw();
+    setAddItem(true);
   };
 
   return (
@@ -174,7 +210,7 @@ export const BuyCard = ({
               )}
             </Tooltip>
           </div>
-          <div className="icon">
+          <div className="icon" onClick={handleAddToCart}>
             <ShoppingBagIcon /> <span>Add to Cart</span>
           </div>
         </div>
@@ -188,6 +224,12 @@ export const BuyCard = ({
           <span className="buy-price ">${price}</span>
         </div>
       </div>
+      <Cart count={count} openCart={cartDraw} closeCart={handleClose} />
+      <Snackbar open={addItem} autoHideDuration={3000} onClose={closeAdd}>
+        <Alert onClose={closeAdd} severity="success" sx={{ width: "100%" }}>
+          Item has been added to cart
+        </Alert>
+      </Snackbar>
       <Snackbar
         open={open}
         autoHideDuration={3000}
@@ -201,11 +243,21 @@ export const BuyCard = ({
       <Snackbar
         open={fav}
         autoHideDuration={3000}
-        onClose={closeAlert}
+        onClose={closeFav}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={closeFav} severity="success" sx={{ width: "100%" }}>
           Product has been added to saved items.{" "}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={duplicate}
+        autoHideDuration={3000}
+        onClose={closeDuplicate}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert onClose={closeDuplicate} severity="error" sx={{ width: "100%" }}>
+          This product has already been added to saved items.
         </Alert>
       </Snackbar>
     </>

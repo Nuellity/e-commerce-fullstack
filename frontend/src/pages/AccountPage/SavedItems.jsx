@@ -98,6 +98,7 @@ function SavedItems() {
 
   useEffect(() => {
     const productIdArray = savedItems.map((obj) => obj.productId);
+
     const newArray = [...new Set(productIdArray)];
     const getProductDetails = async () => {
       const products = await Promise.all(

@@ -11,44 +11,16 @@ import MuiAlert from "@mui/material/Alert";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import moment from "moment";
 import "react-image-gallery/styles/css/image-gallery.css";
-import {
-  Avatar,
-  ButtonGroup,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Rating,
-  Typography,
-} from "@mui/material";
+import { ButtonGroup, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/CartSlice";
 import Cart from "../CartPage/Cart";
+import ProductReview from "./ProductReview";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
-const styles = {
-  listItem: {
-    marginBottom: "16px",
-    border: "1px solid rgba(0, 0, 0, 0.5)",
-    borderRadius: "4px",
-    padding: "16px",
-  },
-  listItemText: {
-    marginBottom: "8px",
-  },
-  date: {
-    marginLeft: "8px",
-  },
-  imageGallery: {
-    width: "100%",
-    height: "20em",
-  },
-};
 
 function ProductDetails({
   product,
@@ -68,7 +40,7 @@ function ProductDetails({
 
   const [value, setValue] = useState(0);
   const averageRating =
-    reviews.reduce((total, review) => total + review.rating, 0) /
+    reviews.reduce((total, review) => parseFloat(total + review.rating), 0) /
     reviews.length;
 
   const handleChange = (event, newValue) => {
@@ -119,6 +91,7 @@ function ProductDetails({
   const handleAddToCart = () => {
     const updatedProduct = { ...product, amount: quantity * product.price };
     const item = { ...updatedProduct, quantity, size };
+    console.log(product, item);
     dispatch(addProduct(item));
     handleDraw();
     setOpen(true);
@@ -154,7 +127,36 @@ function ProductDetails({
       }
     });
   }
-
+  const renderItem = (item) => {
+    return (
+      <div className="image-gallery-image">
+        <img
+          src={item.original}
+          alt={item.originalAlt}
+          srcSet={item.srcSet}
+          sizes={item.sizes}
+          style={{
+            width: "30em",
+            height: "40em",
+          }}
+        />
+      </div>
+    );
+  };
+  const renderThumbInner = (item) => {
+    return (
+      <div className="image-gallery-thumbnail-inner">
+        <img
+          src={item.thumbnail}
+          alt={item.thumbnailAlt}
+          style={{
+            width: "4em",
+            height: "4em",
+          }}
+        />
+      </div>
+    );
+  };
   return (
     <>
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
@@ -167,8 +169,9 @@ function ProductDetails({
                 showNav={false}
                 showPlayButton={false}
                 showFullscreenButton={false}
-                useBrowserFullscreen={true}
-                additionalClass={styles.imageGallery}
+                useBrowserFullscreen={false}
+                renderItem={renderItem}
+                renderThumbInner={renderThumbInner}
               />
             </div>
             <div className="col-lg-6">
@@ -273,81 +276,12 @@ function ProductDetails({
                     <div className="container p-0">{desc}</div>
                   </TabPanel>
                   <TabPanel value={value} index={1}>
-                    {reviews ? (
-                      <div>
-                        <Typography variant="h6" gutterBottom>
-                          Average Rating: {averageRating.toFixed(1)}
-                          <br />
-                          <span> {reviews.length} reviews</span>
-                          <Box
-                            sx={{
-                              "& .MuiSvgIcon-root": {
-                                fontSize: "2em",
-                              },
-                            }}
-                          >
-                            <Rating
-                              precision={0.1}
-                              value={parseFloat(averageRating.toFixed(1))}
-                              readOnly
-                            />
-                          </Box>
-                        </Typography>
-                        <div
-                          style={{ flex: 1, overflowY: "auto", height: "16em" }}
-                        >
-                          <List>
-                            {reviews.map((review, index) => (
-                              <ListItem key={index} style={styles.listItem}>
-                                <ListItemAvatar>
-                                  <Avatar src={image[0]?.original} />
-                                </ListItemAvatar>
-                                <ListItemText
-                                  variant="span"
-                                  primary={review.title}
-                                  secondary={
-                                    <>
-                                      <Typography
-                                        variant="span"
-                                        style={styles.listItemText}
-                                      >
-                                        {review.description}
-                                      </Typography>
-                                      <Box
-                                        component="span"
-                                        display="flex"
-                                        alignItems="center"
-                                      >
-                                        <Rating
-                                          precision={0.2}
-                                          value={parseFloat(review.rating)}
-                                          readOnly
-                                        />
-                                        <Typography
-                                          variant="span"
-                                          color="textSecondary"
-                                        >
-                                          ({review.rating})
-                                        </Typography>
-                                        <Typography
-                                          variant="span"
-                                          color="textSecondary"
-                                          style={styles.date}
-                                        >
-                                          {"  "}
-                                          {moment(review.createdAt).format(
-                                            "dddd MMMM, YYYY"
-                                          )}
-                                        </Typography>
-                                      </Box>
-                                    </>
-                                  }
-                                />
-                              </ListItem>
-                            ))}
-                          </List>
-                        </div>
-                      </div>
+                    {reviews.length > 0 ? (
+                      <ProductReview
+                        reviews={reviews}
+                        image={image}
+                        averageRating={averageRating}
+                      />
                     ) : (
                       <Typography>
                         No reviews available for this product yet.

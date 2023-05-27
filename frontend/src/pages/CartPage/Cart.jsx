@@ -3,7 +3,7 @@ import { Drawer, List, Button, IconButton } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CartItem from "./CartItem";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const theme = createTheme({
@@ -16,6 +16,7 @@ const theme = createTheme({
 
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
   const products = cart.products;
 
   function isEmpty(product) {
@@ -82,19 +83,16 @@ function Cart(props) {
                 </span>
               </div>
             </div>
-            <div className="text-center ">
-              <Link
-                style={{ textDecoration: "none", color: "inherit" }}
-                to="/checkout"
+            <div className="text-center">
+              <Button
+                variant="contained"
+                color="success"
+                sx={{ width: "80%", height: "50px", fontSize: "25px" }}
+                disabled={products.length === 0}
+                onClick={() => navigate("/checkout")}
               >
-                <Button
-                  variant="contained"
-                  color="success"
-                  sx={{ width: "80%", height: "50px", fontSize: "25px" }}
-                >
-                  Checkout
-                </Button>
-              </Link>
+                Checkout
+              </Button>
             </div>
             <div className="cart-ship text-center py-3">
               <p className="px-2 text-capitalize" style={{ fontSize: "1em" }}>

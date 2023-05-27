@@ -139,9 +139,9 @@ function ProductInfo() {
         const res = await publicRequest.get(
           `http://localhost:4000/api/reviews/find/${id}`
         );
-        const fetchProduct = res.data;
+        const fetchReviews = res.data;
 
-        setReviews(fetchProduct);
+        setReviews(fetchReviews);
       } catch (error) {}
     };
     getReviews();

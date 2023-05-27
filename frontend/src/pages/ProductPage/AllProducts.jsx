@@ -58,6 +58,8 @@ function AllProducts({ category, filter }) {
                   title={value.title}
                   id={value._id}
                   category={value.categories[0]}
+                  product={value}
+                  count={value?.count}
                 />
               </div>
             );
