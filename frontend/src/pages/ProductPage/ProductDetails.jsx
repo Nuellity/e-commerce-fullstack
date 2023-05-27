@@ -91,7 +91,6 @@ function ProductDetails({
   const handleAddToCart = () => {
     const updatedProduct = { ...product, amount: quantity * product.price };
     const item = { ...updatedProduct, quantity, size };
-    console.log(product, item);
     dispatch(addProduct(item));
     handleDraw();
     setOpen(true);
