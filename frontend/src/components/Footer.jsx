@@ -14,10 +14,12 @@ function Footer() {
       <div className="container" style={{ position: "relative" }}>
         <div className="row">
           <div className=" col-md-3 mb-3">
-            <h3 className="footer-name  mb-4">AYABA</h3>
+            <Link style={{ textDecoration: "none", color: "inherit" }} to="/">
+              <h3 className="footer-name  mb-4">AYABA</h3>
+            </Link>
             <p className="footer-info">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              mollitia, molestiae quas vel sint commodi repudiandae
+              Discover the Latest Tech Marvels: Explore and Shop Cutting-Edge
+              Devices from Leading Brands
             </p>
             <div>
               <FacebookIcon sx={{ margin: "10px" }} />

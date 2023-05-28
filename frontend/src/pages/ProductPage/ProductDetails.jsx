@@ -137,6 +137,7 @@ function ProductDetails({
           style={{
             width: "30em",
             height: "40em",
+            objectFit: "contain",
           }}
         />
       </div>

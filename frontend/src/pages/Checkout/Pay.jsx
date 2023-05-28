@@ -68,7 +68,7 @@ function Pay() {
   };
 
   const order = {
-    userId: user._id,
+    userId: user ? user._id : null,
     deliveryName: `${userData.firstName} ${userData.lastName}`,
     products: cart.products.map((item) => ({
       productId: item._id,
@@ -104,6 +104,12 @@ function Pay() {
       submitData();
     }
   }, [formErrors, errorState]);
+
+  useEffect(() => {
+    if (!user || !user._id) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="row">

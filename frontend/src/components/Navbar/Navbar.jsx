@@ -123,6 +123,10 @@ function Navbar() {
                           aria-controls={open ? "account-menu" : undefined}
                           aria-haspopup="true"
                           aria-expanded={open ? "true" : undefined}
+                          classes={{ root: "customButton" }}
+                          style={{
+                            borderRadius: 0,
+                          }}
                         >
                           <PersonIcon
                             className="nav-icon"
@@ -130,7 +134,7 @@ function Navbar() {
                           />
                           <Typography
                             className="nav-item"
-                            sx={{ marginRight: "60px" }}
+                            sx={{ marginRight: "2em" }}
                           >
                             Account
                           </Typography>
@@ -141,6 +145,10 @@ function Navbar() {
                           size="large"
                           aria-label="item added"
                           onClick={() => setCartDraw(true)}
+                          classes={{ root: "customButton" }}
+                          style={{
+                            borderRadius: 0,
+                          }}
                         >
                           <Badge badgeContent={cartQuantity} color="error">
                             <ShoppingBagIcon

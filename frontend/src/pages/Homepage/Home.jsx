@@ -3,8 +3,6 @@ import { Box, Fab, Fade, useScrollTrigger } from "@mui/material/";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Footer from "../../components/Footer";
 import "./home.css";
-import HomeAdvert from "./HomeAdvert";
-import HomeBanner from "./HomeBanner";
 import HomeBrand from "./HomeBrand";
 import HomeCategory from "./HomeCategory";
 import HomeDescription from "./HomeDescription";
@@ -55,11 +53,9 @@ function Home() {
       <MainImage />
       <HomeBrand />
       <HomeCategory />
-      <HomeAdvert />
       <HomeFeatured />
-      <HomeBanner />
-      <HomeDescription />
       <HomeSeller />
+      <HomeDescription />
       <Subscribe />
       <Footer />
       <ScrollTop>
