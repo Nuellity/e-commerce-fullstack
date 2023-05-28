@@ -24,8 +24,9 @@ function MainImage() {
               className="animate__animated animate__lightSpeedInRight"
               style={{ animationDelay: "2s" }}
             >
-              you can explore and shop different collections from various brands
-              here
+              Embark on a Technological Adventure: Experience the Ultimate
+              Fusion of Innovation and Style with our Spectacular Range of
+              Laptops, TVs, and Gaming Chairs!
             </p>
             <Button
               color="primary"
@@ -44,10 +45,10 @@ function MainImage() {
             </Button>
           </div>
         </div>
-        <div className="col-lg-6 px-lg-5">
+        <div className="col-lg-6 px-lg-5 img-wrapper">
           <img
             className=" title-img"
-            src="https://images.unsplash.com/photo-1603344797033-f0f4f587ab60?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80"
+            src="https://images.unsplash.com/photo-1536412597336-ade7b523ecfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
             alt="advert"
           />
         </div>

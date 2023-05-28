@@ -57,7 +57,12 @@ function ProductCard({
           to={`/product/${id}`}
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          <img src={image} alt={title} className="image img-fluid" />
+          <img
+            src={image}
+            alt={title}
+            className="image img-fluid"
+            style={{ objectFit: "contain" }}
+          />
           {isSale && (
             <div className="sale-overlay">
               <div>SALE</div>
@@ -86,7 +91,12 @@ export const BigCard = ({ image, title, category, productQuantity, id }) => {
           to={`/product/${id}`}
           style={{ textDecoration: "none", color: "inherit" }}
         >
-          <img src={image} alt={title} className="big-image img-fluid" />
+          <img
+            src={image}
+            alt={title}
+            className="big-image img-fluid"
+            style={{ objectFit: "contain" }}
+          />
         </Link>
         <div className="big-overlay">
           <div>{category}</div>
@@ -299,7 +309,12 @@ export const OrderCard = ({ title, image, status, orderId, orderDate }) => {
           <img
             src={image}
             alt="Avatar"
-            style={{ width: "8rem", height: "7rem", borderRadius: "5px" }}
+            style={{
+              width: "8rem",
+              height: "7rem",
+              borderRadius: "5px",
+              objectFit: "contain",
+            }}
           />
         </div>
         <div className="col-lg-6">
@@ -370,7 +385,12 @@ export const ReviewCard = ({ title, image, orderId }) => {
           <img
             src={image}
             alt="Avatar"
-            style={{ width: "100%", height: "8rem", borderRadius: "5px" }}
+            style={{
+              width: "100%",
+              height: "8rem",
+              borderRadius: "5px",
+              objectFit: "contain",
+            }}
           />
         </div>
         <div className={`col-lg-6 ${isMatch ? "p-0" : "pl-3"}`}>
@@ -421,7 +441,12 @@ export const RateCard = ({ title, image, handleChange, value }) => {
           <img
             src={image}
             alt="Avatar"
-            style={{ width: "8rem", height: "8rem", borderRadius: "5px" }}
+            style={{
+              width: "8rem",
+              height: "8rem",
+              borderRadius: "5px",
+              objectFit: "contain",
+            }}
           />
         </div>
         <div className="col-lg-6">
@@ -487,6 +512,7 @@ export const SavedCard = ({ image, title, id, handleDelete }) => {
               width: "8rem",
               height: "8rem",
               borderRadius: "5px",
+              objectFit: "contain",
             }}
           />
         </div>

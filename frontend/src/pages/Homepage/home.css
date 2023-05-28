@@ -116,61 +116,7 @@ span {
 
 
 
-/* BANNER STYLES */
-.banner {
-  background-image: url("/public/images/img/banner/parallax.jpg");
-  width: 100%;
-  height: 60vh;
-  background-size: cover;
-  background-position: top 70px center;
-  background-repeat: no repeat;
-  background-attachment: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
 
-.banner-title {
-  color: #FFFFFF;
-}
-
-
-
-
-
-/* ADVERT STYLES */
-.advert {
-  position: relative;
-
-}
-
-.advert-title {
-  color: #FFFFFF;
-  position: absolute;
-  bottom: 30%;
-  right: 5em;
-  width: 38%;
-}
-
-.advert-back {
-  position: absolute;
-  top: 6em;
-  right: 1em;
-
-}
-
-
-
-.advert-title p {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.5em;
-  line-height: 1.5;
-  text-transform: capitalize;
-
-}
 
 
 
@@ -734,7 +680,7 @@ span {
   .title-img {
     width: 100%;
     height: 20em;
-    border-radius: 0 5em;
+    border-radius: 0 em;
 
   }
 
@@ -811,7 +757,7 @@ span {
     font-family: 'Roboto';
     font-style: bold;
     font-weight: 500;
-    font-size: 2em;
+    font-size: 1.5em;
     line-height: 1.2;
     text-transform: capitalize;
     text-align: center;
@@ -819,6 +765,30 @@ span {
   }
 
 
+}
+
+@media only screen and (max-width: 1281px) {
+  .title-img {
+    width: 100%;
+    height: 30em;
+    border-radius: 0 4em;
+
+
+  }
+
+  .img-wrapper {
+    margin: auto 0;
+  }
+
+  .main-title p {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5em;
+    line-height: 1.875em;
+    text-transform: capitalize;
+    color: #000000;
+  }
 }
 
 
@@ -835,6 +805,14 @@ span {
     font-size: 14px;
     line-height: 1.5;
     text-transform: capitalize;
+
+  }
+
+  .title-img {
+    width: 100%;
+    height: 20em;
+    border-radius: 0 5em;
+    object-fit: cover;
 
   }
 }

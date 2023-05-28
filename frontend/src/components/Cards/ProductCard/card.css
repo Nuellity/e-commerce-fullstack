@@ -71,7 +71,9 @@
 .buy-image {
     display: block;
     width: 19.5rem;
-    height: 25rem;
+    height: 20rem;
+    object-fit: contain;
+
 }
 
 .product-name {
@@ -89,8 +91,8 @@
     width: 100%;
     transition: .5s ease;
     opacity: 0;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 1.25em;
+    padding: 1.25em;
     text-align: center;
 }
 
@@ -349,6 +351,7 @@
         display: block;
         width: 100%;
         height: 25rem;
+        object-fit: contain;
     }
 
     .image {
@@ -426,6 +429,7 @@
         display: block;
         width: 100%;
         height: 25rem;
+        object-fit: contain;
     }
 
     .buy-overlay {
@@ -516,6 +520,21 @@
 @media screen and (min-width: 960px) and (max-width: 1399px) {
     .product-name {
         width: 16rem;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        background: #1E2832;
+        display: flex;
+        justify-content: space-between;
+        color: #f1f1f1;
+        width: 100%;
+        transition: .5s ease;
+        opacity: 0;
+        font-size: 0.8em;
+        padding: 1em;
+        text-align: center;
     }
 }
 
