@@ -1,5 +1,10 @@
 import { publicRequest } from "../axiosRequest";
 import {
+  getProductFailure,
+  getProductStart,
+  getProductSuccess,
+} from "./ProductSlice";
+import {
   forgetFailure,
   forgetStart,
   forgetSuccess,
@@ -70,5 +75,15 @@ export const forgetPassword = async (dispatch, user) => {
     } else {
       console.log(error);
     }
+  }
+};
+
+export const getProducts = async (dispatch) => {
+  dispatch(getProductStart());
+  try {
+    const res = await publicRequest.get("/products");
+    dispatch(getProductSuccess(res.data));
+  } catch (err) {
+    dispatch(getProductFailure());
   }
 };

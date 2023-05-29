@@ -91,14 +91,10 @@ function Navbar() {
                     sx={{
                       paddingRight: isMatch ? "10px" : "50px",
                       fontFamily: "AmstelvarAlpha",
-                      fontStyle: "normal",
-                      fontWeight: "400px",
+                      fontStyle: "Bold",
+                      fontWeight: "600px",
                       fontSize: "28px",
-                      lineHeight: "34px",
-                      width: "98px",
-                      height: "34px",
-                      left: "611px",
-                      top: "0px",
+                      lineHeight: 1.1,
                       color: "#000000",
                       cursor: "pointer",
                     }}
@@ -107,7 +103,7 @@ function Navbar() {
                   </Typography>
                 </Link>
               </div>
-              <div>
+              <div style={{ width: "30em" }}>
                 <SearchBar />
               </div>
 

@@ -38,6 +38,7 @@ function MainImage() {
                 width: "14em",
                 height: "4.5em",
                 backgroundColor: "#1E2832",
+                fontSize: "1.2em",
               }}
               startIcon={<ShoppingBagIcon />}
             >
