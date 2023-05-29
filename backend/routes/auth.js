@@ -35,7 +35,7 @@ router.post("/signin", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(401).json("Wrong Email!");
+      return res.status(401).json("Wrong Credentials!! Please try again");
     }
 
     const hashedPassword = CryptoJS.AES.decrypt(
@@ -44,7 +44,7 @@ router.post("/signin", async (req, res) => {
     );
     const correctPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
     if (correctPassword !== req.body.password) {
-      return res.status(401).json("Wrong password!!!");
+      return res.status(401).json("Wrong Credentials!! Please try again");
     }
 
     const accesstoken = jwt.sign(
@@ -105,7 +105,7 @@ router.post("/forgotpassword", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(401).json("Account not found!!");
+      return res.status(401).json("Wrong Credentials!! Please try again");
     }
     if (user.isAdmin) {
       return res.status(401).json("You are not authorized");

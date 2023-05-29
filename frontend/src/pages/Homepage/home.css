@@ -85,9 +85,10 @@ span {
 
 /* MAIN IMAGE STYLES */
 .title-img {
-  width: 70%;
+  width: 90%;
   border-radius: 0 7em;
   transform: matrix(-1, 0, 0, 1, 0, 0);
+  object-fit: contain;
 
 }
 

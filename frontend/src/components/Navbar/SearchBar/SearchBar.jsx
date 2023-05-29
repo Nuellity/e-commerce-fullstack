@@ -1,67 +1,65 @@
-import React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { useMediaQuery, useTheme } from "@mui/material";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  color: "black",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    border: "1px solid grey",
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "100ch",
-    },
-  },
-}));
+import React, { useEffect, useState } from "react";
+import { TextField, Autocomplete, InputAdornment } from "@mui/material";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../../redux/ApiCalls";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar() {
-  const theme = useTheme();
+  const [searchValue, setSearchValue] = useState(null);
+  const products = useSelector((state) => state.product.products);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  useEffect(() => {
+    const fetchProduct = () => {
+      getProducts(dispatch);
+    };
+    fetchProduct();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const handleSearch = (searchValue) => {
+      if (searchValue && searchValue.trim() !== "") {
+        const selectedProduct = products.find(
+          (product) => product.title === searchValue
+        );
+
+        if (selectedProduct) {
+          navigate(`/product/${selectedProduct._id}`);
+          window.location.reload();
+        }
+      }
+    };
+
+    handleSearch(searchValue);
+  }, [searchValue, products, navigate]);
 
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search..."
-        inputProps={{ "aria-label": "search" }}
-        sx={{ width: isMatch ? "150px" : "400px" }}
-      />
-    </Search>
+    <Autocomplete
+      disableClearable
+      options={products.map((option) => option.title)}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Search"
+          type="search"
+          placeholder="Search..."
+          InputProps={{
+            ...params.InputProps,
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchOutlinedIcon style={{ cursor: "pointer" }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      )}
+      value={searchValue}
+      onChange={(event, value) => {
+        setSearchValue(value);
+      }}
+    />
   );
 }
 
