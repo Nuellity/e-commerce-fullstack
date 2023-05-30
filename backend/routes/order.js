@@ -118,6 +118,7 @@ router.get("/incomeperday", verifyTokenAdmin, async (req, res) => {
       },
       { $project: { day: { $dayOfYear: "$createdAt" }, sales: "$amount" } },
       { $group: { _id: "$day", totalOrders: { $sum: "$sales" } } },
+      { $sort: { _id: 1 } },
     ];
     const income = await Order.aggregate(pipeline);
     res.status(200).json(income);

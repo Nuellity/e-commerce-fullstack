@@ -43,12 +43,14 @@ function OrderList() {
     {
       field: "amount",
       headerName: "Price($)",
-      flex: 1,
       cellClassName: "name-column--cell",
     },
     {
       field: "createdAt",
       headerName: "Date",
+      headerAlign: "center",
+      align: "center",
+      flex: 1,
       renderCell: (params) => {
         return (
           <div>
@@ -60,6 +62,7 @@ function OrderList() {
     {
       field: "status",
       headerName: "Status",
+      align: "center",
       renderCell: (params) => {
         return (
           <div>
