@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Chip,
@@ -188,6 +188,19 @@ export const BuyCard = ({
     handleDraw();
     setAddItem(true);
   };
+
+  useEffect(() => {
+    const fetchSavedItem = async () => {
+      try {
+        const res = await userRequest.get(`/wishlists/find/${user}`);
+        const savedItems = res.data;
+        const isFav = savedItems.some((item) => item.productId === id);
+        setIsFav(isFav);
+      } catch (error) {}
+    };
+
+    fetchSavedItem();
+  }, []);
 
   return (
     <>
