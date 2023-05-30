@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import {
   Table,
@@ -11,22 +12,14 @@ import {
   Typography,
 } from "@mui/material";
 import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilledOutlined";
-
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import { tokens } from "../theme";
 import moment from "moment";
-
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
-function UserTransaction() {
+function UserTransaction({ transactions }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const allOrder = useSelector((state) => state.order.orders);
-  const transactionOrders = allOrder.slice().reverse();
-
-  console.log(allOrder);
-
   const navigate = useNavigate();
 
   return (
@@ -77,7 +70,7 @@ function UserTransaction() {
         </TableHead>
 
         <TableBody>
-          {transactionOrders.map((order, index) => (
+          {transactions.map((order, index) => (
             <TableRow
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               key={index}

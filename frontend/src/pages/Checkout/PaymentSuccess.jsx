@@ -19,30 +19,48 @@ function PaymentSuccess() {
   const order = useSelector((state) => state.order.order);
   const dispatch = useDispatch();
 
-  const isPayOnDelivery = order.paymentMethod === "Pay on Delivery";
+  const isPayOnDelivery = order.paymentMethod === "Pay On Delivery";
 
-  useEffect(() => {
-    dispatch(clearProduct());
-  }, []);
+  const updatedOrder = {
+    ...order,
+    paymentIntent: paymentIntent ? paymentIntent : "none",
+  };
 
-  useEffect(() => {
-    const updatedOrder = { ...order, paymentIntent: paymentIntent };
-    const createOrder = async () => {
-      try {
-        if (Object.keys(order).length === 0) {
-          return;
-        }
+  const createOrder = async () => {
+    try {
+      if (
+        (paymentIntent === null && isPayOnDelivery) ||
+        (typeof paymentIntent === "string" && paymentIntent !== null)
+      ) {
         const res = await userRequest.post("/orders", updatedOrder);
         setOrderId(res.data._id);
         dispatch(clearOrder());
-      } catch (error) {
-        if (error.response && error.response.status === 403) {
-          logout(dispatch);
-        }
       }
-    };
-    createOrder();
-  }, [dispatch, isPayOnDelivery, order, paymentIntent]);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        window.location.reload();
+      }
+      if (error.response && error.response.status === 403) {
+        logout(dispatch);
+      }
+      if (error.response && error.response.status === 500) {
+        console.log(error.response.data.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    dispatch(clearProduct());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (
+      isPayOnDelivery ||
+      (typeof paymentIntent === "string" && paymentIntent !== null)
+    ) {
+      createOrder();
+    }
+  }, [isPayOnDelivery, paymentIntent]);
 
   return (
     <>

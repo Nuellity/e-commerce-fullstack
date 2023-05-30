@@ -10,10 +10,10 @@ import Chart from "../../components/Chart";
 import Users from "../../components/Users";
 import UserTransaction from "../../components/UserTransaction";
 import { userRequest } from "../../axiosRequest";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { logout } from "../../redux/ApiCalls";
+import { getOrders, logout } from "../../redux/ApiCalls";
 
 function DashBoard() {
   const theme = useTheme();
@@ -23,6 +23,9 @@ function DashBoard() {
   const [revenue, setRevenue] = useState([]);
   const [dailySales, setDailySales] = useState([]);
   const [dailyOrders, setDailyOrders] = useState(0);
+  const allOrder = useSelector((state) => state.order.orders);
+  const transactionOrders = allOrder.slice().reverse();
+
   const [userStats, setUserStats] = useState([
     { name: "Jan", activeUser: 0 },
     { name: "Feb", activeUser: 0 },
@@ -65,6 +68,10 @@ function DashBoard() {
   const currentMonth = newDate.getMonth() + 1;
 
   const previousMonth = revenue.find((item) => item._id === currentMonth - 1);
+
+  useEffect(() => {
+    getOrders(dispatch, navigate);
+  }, []);
 
   useEffect(() => {
     const getRevenue = async () => {
@@ -353,7 +360,7 @@ function DashBoard() {
               </Typography>
             </Box>
             <Box style={{ maxHeight: "260px", overflowY: "auto" }}>
-              <UserTransaction />
+              <UserTransaction transactions={transactionOrders} />
             </Box>
           </Box>
         </div>

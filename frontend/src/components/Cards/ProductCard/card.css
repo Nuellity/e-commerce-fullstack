@@ -92,7 +92,7 @@
     transition: .5s ease;
     opacity: 0;
     font-size: 1.25em;
-    padding: 1.25em;
+    padding: 0.5em;
     text-align: center;
 }
 
@@ -533,7 +533,7 @@
         transition: .5s ease;
         opacity: 0;
         font-size: 0.8em;
-        padding: 1em;
+        padding: 1overem;
         text-align: center;
     }
 }
