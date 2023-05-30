@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Chip,
@@ -158,9 +158,17 @@ export const BuyCard = ({
     const savedItem = { userId: user, productId: id };
 
     try {
-      const res = await userRequest.post("wishlists", savedItem);
-      setIsFav(true);
-      setFav(true);
+      const res = await userRequest.get(`/wishlists/find/${user}`);
+      const savedItems = res.data;
+      const isProductSaved = savedItems.some((item) => item.productId === id);
+
+      if (isProductSaved) {
+        setDuplicate(true);
+      } else {
+        const saveRes = await userRequest.post("wishlists", savedItem);
+        setIsFav(true);
+        setFav(true);
+      }
     } catch (error) {
       if (error.response && error.response.status === 403) {
         logout(dispatch);
@@ -173,6 +181,7 @@ export const BuyCard = ({
       }
     }
   };
+
   const handleDraw = () => {
     setCartDraw(!cartDraw);
   };
@@ -188,6 +197,19 @@ export const BuyCard = ({
     handleDraw();
     setAddItem(true);
   };
+
+  useEffect(() => {
+    const fetchSavedItem = async () => {
+      try {
+        const res = await userRequest.get(`/wishlists/find/${user}`);
+        const savedItems = res.data;
+        const isFav = savedItems.some((item) => item.productId === id);
+        setIsFav(isFav);
+      } catch (error) {}
+    };
+
+    fetchSavedItem();
+  }, []);
 
   return (
     <>
