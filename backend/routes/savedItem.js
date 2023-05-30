@@ -2,7 +2,7 @@ const router = require("express").Router();
 const SavedItem = require("../models/savedItem");
 const { verifyTokenAdmin, verifyToken } = require("./verify");
 
-// CREATE ORDER
+// CREATE SAVED
 
 router.post("/", verifyToken, async (req, res) => {
   const newSavedItem = new SavedItem(req.body);

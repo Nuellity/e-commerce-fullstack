@@ -158,9 +158,17 @@ export const BuyCard = ({
     const savedItem = { userId: user, productId: id };
 
     try {
-      const res = await userRequest.post("wishlists", savedItem);
-      setIsFav(true);
-      setFav(true);
+      const res = await userRequest.get(`/wishlists/find/${user}`);
+      const savedItems = res.data;
+      const isProductSaved = savedItems.some((item) => item.productId === id);
+
+      if (isProductSaved) {
+        setDuplicate(true);
+      } else {
+        const saveRes = await userRequest.post("wishlists", savedItem);
+        setIsFav(true);
+        setFav(true);
+      }
     } catch (error) {
       if (error.response && error.response.status === 403) {
         logout(dispatch);
@@ -173,6 +181,7 @@ export const BuyCard = ({
       }
     }
   };
+
   const handleDraw = () => {
     setCartDraw(!cartDraw);
   };
