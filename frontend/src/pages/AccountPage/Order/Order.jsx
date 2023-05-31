@@ -84,6 +84,7 @@ function Order() {
   const [value, setValue] = useState(0);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+  const transactionOrders = orders.slice().reverse();
 
   const user = useSelector((state) => state.user.currentUser._id);
 
@@ -175,7 +176,7 @@ function Order() {
                 ) : orders.length === 0 ? (
                   <NoOrder />
                 ) : (
-                  orders.map((value) => (
+                  transactionOrders.map((value) => (
                     <OrderCard
                       key={value._id}
                       title={value.products}
