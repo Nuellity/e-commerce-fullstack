@@ -317,6 +317,7 @@ export const OrderCard = ({ title, image, status, orderId, orderDate }) => {
   const navigate = useNavigate();
   const date = moment(orderDate);
   const formattedDate = date.format("MMMM Do YYYY");
+  console.log(status);
   return (
     <div
       style={{
@@ -351,12 +352,11 @@ export const OrderCard = ({ title, image, status, orderId, orderDate }) => {
             <div className="pt-2">
               {status === "pending" ? (
                 <>
-                  {" "}
-                  <Chip label="Delivered" color="success" /> <br />{" "}
+                  <Chip label="Processing" color="secondary" /> <br />
                 </>
               ) : (
                 <>
-                  <Chip label="Processing" color="secondary" /> <br />
+                  <Chip label="Delivered" color="success" /> <br />
                 </>
               )}
 

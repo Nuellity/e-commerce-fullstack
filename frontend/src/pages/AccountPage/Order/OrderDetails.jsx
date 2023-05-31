@@ -182,6 +182,13 @@ function OrderDetails() {
                                     {order?.status === "pending" ? (
                                       <div>
                                         <Chip
+                                          label="Processing"
+                                          color="secondary"
+                                        />
+                                      </div>
+                                    ) : (
+                                      <>
+                                        <Chip
                                           label="DELIVERED"
                                           color="success"
                                           sx={{
@@ -192,13 +199,6 @@ function OrderDetails() {
                                           label="NON-REFUNDABLE"
                                           color="secondary"
                                         />
-                                      </div>
-                                    ) : (
-                                      <>
-                                        <Chip
-                                          label="Processing"
-                                          color="secondary"
-                                        />{" "}
                                         <br />
                                       </>
                                     )}
