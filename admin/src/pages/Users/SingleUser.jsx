@@ -46,7 +46,7 @@ function SingleUser() {
   const customer = useSelector((state) =>
     state.customer.customers.find((customer) => customer._id === customerId)
   );
-
+  console.log(customer, customer?.email);
   const handleInputChange = (event) => {
     setInput((prev) => {
       return { ...prev, [event.target.name]: event.target.value };
@@ -151,10 +151,10 @@ function SingleUser() {
             }}
           >
             <div className="d-flex align-items-center">
-              <Avatar src={customer.img} alt="" />
+              <Avatar src={customer?.img} alt="" />
               <div className="mx-3">
                 <Typography color={colors.greenAccent[100]} fontWeight="600">
-                  {customer.firstName} {customer.lastName}
+                  {customer?.firstName} {customer?.lastName}
                 </Typography>
                 <Typography
                   color={colors.greenAccent[100]}
@@ -162,7 +162,7 @@ function SingleUser() {
                   fontWeight="300"
                 >
                   {" "}
-                  {customer.isAdmin ? "Admin" : "Customer"}
+                  {customer?.isAdmin ? "Admin" : "Customer"}
                 </Typography>
               </div>
             </div>
@@ -175,13 +175,17 @@ function SingleUser() {
               <div className="my-2">
                 <MailOutlineOutlinedIcon sx={{ marginRight: "7px" }} />
                 <span style={{ color: colors.greenAccent[400] }}>
-                  {customer.email}
+                  {customer?.email}
+                </span>
+                <br />
+                <span style={{ color: colors.greenAccent[400] }}>
+                  {customer?.googleId}
                 </span>
               </div>
               <div className="my-2">
                 <LocationSearchingOutlinedIcon sx={{ marginRight: "7px" }} />
                 <span style={{ color: colors.greenAccent[400] }}>
-                  {/* {customer.address.state}| {customer.address.country} */}
+                  {customer?.address?.state}| {customer?.address?.country}
                 </span>
               </div>
             </div>

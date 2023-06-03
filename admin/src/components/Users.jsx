@@ -57,7 +57,7 @@ function Users() {
             <ListItemAvatar>
               <Avatar alt="user avatar" src={user.image} />
             </ListItemAvatar>
-            <ListItemText primary={`${user.firstName} ${user.lastName}`} />
+            <ListItemText primary={user?.email} />
           </ListItem>
         );
       })}

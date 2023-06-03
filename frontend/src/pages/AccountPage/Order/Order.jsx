@@ -80,11 +80,67 @@ const NoOrder = () => {
   );
 };
 
+const NoClosedOrder = () => {
+  const navigate = useNavigate();
+  return (
+    <div
+      className="d-flex justify-content-center pt-5"
+      style={{ textAlign: "center" }}
+    >
+      <div className="py-4">
+        <div
+          style={{
+            background: "rgba(30, 40, 50, 0.05)",
+            padding: "1em",
+            height: "8em",
+            width: "8em",
+            borderRadius: "50%",
+            margin: "auto",
+          }}
+        >
+          <ShoppingCartOutlinedIcon
+            sx={{
+              fontSize: "6em",
+              color: "skyblue",
+            }}
+          />
+        </div>
+        <p className="card-title pt-3 pb-2">
+          You currently have no closed orders.
+        </p>
+        <p className="card-text pb-4">
+          All your closed orders will be displayed here
+        </p>
+        <Button
+          onClick={() => navigate("/")}
+          variant="contained"
+          sx={{
+            fontSize: "1rem",
+            backgroundColor: "skyblue",
+            "&:hover": {
+              backgroundColor: "#4a90e2",
+            },
+          }}
+        >
+          CONTINUE SHOPPING
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 function Order() {
   const [value, setValue] = useState(0);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const transactionOrders = orders.slice().reverse();
+
+  const deliveredOrders = transactionOrders.filter(
+    (order) => order.status === "completed"
+  );
+  const pendingOrders = transactionOrders.filter(
+    (order) => order.status === "pending"
+  );
 
   const user = useSelector((state) => state.user.currentUser._id);
 
@@ -173,10 +229,10 @@ function Order() {
               <div className="container p-0 ">
                 {loading ? (
                   <OrderSkeleton />
-                ) : orders.length === 0 ? (
+                ) : pendingOrders.length === 0 ? (
                   <NoOrder />
                 ) : (
-                  transactionOrders.map((value) => (
+                  pendingOrders.map((value) => (
                     <OrderCard
                       key={value._id}
                       title={value.products}
@@ -191,46 +247,24 @@ function Order() {
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <div
-              className="d-flex justify-content-center pt-5"
-              style={{ textAlign: "center" }}
-            >
-              <div className="py-4">
-                <div
-                  style={{
-                    background: "rgba(30, 40, 50, 0.05)",
-                    padding: "1em",
-                    height: "8em",
-                    width: "8em",
-                    borderRadius: "50%",
-                    margin: "auto",
-                  }}
-                >
-                  <ShoppingCartOutlinedIcon
-                    sx={{
-                      fontSize: "6em",
-                      color: "skyblue",
-                    }}
-                  />
-                </div>
-                <p className="card-title pt-3 pb-2">
-                  You currently have no closed order
-                </p>
-                <p className="card-text pb-4">
-                  All your closed orders will be displayed here
-                </p>
-                <Button
-                  variant="contained"
-                  sx={{
-                    fontSize: "1rem",
-                    backgroundColor: "skyblue",
-                    "&:hover": {
-                      backgroundColor: "#4a90e2",
-                    },
-                  }}
-                >
-                  CONTINUE SHOPPING
-                </Button>
+            <div className="order-list">
+              <div className="container p-0 ">
+                {loading ? (
+                  <OrderSkeleton />
+                ) : deliveredOrders.length === 0 ? (
+                  <NoClosedOrder />
+                ) : (
+                  deliveredOrders.map((value) => (
+                    <OrderCard
+                      key={value._id}
+                      title={value.products}
+                      image={value.products[0].img}
+                      status={value.status}
+                      orderId={value._id}
+                      orderDate={value.updatedAt}
+                    />
+                  ))
+                )}
               </div>
             </div>
           </TabPanel>

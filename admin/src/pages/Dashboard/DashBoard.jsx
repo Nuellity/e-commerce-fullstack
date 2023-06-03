@@ -13,7 +13,7 @@ import { userRequest } from "../../axiosRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import { getOrders, logout } from "../../redux/ApiCalls";
+import { getCustomers, getOrders, logout } from "../../redux/ApiCalls";
 
 function DashBoard() {
   const theme = useTheme();
@@ -160,6 +160,10 @@ function DashBoard() {
     };
     getStats();
   }, [months]);
+
+  useEffect(() => {
+    getCustomers(dispatch);
+  }, [dispatch]);
 
   return (
     <div className="container mt-2 ">

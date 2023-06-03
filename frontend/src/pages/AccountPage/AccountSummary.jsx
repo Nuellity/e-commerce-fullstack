@@ -3,9 +3,13 @@ import "./account.css";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import EditIcon from "@mui/icons-material/Edit";
 import { Button, IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function AccountSummary() {
+  const user = useSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
+  console.log(user);
   return (
     <div className="card main-card">
       <p className="card-header header">Account Overview</p>
@@ -16,8 +20,9 @@ function AccountSummary() {
             <div className="card h-100">
               <p className="card-header">ACCOUNT DETAILS</p>
               <div className="card-body">
-                <p className="card-title">Test Name</p>
-                <p className="card-text">test@gmail.com</p>
+                <p className="card-title">{user?.firstName}</p>
+                <p className="card-title">{user?.lastName}</p>
+                <p className="card-text">{user?.email}</p>
               </div>
             </div>
           </div>
@@ -37,12 +42,12 @@ function AccountSummary() {
               <div className="card-body">
                 <p className="card-title">Your default shipping address:</p>
                 <p className="card-text">
-                  Test Name <br />
-                  20 adeoye street
+                  {user?.address}
                   <br />
-                  Abule Egba, Lagos
+                  {user?.city} <br />
+                  {user?.state}
                   <br />
-                  100238
+                  {user?.zipcode}
                 </p>
               </div>
             </div>
@@ -73,7 +78,11 @@ function AccountSummary() {
                 </p>
               </div>
               <div className="card-footer" style={{ border: "none" }}>
-                <Button variant="text" sx={{ color: "skyblue" }}>
+                <Button
+                  variant="text"
+                  sx={{ color: "skyblue" }}
+                  onClick={() => navigate("/profile/newsletter")}
+                >
                   EDIT NEWSLETTER REFERENCE
                 </Button>
               </div>
