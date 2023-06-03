@@ -1,13 +1,25 @@
 const router = require("express").Router();
 const Order = require("../models/order");
+const Product = require("../models/product");
 const { verifyTokenAdmin, verifyToken } = require("./verify");
 
 // CREATE ORDER
 
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
+
   try {
     const savedOrder = await newOrder.save();
+    for (const product of savedOrder.products) {
+      const productId = product.productId;
+      const quantity = product.quantity;
+
+      await Product.updateOne(
+        { _id: productId },
+        { $inc: { count: -quantity } }
+      );
+    }
+
     res.status(200).json(savedOrder);
   } catch (error) {
     res.status(500).json(error);

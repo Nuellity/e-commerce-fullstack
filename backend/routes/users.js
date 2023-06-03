@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const CryptoJS = require("crypto-js");
 const User = require("../models/user");
+const GoogleAuth = require("../models/googleAuth");
 const { verifyTokenAuthorization, verifyTokenAdmin } = require("./verify");
 
 //CREATE USER
@@ -77,9 +78,29 @@ router.get("/find/:id", verifyTokenAdmin, async (req, res) => {
 router.get("/", verifyTokenAdmin, async (req, res) => {
   const query = req.query.new;
   try {
-    const users = query
-      ? await User.find().sort({ _id: -1 }).limit(5)
-      : await User.find();
+    let users = [];
+
+    if (query) {
+      const userQuery = await User.find().sort({ createdAt: -1 }).limit(5);
+      users.push(...userQuery);
+    } else {
+      const userQuery = await User.find();
+      users.push(...userQuery);
+    }
+
+    if (query) {
+      const googleAuthQuery = await GoogleAuth.find()
+        .sort({ createdAt: -1 })
+        .limit(5);
+      users.push(...googleAuthQuery);
+    } else {
+      const googleAuthQuery = await GoogleAuth.find();
+      users.push(...googleAuthQuery);
+    }
+
+    // Sort the combined user array by createdAt in descending order
+    users.sort((a, b) => b.createdAt - a.createdAt);
+
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json(error);
@@ -92,16 +113,58 @@ router.get("/stats", verifyTokenAdmin, async (req, res) => {
   const date = new Date();
   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
   try {
-    const data = await User.aggregate([
+    const userData = await User.aggregate([
       { $match: { createdAt: { $gte: lastYear } } },
       { $project: { month: { $month: "$createdAt" } } },
       { $group: { _id: "$month", totalUsers: { $sum: 1 } } },
     ]);
 
-    res.status(200).json(data);
+    const googleAuthData = await GoogleAuth.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } },
+      { $project: { month: { $month: "$createdAt" } } },
+      { $group: { _id: "$month", totalUsers: { $sum: 1 } } },
+    ]);
+
+    const combinedData = mergeAggregationResults(userData, googleAuthData);
+
+    const formattedData = formatData(combinedData);
+
+    res.status(200).json(formattedData);
   } catch (error) {
     res.status(500).json(error);
   }
 });
+
+// Function to merge the aggregation results from User and GoogleAuth collections
+function mergeAggregationResults(userData, googleAuthData) {
+  const mergedData = {};
+
+  // Merge User collection data
+  for (const user of userData) {
+    mergedData[user._id] = user.totalUsers;
+  }
+
+  // Merge GoogleAuth collection data
+  for (const googleAuthUser of googleAuthData) {
+    if (mergedData.hasOwnProperty(googleAuthUser._id)) {
+      mergedData[googleAuthUser._id] += googleAuthUser.totalUsers;
+    } else {
+      mergedData[googleAuthUser._id] = googleAuthUser.totalUsers;
+    }
+  }
+
+  return mergedData;
+}
+
+// Function to format the data into the desired format
+function formatData(combinedData) {
+  const formattedData = [];
+
+  for (const [month, totalUsers] of Object.entries(combinedData)) {
+    formattedData.push({ _id: parseInt(month), totalUsers });
+  }
+
+  return formattedData;
+}
 
 module.exports = router;

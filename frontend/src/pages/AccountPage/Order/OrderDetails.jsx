@@ -104,6 +104,7 @@ function OrderDetails() {
     fetchOrder();
   }, [id]);
 
+  console.log(order);
   return (
     <div className="card main-card">
       <p className="card-header header px-0">
@@ -303,10 +304,10 @@ function OrderDetails() {
                     <div className="pt-4">
                       <p className="card-title">Shipping Address</p>
                       <p className="card-text">
-                        {`${order?.userFirstName}  ${order?.userLastName}`}{" "}
+                        {`${order?.deliveryName}`}
                         <br />
                         {order?.address?.address} <br />
-                        {`${order?.address?.city}, ${order?.address?.state}`}
+                        {`${order?.address?.city}, ${order?.address?.state}, ${order?.address?.postalCode}`}
                       </p>
                     </div>
                     <div className="pt-4">

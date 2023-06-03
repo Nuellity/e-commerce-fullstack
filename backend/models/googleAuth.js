@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const googleAuthSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     googleId: { type: String, required: true, unique: true },
@@ -15,4 +15,4 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("GoogleAuth", userSchema);
+module.exports = mongoose.model("GoogleAuth", googleAuthSchema);
