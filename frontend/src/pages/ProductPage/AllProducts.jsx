@@ -38,12 +38,23 @@ function AllProducts({ category, filter }) {
             ? `http://localhost:4000/api/products?category=${category}`
             : "http://localhost:4000/api/products"
         );
-        setProducts(response.data);
+        let filteredProducts = response.data;
+        if (filter === "new") {
+          // Filter by createdAt (newest first)
+          filteredProducts.sort((a, b) => b.createdAt - a.createdAt);
+        } else if (filter === "highPrice") {
+          // Filter by highest price
+          filteredProducts.sort((a, b) => b.price - a.price);
+        } else if (filter === "lowPrice") {
+          // Filter by lowest price
+          filteredProducts.sort((a, b) => a.price - b.price);
+        }
+        setProducts(filteredProducts);
         setLoading(true);
       } catch (error) {}
     };
     getProducts();
-  }, [category]);
+  }, [category, filter]);
 
   return (
     <div className="row">
@@ -52,7 +63,6 @@ function AllProducts({ category, filter }) {
             return (
               <div className="col-lg-3 col-md-6 mt-5" key={value._id}>
                 <BuyCard
-                  filter={filter}
                   image={value.img[0].original}
                   price={value.price}
                   title={value.title}

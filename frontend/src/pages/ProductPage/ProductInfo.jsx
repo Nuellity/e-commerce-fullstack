@@ -140,8 +140,11 @@ function ProductInfo() {
           `http://localhost:4000/api/reviews/find/${id}`
         );
         const fetchReviews = res.data;
+        const completedReviews = fetchReviews.filter(
+          (review) => review.status === "completed"
+        );
 
-        setReviews(fetchReviews);
+        setReviews(completedReviews);
       } catch (error) {}
     };
     getReviews();
