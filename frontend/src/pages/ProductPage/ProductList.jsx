@@ -70,8 +70,6 @@ function ProductList() {
                   <MenuItem value={"new"}>Newest</MenuItem>
                   <MenuItem value={"highPrice"}>Price: High to Low</MenuItem>
                   <MenuItem value={"lowPrice"}>Price: Low to High</MenuItem>
-                  <MenuItem value={"popular"}>Popularity</MenuItem>
-                  <MenuItem value={"discount"}>Discount</MenuItem>
                 </Select>
               </FormControl>
             </Box>
