@@ -195,6 +195,7 @@ function SignIn() {
           variant="outlined"
           endIcon={<GoogleIcon />}
           onClick={handleGoogle}
+          sx={{ borderColor: "red", color: "red" }}
         >
           Sign In With Google
         </Button>
