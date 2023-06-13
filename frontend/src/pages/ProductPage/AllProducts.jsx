@@ -34,9 +34,7 @@ function AllProducts({ category, filter }) {
     const getProducts = async () => {
       try {
         const response = await publicRequest.get(
-          category
-            ? `http://localhost:4000/api/products?category=${category}`
-            : "http://localhost:4000/api/products"
+          category ? `/products?category=${category}` : "/products"
         );
         let filteredProducts = response.data;
         if (filter === "new") {
