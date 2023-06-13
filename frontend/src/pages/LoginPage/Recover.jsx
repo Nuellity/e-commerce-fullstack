@@ -25,8 +25,6 @@ function Recover() {
   const [showPassword, setShowPassword] = useState(false);
   const { forgetError, errorMessage } = useSelector((state) => state.user);
   const isForget = useSelector((state) => state.user.isForget);
-  console.log(isForget);
-  console.log(isForget, forgetError, errorMessage);
   const dispatch = useDispatch();
 
   const email = userData.recoverEmail;

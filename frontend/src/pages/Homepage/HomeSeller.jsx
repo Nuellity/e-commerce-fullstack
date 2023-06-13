@@ -6,6 +6,17 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 import { publicRequest } from "../../axiosRequest";
+import { Skeleton } from "@mui/material";
+
+const BuyCardSkeleton = () => {
+  return (
+    <>
+      <Skeleton variant="rectangular" width={320} height={350} />
+      <Skeleton className="mt-2" width={220} height={30} />
+      <Skeleton width={320} height={25} />
+    </>
+  );
+};
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -17,15 +28,14 @@ function shuffleArray(array) {
 
 function HomeSeller() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const categories = ["Gaming Chairs", "All Flat-Screen TVs"];
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const promises = categories.map((category) =>
-          publicRequest.get(
-            `http://localhost:4000/api/products?category=${category}`
-          )
+          publicRequest.get(`/products?category=${category}`)
         );
         const responses = await Promise.all(promises);
         const fetchedProducts = responses.map((response) =>
@@ -34,8 +44,8 @@ function HomeSeller() {
         const flattenedProducts = fetchedProducts.flat();
         const shuffledProducts = shuffleArray(flattenedProducts);
         setProducts(shuffledProducts);
+        setLoading(true);
       } catch (error) {
-        // Handle error
         console.error("Failed to fetch products:", error);
       }
     };
@@ -67,19 +77,27 @@ function HomeSeller() {
             "--swiper-navigation-color": "red",
           }}
         >
-          {products.map((value, index) => (
-            <SwiperSlide className="my-slide" key={index}>
-              <BuyCard
-                image={value?.img[0]?.original}
-                title={value?.title}
-                category={value?.categories[0]}
-                id={value?._id}
-                price={value?.price}
-                product={value}
-                count={value?.count}
-              />
-            </SwiperSlide>
-          ))}
+          {loading
+            ? products.map((value, index) => (
+                <SwiperSlide className="my-slide" key={index}>
+                  <BuyCard
+                    image={value?.img[0]?.original}
+                    title={value?.title}
+                    category={value?.categories[0]}
+                    id={value?._id}
+                    price={value?.price}
+                    product={value}
+                    count={value?.count}
+                  />
+                </SwiperSlide>
+              ))
+            : Array(4)
+                .fill()
+                .map((_, index) => (
+                  <SwiperSlide className="my-slide" key={index}>
+                    <BuyCardSkeleton />
+                  </SwiperSlide>
+                ))}
         </Swiper>
       </div>
     </div>
