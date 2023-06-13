@@ -8,10 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "admin": "npm start --prefix admin",
-    "buildClient": "npm build --prefix frontend",
-    "buildAdmin": "npm build --prefix admin",
-    "dev": "concurrently \"npm run server\" \"PORT=3000 npm run client\" \"PORT=3001 npm run admin\"",
-    "build": "concurrently \"npm run server\" \" npm run buildClient\" \" npm run buildAdmin\""
+    "dev": "concurrently \"npm run server\" \"PORT=3000 npm run client\" \"PORT=3001 npm run admin\""
   },
   "keywords": [],
   "author": "",

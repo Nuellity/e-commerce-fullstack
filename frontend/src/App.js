@@ -36,11 +36,14 @@ import AddressBook from "./pages/AccountPage/AddressBook/AddressBook";
 import NewAddress from "./pages/AccountPage/AddressBook/NewAddress";
 import DefaultAddress from "./pages/AccountPage/AddressBook/DefaultAddress";
 import BlogDetails from "./pages/BlogPage/BlogDetails";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
     <>
+      {" "}
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={user ? <Navigate to="/" /> : <Log />} />

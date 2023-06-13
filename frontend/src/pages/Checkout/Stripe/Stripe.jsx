@@ -31,14 +31,11 @@ function Stripe() {
   useEffect(() => {
     const fetchClientKey = async () => {
       try {
-        const res = await userRequest.post(
-          "http://localhost:4000/api/checkout/payment",
-          {
-            method: "POST",
-            amount: price,
-            body: JSON.stringify({}),
-          }
-        );
+        const res = await userRequest.post("/checkout/payment", {
+          method: "POST",
+          amount: price,
+          body: JSON.stringify({}),
+        });
         const clientSecret = res.data.clientSecret;
         setClientKey(clientSecret);
       } catch (error) {

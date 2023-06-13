@@ -59,7 +59,7 @@ function ProductList() {
       <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container">
-          <h3 style={{ paddingTop: "2em" }}>
+          <h3 style={{ paddingTop: "2.4em" }}>
             {!category ? "All Products" : category}
           </h3>
           <div className="pt-2 d-flex justify-content-start">

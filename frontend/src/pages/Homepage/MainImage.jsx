@@ -35,8 +35,8 @@ function MainImage() {
               className="animate__animated animate__fadeInUp"
               style={{
                 animationDelay: "3s",
-                width: "14em",
-                height: "4.5em",
+                width: "9em",
+                height: "2.5em",
                 backgroundColor: "#1E2832",
                 fontSize: "1.2em",
               }}
