@@ -122,9 +122,7 @@ function ProductInfo() {
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get(
-          `http://localhost:4000/api/products/find/${id}`
-        );
+        const res = await publicRequest.get(`/products/find/${id}`);
         const fetchProduct = res.data;
 
         setProduct(fetchProduct);
@@ -136,9 +134,7 @@ function ProductInfo() {
   useEffect(() => {
     const getReviews = async () => {
       try {
-        const res = await publicRequest.get(
-          `http://localhost:4000/api/reviews/find/${id}`
-        );
+        const res = await publicRequest.get(`/reviews/find/${id}`);
         const fetchReviews = res.data;
         const completedReviews = fetchReviews.filter(
           (review) => review.status === "completed"
