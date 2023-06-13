@@ -78,34 +78,36 @@ function DrawerComp() {
           onClose={() => setOpenDraw(false)}
         >
           <List>
-            <Link style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/products/Gaming Chairs"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <ListItem>
-                <ListItemText primary="Jewelry & Accessories" />
+                <ListItemText primary="Gaming Chairs" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/products/Audio"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <ListItem>
-                <ListItemText primary="Clothing & Shoes" />
+                <ListItemText primary="Speakers & Headphones" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/products/All Flat-Screen TVs"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <ListItem>
-                <ListItemText primary="Home & Living" />
+                <ListItemText primary="All Flat-Screen TVs" />
               </ListItem>
             </Link>
-            <Link style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to="/products/Laptops"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <ListItem>
-                <ListItemText primary="Wedding & Party" />
-              </ListItem>
-            </Link>
-            <Link style={{ textDecoration: "none", color: "inherit" }}>
-              <ListItem>
-                <ListItemText primary="Toys & Entertainment" />
-              </ListItem>
-            </Link>
-            <Link style={{ textDecoration: "none", color: "inherit" }}>
-              <ListItem>
-                <ListItemText primary="Art & Collectibles" />
+                <ListItemText primary="Laptops" />
               </ListItem>
             </Link>
             <Divider sx={{ border: "0.7px solid" }} />

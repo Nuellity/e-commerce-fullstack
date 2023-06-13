@@ -4,8 +4,12 @@
 
 .card-container {
     position: relative;
-    width: 19.5rem;
+    width: 10rem;
     height: auto;
+    border-radius: 50px;
+    box-shadow: 20px 20px 60px #f4f0f0,
+        -20px -20px 60px #ffffff;
+
 }
 
 .social-container {
@@ -46,34 +50,36 @@
 
 .big-card-container {
     position: relative;
-    width: 40.5rem;
+    width: 30rem;
     height: auto;
 }
 
 .buy-card-container {
     position: relative;
-    width: 19.5rem;
+    width: 14rem;
     height: auto;
 }
 
 .image {
     display: block;
-    width: 19.5rem;
-    height: 19.5rem;
+    width: 14rem;
+    height: 14rem;
+    margin: 0 auto;
 }
 
 .big-image {
     display: block;
-    width: 40.5rem;
-    height: 40.5rem;
+    width: 30rem;
+    height: 30rem;
+    margin: 0 auto;
 }
 
 .buy-image {
     display: block;
-    width: 19.5rem;
-    height: 20rem;
+    width: 14rem;
+    height: 14rem;
     object-fit: contain;
-
+    margin: 0 auto;
 }
 
 .product-name {
@@ -91,7 +97,7 @@
     width: 100%;
     transition: .5s ease;
     opacity: 0;
-    font-size: 1.25em;
+    font-size: 1em;
     padding: 0.5em;
     text-align: center;
 }
@@ -106,8 +112,8 @@
     width: 100%;
     transition: .5s ease;
     opacity: 0;
-    font-size: 20px;
-    padding: 20px;
+    font-size: 1.2rem;
+    padding: 1em;
     text-align: center;
 }
 
@@ -180,17 +186,17 @@
 
 .buy-title {
     color: #000000;
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 .buy-name {
     color: rgba(0, 0, 0, 0.5);
-    font-size: 18px;
+    font-size: 0.8rem;
 }
 
 .buy-price {
     color: #000000;
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 
 
@@ -298,20 +304,6 @@
 
 @media only screen and (max-width: 991px) {
 
-    .big-overlay {
-        position: absolute;
-        bottom: 0;
-        background: #1E2832;
-        display: flex;
-        justify-content: space-between;
-        color: #f1f1f1;
-        width: 100%;
-        transition: .5s ease;
-        opacity: 0;
-        font-size: 20px;
-        padding: 20px;
-        text-align: center;
-    }
 
     .buy-overlay {
         position: absolute;
@@ -348,16 +340,16 @@
     }
 
     .buy-image {
-        display: block;
         width: 100%;
-        height: 25rem;
+        height: 14rem;
         object-fit: contain;
+        margin: 0 auto;
     }
 
     .image {
         display: block;
         width: 100%;
-        height: 19.5rem;
+        height: 14rem;
     }
 
     .overlay {
@@ -378,34 +370,12 @@
     .big-image {
         display: block;
         width: 100%;
-        height: 30.5rem;
+        height: 24.5rem;
     }
 }
 
 @media only screen and (max-width: 480px) {
 
-
-    .big-overlay {
-        position: absolute;
-        bottom: 0;
-        background: #1E2832;
-        display: flex;
-        justify-content: space-between;
-        color: #f1f1f1;
-        width: 100%;
-        transition: .5s ease;
-        opacity: 0;
-        font-size: 20px;
-        padding: 20px;
-        text-align: center;
-    }
-
-    .card-container {
-        position: relative;
-        width: 19.5rem;
-        height: auto;
-    }
-
     .social-image {
         display: block;
         width: 100%;
@@ -426,10 +396,10 @@
     }
 
     .buy-image {
-        display: block;
         width: 100%;
-        height: 25rem;
+        height: 14rem;
         object-fit: contain;
+        margin: 0 auto;
     }
 
     .buy-overlay {
@@ -450,13 +420,13 @@
     .big-image {
         display: block;
         width: 100%;
-        height: 30.5rem;
+        height: 18rem;
     }
 
     .image {
         display: block;
         width: 100%;
-        height: 19.5rem;
+        height: 14rem;
     }
 
     .overlay {
@@ -474,20 +444,7 @@
         text-align: center;
     }
 
-    .big-overlay {
-        position: absolute;
-        bottom: 0;
-        background: #1E2832;
-        display: flex;
-        justify-content: space-between;
-        color: #f1f1f1;
-        width: 100%;
-        transition: .5s ease;
-        opacity: 0;
-        font-size: 20px;
-        padding: 20px;
-        text-align: center;
-    }
+
 
     .review-details {
         padding: 0

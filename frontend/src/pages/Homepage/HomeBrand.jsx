@@ -3,7 +3,7 @@ import React from "react";
 function HomeBrand() {
   return (
     <>
-      <div className="container brand">
+      <div className="container">
         <div className="row m-0 py-5">
           <img
             className="img-fluid col-lg-2 col-md-4 col-6"

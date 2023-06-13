@@ -7,24 +7,22 @@
 
 
 .nav-icon {
-    height: 60px;
-    width: 60px;
+    height: 30px;
+    width: 30px;
     font-style: normal;
-    font-size: 100px;
-    line-height: 40px;
+    font-size: 3.125rem;
     align-items: center;
     text-align: center;
     color: #1e2832
 }
 
 .nav-item {
-    width: 47px;
+    width: 23px;
     color: #1e2832;
     font-family: "Roboto";
     font-style: normal;
     font-weight: 100;
-    font-size: 0.5rem;
-    line-height: 0.75rem;
+    font-size: 0.25rem;
     text-transform: capitalize;
 }
 
