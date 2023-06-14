@@ -8,12 +8,13 @@ router.get("/config", (req, res) => {
 });
 
 router.post("/payment", async (req, res) => {
-  const amountInfo = (req.body.amount * 100).toString()
-  
+  const amountInfo = (req.body.amount * 100).toString();
+  const amount = Math.floor(parseFloat(amountInfo));
+
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "usd",
-      amount: amountInfo,
+      amount,
       automatic_payment_methods: {
         enabled: true,
       },
