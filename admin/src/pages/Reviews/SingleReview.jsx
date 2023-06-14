@@ -44,6 +44,17 @@ function SingleReview() {
     "&:hover": {
       backgroundColor: colors.blueAccent[600],
     },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      maxWidth: "8rem",
+      height: "2.5rem",
+      fontSize: "0.7rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "12.5rem",
+      height: "2.5rem",
+      fontSize: "1rem",
+    },
   }));
 
   return (
@@ -131,7 +142,6 @@ function SingleReview() {
           <ColorButton
             disabled={review?.status === "completed"}
             onClick={handleClick}
-            style={{ width: "200px", height: "40px", fontSize: "15px" }}
           >
             {review?.status === "completed"
               ? "Review Published"

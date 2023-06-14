@@ -5,8 +5,9 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/ApiCalls";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const initialValues = {
   email: "",
@@ -22,10 +23,12 @@ function Login() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.user.isFetching);
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
     backgroundColor: colors.greenAccent[400],
+    width: "8rem",
     "&:hover": {
       backgroundColor: colors.greenAccent[600],
     },
@@ -97,7 +100,22 @@ function Login() {
                   />
                 </div>
                 <div className="d-flex justify-content-end mt-3">
-                  <ColorButton type="submit">Login</ColorButton>
+                  <ColorButton type="submit" disabled={isLoading}>
+                    Login
+                    {isLoading && (
+                      <CircularProgress
+                        size={24}
+                        sx={{
+                          color: colors.grey[500],
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          marginTop: "-12px",
+                          marginLeft: "-12px",
+                        }}
+                      />
+                    )}
+                  </ColorButton>
                 </div>
               </form>
             </div>

@@ -104,6 +104,17 @@ function UserList() {
     "&:hover": {
       backgroundColor: colors.blueAccent[600],
     },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      maxWidth: "8rem",
+      height: "2.5rem",
+      fontSize: "0.7rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "12.5rem",
+      height: "2.5rem",
+      fontSize: "1rem",
+    },
   }));
 
   return (
@@ -111,22 +122,13 @@ function UserList() {
       <div className="d-flex justify-content-between">
         <Header title="Products" subTitle="Managing the Product" />
         <div>
-          <ColorButton
-            onClick={() => navigate("/newproduct")}
-            style={{
-              width: "150px",
-              height: "40px",
-              fontSize: "13px",
-              fontWeight: "bold",
-            }}
-            variant="contained"
-          >
+          <ColorButton onClick={() => navigate("/newproduct")}>
             Add new product
           </ColorButton>
         </div>
       </div>
       <Box
-        m="40px 0 0 0"
+        className="pb-5"
         width="100%"
         height="75vh"
         sx={{

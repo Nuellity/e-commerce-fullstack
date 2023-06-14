@@ -249,12 +249,22 @@ function SingleProduct() {
       setBuffer(0);
     }
   };
-
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
     backgroundColor: colors.blueAccent[400],
     "&:hover": {
       backgroundColor: colors.blueAccent[600],
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      maxWidth: "8rem",
+      height: "2.5rem",
+      fontSize: "0.7rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "12.5rem",
+      height: "2.5rem",
+      fontSize: "1rem",
     },
   }));
 
@@ -651,16 +661,7 @@ function SingleProduct() {
                         color="secondary"
                       />
                     </div>
-                    <ColorButton
-                      type="submit"
-                      style={{
-                        width: "150px",
-                        height: "40px",
-                        fontSize: "13px",
-                        fontWeight: "bold",
-                        backgroundColor: colors.greenAccent[400],
-                      }}
-                    >
+                    <ColorButton type="submit">
                       {isFetching ? (
                         <CircularProgress color="success" />
                       ) : (

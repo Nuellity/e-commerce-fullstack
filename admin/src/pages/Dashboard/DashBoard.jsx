@@ -63,7 +63,7 @@ function DashBoard() {
   const dayOfYear = today.dayOfYear();
   const date = today.year(year).dayOfYear(dayOfYear);
   const formattedDate = date.format("MMMM Do, YYYY");
-
+  console.log(dailySales[0]?._id, dayOfYear);
   const newDate = new Date();
   const currentMonth = newDate.getMonth() + 1;
 
@@ -76,7 +76,7 @@ function DashBoard() {
   useEffect(() => {
     const getRevenue = async () => {
       try {
-        const res = await userRequest.get("orders/income");
+        const res = await userRequest.get("/orders/income");
         const income = res.data;
         setRevenue(income);
       } catch (error) {
@@ -95,7 +95,7 @@ function DashBoard() {
   useEffect(() => {
     const getDailySales = async () => {
       try {
-        const res = await userRequest.get("orders/incomeperday");
+        const res = await userRequest.get("/orders/incomeperday");
         setDailySales(res.data);
       } catch (error) {
         if (error.response && error.response.status === 403) {
@@ -112,7 +112,7 @@ function DashBoard() {
   useEffect(() => {
     const getDailyOrders = async () => {
       try {
-        const res = await userRequest.get("orders/ordersperday");
+        const res = await userRequest.get("/orders/ordersperday");
         setDailyOrders(res.data);
       } catch (error) {
         if (error.response && error.response.status === 403) {
@@ -249,8 +249,8 @@ function DashBoard() {
             >
               <StatBox
                 title={
-                  dailySales[0]?._id === dayOfYear
-                    ? `$${dailySales[0]?.totalOrders}`
+                  dailySales[1]?._id === dayOfYear
+                    ? `$${dailySales[1]?.totalOrders}`
                     : "$0"
                 }
                 subTitle={`Today Sales on ${formattedDate}`}
@@ -277,7 +277,7 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={dailySales[0]?._id === dayOfYear ? dailyOrders : "0"}
+                title={dailySales[1]?._id === dayOfYear ? dailyOrders : "0"}
                 subTitle={`Today Orders on ${formattedDate}`}
                 isProgress
                 isIncrease
@@ -295,7 +295,9 @@ function DashBoard() {
           <div className="col h-100">
             <Box
               backgroundColor={colors.primary[400]}
-              sx={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+              sx={{
+                boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+              }}
               component="div"
             >
               <Box

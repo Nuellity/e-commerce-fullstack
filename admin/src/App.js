@@ -4,7 +4,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route, Navigate } from "react-router-dom";
 import TopBar from "./pages/Global/TopBar";
 import DashBoard from "./pages/Dashboard/DashBoard";
-
 import Pie from "./pages/Pie/Pie";
 import UserList from "./pages/Users/UserList";
 import UserInfo from "./pages/Users/UserInfo";
