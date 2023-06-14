@@ -135,6 +135,7 @@ export const BuyCard = ({
     setOpen(false);
   };
 
+  console.log(user);
   const closeAdd = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -155,6 +156,9 @@ export const BuyCard = ({
     setDuplicate(false);
   };
   const handleFav = async () => {
+    if (!user) {
+      return;
+    }
     const savedItem = { userId: user, productId: id };
 
     try {

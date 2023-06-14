@@ -51,7 +51,7 @@ function HomeFeatured() {
             ))
           : Array(8)
               .fill()
-              .map((_, index) => <BuyCardSkeleton />)}
+              .map((_, index) => <BuyCardSkeleton key={index} />)}
       </div>
     </div>
   );

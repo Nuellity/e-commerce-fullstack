@@ -14,7 +14,6 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PersonIcon from "@mui/icons-material/Person";
@@ -22,10 +21,6 @@ import LoginIcon from "@mui/icons-material/Login";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
-import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
-import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore";
-import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import Cart from "../../pages/CartPage/Cart";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,18 +36,12 @@ const theme = createTheme({
 
 function DrawerComp() {
   const [openDraw, setOpenDraw] = useState(false);
-  const [visible, setVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const quantity = useSelector((state) => state.cart.quantity);
-
   const [cartDraw, setCartDraw] = useState(false);
-
   const user = useSelector((state) => state.user.currentUser);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const handleDisplay = () => setVisible(!visible);
 
   const handleAccount = () => setIsVisible(!isVisible);
 
@@ -133,7 +122,7 @@ function DrawerComp() {
             <div style={{ display: isVisible ? "block" : "none" }}>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
-                to="/orders"
+                to="/profile/orders"
               >
                 <ListItemButton>
                   <ListItemIcon>
@@ -144,7 +133,7 @@ function DrawerComp() {
               </Link>
               <Link
                 style={{ textDecoration: "none", color: "inherit" }}
-                to="/wishlists"
+                to="/profile/wishlist"
               >
                 <ListItemButton>
                   <ListItemIcon>
@@ -161,59 +150,11 @@ function DrawerComp() {
                   <ListItemIcon>
                     <AccountCircleIcon />
                   </ListItemIcon>
-                  <ListItemText primary="View Account" />
+                  <ListItemText primary="/profile/summary" />
                 </ListItemButton>
               </Link>
             </div>
             <Divider sx={{ border: "0.7px solid" }} />
-            <div>
-              <ListItemButton onClick={handleDisplay}>
-                <ListItemIcon>
-                  <ContactSupportIcon sx={{ fontSize: 30 }} />
-                </ListItemIcon>
-                <ListItemText primary="Help" />
-                {visible ? <ExpandLess /> : <ExpandMore />}
-              </ListItemButton>
-              <Divider sx={{ border: "0.4px solid" }} />
-            </div>
-            <div style={{ display: visible ? "block" : "none" }}>
-              <Link
-                style={{ textDecoration: "none", color: "inherit" }}
-                to="/return"
-              >
-                <ListItemButton>
-                  <ListItemIcon>
-                    <LocalConvenienceStoreIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Refund and Returns" />
-                </ListItemButton>
-              </Link>
-              <ListItemButton>
-                <ListItemIcon>
-                  <CancelPresentationIcon />
-                </ListItemIcon>
-                <ListItemText primary="Order Cancellation" />
-              </ListItemButton>
-              <ListItemButton>
-                <ListItemIcon>
-                  <AirportShuttleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Track Order" />
-              </ListItemButton>
-              <Link
-                style={{ textDecoration: "none", color: "inherit" }}
-                to="/faq"
-              >
-                <ListItemButton>
-                  <ListItemIcon>
-                    <LiveHelpIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Help Center" />
-                </ListItemButton>
-              </Link>
-            </div>
-            <Divider sx={{ border: "0.7px solid" }} />
-
             <ListItemButton>
               {user ? (
                 <Button
