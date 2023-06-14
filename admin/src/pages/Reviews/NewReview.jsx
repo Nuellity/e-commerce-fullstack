@@ -50,7 +50,7 @@ function NewReview() {
     ...reviewInfo,
     rating: value,
   };
-  console.log(review);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("working");

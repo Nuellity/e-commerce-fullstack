@@ -18,7 +18,6 @@ function ReviewList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.review.reviews);
-  console.log(reviews);
 
   const handleDelete = (id) => {
     deleteReview(id, dispatch);
