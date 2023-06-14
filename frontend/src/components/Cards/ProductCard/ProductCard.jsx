@@ -135,7 +135,6 @@ export const BuyCard = ({
     setOpen(false);
   };
 
-  console.log(user);
   const closeAdd = (event, reason) => {
     if (reason === "clickaway") {
       return;
