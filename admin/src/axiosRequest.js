@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4000/api/";
+const BASE_URL = "https://cyan-adventurous-magpie.cyclic.app/api/";
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;
@@ -18,18 +18,3 @@ export const userRequest = axios.create({
     },
   },
 });
-
-// userRequest.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     // Check if the error is related to authentication
-//     if (error.response.status === 401 || error.response.status === 403) {
-//       // If the error is related to authentication, log the user out and redirect to login page
-//       localStorage.removeItem("persist:root");
-//       window.location.href = "/login";
-//     }
-//     return Promise.reject(error);
-//   }
-// );

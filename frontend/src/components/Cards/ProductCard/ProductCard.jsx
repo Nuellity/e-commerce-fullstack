@@ -324,7 +324,6 @@ export const OrderCard = ({ title, image, status, orderId, orderDate }) => {
   const navigate = useNavigate();
   const date = moment(orderDate);
   const formattedDate = date.format("MMMM Do YYYY");
-  console.log(status);
   return (
     <div
       style={{

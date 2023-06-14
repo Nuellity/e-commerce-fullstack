@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// eslint-disable-next-line no-unused-vars
 import { IconButton, List, useTheme, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
@@ -13,23 +12,23 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
 import StorefrontOutlinedIcon from "@mui/icons-material/StorefrontOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import DynamicFeedOutlinedIcon from "@mui/icons-material/DynamicFeedOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import ErrorOutlinedIcon from "@mui/icons-material/ErrorOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 function Menubar() {
   const theme = useTheme();
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const colors = tokens(theme.palette.mode);
 
   const [open, setOpen] = useState(false);
 
-  const drawerWidth = 240;
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
+
+  const drawerWidth = 200;
 
   const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -72,11 +71,19 @@ function Menubar() {
     boxSizing: "border-box",
     ...(open && {
       ...openedMixin(theme),
-      "& .MuiDrawer-paper": openedMixin(theme),
+      backgroundColor: colors.primary[400],
+      "& .MuiDrawer-paper": {
+        ...openedMixin(theme),
+        backgroundColor: colors.primary[400],
+      },
     }),
     ...(!open && {
       ...closedMixin(theme),
-      "& .MuiDrawer-paper": closedMixin(theme),
+      backgroundColor: colors.primary[400],
+      "& .MuiDrawer-paper": {
+        ...closedMixin(theme),
+        backgroundColor: colors.primary[400],
+      },
     }),
   }));
 
@@ -88,7 +95,7 @@ function Menubar() {
     <>
       <MenuDrawer
         variant="permanent"
-        backgroundcolor={colors.primary[400]}
+        sx={{ backgroundColor: colors.primary[400] }}
         open={open}
       >
         <DrawerHeader>
@@ -102,8 +109,16 @@ function Menubar() {
         <Divider />
         <List>
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem
+              sx={{
+                backgroundColor:
+                  selectedIndex === 0 ? colors.greenAccent[500] : "transparent",
+              }}
+              disablePadding
+            >
               <ListItemButton
+                selected={selectedIndex === 0}
+                onClick={(event) => handleListItemClick(event, 0)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
@@ -131,16 +146,26 @@ function Menubar() {
             id="nested-list-subheader"
             sx={{
               ...(!open && { display: "none" }),
+              backgroundColor: colors.primary[400],
             }}
           >
-            Quick Menu
+            Menu
           </ListSubheader>
           <Link
             to="/users"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem
+              ListItem
+              sx={{
+                backgroundColor:
+                  selectedIndex === 1 ? colors.greenAccent[500] : "transparent",
+              }}
+              disablePadding
+            >
               <ListItemButton
+                selected={selectedIndex === 1}
+                onClick={(event) => handleListItemClick(event, 1)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
@@ -164,8 +189,17 @@ function Menubar() {
             to="/products"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem
+              disablePadding
+              ListItem
+              sx={{
+                backgroundColor:
+                  selectedIndex === 2 ? colors.greenAccent[500] : "transparent",
+              }}
+            >
               <ListItemButton
+                selected={selectedIndex === 2}
+                onClick={(event) => handleListItemClick(event, 2)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
@@ -192,12 +226,23 @@ function Menubar() {
             to="transactions"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem
+              ListItem
+              sx={{
+                backgroundColor:
+                  selectedIndex === 3 ? colors.greenAccent[500] : "transparent",
+              }}
+              disablePadding
+            >
               <ListItemButton
+                selected={selectedIndex === 3}
+                onClick={(event) => handleListItemClick(event, 3)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  backgroundColor:
+                    selectedIndex === 3 ? "green" : "transparent",
                 }}
               >
                 <ListItemIcon
@@ -220,8 +265,17 @@ function Menubar() {
             to="reviews"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <ListItem disablePadding sx={{ display: "block" }}>
+            <ListItem
+              ListItem
+              sx={{
+                backgroundColor:
+                  selectedIndex === 4 ? colors.greenAccent[500] : "transparent",
+              }}
+              disablePadding
+            >
               <ListItemButton
+                selected={selectedIndex === 4}
+                onClick={(event) => handleListItemClick(event, 4)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
@@ -239,172 +293,6 @@ function Menubar() {
                 </ListItemIcon>
                 <ListItemText
                   primary="Reviews"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        </List>
-        <List>
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-            sx={{
-              ...(!open && { display: "none" }),
-            }}
-          >
-            Alerts
-          </ListSubheader>
-          <Link to="form" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <EmailOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Mail" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="pie" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <DynamicFeedOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Feedback"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="mail" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ChatBubbleOutlineOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Messages"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        </List>
-        <List>
-          <ListSubheader
-            component="div"
-            id="nested-list-subheader"
-            sx={{
-              ...(!open && { display: "none" }),
-            }}
-          >
-            Staff
-          </ListSubheader>
-          <Link to="team" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <WorkOutlineOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="Manage" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="pie" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <TrendingUpOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Analytics"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-          <Link to="line" style={{ textDecoration: "none", color: "inherit" }}>
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  <ErrorOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Reports"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>

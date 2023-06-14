@@ -123,7 +123,7 @@ function OrderList() {
         <Header title="Orders" subTitle="Manage your Orders" />
       </div>
       <Box
-        m="40px 0 0 0"
+        className="pb-5"
         width="100%"
         height="75vh"
         sx={{

@@ -114,6 +114,17 @@ function ReviewList() {
     "&:hover": {
       backgroundColor: colors.blueAccent[600],
     },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      maxWidth: "8rem",
+      height: "2.5rem",
+      fontSize: "0.7rem",
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "12.5rem",
+      height: "2.5rem",
+      fontSize: "1rem",
+    },
   }));
 
   return (
@@ -121,22 +132,13 @@ function ReviewList() {
       <div className="d-flex justify-content-between">
         <Header title="Reviews" subTitle="Managing The Product Reviews" />
         <div>
-          <ColorButton
-            onClick={() => navigate("/newreview")}
-            style={{
-              width: "150px",
-              height: "40px",
-              fontSize: "13px",
-              fontWeight: "bold",
-            }}
-            variant="contained"
-          >
+          <ColorButton onClick={() => navigate("/newreview")}>
             Add new review
           </ColorButton>
         </div>
       </div>
       <Box
-        m="2.5em 0 0 0"
+        className="pb-5"
         width="100%"
         height="75vh"
         sx={{

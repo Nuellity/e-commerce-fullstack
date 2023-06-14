@@ -14,15 +14,18 @@ body,
     position: relative;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 10px;
 }
-::-webkit-scrollbar-track{
+
+::-webkit-scrollbar-track {
     background: #e0e0e0;
 }
-::-webkit-scrollbar-thumb{
+
+::-webkit-scrollbar-thumb {
     background: #888;
 }
-::-webkit-scrollbar-track:hover{
+
+::-webkit-scrollbar-track:hover {
     background: #555;
 }

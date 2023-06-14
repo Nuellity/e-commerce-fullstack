@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://cyan-adventurous-magpie.cyclic.app//api/";
+const BASE_URL = "https://cyan-adventurous-magpie.cyclic.app/api/";
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;

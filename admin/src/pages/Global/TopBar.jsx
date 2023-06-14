@@ -2,29 +2,22 @@ import {
   Box,
   IconButton,
   useTheme,
-  Avatar,
   Menu,
   MenuItem,
   Button,
-  Divider,
-  ListItemIcon,
   Typography,
   Badge,
   ListItem,
+  List,
   ListItemAvatar,
   ListItemText,
 } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { colorModeContext, tokens } from "../../theme";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import PersonIcon from "@mui/icons-material/Person";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LoginIcon from "@mui/icons-material/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -32,6 +25,8 @@ import { useState } from "react";
 import { logout } from "../../redux/ApiCalls";
 import { userRequest } from "../../axiosRequest";
 import moment from "moment";
+import SearchBar from "../../components/SearchBar";
+import { Link } from "react-router-dom";
 
 function TopBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -50,7 +45,7 @@ function TopBar() {
 
   const notificationOrders = transactionOrders.slice(0, 5);
 
-  console.log("notify: ", notificationOrders);
+  console.log(notificationOrders);
 
   const open = Boolean(anchorEl);
   const openNotif = Boolean(horEl);
@@ -103,15 +98,9 @@ function TopBar() {
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 0px 8px 0px",
       }}
     >
-      <Box display="flex" borderRadius="3px">
-        <InputBase
-          sx={{ ml: 2, flex: 1, borderColor: "red" }}
-          placeholder="Search"
-        />
-        <IconButton type="button" sx={{ p: 1 }}>
-          <SearchIcon />
-        </IconButton>
-      </Box>
+      <div style={{ width: "30em" }}>
+        <SearchBar />
+      </div>
       <Box display="flex">
         <IconButton
           onClick={handleNotif}
@@ -123,19 +112,14 @@ function TopBar() {
             <NotificationsOutlinedIcon />
           </Badge>
         </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
-        </IconButton>
+
         <IconButton
           onClick={handleClick}
           aria-controls={open ? "account-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <Avatar
-            src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt=""
-          />
+          <PersonOutlineOutlinedIcon />
         </IconButton>
 
         <IconButton onClick={colorMode.toggleColorMode}>
@@ -156,6 +140,7 @@ function TopBar() {
             sx: {
               overflow: "visible",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+              bgcolor: colors.grey[800],
               mt: 1.5,
               "& .MuiAvatar-root": {
                 width: 32,
@@ -185,7 +170,10 @@ function TopBar() {
               <Button
                 variant="contained"
                 endIcon={<LoginIcon fontSize="small" />}
-                sx={{ marginLeft: "10px" }}
+                sx={{
+                  marginLeft: "10px",
+                  backgroundColor: colors.redAccent[600],
+                }}
                 size="large"
                 onClick={handleLogOut}
               >
@@ -195,37 +183,16 @@ function TopBar() {
               <Button
                 variant="contained"
                 endIcon={<LoginIcon fontSize="small" />}
-                sx={{ marginLeft: "10px" }}
+                sx={{
+                  marginLeft: "10px",
+                  backgroundColor: colors.greenAccent[600],
+                }}
                 size="large"
                 onClick={handleLogin}
               >
                 Login
               </Button>
             )}
-          </MenuItem>
-          <Divider />
-          <MenuItem>
-            <ListItemIcon>
-              <PersonIcon fontSize="small" />
-              <Typography
-                sx={{ pl: "10px" }}
-                onClick={() => navigate("/profile")}
-              >
-                My Account{" "}
-              </Typography>
-            </ListItemIcon>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon onClick={() => navigate("/order")}>
-              <ShoppingCartIcon fontSize="small" />
-              <Typography sx={{ pl: "10px" }}>Orders </Typography>
-            </ListItemIcon>
-          </MenuItem>
-          <MenuItem>
-            <ListItemIcon onClick={() => navigate("/wishlist")}>
-              <FavoriteIcon fontSize="small" />
-              <Typography sx={{ pl: "10px" }}> Saved Items </Typography>
-            </ListItemIcon>
           </MenuItem>
         </Menu>
 
@@ -242,7 +209,7 @@ function TopBar() {
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1.5,
               "& .MuiAvatar-root": {
-                width: 32,
+                width: 20,
                 height: 32,
                 ml: -0.5,
                 mr: 1,
@@ -267,33 +234,44 @@ function TopBar() {
           <Typography sx={{ padding: "5px", color: colors.grey[400] }}>
             Order Notifications
           </Typography>
-          {notificationOrders.map((value, index) => (
-            <div key={index}>
-              {" "}
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar alt="Remy Sharp" src={value.products[0].img} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={value.products[0].name}
-                  secondary={
-                    <>
+          <List>
+            {notificationOrders.map((value, index) => (
+              <Link
+                to={`/transactions/${value._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ListItem key={index} sx={{ cursor: "pointer" }}>
+                  <ListItemAvatar>
+                    <img
+                      src={value.products[0].img}
+                      alt={value.title}
+                      style={{
+                        height: "3rem",
+                        width: "3rem",
+                        objectFit: "contain",
+                        borderRadius: "1rem",
+                      }}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    secondary={
                       <Typography
                         sx={{ display: "inline" }}
                         component="span"
                         variant="body2"
-                        color="text.primary"
+                        color={colors.greenAccent[500]}
                       >
-                        {`${value.userFirstName} ${value.userLastName}`}
+                        {"  order was placed "}
+                        {moment(value.createdAt).fromNow()}.
                       </Typography>
-                      {" — has placed an order "}
-                      {moment(value.createdAt).fromNow()}
-                    </>
-                  }
-                />
-              </ListItem>
-            </div>
-          ))}
+                    }
+                    primary={value.products[0].name}
+                    variant="body1"
+                  />
+                </ListItem>
+              </Link>
+            ))}
+          </List>
         </Menu>
       </Box>
     </Box>
