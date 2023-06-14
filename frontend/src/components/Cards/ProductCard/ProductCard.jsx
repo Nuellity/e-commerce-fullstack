@@ -204,6 +204,10 @@ export const BuyCard = ({
 
   useEffect(() => {
     const fetchSavedItem = async () => {
+      if (!user) {
+        return;
+      }
+
       try {
         const res = await userRequest.get(`/wishlists/find/${user}`);
         const savedItems = res.data;
@@ -213,7 +217,7 @@ export const BuyCard = ({
     };
 
     fetchSavedItem();
-  }, []);
+  }, [user, id]);
 
   return (
     <>
