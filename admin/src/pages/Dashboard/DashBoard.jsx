@@ -63,7 +63,6 @@ function DashBoard() {
   const dayOfYear = today.dayOfYear();
   const date = today.year(year).dayOfYear(dayOfYear);
   const formattedDate = date.format("MMMM Do, YYYY");
-  console.log(dailySales[0]?._id, dayOfYear);
   const newDate = new Date();
   const currentMonth = newDate.getMonth() + 1;
 

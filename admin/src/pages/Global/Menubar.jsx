@@ -156,7 +156,6 @@ function Menubar() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem
-              ListItem
               sx={{
                 backgroundColor:
                   selectedIndex === 1 ? colors.greenAccent[500] : "transparent",
@@ -191,7 +190,6 @@ function Menubar() {
           >
             <ListItem
               disablePadding
-              ListItem
               sx={{
                 backgroundColor:
                   selectedIndex === 2 ? colors.greenAccent[500] : "transparent",
@@ -227,7 +225,6 @@ function Menubar() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem
-              ListItem
               sx={{
                 backgroundColor:
                   selectedIndex === 3 ? colors.greenAccent[500] : "transparent",
@@ -266,7 +263,6 @@ function Menubar() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItem
-              ListItem
               sx={{
                 backgroundColor:
                   selectedIndex === 4 ? colors.greenAccent[500] : "transparent",
