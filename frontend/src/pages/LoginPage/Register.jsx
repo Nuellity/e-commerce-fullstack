@@ -20,7 +20,10 @@ import BusinessIcon from "@mui/icons-material/Business";
 import LockIcon from "@mui/icons-material/Lock";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../../redux/ApiCalls";
+import { googleAuth, signup } from "../../redux/ApiCalls";
+import GoogleIcon from "@mui/icons-material/Google";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../fireBase";
 
 function Register() {
   const theme = useTheme();
@@ -100,6 +103,16 @@ function Register() {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   }
+
+  const handleGoogle = async () => {
+    try {
+      const data = await signInWithPopup(auth, provider);
+      await googleAuth(dispatch, {
+        email: data.user.email,
+        googleId: data.user.uid,
+      });
+    } catch (error) {}
+  };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && errorState) {
@@ -370,6 +383,17 @@ function Register() {
           Log in instead? Click here
         </p>
       </form>
+
+      <div className="py-5 d-flex justify-content-center">
+        <Button
+          variant="outlined"
+          endIcon={<GoogleIcon />}
+          onClick={handleGoogle}
+          sx={{ borderColor: "red", color: "red" }}
+        >
+          Sign Up With Google
+        </Button>
+      </div>
     </>
   );
 }
