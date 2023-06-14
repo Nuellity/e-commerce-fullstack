@@ -37,6 +37,7 @@ function ProductDetails({
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
+  console.log(product);
 
   const [value, setValue] = useState(0);
   const averageRating =
