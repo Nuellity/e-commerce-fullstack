@@ -23,7 +23,9 @@ function Login() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.user.isFetching);
+  const { isFetching, error, errorMessage } = useSelector(
+    (state) => state.user
+  );
 
   const ColorButton = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(colors.grey[100]),
@@ -100,9 +102,9 @@ function Login() {
                   />
                 </div>
                 <div className="d-flex justify-content-end mt-3">
-                  <ColorButton type="submit" disabled={isLoading}>
+                  <ColorButton type="submit" disabled={isFetching}>
                     Login
-                    {isLoading && (
+                    {isFetching && (
                       <CircularProgress
                         size={24}
                         sx={{
@@ -119,6 +121,11 @@ function Login() {
                 </div>
               </form>
             </div>
+            {error && (
+              <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
+                {errorMessage}
+              </p>
+            )}
           </div>
         )}
       </Formik>
