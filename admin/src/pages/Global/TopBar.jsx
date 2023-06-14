@@ -45,8 +45,6 @@ function TopBar() {
 
   const notificationOrders = transactionOrders.slice(0, 5);
 
-  console.log(notificationOrders);
-
   const open = Boolean(anchorEl);
   const openNotif = Boolean(horEl);
 
@@ -239,8 +237,9 @@ function TopBar() {
               <Link
                 to={`/transactions/${value._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
+                key={index}
               >
-                <ListItem key={index} sx={{ cursor: "pointer" }}>
+                <ListItem sx={{ cursor: "pointer" }}>
                   <ListItemAvatar>
                     <img
                       src={value.products[0].img}
