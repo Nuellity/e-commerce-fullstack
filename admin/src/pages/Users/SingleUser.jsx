@@ -46,7 +46,7 @@ function SingleUser() {
   const customer = useSelector((state) =>
     state.customer.customers.find((customer) => customer._id === customerId)
   );
-  console.log(customer, customer?.email);
+
   const handleInputChange = (event) => {
     setInput((prev) => {
       return { ...prev, [event.target.name]: event.target.value };

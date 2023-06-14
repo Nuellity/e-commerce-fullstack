@@ -30,8 +30,6 @@ function SingleReview() {
     state.product.products.find((product) => product._id === productId)
   );
 
-  console.log(product, "review: ", review, productId);
-
   const handleClick = () => {
     updateReview(reviewId, { status: "completed" }, dispatch);
     navigate("/reviews");
