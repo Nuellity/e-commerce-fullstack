@@ -18,6 +18,13 @@ router.post("/", verifyToken, async (req, res) => {
         { _id: productId },
         { $inc: { count: -quantity } }
       );
+
+      if (quantity >= product.count) {
+        await Product.updateOne(
+          { _id: productId },
+          { $set: { inStock: false } }
+        );
+      }
     }
 
     res.status(200).json(savedOrder);

@@ -37,7 +37,6 @@ function ProductDetails({
   const [open, setOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
-  console.log(product);
 
   const [value, setValue] = useState(0);
   const averageRating =
@@ -216,13 +215,19 @@ function ProductDetails({
                 </ButtonGroup>
               </div>
               <div className="mt-5">
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={() => handleAddToCart()}
-                >
-                  Add to Cart
-                </Button>
+                {product.inStock ? (
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => handleAddToCart()}
+                  >
+                    Add to Cart
+                  </Button>
+                ) : (
+                  <Button variant="outlined" color="success" disabled>
+                    OUT OF STOCK
+                  </Button>
+                )}
               </div>
               <Cart
                 count={count}
