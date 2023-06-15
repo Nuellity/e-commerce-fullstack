@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Stripe from "./Stripe/Stripe";
 import Dialog from "@mui/material/Dialog";
+import PaymentIcon from "@mui/icons-material/Payment";
 
 import DialogContent from "@mui/material/DialogContent";
 
@@ -177,6 +178,7 @@ function Pay() {
           <Button
             variant="contained"
             color="success"
+            endIcon={<PaymentIcon />}
             sx={{ height: "50px" }}
             type="submit"
           >
