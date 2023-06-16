@@ -22,7 +22,6 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
 import { auth, provider } from "../../fireBase";
 import { signInWithPopup } from "firebase/auth";
-import GoogleIcon from "@mui/icons-material/Google";
 
 function SignIn() {
   const theme = useTheme();
@@ -190,15 +189,11 @@ function SignIn() {
           </p>
         </div>
       </form>
-      <div className="py-5">
-        <Button
-          variant="outlined"
-          endIcon={<GoogleIcon />}
-          onClick={handleGoogle}
-          sx={{ borderColor: "red", color: "red" }}
-        >
+      <div className="py-5 d-flex justify-content-center ">
+        <button className="button" onClick={handleGoogle}>
+          <img alt="google" src="./images/img/auth.svg" className="google" />
           Sign In With Google
-        </Button>
+        </button>
       </div>
       {error && (
         <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
