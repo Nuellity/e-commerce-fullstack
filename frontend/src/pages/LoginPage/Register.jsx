@@ -21,7 +21,6 @@ import LockIcon from "@mui/icons-material/Lock";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { googleAuth, signup } from "../../redux/ApiCalls";
-import GoogleIcon from "@mui/icons-material/Google";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../fireBase";
 
@@ -346,7 +345,7 @@ function Register() {
             <FormHelperText>{formErrors.confirmPassword}</FormHelperText>
           </FormControl>
         </div>
-        <div>
+        <div className=" d-flex justify-content-center ">
           {isSignUp ? (
             <Button
               type="submit"
@@ -384,15 +383,11 @@ function Register() {
         </p>
       </form>
 
-      <div className="py-5 d-flex justify-content-center">
-        <Button
-          variant="outlined"
-          endIcon={<GoogleIcon />}
-          onClick={handleGoogle}
-          sx={{ borderColor: "red", color: "red" }}
-        >
+      <div className="py-5 d-flex justify-content-center ">
+        <button className="button" onClick={handleGoogle}>
+          <img alt="google" src="./images/img/auth.svg" className="google" />
           Sign Up With Google
-        </Button>
+        </button>
       </div>
     </>
   );

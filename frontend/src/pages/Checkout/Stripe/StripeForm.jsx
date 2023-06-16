@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PaymentIcon from "@mui/icons-material/Payment";
 
 import { Button } from "@mui/material";
 
@@ -46,7 +46,7 @@ function StripeForm(props) {
             <Button
               color="success"
               variant="contained"
-              endIcon={<AttachMoneyIcon />}
+              endIcon={<PaymentIcon />}
               disabled={isProcessing || !stripe || !elements}
               type="submit"
             >
