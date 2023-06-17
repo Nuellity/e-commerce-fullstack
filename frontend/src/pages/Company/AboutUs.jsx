@@ -139,7 +139,7 @@ function AboutUs() {
           </p>
           <Link
             style={{ textDecoration: "none", color: "inherit" }}
-            to="/products"
+            to="/products/"
           >
             <Button
               variant="contained"
