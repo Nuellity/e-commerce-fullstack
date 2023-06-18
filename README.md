@@ -118,3 +118,7 @@ Please refer to the respective documentation and official websites for more info
 ## Contributing
 
 Contributions are welcome! Please open an issue or a pull request if you have any ideas for improvements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Nuellity/e-commerce-fullstack/blob/main/LICENSE) file for details.
