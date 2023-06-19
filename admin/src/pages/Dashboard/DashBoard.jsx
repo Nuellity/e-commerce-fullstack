@@ -68,6 +68,8 @@ function DashBoard() {
 
   const previousMonth = revenue.find((item) => item._id === currentMonth - 1);
 
+  console.log(dayOfYear, dailySales);
+
   useEffect(() => {
     getOrders(dispatch, navigate);
   }, []);
@@ -248,8 +250,8 @@ function DashBoard() {
             >
               <StatBox
                 title={
-                  dailySales[1]?._id === dayOfYear
-                    ? `$${dailySales[1]?.totalOrders}`
+                  dailySales[0]?._id === dayOfYear
+                    ? `$${dailySales[0]?.totalOrders}`
                     : "$0"
                 }
                 subTitle={`Today Sales on ${formattedDate}`}
@@ -276,7 +278,7 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={dailySales[1]?._id === dayOfYear ? dailyOrders : "0"}
+                title={dailySales[0]?._id === dayOfYear ? dailyOrders : "0"}
                 subTitle={`Today Orders on ${formattedDate}`}
                 isProgress
                 isIncrease
