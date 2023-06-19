@@ -6,10 +6,14 @@ This is a full-stack e-commerce application built with React and Node.js. It fea
 
 ## Screen Snapshots
 
-![](https://imgur.com/w06cCUy.png)
-![](https://imgur.com/8b8NM0q.png)
-![](https://imgur.com/YoGC5Mh.png)
-![](https://imgur.com/z1u05JM.png)
+<p float="left">
+  <img src="https://imgur.com/w06cCUy.png" width=400 />
+  <img src="https://imgur.com/8b8NM0q.png" width=400 />
+  <img src="https://imgur.com/YoGC5Mh.png" width=400 />
+  <img src="https://imgur.com/z1u05JM.png" width=400 />
+<img src="https://imgur.com/zxWT43M.jpg" width=400 />
+
+</p>
 
 ## Features
 
