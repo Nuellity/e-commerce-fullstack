@@ -215,17 +215,17 @@ function ProductDetails({
                 </ButtonGroup>
               </div>
               <div className="mt-5">
-                {product.inStock ? (
+                {product.count <= 0 ? (
+                  <Button variant="outlined" color="error" disabled>
+                    OUT OF STOCK
+                  </Button>
+                ) : (
                   <Button
                     variant="contained"
                     color="success"
                     onClick={() => handleAddToCart()}
                   >
                     Add to Cart
-                  </Button>
-                ) : (
-                  <Button variant="outlined" color="success" disabled>
-                    OUT OF STOCK
                   </Button>
                 )}
               </div>
