@@ -3,6 +3,10 @@ const User = require("../models/user");
 const GoogleAuth = require("../models/googleAuth");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const sendEmail = require("../sendEmail");
+const myModule = require("../template");
+
+const welcomeEmail = myModule.welcome;
 
 // SIGN UP
 
@@ -23,7 +27,13 @@ router.post("/signup", async (req, res) => {
   });
   try {
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+
+    const subject = "Welcome to Ayaba";
+    const send_to = req.body.email;
+    const sent_from = process.env.EMAIL_USER;
+    const message = welcomeEmail;
+    await sendEmail(subject, message, send_to, sent_from);
+    res.status(200).send({ success: true, message: "Email sent" });
   } catch (error) {
     res.status(500).json(error);
   }

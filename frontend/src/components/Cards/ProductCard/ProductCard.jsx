@@ -249,9 +249,15 @@ export const BuyCard = ({
               )}
             </Tooltip>
           </div>
-          <div className="icon" onClick={handleAddToCart}>
-            <ShoppingBagIcon /> <span>Add to Cart</span>
-          </div>
+          {count <= 0 ? (
+            <div className="icon">
+              <span>Out of Stock</span>
+            </div>
+          ) : (
+            <div className="icon" onClick={handleAddToCart}>
+              <ShoppingBagIcon /> <span>Add to Cart</span>
+            </div>
+          )}
         </div>
       </div>
       <div className="mx-1 mt-3 product-name">
