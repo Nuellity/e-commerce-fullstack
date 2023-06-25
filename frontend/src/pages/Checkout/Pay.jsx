@@ -30,7 +30,7 @@ function Pay() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { address, city, country, state, postalCode } = userData;
+  const { email, address, city, country, state, postalCode } = userData;
   const billingAddress = {
     address,
     city,
@@ -71,6 +71,7 @@ function Pay() {
   const order = {
     userId: user ? user._id : null,
     deliveryName: `${userData.firstName} ${userData.lastName}`,
+    email,
     products: cart.products.map((item) => ({
       productId: item._id,
       name: item.title,
