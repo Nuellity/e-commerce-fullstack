@@ -251,7 +251,7 @@ function DashBoard() {
               }}
             >
               <StatBox
-                title={`$${dailyTotalSales}`}
+                title={`${dailyTotalSales}`}
                 subTitle={`Today Sales on ${formattedDate}`}
                 isProgress
                 isIncrease
