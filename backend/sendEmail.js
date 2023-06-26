@@ -5,7 +5,7 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: 587,
-      secure: true,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
@@ -32,12 +32,16 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
     });
 
     // Send Email
-    transporter.sendMail(options, function (err, info) {
-      if (err) {
-        console.error("Error sending email:", err);
-      } else {
-        console.log("Email sent successfully:", info.response);
-      }
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(options, function (err, info) {
+        if (err) {
+          console.error("Error sending email:", err);
+          reject(err);
+        } else {
+          console.log("Email sent successfully:", info.response);
+          resolve(info);
+        }
+      });
     });
   } catch (error) {
     console.error("Error sending email:", error);
