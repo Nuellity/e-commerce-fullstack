@@ -58,6 +58,10 @@ export const signup = async (dispatch, user) => {
   } catch (error) {
     if (error.response.status === 401) {
       dispatch(signUpFailure(error.response.data));
+    } else if (error.response && error.response.status === 409) {
+      // Duplicate key error
+      dispatch(signUpFailure(error.response.data.error));
+      console.log(error.response.data.error);
     } else {
       console.log(error);
     }

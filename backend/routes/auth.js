@@ -35,6 +35,14 @@ router.post("/signup", async (req, res) => {
     await sendEmail(subject, message, send_to, sent_from);
     res.status(200).send({ success: true, message: "Email sent" });
   } catch (error) {
+    if (error.code === 11000 && error.keyPattern && error.keyValue) {
+      // Duplicate key error
+      const duplicatedField = Object.keys(error.keyPattern)[0];
+      const duplicatedValue = error.keyValue[duplicatedField];
+      return res.status(409).json({
+        error: `The ${duplicatedField} '${duplicatedValue}' already exists.`,
+      });
+    }
     res.status(500).json(error);
   }
 });

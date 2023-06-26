@@ -33,7 +33,9 @@ function Register() {
   const [errorState, setErrorState] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const { isSignUp, signUpError } = useSelector((state) => state.user);
+  const { signUpError, errorMessage, isSignUp } = useSelector(
+    (state) => state.user
+  );
   const firstName = userData.firstName;
   const lastName = userData.lastName;
   const email = userData.email;
@@ -347,12 +349,7 @@ function Register() {
         </div>
         <div className=" d-flex justify-content-center ">
           {isSignUp ? (
-            <Button
-              type="submit"
-              variant="contained"
-              disabled={isSignUp}
-              fullWidth
-            >
+            <Button type="submit" variant="contained" fullWidth>
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"
@@ -364,12 +361,12 @@ function Register() {
               Create an Account
             </Button>
           )}
-          {signUpError && (
-            <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
-              Error occured!!! Please try again.
-            </p>
-          )}
         </div>
+        {signUpError && (
+          <p className="mt-3" style={{ color: "red", fontSize: "15px" }}>
+            {errorMessage}
+          </p>
+        )}
         <p
           className="text-center text-capitalize py-4"
           style={{
