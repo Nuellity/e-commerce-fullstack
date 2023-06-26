@@ -19,10 +19,16 @@ function SingleOrder() {
     state.order.orders.find((order) => order._id === orderId)
   );
 
-  const handleClick = () => {
-    updateOrder(orderId, { status: "completed" }, dispatch);
-    navigate("/transactions");
-    window.location.reload();
+  const handleClick = async () => {
+    console.log("1");
+    try {
+      await updateOrder(orderId, { status: "completed" }, dispatch);
+      console.log("yes");
+      navigate("/transactions");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const ColorButton = styled(Button)(({ theme }) => ({
