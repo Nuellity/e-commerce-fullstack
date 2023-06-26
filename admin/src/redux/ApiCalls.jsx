@@ -229,6 +229,7 @@ export const updateOrder = async (id, order, dispatch) => {
   dispatch(updateOrderStart());
   try {
     const res = await userRequest.patch(`/orders/${id}`, order);
+    console.log("work");
     dispatch(updateOrderSuccess(res.data));
   } catch (err) {
     dispatch(updateOrderFailure());
