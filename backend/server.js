@@ -9,25 +9,13 @@ const orderRoutes = require("./routes/order");
 const reviewRoutes = require("./routes/review");
 const savedItemRoutes = require("./routes/savedItem");
 const stripeRoutes = require("./routes/stripe");
-const webPushRoutes = require("./routes/webPush");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const path = require("path");
 
 const startServer = async () => {
   await connectDatabase();
 
   const app = express();
-
-  app.use(
-    express.static(path.join(__dirname, "frontend"), {
-      setHeaders: (res, path, stat) => {
-        if (path === "/service-worker.js") {
-          res.set("Content-Type", "application/javascript");
-        }
-      },
-    })
-  );
 
   app.use(cors());
   app.use(express.json());
@@ -42,7 +30,6 @@ const startServer = async () => {
   app.use("/api/reviews", reviewRoutes);
   app.use("/api/wishlists", savedItemRoutes);
   app.use("/api/checkout", stripeRoutes);
-  app.use("/api/subscribe", webPushRoutes);
 
   const port = process.env.PORT || 5000;
 

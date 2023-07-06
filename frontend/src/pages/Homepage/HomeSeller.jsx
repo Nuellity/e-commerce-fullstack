@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
@@ -58,9 +58,13 @@ function HomeSeller() {
         <h2 className="main-header pb-5">best sellers</h2>
         <Swiper
           navigation
-          modules={[Navigation]}
+          modules={[Navigation, Autoplay]}
           className="mySwiper "
           slidesPerView={1}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
           spaceBetween={10}
           breakpoints={{
             640: {

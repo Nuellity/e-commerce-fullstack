@@ -129,6 +129,8 @@ function Login() {
           </div>
         )}
       </Formik>
+      <p> DEMO EMAIL: ayaba@mail.com</p>
+      <p>DEMO PASSWORD: demopass</p>
     </Box>
   );
 }
