@@ -3,7 +3,6 @@ import {
   Box,
   useTheme,
   Typography,
-  Avatar,
   Button,
   TextField,
   FormControl,
@@ -347,6 +346,7 @@ function SingleProduct() {
               <Box
                 display="flex"
                 justifyContent="center"
+                alignItems="center"
                 component="div"
                 mr="8px"
                 height={120}
@@ -366,10 +366,14 @@ function SingleProduct() {
               }}
             >
               <div className="d-flex justify-content-start align-items-center ">
-                <Avatar
+                <img
                   src={product.img[0].original}
-                  alt=""
-                  sx={{ width: 100, height: 100 }}
+                  alt="img-product"
+                  style={{
+                    width: 200,
+                    height: 200,
+                    objectFit: "contain",
+                  }}
                 />
                 <Typography
                   variant="h4"
