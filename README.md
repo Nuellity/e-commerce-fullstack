@@ -4,6 +4,10 @@
 
 Welcome to the Repository, a captivating MERN e-commerce application built with React and Node.js. This full-stack app features a user-friendly frontend and a powerful backend capable of handling high traffic volumes. Explore our admin, server, and frontend folders to take control of users, products, orders, and reviews. Experience seamless account creation, product browsing, wishlisting, and review dropping. Join us in redefining the e-commerce experience.
 
+STORE DEMO: https://mern-gadget-store.onrender.com/
+
+ADMIN DEMO: https://mern-admin-5vo2.onrender.com/
+
 ## Screen Snapshots
 
 <p float="left">
