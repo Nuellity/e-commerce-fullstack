@@ -1,15 +1,17 @@
-import React from 'react'
-import Login from './Login'
-import LoginDetails from './LoginDetails'
+import React from "react";
+import Login from "./Login";
+import LoginDetails from "./LoginDetails";
+import ScrollToTop from "../../ScrollToTop";
 
 function Log() {
   return (
     <>
-        <LoginDetails>
-            <Login/>
-        </LoginDetails>
+      <ScrollToTop />
+      <LoginDetails>
+        <Login />
+      </LoginDetails>
     </>
-  )
+  );
 }
 
-export default Log
+export default Log;

@@ -349,7 +349,16 @@ function Register() {
         </div>
         <div className=" d-flex justify-content-center ">
           {isSignUp ? (
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              style={{
+                width: "7em",
+                height: "2.2em",
+                backgroundColor: "#1E2832",
+                fontSize: "1.2em",
+              }}
+              type="submit"
+              variant="contained"
+            >
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"
@@ -357,7 +366,16 @@ function Register() {
               ></span>
             </Button>
           ) : (
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              style={{
+                height: "2.2em",
+                backgroundColor: "#1E2832",
+                fontSize: "1.2em",
+              }}
+              type="submit"
+              variant="contained"
+              fullWidth
+            >
               Create an Account
             </Button>
           )}
