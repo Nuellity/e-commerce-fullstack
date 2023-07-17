@@ -158,7 +158,17 @@ function SignIn() {
         </div>
         <div>
           {isFetching ? (
-            <Button type="submit" variant="contained" fullWidth>
+            <Button
+              style={{
+                width: "7em",
+                height: "2.2em",
+                backgroundColor: "#1E2832",
+                fontSize: "1.2em",
+              }}
+              type="submit"
+              variant="contained"
+              disabled
+            >
               <span
                 className="spinner-border spinner-border-sm"
                 role="status"
@@ -167,9 +177,14 @@ function SignIn() {
             </Button>
           ) : (
             <Button
+              style={{
+                width: "7em",
+                height: "2.2em",
+                backgroundColor: "#1E2832",
+                fontSize: "1.2em",
+              }}
               type="submit"
               variant="contained"
-              fullWidth
               endIcon={<LoginIcon fontSize="small" />}
             >
               Log In

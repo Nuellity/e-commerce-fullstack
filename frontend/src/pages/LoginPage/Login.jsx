@@ -1,12 +1,54 @@
 import React, { useContext } from "react";
-import { Button, useMediaQuery, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Fab,
+  Fade,
+  useMediaQuery,
+  useScrollTrigger,
+  useTheme,
+} from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import { loginDetails } from "./LoginDetails";
-
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Recover from "./Recover";
 import Register from "./Register";
 import SignIn from "./SignIn";
+import ScrollToTop from "../../ScrollToTop";
+
+function ScrollTop(props) {
+  const { children, window } = props;
+  const trigger = useScrollTrigger({
+    target: window ? window() : undefined,
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector(
+      "#back-to-top-anchor"
+    );
+
+    if (anchor) {
+      anchor.scrollIntoView({
+        block: "center",
+      });
+    }
+  };
+
+  return (
+    <Fade in={trigger}>
+      <Box
+        onClick={handleClick}
+        role="presentation"
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
+      >
+        {children}
+      </Box>
+    </Fade>
+  );
+}
 
 function Login() {
   const { register, setRegister, recover, signUp } = useContext(loginDetails);
@@ -20,11 +62,13 @@ function Login() {
   return (
     <>
       <Navbar />
+      <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <div style={{ backgroundColor: "rgba(30, 40, 50, 0.05)" }}>
         <div className="container">
           <div className="row">
             {signUp ? (
               <>
+                <ScrollToTop />
                 <div
                   style={{
                     display: isMatch ? "none" : "block",
@@ -53,6 +97,7 @@ function Login() {
                     </>
                   ) : (
                     <>
+                      <ScrollToTop />
                       <SignIn />
                     </>
                   )}
@@ -107,6 +152,11 @@ function Login() {
         </div>
       </div>
       <Footer />
+      <ScrollTop>
+        <Fab size="large" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon sx={{ fontSize: 40 }} />
+        </Fab>
+      </ScrollTop>
     </>
   );
 }
