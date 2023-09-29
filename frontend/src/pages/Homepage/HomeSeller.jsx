@@ -5,7 +5,7 @@ import { Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
-import { publicRequest } from "../../axiosRequest";
+import { publicRequest } from "../../utils/axiosRequest";
 import { Skeleton } from "@mui/material";
 
 const BuyCardSkeleton = () => {

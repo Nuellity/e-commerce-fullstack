@@ -1,7 +1,7 @@
 import { Alert, Button, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { publicRequest, userRequest } from "../../axiosRequest";
+import { publicRequest, userRequest } from "../../utils/axiosRequest";
 import { SavedCard } from "../../components/Cards/ProductCard/ProductCard";
 import FolderSpecialIcon from "@mui/icons-material/FolderSpecial";
 import "./account.css";

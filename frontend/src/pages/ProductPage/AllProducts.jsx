@@ -6,7 +6,8 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { publicRequest } from "../../axiosRequest";
+import { publicRequest } from "../../utils/axiosRequest";
+
 
 const BuyCardSkeleton = () => {
   return (

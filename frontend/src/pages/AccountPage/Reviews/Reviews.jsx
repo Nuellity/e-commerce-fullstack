@@ -2,7 +2,7 @@
 import { Button, Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { publicRequest, userRequest } from "../../../axiosRequest";
+import { publicRequest, userRequest,  } from "../../../utils/axiosRequest";
 import { ReviewCard } from "../../../components/Cards/ProductCard/ProductCard";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import "../account.css";

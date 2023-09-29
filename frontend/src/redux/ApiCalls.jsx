@@ -1,4 +1,4 @@
-import { publicRequest } from "../axiosRequest";
+import { publicRequest } from "../utils/axiosRequest";
 import {
   getProductFailure,
   getProductStart,

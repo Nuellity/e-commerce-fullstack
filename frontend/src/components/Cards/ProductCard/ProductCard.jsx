@@ -22,7 +22,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "./card.css";
 import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { userRequest } from "../../../axiosRequest";
+import { userRequest } from "../../../utils/axiosRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/ApiCalls";
 import { addProduct } from "../../../redux/CartSlice";

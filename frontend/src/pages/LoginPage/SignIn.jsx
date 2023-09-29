@@ -20,7 +20,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import LockIcon from "@mui/icons-material/Lock";
-import { auth, provider } from "../../fireBase";
+import { auth, provider } from "../../utils/fireBase";
 import { signInWithPopup } from "firebase/auth";
 
 function SignIn() {

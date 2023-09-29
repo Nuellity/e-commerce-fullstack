@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./Login";
 import LoginDetails from "./LoginDetails";
-import ScrollToTop from "../../ScrollToTop";
+import ScrollToTop from "../../utils/ScrollToTop";
 
 function Log() {
   return (

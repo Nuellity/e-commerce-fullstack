@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { clearProduct } from "../../redux/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
-import { userRequest } from "../../axiosRequest";
+import { userRequest } from "../../utils/axiosRequest";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
