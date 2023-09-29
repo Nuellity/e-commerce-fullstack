@@ -14,7 +14,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer";
 import ProductDetails from "./ProductDetails";
-import { publicRequest } from "../../axiosRequest";
+import { publicRequest } from "../../utils/axiosRequest";
 
 const ProductDetailsSkeleton = () => {
   const theme = useTheme();

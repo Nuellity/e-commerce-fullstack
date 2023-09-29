@@ -1,6 +1,6 @@
 import { Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { publicRequest } from "../../axiosRequest";
+import { publicRequest } from "../../utils/axiosRequest";
 
 import { BuyCard } from "../../components/Cards/ProductCard/ProductCard";
 

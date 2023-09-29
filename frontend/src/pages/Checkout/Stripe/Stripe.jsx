@@ -4,7 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import StripeForm from "./StripeForm";
 import { useDispatch, useSelector } from "react-redux";
-import { publicRequest, userRequest } from "../../../axiosRequest";
+import { publicRequest, userRequest } from "../../../utils/axiosRequest";
 import { logout } from "../../../redux/ApiCalls";
 
 function Stripe() {

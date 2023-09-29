@@ -22,7 +22,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { googleAuth, signup } from "../../redux/ApiCalls";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../fireBase";
+import { auth, provider } from "../../utils/fireBase";
 
 function Register() {
   const theme = useTheme();

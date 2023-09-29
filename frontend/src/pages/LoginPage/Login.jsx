@@ -15,7 +15,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Recover from "./Recover";
 import Register from "./Register";
 import SignIn from "./SignIn";
-import ScrollToTop from "../../ScrollToTop";
+import ScrollToTop from "../../utils/ScrollToTop"
 
 function ScrollTop(props) {
   const { children, window } = props;

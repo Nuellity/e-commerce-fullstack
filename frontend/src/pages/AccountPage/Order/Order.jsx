@@ -8,9 +8,10 @@ import Box from "@mui/material/Box";
 import { OrderCard } from "../../../components/Cards/ProductCard/ProductCard";
 import { Button, Skeleton } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { userRequest } from "../../../axiosRequest";
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { userRequest } from "../../../utils/axiosRequest";
 
 const OrderSkeleton = () => {
   return (

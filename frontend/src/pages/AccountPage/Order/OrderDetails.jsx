@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { userRequest } from "../../../axiosRequest";
+import { userRequest } from "../../../utils/axiosRequest";
+
 
 const OrderTitleSkeleton = () => {
   return (

@@ -5,8 +5,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../account.css";
 import { RateCard } from "../../../components/Cards/ProductCard/ProductCard";
-import { publicRequest, userRequest } from "../../../axiosRequest";
 import { useSelector } from "react-redux";
+import { userRequest, publicRequest,  } from "../../../utils/axiosRequest";
 
 function ReviewProduct() {
   const navigate = useNavigate();
