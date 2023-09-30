@@ -118,6 +118,7 @@ button:hover {
   border-radius: 0 7em;
   transform: matrix(-1, 0, 0, 1, 0, 0);
   object-fit: contain;
+  margin: auto 0;
 
 }
 
@@ -126,7 +127,7 @@ button:hover {
   font-style: normal;
   font-weight: 300;
   font-size: 4.625em;
-  line-height: 2;
+  line-height: 1.2;
   text-transform: capitalize;
   color: #000000;
 }
@@ -799,7 +800,8 @@ button:hover {
   }
 
   .img-wrapper {
-    margin: auto 0;
+    display: flex;
+    justify-content: center;
   }
 
 
@@ -827,6 +829,8 @@ button:hover {
     height: 20em;
     border-radius: 0 5em;
     object-fit: cover;
+    align-items: center;
+    justify-content: center;
 
   }
 }
