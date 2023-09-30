@@ -3,10 +3,8 @@ import { Button } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCube } from "swiper";
+import { Autoplay } from "swiper";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/effect-cube";
 import mainImageData from "../../Data/mainImageData";
 
 const SlideImage = ({ navigate, heading, description, image }) => {
@@ -61,15 +59,7 @@ function MainImage() {
 
   return (
     <Swiper
-      effect={"cube"}
-      grabCursor={true}
-      cubeEffect={{
-        shadow: false,
-        slideShadows: true,
-        shadowOffset: 20,
-        shadowScale: 0.94,
-      }}
-      modules={[Autoplay, EffectCube]}
+      modules={[Autoplay]}
       className="mySwiper"
       slidesPerView={1}
       autoplay={{
