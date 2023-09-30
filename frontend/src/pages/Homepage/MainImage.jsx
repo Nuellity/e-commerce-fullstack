@@ -2,10 +2,14 @@ import React from "react";
 import { Button } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectCube } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/effect-cube";
+import mainImageData from "../../Data/mainImageData";
 
-function MainImage() {
-  const navigate = useNavigate();
-
+const SlideImage = ({ navigate, heading, description, image }) => {
   return (
     <div
       className="container-fluid"
@@ -18,15 +22,13 @@ function MainImage() {
               className="animate__animated animate__lightSpeedInLeft"
               style={{ animationDelay: "1s" }}
             >
-              Collections
+              {heading}
             </h1>
             <p
               className="animate__animated animate__lightSpeedInRight"
               style={{ animationDelay: "2s" }}
             >
-              Embark on a Technological Adventure: Experience the Ultimate
-              Fusion of Innovation and Style with our Spectacular Range of
-              Laptops, TVs, and Gaming Chairs!
+              {description}
             </p>
             <Button
               color="primary"
@@ -47,14 +49,46 @@ function MainImage() {
           </div>
         </div>
         <div className="col-lg-6 px-lg-5 img-wrapper">
-          <img
-            className=" title-img"
-            src="https://images.unsplash.com/photo-1536412597336-ade7b523ecfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-            alt="advert"
-          />
+          <img className="title-img" src={image} alt={heading} />
         </div>
       </div>
     </div>
+  );
+};
+
+function MainImage() {
+  const navigate = useNavigate();
+
+  return (
+    <Swiper
+      effect={"cube"}
+      grabCursor={true}
+      cubeEffect={{
+        shadow: false,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+      }}
+      modules={[Autoplay, EffectCube]}
+      className="mySwiper"
+      slidesPerView={1}
+      autoplay={{
+        delay: 8000,
+        disableOnInteraction: false,
+      }}
+    >
+      {mainImageData.map((value) => (
+        <SwiperSlide>
+          <SlideImage
+            key={value.heading}
+            navigate={navigate}
+            heading={value.heading}
+            description={value.description}
+            image={value.image}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
 

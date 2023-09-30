@@ -57,6 +57,7 @@ function HomeSeller() {
       <div className="container pt-5">
         <h2 className="main-header pb-5">best sellers</h2>
         <Swiper
+          rewind
           navigation
           modules={[Navigation, Autoplay]}
           className="mySwiper "
