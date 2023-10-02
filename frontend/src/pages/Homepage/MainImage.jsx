@@ -68,7 +68,7 @@ function MainImage() {
       }}
     >
       {mainImageData.map((value) => (
-        <SwiperSlide>
+        <SwiperSlide key={value.heading}>
           <SlideImage
             key={value.heading}
             navigate={navigate}
