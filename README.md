@@ -141,8 +141,10 @@ To deploy the application, you can use a service like Render or Cyclic.
 This project utilizes the following dependencies:
 
 ### Frontend
-
-- React (v16.8.0 or above)
+ <details>
+          <summary>Click to expand!</summary>
+          
+ - React (v16.8.0 or above)
 - Redux (v4.0.0 or above)
 - React Redux (v7.1.0 or above)
 - React Router DOM (v5.0.0 or above)
@@ -160,10 +162,15 @@ This project utilizes the following dependencies:
 - Moment (v2.0.0 or above)
 - Animate.css (v4.0.0 or above)
 - Swiper (v8.0.0 or above)
+ </details>
+
+
 
 ### Backend
-
-- Node.js (v12 or above)
+ <details>
+          <summary>Click to expand!</summary>
+          
+  - Node.js (v12 or above)
 - Express.js (v4.17.1 or above)
 - MongoDB (v4.0.0 or above)
 - Mongoose (v5.10.0 or above)
@@ -173,6 +180,11 @@ This project utilizes the following dependencies:
 - Nodemailer (v6.4.11 or above)
 - Dotenv (v10.0.0 or above)
 - Concurrently (v6.2.0 or above)
+
+ </details>
+
+
+
 
 Please refer to the respective documentation and official websites for more information on each dependency and its usage.
 
