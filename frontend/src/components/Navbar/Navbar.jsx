@@ -92,9 +92,8 @@ function Navbar() {
                       paddingRight: isMatch ? "10px" : "50px",
                       fontFamily: "AmstelvarAlpha",
                       fontStyle: "Bold",
-                      fontWeight: "600px",
-                      fontSize: "28px",
-                      lineHeight: 1.1,
+                      fontSize: "38px",
+                      lineHeight: 1,
                       color: "#000000",
                       cursor: "pointer",
                     }}
@@ -111,57 +110,45 @@ function Navbar() {
                 <DrawerComp />
               ) : (
                 <>
-                  <div>
-                    <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                      <Tooltip title="View Account">
-                        <IconButton
-                          onClick={handleClick}
-                          aria-controls={open ? "account-menu" : undefined}
-                          aria-haspopup="true"
-                          aria-expanded={open ? "true" : undefined}
-                          classes={{ root: "customButton" }}
-                          style={{
-                            borderRadius: 0,
-                          }}
-                        >
-                          <PersonIcon
+                  <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                    <Tooltip title="View Account">
+                      <IconButton
+                        onClick={handleClick}
+                        aria-controls={open ? "account-menu" : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={open ? "true" : undefined}
+                        style={{
+                          borderRadius: 0,
+                        }}
+                      >
+                        <PersonIcon
+                          className="nav-icon"
+                          sx={{ fontSize: "30px" }}
+                        />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="View Cart">
+                      <IconButton
+                        size="large"
+                        aria-label="item added"
+                        onClick={() => setCartDraw(true)}
+                        style={{
+                          borderRadius: 0,
+                        }}
+                      >
+                        <Badge badgeContent={cartQuantity} color="error">
+                          <ShoppingBagIcon
                             className="nav-icon"
                             sx={{ fontSize: "30px" }}
                           />
-                          <Typography
-                            className="nav-item"
-                            sx={{ marginRight: "2em" }}
-                          >
-                            Account
-                          </Typography>
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip title="View Cart">
-                        <IconButton
-                          size="large"
-                          aria-label="item added"
-                          onClick={() => setCartDraw(true)}
-                          classes={{ root: "customButton" }}
-                          style={{
-                            borderRadius: 0,
-                          }}
-                        >
-                          <Badge badgeContent={cartQuantity} color="error">
-                            <ShoppingBagIcon
-                              className="nav-icon"
-                              sx={{ fontSize: "30px" }}
-                            />
-                          </Badge>
-                          <Typography className="nav-item">Cart</Typography>
-                        </IconButton>
-                      </Tooltip>
-
-                      <Cart
-                        openCart={cartDraw}
-                        closeCart={() => setCartDraw(false)}
-                      />
-                    </Box>
-                  </div>
+                        </Badge>
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                  <Cart
+                    openCart={cartDraw}
+                    closeCart={() => setCartDraw(false)}
+                  />
                   <Menu
                     anchorEl={anchorEl}
                     id="account-menu"

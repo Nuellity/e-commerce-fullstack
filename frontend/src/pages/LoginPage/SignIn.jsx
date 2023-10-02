@@ -187,7 +187,7 @@ function SignIn() {
               variant="contained"
               endIcon={<LoginIcon fontSize="small" />}
             >
-              Log In
+              Login
             </Button>
           )}
 
