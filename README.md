@@ -10,7 +10,9 @@ ADMIN DEMO: https://mern-admin-5vo2.onrender.com/
 
 ## Screen Snapshots
 
-<p float="left">
+  <details>
+          <summary>Click to expand!</summary>
+        <p float="left">
   <img src="https://imgur.com/w06cCUy.png" width=400  style="border-radius: 10px;" />
   <img src="https://i.imgur.com/E9CNVz7.png" width=400 style="border-radius: 10px;"  />
   <img src="https://imgur.com/YoGC5Mh.png" width=400 style="border-radius: 10px;"  />
@@ -28,6 +30,9 @@ ADMIN DEMO: https://mern-admin-5vo2.onrender.com/
  <img src="https://i.imgur.com/Qv0x18a.png" height=300 style="border-radius: 10px;"  />
  <img src="https://imgur.com/YL2kNVC.png" height=300 style="border-radius: 10px;"  />
 </p>
+  </details>
+
+
 
 ## Features
 
