@@ -1,10 +1,13 @@
 import { Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { publicRequest } from "../../utils/axiosRequest";
+import { motion } from "framer-motion";
 import ProductCard, {
   BigCard,
 } from "../../components/Cards/ProductCard/ProductCard";
 
+import { fadeIn, staggerContainer } from "../../utils/motion";
+import { TypingText } from "../../components/TypingText";
 const ProductSkeleton = () => {
   return (
     <div className="col-md-6">
@@ -41,9 +44,20 @@ function HomeCategory() {
   }, []);
   return (
     <div className="container pb-5">
-      <div>
-        <h3 className="main-header pb-5">Explore New And Popular Products</h3>
-        <div className="row g-4">
+      <motion.div
+        variants={staggerContainer()}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+      >
+        <TypingText
+          title="Explore New And Popular Products"
+          textStyles="pb-5"
+        />
+        <motion.div
+          variants={fadeIn("up", "tween", 1.1, 1)}
+          className="row g-4"
+        >
           {loading ? (
             <BigCard
               image={fiveProducts[0]?.img[0]?.original}
@@ -98,8 +112,8 @@ function HomeCategory() {
               )}
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

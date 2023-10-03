@@ -119,6 +119,7 @@ button:hover {
   transform: matrix(-1, 0, 0, 1, 0, 0);
   object-fit: contain;
   margin: auto 0;
+  filter: grayscale(100%);
 
 }
 
