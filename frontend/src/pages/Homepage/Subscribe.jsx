@@ -18,39 +18,6 @@ function Subscribe() {
       style={{ background: "rgba(30, 40, 50, 0.05)", width: "100%" }}
     >
       <h3 className="main-header"> Subscribe to Newsletter</h3>
-
-      {/* <div className="row">
-        <div className="col-md-6 col-lg-4 d-flex justify-content-center">
-          <TextField
-            label="Name"
-            placeholder="Enter your name "
-            margin="normal"
-            variant="outlined"
-          />
-        </div>
-        <div className="col-md-6 col-lg-4 d-flex justify-content-center">
-          <TextField
-            label="Email"
-            placeholder="Enter your email"
-            margin="normal"
-            variant="outlined"
-          />
-        </div>
-        <div className="col-md-6 my-auto  col-lg-4 d-flex justify-content-center">
-          <Button
-            variant="contained"
-            style={{
-              width: "6em",
-              height: "3.8em",
-              alignItems: "center",
-              backgroundColor: "#1E2832",
-              borderRadius: "10px",
-            }}
-          >
-            <SendIcon />
-          </Button>
-        </div>
-      </div> */}
       <form onSubmit={handleSubscribe}>
         <div
           className={` d-flex ${
