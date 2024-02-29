@@ -41,7 +41,7 @@ function HomeSeller() {
         const fetchedProducts = responses.map((response) =>
           response.data.slice(6, 13)
         );
-        const flattenedProducts = fetchedProducts.flat();
+        const flattenedProducts = fetchedProducts.flat(Infinity);
         const shuffledProducts = shuffleArray(flattenedProducts);
         setProducts(shuffledProducts);
         setLoading(true);

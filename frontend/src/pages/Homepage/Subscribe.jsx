@@ -1,46 +1,99 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import React, { useState } from "react";
+import SendIcon from "@mui/icons-material/Send";
+import { useTheme, useMediaQuery, TextField, Button } from "@mui/material";
 
 function Subscribe() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const myTheme = useTheme();
+
+  const isMatch = useMediaQuery(myTheme.breakpoints.down("sm"));
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+  };
   return (
     <div
       className="container-fluid py-5"
       style={{ background: "rgba(30, 40, 50, 0.05)", width: "100%" }}
     >
-      <div>
-        <h3 className="main-header "> subscribe to newsletter</h3>
-      </div>
+      <h3 className="main-header"> Subscribe to Newsletter</h3>
 
-      <div className="col-lg-8  mx-auto">
-        <div className="mx-auto">
-          <div className="row">
-            <div className="col-md-6">
-              <TextField
-                label="Email Address"
-                placeholder="enter your email address here"
-                variant="standard"
-                margin="normal"
-                fullWidth
-              />
-            </div>
-            <div className="col-md-6 my-auto">
-              <Button
-                color="primary"
-                variant="contained"
-                style={{
-                  width: "12em",
-                  height: "3em",
-                  alignItems: "center",
-                  backgroundColor: "#1E2832",
-                }}
-              >
-                Subscribe
-              </Button>
-            </div>
+      {/* <div className="row">
+        <div className="col-md-6 col-lg-4 d-flex justify-content-center">
+          <TextField
+            label="Name"
+            placeholder="Enter your name "
+            margin="normal"
+            variant="outlined"
+          />
+        </div>
+        <div className="col-md-6 col-lg-4 d-flex justify-content-center">
+          <TextField
+            label="Email"
+            placeholder="Enter your email"
+            margin="normal"
+            variant="outlined"
+          />
+        </div>
+        <div className="col-md-6 my-auto  col-lg-4 d-flex justify-content-center">
+          <Button
+            variant="contained"
+            style={{
+              width: "6em",
+              height: "3.8em",
+              alignItems: "center",
+              backgroundColor: "#1E2832",
+              borderRadius: "10px",
+            }}
+          >
+            <SendIcon />
+          </Button>
+        </div>
+      </div> */}
+      <form onSubmit={handleSubscribe}>
+        <div
+          className={` d-flex ${
+            isMatch && "flex-column"
+          } justify-content-center`}
+        >
+          <TextField
+            label="Name"
+            name="name"
+            placeholder="Enter your name "
+            margin="normal"
+            variant="outlined"
+            sx={{ padding: "10px" }}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <TextField
+            label="Email"
+            name="email"
+            placeholder="Enter your email"
+            margin="normal"
+            variant="outlined"
+            sx={{ padding: "10px" }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <div className=" d-flex align-items-center mt-2 px-2">
+            <Button
+              type="submit"
+              variant="contained"
+              style={{
+                width: "5.5em",
+                height: "4em",
+                alignItems: "center",
+                backgroundColor: "#1E2832",
+                borderRadius: "10px",
+              }}
+            >
+              <SendIcon />
+            </Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
