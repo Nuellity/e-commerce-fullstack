@@ -9,8 +9,6 @@ function Subscribe() {
 
   const isMatch = useMediaQuery(myTheme.breakpoints.down("sm"));
 
-  console.log(name, email);
-
   const handleSubscribe = (e) => {
     e.preventDefault();
   };
