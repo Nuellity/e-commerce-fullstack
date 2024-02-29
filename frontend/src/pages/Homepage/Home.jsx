@@ -49,7 +49,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div sx={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
+      <div style={{ padding: 0, margin: 0 }} id="back-to-top-anchor" />
       <MainImage />
       <HomeBrand />
       <HomeCategory />
